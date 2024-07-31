@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>
+      字符显示器
+    </title>
+    <link rel="stylesheet" href="../assets/css/fontFallback.css" as="style">
+    <style>
+      textarea {
+        width: 100%;
+        resize: none;
+      }
+    </style>
+  </head>
+  <body>
+    <p align="center">
+      请在以下文本区域中输入字符。
+    </p>
+    <textarea rows="15" placeholder="🝾请输入文本……" id="text" class="font auto-height"></textarea>
+    <button onclick="input.value = ''">清空</button>
+    <span>其它设置：</span>
+    <button onclick="selectBold();"><span id="bold">粗体</span><span id="boldStatus">：关</span></button>
+    <button onclick="selectItalic();"><span id="italic">斜体</span><span id="italicStatus">：关</span></button>
+    <script src="../assets/js/autoHeight.js"></script>
+    <script src="./charDisplay.js"></script>
+  </body>
+</html>
