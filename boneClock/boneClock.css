@@ -1,0 +1,49 @@
+body {
+  --hour: 90deg;
+  --min: 90deg;
+  --sec: 90deg;
+}
+
+* {
+  margin: 0;
+}
+
+#frame {
+  width: 350px;
+  height: 400px;
+}
+
+#hour {
+  width: 50px;
+  height: 19px;
+  position: absolute;
+  left: 120.5px;
+  top: 84px;
+  transform: rotate(var(--hour));
+  transform-origin: right;
+}
+
+#min {
+  width: 60px;
+  height: 19px;
+  position: absolute;
+  left: 110.5px;
+  top: 84px;
+  transform: rotate(var(--min));
+  transform-origin: right;
+}
+
+#sec {
+  width: 72.5px;
+  height: 19px;
+  position: absolute;
+  left: 98px;
+  top: 84px;
+  transform: rotate(var(--sec));
+  opacity: 0.2;
+  transform-origin: right;
+}
+
+#time {
+  transform: scale(0);
+}
