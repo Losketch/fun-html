@@ -53,3 +53,8 @@ body {
 #time {
   transform: scale(0);
 }
+
+button {
+  display: block;
+  margin: 0 auto;
+}
