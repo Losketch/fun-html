@@ -1,5 +1,7 @@
 @font-face {
     font-family: 'NotoColorEmoji';
+    font-style: normal;
+    font-weight: 400;
     src: url("../fonts/NotoColorEmoji.ttf") format('truetype');
 }
 
@@ -10,41 +12,55 @@
 
 @font-face {
     font-family: 'Plgo1';
+    font-style: normal;
+    font-weight: 400;
     src: url("../fonts/PlangothicP1-Regular.fallback.otf") format('opentype');
 }
 
 @font-face {
     font-family: 'Plgo2';
+    font-style: normal;
+    font-weight: 400;
     src: url("../fonts/PlangothicP2-Regular.otf") format('opentype');
 }
 
 @font-face {
     font-family: 'MonuHanp';
+    font-style: normal;
+    font-weight: 400;
     src: url("../fonts/MonuHanp-3.001.ttf") format('truetype');
 }
 
 @font-face {
     font-family: 'NotoSansSC';
+    font-style: normal;
+    font-weight: 400;
     src: url("../fonts/NotoSansSC.ttf") format('truetype');
 }
 
 @font-face {
     font-family: 'TH-Disp-P0';
+    font-style: normal;
+    font-weight: 400;
     src: url("../fonts/TH-Disp-P0.ttf") format('truetype');
 }
 
 @font-face {
     font-family: 'TH-Times';
+    font-style: normal;
+    font-weight: 400;
     src: url("../fonts/TH-Times.ttf") format('truetype');
 }
 
 @font-face {
     font-family: 'LastResort';
+    font-style: normal;
+    font-weight: 400;
     src: url("../fonts/LastResort-Regular.ttf") format('truetype');
 }
 
 .font {
   font-family: NotoColorEmoji, NotoUnicode, Plgo1,
-    Plgo2, MonuHanp, NotoSansSC,TH-Disp-P0,
+    Plgo2, MonuHanp, NotoSansSC, TH-Disp-P0,
     TH-Times, LastResort;
 }
