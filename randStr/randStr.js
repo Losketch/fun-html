@@ -33,18 +33,18 @@ Array.prototype.removeAll = function(value) {
 }
 
 const validCode = /^([0-9a-fA-F]|10)?[0-9a-fA-F]{0,4}$/;
-const resultTextarea = document.getElementById("resultTextarea");
-const customCharEle = document.getElementById("customChar");
-const slider = document.getElementById("countSlider");
-const counter = document.getElementById("counter");
-const countInput = document.getElementById("countInput");
-const con = document.getElementById("con");
+const resultTextarea = document.getElementById('resultTextarea');
+const customCharEle = document.getElementById('customChar');
+const slider = document.getElementById('countSlider');
+const counter = document.getElementById('counter');
+const countInput = document.getElementById('countInput');
+const con = document.getElementById('con');
 const addEle = '<span>0x</span><input type="text" class="uni" oninput="inspect(this)"></input><span>-0x</span><input type="text" class="uni" oninput="inspect(this)"></input><button onclick="this.parentNode.remove()" class="rem">×</button>';
 
 const characterSets = {
-  includeDigits: "0123456789".toArray(),
-  includeLowercase: "abcdefghijklmnopqrstuvwxyz".toArray(),
-  includeUppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toArray(),
+  includeDigits: '0123456789'.toArray(),
+  includeLowercase: 'abcdefghijklmnopqrstuvwxyz'.toArray(),
+  includeUppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.toArray(),
   includeSpecialSymbols: '!\"#$%&\'()*+,-./:;<=>?@[]^_`{|}~'.toArray(),
   includeBasicChinese: rangeArr(0x4E00, 0x9FFF),   includeExtendedAChinese: rangeArr(0x3400, 0x4DBF),
   includeExtendedBChinese: rangeArr(0x20000, 0x2A6DF),
@@ -60,20 +60,20 @@ const characterSets = {
 };
 const dom = {};
 
-["includeDigits", "includeLowercase", "includeUppercase",
- "includeSpecialSymbols", "includeBasicChinese", "includeExtendedAChinese",
- "includeExtendedBChinese", "includeExtendedCChinese", "includeExtendedDChinese",
- "includeExtendedEChinese", "includeExtendedFChinese", "includeExtendedGChinese",
- "includeExtendedHChinese", "includeExtendedIChinese", "includeCompatibleChinese",
- "includeCompatibleSupplementChinese", "includeCustomChar", "includeCustomInterval",
- "noRepeat"]
+['includeDigits', 'includeLowercase', 'includeUppercase',
+ 'includeSpecialSymbols', 'includeBasicChinese', 'includeExtendedAChinese',
+ 'includeExtendedBChinese', 'includeExtendedCChinese', 'includeExtendedDChinese',
+ 'includeExtendedEChinese', 'includeExtendedFChinese', 'includeExtendedGChinese',
+ 'includeExtendedHChinese', 'includeExtendedIChinese', 'includeCompatibleChinese',
+ 'includeCompatibleSupplementChinese', 'includeCustomChar', 'includeCustomInterval',
+ 'noRepeat']
    .forEach(name => dom[name] = document.getElementById(name));
 
 function inspect(ele) {
   const inputValue = ele.value;
 
   if (!validCode.test(inputValue)) {
-    ele.value = "";
+    ele.value = '';
   }
 }
 
@@ -114,17 +114,17 @@ function generateRandomCharacters() {
         characters.push(...characterSets[option]);
     }
   }
-  
+
   if (options.includeCustomInterval) {
   	[...con.children].forEach((chi) => {
   	  const [inpu, inpu2] = chi.getElementsByTagName('input');
       if (inpu.value && inpu2.value) characters = characters.concat(rangeArr(parseInt(inpu.value, 16), parseInt(inpu2.value, 16)));
   	})
   }
-  var result = "";
-  
+  var result = '';
+
   if (!characters.length){
-    result = "";
+    result = '';
   } else if (!options.noRepeat) {
     for (let i = 0; i < count; i++) {
       const chart = String.fromCodePoint(characters[getRandomNumber(0,characters.length - 1)]);
@@ -140,7 +140,7 @@ function generateRandomCharacters() {
   }
   resultTextarea.value = result;
   updateCount();
-  resultTextarea.style.height = "auto";
+  resultTextarea.style.height = 'auto';
   resultTextarea.style.height = `${resultTextarea.scrollHeight}px`;
 }
 

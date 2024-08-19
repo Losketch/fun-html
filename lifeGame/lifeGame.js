@@ -3,7 +3,7 @@ let star = [2, 3]
 let typeCount = 2
 
 const container = document.getElementById('container')
-const [generationsCountShow, exportBtn, importInp, generationsInp, jumpBtn, ruleSpan, stateBtn, stateShow, gridSizeBtn, gridSizeShow, gapBtn, gapShow, clearBtn] = "generationsCountShow1export1import1generations1jump1rule1state1stateShow1gridSize1gridSizeShow1gap1gapShow".split(1).map(n => document.getElementById(n))
+const [generationsCountShow, exportBtn, importInp, generationsInp, jumpBtn, ruleSpan, stateBtn, stateShow, gridSizeBtn, gridSizeShow, gapBtn, gapShow, clearBtn] = 'generationsCountShow1export1import1generations1jump1rule1state1stateShow1gridSize1gridSizeShow1gap1gapShow'.split(1).map(n => document.getElementById(n))
 const wh = Math.min(window.innerWidth - 16, window.innerWidth - 16)
 let size = 20
 let count = void 0
@@ -230,7 +230,7 @@ exportBtn.onclick = () => {
   const a = document.createElement('a');
   const fileName = prompt('请输入文件名（无后缀名）（点击取消则使用默认名字）')
   a.href = url;
-  a.download = fileName === null ? "data.txt" : fileName + '.txt';
+  a.download = fileName === null ? 'data.txt' : fileName + '.txt';
   a.click();
 }
 
