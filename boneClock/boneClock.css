@@ -2,7 +2,6 @@ body {
   --hour: 90deg;
   --min: 90deg;
   --sec: 90deg;
-  margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
