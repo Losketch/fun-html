@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>“門”指南针</title>
+  <link rel="stylesheet" href="./doorCompass.css" as="style" />
+</head>
+<body>
+  <svg id="frame" viewBox="0 0 700 950">
+    <path id="framePath" d="M1 1v948h63V312h241V1Zm383 0v312h250v548c0 16-5 21-22 22s-75 2-134-1c10 18 21 48 24 66 77 0 128-1 158-11 29-11 39-32 39-75V1ZM64 54h181v74H64Zm381 0h189v74H445ZM64 177h181v82H64Zm381 0h189v83H445Z" />
+  </svg>
+  <svg id="hand">
+    <path id="handPath"d="M 0,0 H 500 V 500 H 0 Z" />
+  </svg>
+  <button id="togglePathButton">更换样式</button>
+  <script src="./doorCompass.js"></script>
+</body>
+</html>
