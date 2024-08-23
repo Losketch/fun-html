@@ -1,4 +1,11 @@
 @font-face {
+    font-family: 'Ctrl-Ctrl';
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/Ctrl Ctrl.ttf") format('truetype');
+}
+
+@font-face {
     font-family: 'Noto-Color-Emoji';
     font-style: normal;
     font-weight: 400;
@@ -202,7 +209,7 @@
 }
 
 .font {
-  font-family: Noto-Color-Emoji, Noto-Unicode, Monu-Hani, Monu-Hanp,
+  font-family: Ctrl-Ctrl, Noto-Color-Emoji, Noto-Unicode, Monu-Hani, Monu-Hanp,
     Monu-Han2, Monu-Han3, Noto-Serif-Tangut, Monu-Temp, Segoe-UI-Historic, 
     MV-Boli, Ebrima, Nirmala-UI, Leelawadee-UI, Myanmar-Text,
     Calibri, Malgun-Gothic, Gadugi, Microsoft-Tai-Le, Microsoft-New-Tai-Lue,
