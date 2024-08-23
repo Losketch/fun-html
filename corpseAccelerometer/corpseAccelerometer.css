@@ -1,0 +1,40 @@
+body {
+  --deg: 0deg;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: unset;
+}
+
+* {
+  margin: 0;
+}
+
+.center {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#frame {
+  width: 350px;
+  height: 425px;
+}
+
+#hand {
+  width: 114.514px;
+  height: 25px;
+  position: absolute;
+  left: 87px;
+  top: 6px;
+  transform: rotate(var(--deg));
+  transform-origin: right;
+}
+
+#acceleration {
+  position: absolute;
+  left: 90px;
+  top: 75px;
+  font-size: 35px;
+}
