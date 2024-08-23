@@ -9,6 +9,7 @@
     textarea {
       width: 100%;
       resize: none;
+      font-size: 40px;
     }
   </style>
 </head>
@@ -16,7 +17,7 @@
   <p align="center">
     请在以下文本区域中输入字符。
   </p>
-  <textarea rows="15" placeholder="🝾请输入文本……" id="text" class="font auto-height"></textarea>
+  <textarea rows="5" placeholder="🝾请输入文本……" id="text" class="font auto-height"></textarea>
   <button onclick="input.value = ''">清空</button>
   <span>其它设置：</span>
   <label>
@@ -25,14 +26,17 @@
   <label>
     <input type="checkbox" id="italic"> 斜体
   </label>  
-  <div>
+  <div align="left">
     使用方法：
     <br>
     您只需将字符粘贴或输入到文本区域即可。
     <br><br>
     注意事项：
     <br>
-    从4号平面到13号平面的字符都未编码，因此此软件无法正常显示这些字符。
+    如果字符未编码，它将显示为“豆腐”、“〿”或方框围着的字符。
+    <br>
+    从4号平面到13号平面的字符都未编码，因此此软件会显示这些字符的分别在那个平面。
+    <br>
   </div>
   <script src="../assets/js/autoHeight.js"></script>
   <script src="./charDisplay.js"></script>
