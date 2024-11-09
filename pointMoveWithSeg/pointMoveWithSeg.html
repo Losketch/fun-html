@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="./pointMoveWithSeg.css" as="style" />
+    <title>点在移动时的连线</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div id="config">
+      <div>点数量(个)：<input id="count" type="number" value="80"></div>
+      <div>点半径(px)：<input id="pointRadius" type="number" value="6"></div>
+      <div>连线最大长度(px)：<input id="maxLen" type="number" value="300"></div>
+      <div>水平速度区间(px/s)：<input id="vxMin" type="number" value="-50">~<input id="vxMax" type="number" value="50"></div>
+      <div>垂直速度区间(px/s)：<input id="vyMin" type="number" value="-50">~<input id="vyMax" type="number" value="50"></div>
+      <div>水平速度阈值(px/s)：<input id="vxThreshold" type="number" value="10"></div>
+      <div>垂直速度阈值(px/s)：<input id="vyThreshold" type="number" value="10"></div>
+      <div><button id="update">更新</button></div>
+    </div>
+    <script src="pointMoveWithSeg.js"></script>
+</body>
+</html>
