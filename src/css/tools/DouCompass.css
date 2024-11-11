@@ -1,0 +1,32 @@
+body {
+  --deg: 90deg;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: unset;
+}
+
+* {
+  margin: 0;
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+}
+
+#frame {
+  width: 350px;
+  height: 425px;
+}
+
+#hand {
+  width: 114.514px;
+  height: 25px;
+  position: absolute;
+  left: 58.486px;
+  top: 251px;
+  transform: rotate(var(--deg));
+  transform-origin: right;
+}

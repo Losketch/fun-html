@@ -1,0 +1,41 @@
+body {
+  padding: 0;
+  margin: 4px;
+  letter-spacing: 0px;
+}
+
+main > div {
+  display: grid;
+  gap: 4px;
+}
+
+main > div > div:nth-child(2) {
+  display: block;
+  margin: 0;
+}
+
+main > div > div {
+  display: block;
+  font-size: 24px;
+  color: #2d4059;
+  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.02);
+  background-color: #00000006;
+  border-radius: 10px;
+}
+
+main > div > div > span {
+  color: rgb(255, 32, 32);
+  box-shadow: 0 -2px rgba(189, 195, 199, 0.5) inset;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-size: unset;
+}
+
+span:hover {
+  cursor: pointer;
+  box-shadow: 0px -1.8rem 0px rgba(189, 195, 199, 0.7) inset;
+}
+
+hr {
+  margin: 1px;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>字符显示器</title>
+
+  <link rel="stylesheet" href="../css/mainStyles.css" as="style">
+  <link rel="stylesheet" href="../css/fontFallback.css" as="style">
+  <script defer src="../js/changeHeader.js"></script>
+  <script defer src="../js/autoHeight.js"></script>
+  <script defer src="../js/tools/charDisplay.js"></script>
+</head>
+<body>
+  <div>
+    <main>
+      <div>
+        <div>
+          <label for="text">请在以下文本区域中输入字符</label>
+          <textarea rows="1" placeholder="🝾请输入文本……" id="text" class="font auto-height"></textarea>
+        </div>
+
+        <div>
+          <button onclick="clearText()">
+            <span class="material-icons">清空</span>
+          </button>
+        </div>
+
+        <div>
+          <span>其它设置：</span>
+          <label>
+            <input type="checkbox" id="bold"> 粗体
+          </label>
+          <label>
+            <input type="checkbox" id="italic"> 斜体
+          </label>
+        </div>
+      </div>
+
+      <div>
+        <h2>使用方法</h2>
+        <p>您只需将字符粘贴或输入到文本区域即可。</p>
+        
+        <h2>注意事项</h2>
+        <ul>
+          <li>如果字符未编码，它将显示为"豆腐"、"〿"或方框围着的字符。</li>
+          <li>从4号平面到13号平面的字符都未编码，因此此软件会显示这些字符的分别在那个平面。</li>
+        </ul>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
