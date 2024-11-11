@@ -1,0 +1,21 @@
+input {
+  width: 90%;
+}
+
+body {
+  width: 100%;
+}
+
+pre {
+  margin: 0em 0px;
+  display: unset;
+}
+
+main > div > div:nth-child(2) {
+  display: block;
+}
+
+main > div {
+  display: grid;
+  gap: 5px;
+}

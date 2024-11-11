@@ -1,0 +1,13 @@
+body > div {
+  display: grid;
+  gap: 5px;
+  min-height: unset;
+}
+
+button[id], button[onclick] {
+  display: flex;
+}
+
+body {
+  overflow: visible;
+}
