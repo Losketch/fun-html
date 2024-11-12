@@ -152,13 +152,13 @@ hr {
 .sidebar {
   z-index: 2;
   position: fixed;
-  right: -355px;
+  right: calc(-90vw - 5px);
   top: 0;
-  width: 350px;
+  width: 90vw;
   height: 100%;
   background-color: #FFFBFE99;
   backdrop-filter: blur(5px);
-  transition: right 0.6s linear(0 0%, 0 1.8%, 0.01 3.6%, 0.03 6.35%, 0.07 9.1%, 0.13 11.4%, 0.19 13.4%, 0.27 15%, 0.34 16.1%, 0.54 18.35%, 0.66 20.6%, 0.72 22.4%, 0.77 24.6%, 0.81 27.3%, 0.85 30.4%, 0.88 35.1%, 0.92 40.6%, 0.94 47.2%, 0.96 55%, 0.98 64%, 0.99 74.4%, 1 86.4%, 1 100%);
+  transition: right 0.6s cubic-bezier(0.1, 0.5, 0.13, 1);;
   overflow: hidden;
   box-shadow: 1px 0 10px 0px rgba(0, 0, 0, 0.5)
 }
