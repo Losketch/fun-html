@@ -6,6 +6,7 @@ const toolButtons = document.querySelectorAll('.tool-button');
 const nav = document.querySelector('nav');
 const toggleNavButton = document.getElementById('toggleNavButton');
 const titleH1 = document.getElementById('titleH1');
+let currentActiveMenu = 'home';
 
 function animateContent() {
   content.style.transition = 'none';
@@ -20,6 +21,7 @@ function animateContent() {
 }
 
 function updateActiveMenuItem(target) {
+  currentActiveMenu = target;
   menuItems.forEach(item => {
     if (item.dataset.target === target) {
       item.classList.add('active');
@@ -36,6 +38,9 @@ function loadContent(url) {
 
 menuItems.forEach(item => {
   item.addEventListener('click', () => {
+    if (currentActiveMenu === item.dataset.target) return;
+
+    currentActiveMenu = item.dataset.target;
     updateActiveMenuItem(item.dataset.target);
     animateContent();
 
@@ -99,6 +104,7 @@ toggleNavButton.addEventListener('click', () => {
     '<span class="material-icons">close</span>' :
     '<span class="material-icons">menu</span>';
 });
+
 
 
 let currentZoom = 1;
