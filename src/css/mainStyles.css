@@ -13,6 +13,7 @@
   --md-sys-color-surface-variant: #E7E0EC;
   --md-sys-color-on-surface-variant: #49454F;
   --md-sys-color-outline: #79747E;
+  --md-sys-color-ripple: #FFFFFF80;
   --md-sys-color-disabled: #F6F0FF;
   --md-sys-color-on-disabled: #3C2A5C;
   --md-sys-color-background: #FFFBFE;
@@ -43,6 +44,14 @@ body > div {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+.code-container {
+    background: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    overflow: auto;
+    position: relative;
 }
 
 header {
@@ -121,10 +130,10 @@ textarea::placeholder, input::placeholder {
   opacity: 0.5;
 }
 
-main > div > div:nth-child(2) {
+.flex-end {
   display: flex;
   justify-content: flex-end;
-  /* margin: 16px 0; */
+  margin: 16px 0;
 }
 
 main > div > div:nth-child(2) > button {
@@ -163,7 +172,7 @@ button {
 .ripple {
   position: absolute;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: var(--md-sys-color-ripple);
   transform: scale(0);
   animation: ripple-animation 0.6s linear;
 }
@@ -183,6 +192,12 @@ button:disabled {
 button > span:last-child {
   font-size: 0.75rem;
   opacity: 0.8;
+}
+
+.copy-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
 input[type="range"] {

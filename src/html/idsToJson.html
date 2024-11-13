@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDS转JSON</title>
+
+    <link rel="stylesheet" href="../highlight.js/default.min.css" as="style">
+    <link rel="stylesheet" href="../css/mainStyles.css" as="style">
+    <link rel="stylesheet" href="../css/fontFallback.css" as="style">
+    <link rel="stylesheet" href="../css/tools/idsToJson.css" as="style">
+    <script defer src="../highlight.js/highlight.min.js"></script>
+    <script defer src="../js/changeHeader.js"></script>
+    <script defer src="../js/rippleButton.js"></script>
+    <script defer src="../js/tools/idsToJson.js"></script>
+</head>
+<body>
+<div>
+  <main>
+    <div>
+      <input placeholder="🝾请输入IDS……" type="text" id="input" class="font">
+      <div class="flex-end">
+        <button id="convert">转换</button>
+      </div>
+    </div>
+    <div>
+      <pre class="code-container">
+        <button class="copy-button" id="copy-button">复制</button>
+        <code class="json" id="json-code"></code>
+      </pre>
+    </div>
+  </main>
+</div>
+
+</body>
+</html>
