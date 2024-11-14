@@ -11,11 +11,15 @@ for (let button of buttons) {
     ripple.style.width = ripple.style.height = `${size}px`;
     ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
     ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
-    
+
+    if (localStorage.getItem('dark_mode') === 'dark') {
+      ripple.style.filter = 'invert(1) hue-rotate(180deg)';
+    }
+
     ripple.classList.add('ripple');
 
-    button.insertBefore(ripple, button.firstChild);
-    
+    button.appendChild(ripple);
+
     ripple.addEventListener('animationend', () => {
         ripple.remove();
     });

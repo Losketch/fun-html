@@ -4,8 +4,9 @@
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>点在移动时的连线</title>
 
-    <link rel="stylesheet" href="../css/mainStyles.css" as="style">
-    <link rel="stylesheet" href="../css/tools/pointMoveWithSeg.css" as="style" />
+    <link rel="stylesheet" href="../css/mainStyles.css">
+    <link rel="stylesheet" href="../css/rippleButton.css">
+    <link rel="stylesheet" href="../css/tools/pointMoveWithSeg.css">
     <script defer src="../js/changeHeader.js"></script>
     <script defer src="../js/rippleButton.js"></script>
     <script defer src="../js/tools/pointMoveWithSeg.js"></script>
@@ -21,7 +22,7 @@
         <div>垂直速度区间(px/s)：<input id="vyMin" type="number" value="-50">~<input id="vyMax" type="number" value="50"></div>
         <div>水平速度阈值(px/s)：<input id="vxThreshold" type="number" value="10"></div>
         <div>垂直速度阈值(px/s)：<input id="vyThreshold" type="number" value="10"></div>
-        <div><button id="update">更新</button></div>
+        <div><button id="update" class="shadow-button">更新</button></div>
       </div>
     </main>
     <canvas id="canvas"></canvas>
