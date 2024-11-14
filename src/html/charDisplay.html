@@ -4,8 +4,9 @@
   <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>字符显示器</title>
 
-  <link rel="stylesheet" href="../css/mainStyles.css" as="style">
-  <link rel="stylesheet" href="../css/fontFallback.css" as="style">
+  <link rel="stylesheet" href="../css/mainStyles.css">
+  <link rel="stylesheet" href="../css/fontFallback.css">
+  <link rel="stylesheet" href="../css/rippleButton.css">
   <script defer src="../js/changeHeader.js"></script>
   <script defer src="../js/autoHeight.js"></script>
   <script defer src="../js/rippleButton.js"></script>
@@ -21,19 +22,21 @@
         </div>
 
         <div class="flex-end">
-          <button onclick="clearText()">
+          <button onclick="clearText()" class="shadow-button">
             <span class="material-icons">清空</span>
           </button>
         </div>
 
         <div>
-          <span>其它设置：</span>
-          <label>
-            <input type="checkbox" id="bold"> 粗体
-          </label>
-          <label>
-            <input type="checkbox" id="italic"> 斜体
-          </label>
+          <span class="other-options-span">其它设置：</span>
+          <button id="bold">
+            <span>粗体</span>
+            <span id="boldstatus" class="last-button-span">关</span>
+          </button>
+          <button id="italic">
+            <span>斜体</span>
+            <span id="italicstatus" class="last-button-span">关</span>
+          </button>
         </div>
       </div>
 

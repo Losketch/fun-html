@@ -221,24 +221,24 @@ function strokeSequenceToObj(strokeSequence) {
 }
 
 function moveStructureToEnd(data) {
-    if (Array.isArray(data)) {
-        return data.map(item => moveStructureToEnd(item));
-    } else if (typeof data === 'object' && data !== null) {
-        const keys = Object.keys(data);
-        if (keys.includes('structure')) {
-            keys.splice(keys.indexOf('structure'), 1);
-            keys.push('structure');
-        }
-
-        const newObject = {};
-        for (let key of keys) {
-            newObject[key] = moveStructureToEnd(data[key]);
-        }
-        return newObject;
-
+  if (Array.isArray(data)) {
+    return data.map(item => moveStructureToEnd(item));
+  } else if (typeof data === 'object' && data !== null) {
+    const keys = Object.keys(data);
+    if (keys.includes('structure')) {
+      keys.splice(keys.indexOf('structure'), 1);
+      keys.push('structure');
     }
 
-    return data;
+    const newObject = {};
+    for (let key of keys) {
+      newObject[key] = moveStructureToEnd(data[key]);
+    }
+    return newObject;
+
+  }
+
+  return data;
 }
 
 const input = document.getElementById('input');
@@ -252,7 +252,14 @@ copyButton.addEventListener('click', () => {
 });
 
 convertButton.addEventListener('click', () => {
-  const jsonObject = idsToObj(input.value);
+  let jsonObject;
+  try {
+    jsonObject = idsToObj(input.value);
+  } catch (e) {
+    alert('IDS语法不正确！\n错误信息：\n' + e.stack);
+    return;
+  }
+  
   const jsonString = JSON.stringify(jsonObject, null, 2);
 
   delete codeBlock.dataset.highlighted;
