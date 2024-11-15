@@ -1,6 +1,6 @@
 :root {
   --md-sys-color-primary: #6750A4;
-  --md-sys-color-alpha-primary: #6750A41a;
+  --md-sys-color-alpha-primary: #6750A41A;
   --md-sys-color-on-primary: #FFFFFF;
   --md-sys-color-primary-container: #EADDFF;
   --md-sys-color-on-primary-container: #21005D;
@@ -14,6 +14,7 @@
   --md-sys-color-on-surface-variant: #49454F;
   --md-sys-color-outline: #79747E;
   --md-sys-color-ripple: #FFFFFF80;
+  --md-sys-color-background-text: #0000000F;
   --md-sys-color-disabled: #F6F0FF;
   --md-sys-color-on-disabled: #3C2A5C;
   --md-sys-color-background: #FFFBFE;
@@ -33,7 +34,7 @@
 }
 
 .code-container {
-  background: #f0f0f0;
+  background: var(--md-sys-color-background-text);
   padding: 10px;
   border-radius: 5px;
   overflow: auto;
@@ -61,7 +62,7 @@
   color: var(--md-sys-color-on-surface-variant);
 }
 
-.last-button-span {
+.other-options-text {
   font-size: 0.75rem;
   opacity: 0.8;
 }
@@ -122,12 +123,13 @@ label {
 }
 
 textarea {
+  border-radius: 10px 10px 0 0;
   width: 100%;
   border: none;
   border-bottom: 1px solid var(--md-sys-color-outline);
   padding: 7.5px 10px 0 10px;
   font-size: 1rem;
-  background-color: #0000000f;
+  background-color: var(--md-sys-color-background-text);
   color: var(--md-sys-color-on-surface);
   resize: none;
   overflow: hidden;
@@ -136,11 +138,12 @@ textarea {
 }
 
 input:not([type="file"]) {
+  border-radius: 10px 10px 0 0;
   border: none;
   border-bottom: 1px solid var(--md-sys-color-outline);
   padding: 5px 10px;
   font-size: 1rem;
-  background-color: #0000000f;
+  background-color: var(--md-sys-color-background-text);
   color: var(--md-sys-color-on-surface);
   resize: none;
   transition: border-bottom 0.3s ease;
@@ -201,7 +204,7 @@ input[type="range"] {
 input[type="range"]::-webkit-slider-runnable-track {
     height: 4px;
     border-radius: 100px;
-    background: #0000000f;
+    background: var(--md-sys-color-background-text);
 }
 
 input[type="range"]::-webkit-slider-thumb {

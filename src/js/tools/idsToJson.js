@@ -241,6 +241,14 @@ function moveStructureToEnd(data) {
   return data;
 }
 
+function isZi(char) {
+  const code = char.codePointAt();
+
+  if (0x4E00 <= code && code <= 0x9FFF) return true;
+  if (0x3400 <= code && code <= 0x4DBF) return true;
+  if (0x20000 <= code && code <= 0x2A6DF) return true;
+}
+
 const input = document.getElementById('input');
 const convertButton = document.getElementById('convert');
 const copyButton = document.getElementById('copy-button');
@@ -248,7 +256,7 @@ const codeBlock = document.getElementById('json-code');
 
 copyButton.addEventListener('click', () => {
   const code = document.getElementById('json-code').textContent;
-  navigator.clipboard.writeText(code)
+  navigator.clipboard.writeText(code);
 });
 
 convertButton.addEventListener('click', () => {
@@ -256,7 +264,7 @@ convertButton.addEventListener('click', () => {
   try {
     jsonObject = idsToObj(input.value);
   } catch (e) {
-    alert('IDS语法不正确！\n错误信息：\n' + e.stack);
+    alert('IDS语法不正确！\n错误信息：\n' + e.toString());
     return;
   }
   
