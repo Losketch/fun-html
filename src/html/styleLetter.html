@@ -15,7 +15,10 @@
   <div>
     <main>
       <div>
-        <input placeholder="🝾请输入英文字母、数字或希腊字母……" type="text" id="input" class="font-without-ctrlctrl">
+        <div class="text-input-container">
+          <input type="text" id="input" class="font-without-ctrlctrl" required>
+          <label for="input">待转换字符</label>
+        </div>
       </div>
       <div><pre>粗体：　　　　　</pre><input readonly type="text" id="bold" class="font-without-ctrlctrl"></div>
       <div><pre>斜体：　　　　　</pre><input readonly type="text" id="italic" class="font-without-ctrlctrl"></div>
