@@ -185,8 +185,10 @@ function idsToObj(string) {
     }
   }
 
-  [thisIdc, thisIdcIndex] = idcs.pop();
-  if (thisIdcHaveBeenPassedParametersCount < thisIdcArity) throw new Error(`在第${thisIdcIndex + 1}个字符处的IDC'${thisIdc}'期望传递${getIdcArity(thisIdc)}个参数，但实际上只传递了${thisIdcHaveBeenPassedParametersCount}个。`);
+  if (idcs.length) {
+    [thisIdc, thisIdcIndex] = idcs.pop();
+    if (thisIdcHaveBeenPassedParametersCount < thisIdcArity) throw new Error(`在第${thisIdcIndex + 1}个字符处的IDC'${thisIdc}'期望传递${getIdcArity(thisIdc)}个参数，但实际上只传递了${thisIdcHaveBeenPassedParametersCount}个。`);
+  }
 
   if (inAbstractStructure) throw new Error(`抽象构形未闭合。`);
   if (inSurroundTag) throw new Error(`包围标记未闭合。`);
