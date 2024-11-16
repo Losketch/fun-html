@@ -1,20 +1,11 @@
 body {
   --deg: 0deg;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: unset;
+  margin-top: 70px;
+  overflow: visible;
 }
 
 * {
   margin: 0;
-}
-
-.center {
-  display: block;
-  margin: 0 auto;
-  text-align: center;
 }
 
 #frame {

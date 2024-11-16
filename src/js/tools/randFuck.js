@@ -23,6 +23,6 @@ startBtn.addEventListener('click', () => {
     res[targets[Math.floor(Math.random() * targets.length)]]++; 
   }
   for (let k in res) {
-    output.innerHTML += `${k}被草了${res[k]}次<br>`
+    output.innerHTML += `<span>${k}被草了${res[k]}次</span>`
   }
 })

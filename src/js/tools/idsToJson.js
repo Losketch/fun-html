@@ -7,24 +7,34 @@ const ternaryIdc = new Set(["⿲", "⿳"]);
 const number = new Set(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]);
 
 const strokes = new Set([
-  "D", "H", "J", "N", "P", "Q", "S", "T", "W", "Z", "g", "w", 
-  "◜", "◝", "◞", "◟", "⺄", "㇀", "㇂", "㇄", "㇅", "㇇", 
-  "㇈", "㇉", "㇊", "㇋", "㇌", "㇍", "㇎", "㇝", "一", 
-  "丨", "丶", "丿", "乀", "乁", "乙", "乚", "乛", "亅", 
-  "𠃊", "𠃋", "𠃌", "𠃍", "𠃑", "𠄌", "𠄎"
-]);
+  "D", "H", "J", "N", "P", "Q", "S", "T", "W", "Z", "g", "w",
+  "◜", "◝", "◞", "◟", "⺄", "㇀", "㇂", "㇄", "㇅", "㇇",
+  "㇈", "㇉", "㇊", "㇋", "㇌", "㇍", "㇎", "㇝", "一",
+  "丨", "丶", "丿", "乀", "乁", "乙", "乚", "乛", "亅",
+  "𠃊", "𠃋", "𠃌", "𠃍", "𠃑", "𠄌", "𠄎"]);
 
 const glyphFormSelectorChar = new Set([
-  "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", 
-  "B", "G", "H", "J", "K", "M", "P", "Q", "S", "T", "U", "V", 
-  "a", "b", "c", "d", "e", "f", "g", "h", "j", "l", "m", 
-  "n", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
-]);
+  "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".",
+  "B", "G", "H", "J", "K", "M", "P", "Q", "S", "T", "U", "V",
+  "a", "b", "c", "d", "e", "f", "g", "h", "j", "l", "m",
+  "n", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]);
+
+String.prototype.toArray = function() {
+  var arr = [];
+  for (let i = 0; i < this.length;) {
+    const codePoint = this.codePointAt(i);
+    i += codePoint > 0xffff ? 2 : 1;
+    arr.push(String.fromCodePoint(codePoint));
+  }
+  return arr
+}
 
 function idsToObj(string) {
+  string = string.toArray();
   const res = {};
   const indexes = [];
   const idcArity = [];
+  const idcs = [];
 
   let thisIdcHaveBeenPassedParametersCount = 0;
   let thisIdcArity = 0;
@@ -34,6 +44,7 @@ function idsToObj(string) {
   let inStrokeSequence = false;
   let inGlyphFormSelector = false;
   let inSingleZiGlyphFormSelector = false;
+  let thisIdc = undefined;
 
   for (let charIndex = 0; charIndex < string.length; charIndex++) {
     const char = string[charIndex];
@@ -67,6 +78,7 @@ function idsToObj(string) {
       const prevIdcZiCount = indexes.pop() + 1;
       thisIdcHaveBeenPassedParametersCount = prevIdcZiCount;
       thisIdcArity = idcArity.pop();
+      thisIdc = idcs.pop();
     }
 
     let curStructure = res;
@@ -113,6 +125,7 @@ function idsToObj(string) {
       if (thisIdcArity - thisIdcHaveBeenPassedParametersCount > 0) {
         indexes.push(thisIdcHaveBeenPassedParametersCount);
         idcArity.push(thisIdcArity);
+        idcs.push(char);
         curStructure = curStructure.structure[thisIdcHaveBeenPassedParametersCount];
         thisIdcHaveBeenPassedParametersCount = 0;
       }
@@ -126,9 +139,12 @@ function idsToObj(string) {
       } else if (ternaryIdc.has(char)) {
         thisIdcArity = 3;
       }
+      thisIdc = char;
 
       if (!curStructure.structure) {
-        curStructure.structure = Array.from({ length: thisIdcArity }, () => ({}));
+        curStructure.structure = Array.from({
+          length: thisIdcArity
+        }, () => ({}));
       }
 
       if (surroundIdc.has(char) && string[charIndex + 1] === "[") {
@@ -144,6 +160,7 @@ function idsToObj(string) {
       thisIdcHaveBeenPassedParametersCount++;
 
       if (char === "#") {
+        if (string[charIndex + 1] !== "(") throw new Error(`非法字符'${char}'在第${charIndex + 1}个字符处。（'#'的下一个字符必须为'('）`);
         inStrokeSequence = true;
         if (!curStructure.structure) {
           curStructure.type = "strokeSequence";
@@ -155,17 +172,31 @@ function idsToObj(string) {
         continue;
       }
 
+      if (!isZi(char)) throw new Error(`非法字符'${char}'在第${charIndex + 1}个字符处。`);
+      if (thisIdcHaveBeenPassedParametersCount > thisIdcArity) throw new Error(`非法字符'${char}'在第${charIndex + 1}个字符处。（IDC'${curStructure.idc}'期望传递${getIdcArity(curStructure.idc)}个参数）`);
+
       curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1].type = "zi";
       curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1].zi = char;
       inSingleZiGlyphFormSelector = true;
     }
   }
 
+  if (inAbstractStructure) throw new Error(`抽象构形未闭合。`);
+  if (inSurroundTag) throw new Error(`包围标记未闭合。`);
+  if (inOverlapTag) throw new Error(`重叠标记未闭合。`);
+  if (inStrokeSequence) throw new Error(`笔画序列未闭合。`);
+  if (inGlyphFormSelector) throw new Error(`字形样式选择器未闭合。`);
+  if (thisIdcHaveBeenPassedParametersCount < thisIdcArity) throw new Error(`IDC'${thisIdc}'期望传递${getIdcArity(thisIdc)}个参数，但实际上只传递了${thisIdcHaveBeenPassedParametersCount}个。`);
+
   return moveStructureToEnd(res);
 }
 
 function strokeSequenceToObj(strokeSequence) {
-  const res = { structure: [] };
+  const res = {
+    structure: []
+  };
+  const originalStrokeSequence = strokeSequence;
+  strokeSequence = strokeSequence.toArray();
   strokeSequence = strokeSequence.slice(2, -1);
 
   if (strokeSequence[strokeSequence.length - 1] === "z") {
@@ -179,18 +210,23 @@ function strokeSequenceToObj(strokeSequence) {
   let nextIsReverseStroke = false;
   let inCurve = false;
 
-  for (let char of strokeSequence) {
+  for (let charIndex = 0; charIndex < strokeSequence.length; charIndex++) {
+    const char = strokeSequence[charIndex]
+    
     if (inCrossingTag && number.has(char)) {
       curUnit.crossing += char;
     } else if (inCurve) {
+      if (char !== 'a' && char !== 'b' && char !== 'c' && char !== 'd') throw new Error(`非法曲线方向字符'${char}'。（曲线方向字符只能是abcd中的一个）（在笔画序列'${originalStrokeSequence}'的第${charIndex + 3}个字符处）`);
       curUnit.stroke += char;
       inCurve = false;
     } else if (strokes.has(char)) {
       if (curUnit !== null) {
         if ("crossing" in curUnit) {
+          if (!curUnit.crossing) throw new Error(`笔画交叉标记未指定交错索引。（在笔画序列'${originalStrokeSequence}'的第${charIndex + 3}个字符处）`);
           curUnit.crossing = parseInt(curUnit.crossing, 10);
         }
         structure.push(curUnit);
+        inCrossingTag = false;
       }
       curUnit = {};
       if (nextIsReverseStroke) {
@@ -204,18 +240,33 @@ function strokeSequenceToObj(strokeSequence) {
         curUnit.stroke = char;
       }
     } else if (char === "x") {
+      if (curUnit === null) throw new Error(`笔画交叉标记用在开头。（在笔画序列'${originalStrokeSequence}'的第${charIndex + 3}个字符处）`);
+      if (inCrossingTag) throw new Error(`笔画交叉标记重复使用。（在笔画序列'${originalStrokeSequence}'的第${charIndex + 3}个字符处）`);
       inCrossingTag = true;
       curUnit.crossing = "";
     } else if (char === "b") {
+      if (curUnit === null) throw new Error(`笔画撕开标记用在开头。（在笔画序列'${originalStrokeSequence}'的第${charIndex + 3}个字符处）`);
+      if (curUnit.break) throw new Error(`笔画撕开标记重复使用。（在笔画序列'${originalStrokeSequence}'的第${charIndex + 3}个字符处）`);
       curUnit.break = true;
     } else if (char === "-") {
+      if (nextIsReverseStroke) throw new Error(`逆运笔标记重复使用。（在笔画序列'${originalStrokeSequence}'的第${charIndex + 3}个字符处）`);
       nextIsReverseStroke = true;
+    } else {
+      throw new Error(`非法笔画序列字符'${char}'在笔画序列'${originalStrokeSequence}'的第${charIndex + 3}个字符处。`);
     }
   }
 
   if (curUnit !== null) {
+    if ("crossing" in curUnit) {
+      if (!curUnit.crossing) throw new Error(`笔画交叉标记未指定交错索引。（在笔画序列'${originalStrokeSequence}'的末尾）`);
+      curUnit.crossing = parseInt(curUnit.crossing, 10);
+    }
     structure.push(curUnit);
+    inCrossingTag = false;
   }
+
+  if (nextIsReverseStroke) throw new Error(`逆运笔标记未指定目标。（在笔画序列'${originalStrokeSequence}'的末尾）`);
+  if (inCurve) throw new Error(`曲线未指定方向。（在笔画序列'${originalStrokeSequence}'的末尾）`);
 
   return res;
 }
@@ -247,6 +298,22 @@ function isZi(char) {
   if (0x4E00 <= code && code <= 0x9FFF) return true;
   if (0x3400 <= code && code <= 0x4DBF) return true;
   if (0x20000 <= code && code <= 0x2A6DF) return true;
+  if (0x2A700 <= code && code <= 0x2B73A) return true;
+  if (0x2B740 <= code && code <= 0x2B81D) return true;
+  if (0x2B820 <= code && code <= 0x2CEA1) return true;
+  if (0x2CEB0 <= code && code <= 0x2EBE0) return true;
+  if (0x30000 <= code && code <= 0x3134A) return true;
+  if (0x31350 <= code && code <= 0x323AF) return true;
+  if (0x2EBF0 <= code && code <= 0x2EE5D) return true;
+  if (0x2EBF0 <= code && code <= 0x3347B) return true;
+
+  return false;
+}
+
+function getIdcArity(idc) {
+  if (unaryIdc.has(idc)) return 1;
+  if (binaryIdc.has(idc)) return 2;
+  if (ternaryIdc.has(idc)) return 3;
 }
 
 const input = document.getElementById('input');
@@ -255,7 +322,8 @@ const copyButton = document.getElementById('copy-button');
 const codeBlock = document.getElementById('json-code');
 
 copyButton.addEventListener('click', () => {
-  const code = document.getElementById('json-code').textContent;
+  const code = document.getElementById('json-code')
+    .textContent;
   navigator.clipboard.writeText(code);
 });
 
@@ -267,7 +335,7 @@ convertButton.addEventListener('click', () => {
     alert('IDS语法不正确！\n错误信息：\n' + e.toString());
     return;
   }
-  
+
   const jsonString = JSON.stringify(jsonObject, null, 2);
 
   delete codeBlock.dataset.highlighted;

@@ -12,6 +12,13 @@ cell {
   border-radius: 25%;
 }
 
+main > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
 @font-face {
   font-family: 'icomoon';
   src:  url('../../../assets/fonts/icomoon/icomoon.eot?f93e9y');
