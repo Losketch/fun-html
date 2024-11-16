@@ -45,6 +45,7 @@ function idsToObj(string) {
   let inGlyphFormSelector = false;
   let inSingleZiGlyphFormSelector = false;
   let thisIdc = undefined;
+  let thisIdcIndex = undefined;
 
   for (let charIndex = 0; charIndex < string.length; charIndex++) {
     const char = string[charIndex];
@@ -78,7 +79,7 @@ function idsToObj(string) {
       const prevIdcZiCount = indexes.pop() + 1;
       thisIdcHaveBeenPassedParametersCount = prevIdcZiCount;
       thisIdcArity = idcArity.pop();
-      thisIdc = idcs.pop();
+      [thisIdc, thisIdcIndex] = idcs.pop();
     }
 
     let curStructure = res;
@@ -125,9 +126,12 @@ function idsToObj(string) {
       if (thisIdcArity - thisIdcHaveBeenPassedParametersCount > 0) {
         indexes.push(thisIdcHaveBeenPassedParametersCount);
         idcArity.push(thisIdcArity);
-        idcs.push(char);
+        idcs.push([char, charIndex]);
         curStructure = curStructure.structure[thisIdcHaveBeenPassedParametersCount];
         thisIdcHaveBeenPassedParametersCount = 0;
+      }
+      if (!idcs.length) {
+        idcs.push([char, charIndex]);
       }
       curStructure.type = "IDS";
       curStructure.idc = char;
@@ -181,12 +185,14 @@ function idsToObj(string) {
     }
   }
 
+  [thisIdc, thisIdcIndex] = idcs.pop();
+  if (thisIdcHaveBeenPassedParametersCount < thisIdcArity) throw new Error(`在第${thisIdcIndex + 1}个字符处的IDC'${thisIdc}'期望传递${getIdcArity(thisIdc)}个参数，但实际上只传递了${thisIdcHaveBeenPassedParametersCount}个。`);
+
   if (inAbstractStructure) throw new Error(`抽象构形未闭合。`);
   if (inSurroundTag) throw new Error(`包围标记未闭合。`);
   if (inOverlapTag) throw new Error(`重叠标记未闭合。`);
   if (inStrokeSequence) throw new Error(`笔画序列未闭合。`);
   if (inGlyphFormSelector) throw new Error(`字形样式选择器未闭合。`);
-  if (thisIdcHaveBeenPassedParametersCount < thisIdcArity) throw new Error(`IDC'${thisIdc}'期望传递${getIdcArity(thisIdc)}个参数，但实际上只传递了${thisIdcHaveBeenPassedParametersCount}个。`);
 
   return moveStructureToEnd(res);
 }
@@ -222,7 +228,7 @@ function strokeSequenceToObj(strokeSequence) {
     } else if (strokes.has(char)) {
       if (curUnit !== null) {
         if ("crossing" in curUnit) {
-          if (!curUnit.crossing) throw new Error(`笔画交叉标记未指定交错索引。（在笔画序列'${originalStrokeSequence}'的第${charIndex + 3}个字符处）`);
+          if (!curUnit.crossing) throw new Error(`笔画交叉标记未指定交叉索引。（在笔画序列'${originalStrokeSequence}'的第${charIndex + 2}个字符处）`);
           curUnit.crossing = parseInt(curUnit.crossing, 10);
         }
         structure.push(curUnit);
@@ -258,14 +264,14 @@ function strokeSequenceToObj(strokeSequence) {
 
   if (curUnit !== null) {
     if ("crossing" in curUnit) {
-      if (!curUnit.crossing) throw new Error(`笔画交叉标记未指定交错索引。（在笔画序列'${originalStrokeSequence}'的末尾）`);
+      if (!curUnit.crossing) throw new Error(`笔画交叉标记未指定交叉索引。（在笔画序列'${originalStrokeSequence}'的末尾）`);
       curUnit.crossing = parseInt(curUnit.crossing, 10);
     }
     structure.push(curUnit);
     inCrossingTag = false;
   }
 
-  if (nextIsReverseStroke) throw new Error(`逆运笔标记未指定目标。（在笔画序列'${originalStrokeSequence}'的末尾）`);
+  if (nextIsReverseStroke) throw new Error(`逆运笔标记未指定目标笔画。（在笔画序列'${originalStrokeSequence}'的末尾）`);
   if (inCurve) throw new Error(`曲线未指定方向。（在笔画序列'${originalStrokeSequence}'的末尾）`);
 
   return res;
