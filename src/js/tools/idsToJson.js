@@ -211,16 +211,18 @@ function idsToObj(string) {
       thisIdcHaveBeenPassedParametersCount++;
 
       if (char === "#") {
-        const targetStructure = curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1];
         if (thisIdcHaveBeenPassedParametersCount > thisIdcArity && thisIdcArity) throw new IdsError(`非法字符“${char}”。（IDC“${curStructure.idc}”期望传递${getIdcArity(curStructure.idc)}个参数）`, charIndex, 1, curStructure.index, 1);
         if (string[charIndex + 1] !== "(") throw new IdsError(`非法字符“${char}”。（“#”的下一个字符必须为“(”）`, charIndex);
         inStrokeSequence = true;
         lastStrokeSequenceIndex = charIndex;
         if (!curStructure.structure) {
           curStructure.type = "strokeSequence";
+          curStructure.index = charIndex;
+          curStructure.endIndex = charIndex;
           curStructure.strokeSequence = "#";
           continue;
         }
+        const targetStructure = curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1];
         targetStructure.type = "strokeSequence";
         targetStructure.index = charIndex;
         targetStructure.endIndex = charIndex;
@@ -240,6 +242,7 @@ function idsToObj(string) {
     }
   }
 
+  if (!Object.keys(res).length) throw new IdsError(`IDS为空。`, 0, 0);
   if (inAbstractStructure) throw new IdsError(`抽象构形未闭合。`, 0);
   if (inSurroundTag) throw new IdsError(`包围标记未闭合。`, lastSurroundTagIndex);
   if (inOverlapTag) throw new IdsError(`重叠标记未闭合。`, lastOverlapTagIndex);
@@ -349,10 +352,6 @@ function countNonemptyObjects(arr) {
   return arr.filter(obj => Object.keys(obj).length !== 0).length;
 }
 
-function getLastEmptyObjectPrevObject(arr) {
-  return arr.filter(obj => Object.keys(obj).length !== 0).pop();
-}
-
 function getEndIndex(obj, result=[]) {
   for (let key in obj) {
     if (typeof obj[key] === 'object') {
@@ -374,6 +373,8 @@ function moveStructureToEnd(data) {
       keys.splice(keys.indexOf('structure'), 1);
       keys.push('structure');
     }
+    if (keys.includes('index')) keys.splice(keys.indexOf('index'), 1);
+    if (keys.includes('endIndex')) keys.splice(keys.indexOf('endIndex'), 1);
 
     const newObject = {};
     for (let key of keys) {

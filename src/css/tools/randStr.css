@@ -16,6 +16,12 @@ input[type="number"], input[type="text"] {
   margin-bottom: 8px;
 }
 
+.checkbox-section {
+  display: flex;
+  align-items: unset;
+  flex-direction: column;
+}
+
 input[type="checkbox"] {
   margin-right: 8px;
 }
