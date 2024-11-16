@@ -1,7 +1,7 @@
 @font-face{font-family:'Ctrl-Ctrl';src:url("../../assets/fonts/display/Ctrl Ctrl.woff2") format('woff2');font-display:swap;}
 @font-face{font-family:'Noto-Color-Emoji';src:url("../../assets/fonts/display/Noto Color Emoji.ttf") format('truetype');font-display:swap;}
 
-@font-face{font-family:'Plgo1';src:url("../../assets/fonts/display/Plgo1.ttf") format('truetype');font-display:swap;}
+@font-face{font-family:'Plgo1';src:url("../../assets/fonts/display/Plgo1.woff2") format('woff2');font-display:swap;}
 @font-face{font-family:'Plgo2';src:url("../../assets/fonts/display/Plgo2.woff2") format('woff2');font-display:swap;}
 
 @font-face{font-family:'Noto';src:url("../../assets/fonts/display/NotoUnicode.woff2") format('woff2');font-display:swap;}
@@ -9,7 +9,7 @@
 @font-face{font-family:'NotoSansKR';src:url("../../assets/fonts/display/NotoSansKR.woff2") format('woff2');font-display:swap;}
 
 @font-face{font-family:'Monu';src:url("../../assets/fonts/display/Monu Temp.woff2") format('woff2');font-display:swap;}
-@font-face{font-family:'Monu';src:url("../../assets/fonts/display/Monu Hanp.ttf") format('truetype');font-display:swap;}
+@font-face{font-family:'Monu';src:url("../../assets/fonts/display/Monu Hanp.woff2") format('woff2');font-display:swap;}
 
 @font-face{font-family:'Segoe';src:url("../../assets/fonts/display/Segoe UI Historic-edt.woff2") format('woff2');font-display:swap;}
 @font-face{font-family:'Segoe';src:url("../../assets/fonts/display/Segoe UI Symbol-edt.woff2") format('woff2');font-display:swap;}
