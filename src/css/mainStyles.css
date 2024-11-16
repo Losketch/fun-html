@@ -25,6 +25,7 @@
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   overflow: auto;
+ transition: filter 0.3s ease;
 }
 
 .center {
@@ -72,6 +73,14 @@
 .other-options-text {
   font-size: 0.75rem;
   opacity: 0.8;
+}
+
+.other-options-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow: visible;
 }
 
 body {
@@ -172,14 +181,6 @@ textarea:focus, input:focus:not([type="file"]) {
 textarea::placeholder, input::placeholder {
   color: var(--md-sys-color-on-surface-variant);
   opacity: 0.5;
-}
-
-main > div > div:not([id="errorRes"]) {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  flex-wrap: wrap;
-  overflow: visible;
 }
 
 button {

@@ -40,13 +40,23 @@
     }
   };
   let main = {
+    mainContent: document.getElementById('mainContent'),
+    darkModeToggle: document.getElementById('darkmode-toggle'),
     enableDarkMode() {
       this.createDarkStyle();
       util.addThemeColor('#131313');
+      this.mainContent.contentWindow.postMessage({
+        type: "outterColorSchemeChange",
+        colorScheme: 'dark'
+      }, '*');
     },
     disableDarkMode() {
       util.removeElementById('dark-mode-style');
       util.addThemeColor(util.getValue('origin_theme_color'));
+      this.mainContent.contentWindow.postMessage({
+        type: "outterColorSchemeChange",
+        colorScheme: 'light'
+      }, '*');
     },
     createDarkStyle() {
       util.addStyle('dark-mode-style', 'style', `
@@ -61,12 +71,14 @@
         ::-webkit-scrollbar {
             display: none;
         }
+        .no-invert {
+          filter: invert(1) hue-rotate(180deg);
+        }
       `);
     },
     toggleDarkMode() {
-      const darkModeToggle = document.getElementById('darkmode-toggle');
-      darkModeToggle.addEventListener('change', () => {
-        if (darkModeToggle.checked) {
+      this.darkModeToggle.addEventListener('change', () => {
+        if (this.darkModeToggle.checked) {
           util.setValue('dark_mode', 'dark');
           this.enableDarkMode();
         } else {
@@ -74,11 +86,20 @@
           this.disableDarkMode();
         }
       });
+
+      this.mainContent.addEventListener('load', function() {
+        this.contentWindow.postMessage({
+          type: "outterColorSchemeChange",
+          colorScheme: util.getValue('dark_mode')
+        }, '*')
+      })
+
       if (util.getValue('dark_mode') === 'dark') {
-        darkModeToggle.checked = true;
+        this.darkModeToggle.checked = true;
         this.enableDarkMode();
       } else {
-        darkModeToggle.checked = false;
+        this.darkModeToggle.checked = false;
+        this.disableDarkMode();
       }
     },
     init() {
