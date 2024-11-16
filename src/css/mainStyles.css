@@ -75,7 +75,7 @@
   opacity: 0.8;
 }
 
-.other-options-container {
+.options-container {
   display: flex;
   gap: 8px;
   align-items: center;
