@@ -58,12 +58,12 @@ class IdsError extends Error {
     ids = ids.toArray();
 
     let errorChar = ids.splice(this.errorCharIndex, this.errorCharLength);
-    errorChar = `<span style="background-color: red;">${errorChar.join('')}</span>`;
+    errorChar = `<span class="error">${errorChar.join('')}</span>`;
     ids.splice(this.errorCharIndex, 0, errorChar);
 
     if (this.extraCharLength) {
       let extraChar = ids.splice(this.extraCharIndex, this.extraCharLength);
-      extraChar = `<span style="background-color: green;">${extraChar.join('')}</span>`;
+      extraChar = `<span class="extra">${extraChar.join('')}</span>`;
       ids.splice(this.extraCharIndex, 0, extraChar);
     }
     target.innerHTML = '错误：' + this.message + '<br>' + ids.join('');
@@ -75,7 +75,6 @@ function idsToObj(string) {
   const res = {};
   const indexes = [];
   const idcArity = [];
-  const idcs = [];
 
   let thisIdcHaveBeenPassedParametersCount = 0;
   let thisIdcArity = 0;
@@ -89,8 +88,6 @@ function idsToObj(string) {
   let inGlyphFormSelector = false;
   let lastGlyphFormSelectorIndex;
   let inSingleZiGlyphFormSelector = false;
-  let thisIdc;
-  let thisIdcIndex;
 
   for (let charIndex = 0; charIndex < string.length; charIndex++) {
     const char = string[charIndex];
@@ -102,10 +99,12 @@ function idsToObj(string) {
           curStructure = curStructure.structure[i];
         }
 
-        if (!curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1].singleZiGlyphFormSelector) {
-          curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1].singleZiGlyphFormSelector = "";
+        const targetStructure = curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1];
+        if (!targetStructure.singleZiGlyphFormSelector) {
+          targetStructure.singleZiGlyphFormSelector = "";
         }
-        curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1].singleZiGlyphFormSelector += char;
+        targetStructure.singleZiGlyphFormSelector += char;
+        targetStructure.endIndex++;
         continue;
       } else {
         inSingleZiGlyphFormSelector = false;
@@ -124,7 +123,6 @@ function idsToObj(string) {
       const prevIdcZiCount = indexes.pop() + 1;
       thisIdcHaveBeenPassedParametersCount = prevIdcZiCount;
       thisIdcArity = idcArity.pop();
-      [thisIdc, thisIdcIndex] = idcs.pop();
     }
 
     let curStructure = res;
@@ -151,15 +149,18 @@ function idsToObj(string) {
     } else if (inStrokeSequence) {
       if (!curStructure.structure) {
         curStructure.strokeSequence += char;
+        curStructure.endIndex++;
         if (char === ")") {
           inStrokeSequence = false;
-          curStructure.strokeSequence = strokeSequenceToObj(curStructure.strokeSequence, charIndex - curStructure.strokeSequence.length + 1);
+          curStructure.strokeSequence = strokeSequenceToObj(curStructure.strokeSequence, curStructure.index);
         }
       } else {
-        curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1].strokeSequence += char;
+        const targetStructure = curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1];
+        targetStructure.strokeSequence += char;
+        targetStructure.endIndex++;
         if (char === ")") {
           inStrokeSequence = false;
-          curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1].strokeSequence = strokeSequenceToObj(curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1].strokeSequence, charIndex - curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1].strokeSequence.length + 1);
+          targetStructure.strokeSequence = strokeSequenceToObj(targetStructure.strokeSequence, targetStructure.index);
         }
       }
     } else if (char === "{") {
@@ -173,15 +174,13 @@ function idsToObj(string) {
       if (thisIdcArity - thisIdcHaveBeenPassedParametersCount > 0) {
         indexes.push(thisIdcHaveBeenPassedParametersCount);
         idcArity.push(thisIdcArity);
-        idcs.push([char, charIndex]);
         curStructure = curStructure.structure[thisIdcHaveBeenPassedParametersCount];
         thisIdcHaveBeenPassedParametersCount = 0;
       }
-      if (!idcs.length) {
-        idcs.push([char, charIndex]);
-      }
+      if (thisIdcArity === thisIdcHaveBeenPassedParametersCount && thisIdcArity) throw new IdsError(`非法字符“${char}”。（IDC“${curStructure.idc}”期望传递${getIdcArity(curStructure.idc)}个参数）`, charIndex, 1, curStructure.index, 1);
       curStructure.type = "IDS";
       curStructure.idc = char;
+      curStructure.index = charIndex;
 
       if (unaryIdc.has(char)) {
         thisIdcArity = 1;
@@ -190,7 +189,6 @@ function idsToObj(string) {
       } else if (ternaryIdc.has(char)) {
         thisIdcArity = 3;
       }
-      thisIdc = char;
 
       if (!curStructure.structure) {
         curStructure.structure = Array.from({
@@ -213,6 +211,8 @@ function idsToObj(string) {
       thisIdcHaveBeenPassedParametersCount++;
 
       if (char === "#") {
+        const targetStructure = curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1];
+        if (thisIdcHaveBeenPassedParametersCount > thisIdcArity && thisIdcArity) throw new IdsError(`非法字符“${char}”。（IDC“${curStructure.idc}”期望传递${getIdcArity(curStructure.idc)}个参数）`, charIndex, 1, curStructure.index, 1);
         if (string[charIndex + 1] !== "(") throw new IdsError(`非法字符“${char}”。（“#”的下一个字符必须为“(”）`, charIndex);
         inStrokeSequence = true;
         lastStrokeSequenceIndex = charIndex;
@@ -221,29 +221,22 @@ function idsToObj(string) {
           curStructure.strokeSequence = "#";
           continue;
         }
-        curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1].type = "strokeSequence";
-        curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1].strokeSequence = "#";
+        targetStructure.type = "strokeSequence";
+        targetStructure.index = charIndex;
+        targetStructure.endIndex = charIndex;
+        targetStructure.strokeSequence = "#";
         continue;
       }
 
-      if (!isZi(char)) throw new IdsError(`非法字符“${char}”。`, charIndex);
-      if (thisIdcHaveBeenPassedParametersCount > thisIdcArity) throw new IdsError(`非法字符“${char}”。（IDC'${curStructure.idc}'期望传递${getIdcArity(curStructure.idc)}个参数）`, charIndex);
+      if (!isZi(char) || !curStructure.structure) throw new IdsError(`非法字符“${char}”。`, charIndex);
+      if (thisIdcHaveBeenPassedParametersCount > thisIdcArity && thisIdcArity) throw new IdsError(`非法字符“${char}”。（IDC“${curStructure.idc}”期望传递${getIdcArity(curStructure.idc)}个参数）`, charIndex, 1, curStructure.index, 1);
 
-      curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1].type = "zi";
-      curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1].zi = char;
+      const targetStructure = curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1];
+      targetStructure.type = "zi";
+      targetStructure.index = charIndex;
+      targetStructure.endIndex = charIndex;
+      targetStructure.zi = char;
       inSingleZiGlyphFormSelector = true;
-    }
-  }
-
-  if (idcs.length) {
-    [thisIdc, thisIdcIndex] = idcs.pop();
-    if (thisIdcHaveBeenPassedParametersCount < thisIdcArity) throw new IdsError(`“${thisIdc}”期望传递${getIdcArity(thisIdc)}个参数，但实际上只传递了${thisIdcHaveBeenPassedParametersCount}个。`, thisIdcIndex, 1, thisIdcIndex + 1, string.join('').replace(/\([0123456789.BGHJKMPQSTUVabcdefghjlmnpqrstuvwxyz]+\)$/g, '').codePointLength - thisIdcIndex - 1);
-    while (!inStrokeSequence && indexes.length && thisIdcArity !== 0 && thisIdcArity - thisIdcHaveBeenPassedParametersCount === 0) {
-      const prevIdcZiCount = indexes.pop() + 1;
-      thisIdcHaveBeenPassedParametersCount = prevIdcZiCount;
-      thisIdcArity = idcArity.pop();
-      [thisIdc, thisIdcIndex] = idcs.pop();
-      if (thisIdcHaveBeenPassedParametersCount < thisIdcArity) throw new IdsError(`“${thisIdc}”期望传递${getIdcArity(thisIdc)}个参数，但实际上只传递了${thisIdcHaveBeenPassedParametersCount}个。`, thisIdcIndex, 1, thisIdcIndex + 1, string.join('').replace(/\([0123456789.BGHJKMPQSTUVabcdefghjlmnpqrstuvwxyz]+\)$/g, '').codePointLength - thisIdcIndex - 1);
     }
   }
 
@@ -252,6 +245,7 @@ function idsToObj(string) {
   if (inOverlapTag) throw new IdsError(`重叠标记未闭合。`, lastOverlapTagIndex);
   if (inStrokeSequence) throw new IdsError(`笔画序列未闭合。`, lastStrokeSequenceIndex, 2)
   if (inGlyphFormSelector) throw new IdsError(`字形样式选择器未闭合。`, lastGlyphFormSelectorIndex);
+  checkObj(null, res);
 
   return moveStructureToEnd(res);
 }
@@ -320,7 +314,6 @@ function strokeSequenceToObj(strokeSequence, index=0) {
       throw new IdsError(`非法笔画序列字符“${char}”。`, index + charIndex + 2);
     }
   }
-
   if (curUnit !== null) {
     if ("crossing" in curUnit) {
       if (!curUnit.crossing) throw new IdsError(`笔画交叉标记未指定交叉索引。`, index + strokeSequence.length + 1);
@@ -334,6 +327,42 @@ function strokeSequenceToObj(strokeSequence, index=0) {
   if (inCurve) throw new IdsError(`曲线未指定方向。`, index + strokeSequence.length + 1);
 
   return res;
+}
+
+function checkObj(prevObj, data) {
+  if (Array.isArray(data)) {
+      data.forEach(item => checkObj(prevObj, item));
+  } else if (typeof data === 'object' && data !== null) {
+    if (Object.keys(data).length === 0) {
+      const idc = prevObj.idc;
+      const index = prevObj.index;
+      const endIndex = getEndIndex(prevObj);
+      throw new IdsError(`“${idc}”期望传递${getIdcArity(idc)}个参数，但实际上只传递了${countNonemptyObjects(prevObj.structure)}个。`, index, 1, index + 1, endIndex - index);
+    }
+    for (let key in data) {
+      checkObj(data, data[key]);
+    }
+  }
+}
+ 
+function countNonemptyObjects(arr) {
+  return arr.filter(obj => Object.keys(obj).length !== 0).length;
+}
+
+function getLastEmptyObjectPrevObject(arr) {
+  return arr.filter(obj => Object.keys(obj).length !== 0).pop();
+}
+
+function getEndIndex(obj, result=[]) {
+  for (let key in obj) {
+    if (typeof obj[key] === 'object') {
+      getEndIndex(obj[key], result);
+    }
+    if (key === 'index' || key === 'endIndex') {
+      result.push(obj[key]);
+    }
+  }
+  return Math.max(...result);
 }
 
 function moveStructureToEnd(data) {
@@ -351,9 +380,7 @@ function moveStructureToEnd(data) {
       newObject[key] = moveStructureToEnd(data[key]);
     }
     return newObject;
-
   }
-
   return data;
 }
 
@@ -385,7 +412,7 @@ const input = document.getElementById('input');
 const convertButton = document.getElementById('convert');
 const copyButton = document.getElementById('copy-button');
 const codeBlock = document.getElementById('json-code');
-const errorRes = document.getElementById('errorRes');
+const errorRes = document.getElementById('error');
 
 copyButton.addEventListener('click', () => {
   const code = document.getElementById('json-code')
@@ -394,12 +421,17 @@ copyButton.addEventListener('click', () => {
 });
 
 convertButton.addEventListener('click', () => {
-  errorRes.innerHTML = '';
+  errorRes.style.display = 'none';
   let jsonObject;
   try {
     jsonObject = idsToObj(input.value);
   } catch (e) {
-    e.show(errorRes);
+    try {
+      e.show(errorRes);
+    } catch (err) {
+      alert(e.stack);
+    }
+    errorRes.style.display = 'block';
     return;
   }
 

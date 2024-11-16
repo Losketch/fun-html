@@ -12,32 +12,50 @@
   --md-sys-color-on-surface: #1C1B1F;
   --md-sys-color-surface-variant: #E7E0EC;
   --md-sys-color-on-surface-variant: #49454F;
+  --md-sys-color-error: #B3261E;
+  --md-sys-color-on-error: #FFFFFF;
+  --md-sys-color-error-container: #F9DEDC;
+  --md-sys-color-on-error-container: #8C1D18;
   --md-sys-color-outline: #79747E;
+  --md-sys-color-background: #FFFBFE;
+  --md-sys-color-on-background: #1C1B1F;
+
   --md-sys-color-ripple: #FFFFFF80;
   --md-sys-color-background-text: #0000000F;
   --md-sys-color-disabled: #F6F0FF;
   --md-sys-color-on-disabled: #3C2A5C;
-  --md-sys-color-background: #FFFBFE;
-  --md-sys-color-on-background: #1C1B1F;
+
 }
 
 * {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   overflow: auto;
- transition: filter 0.3s ease;
+  transition: filter 0.3s ease;
 }
 
-.center {
-  width: fit-content;
-  margin: auto;
-  text-align: center;
+.error-container {
+  background: var(--md-sys-color-error-container);
+  color: var(--md-sys-color-on-error-container);
+  border-radius: 10px;
+  padding: 10px;
+  display: none;
+}
+
+.error {
+  background: var(--md-sys-color-error);
+  color: var(--md-sys-color-on-error);
+}
+
+.extra {
+  background: green;
+  color: var(--md-sys-color-on-error);
 }
 
 .code-container {
   background: var(--md-sys-color-background-text);
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   overflow: auto;
   position: relative;
 }
@@ -56,6 +74,7 @@
 }
 
 .flex-end {
+  overflow: visible;
   display: flex;
   justify-content: flex-end;
   margin: 16px 0;
