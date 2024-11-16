@@ -47,16 +47,15 @@
     },
     createDarkStyle() {
       util.addStyle('dark-mode-style', 'style', `
-        html {
-            filter: invert(1) hue-rotate(180deg);
-            scrollbar-color: #454a4d #202324;
-        }
-        img, video, canvas, svg {
+        img, video, canvas {
             filter: invert(1) hue-rotate(180deg);
             fill: unset;
         }
         ::-webkit-scrollbar {
             display: none;
+        }
+        svg {
+          filter: hue-rotate(180deg);
         }
         .no-invert {
           filter: invert(1) hue-rotate(180deg);
