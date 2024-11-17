@@ -14,6 +14,8 @@ input[type="number"], input[type="text"] {
   display: flex;
   align-items: center;
   margin-bottom: 8px;
+  font-size: 0.875rem;
+  color: var(--md-sys-color-on-surface-variant);
 }
 
 .checkbox-section {

@@ -5,9 +5,11 @@
   <title>随机草人器</title>
   <link rel="stylesheet" href="../css/mainStyles.css">
   <link rel="stylesheet" href="../css/rippleButton.css">
+  <link rel="stylesheet" href="../css/materialTextInput.css">
   <link rel="stylesheet" href="../css/tools/randFuck.css">
   <script defer src="../js/changeHeader.js"></script>
   <script defer src="../js/rippleButton.js"></script>
+  <script defer src="../js/materialTextInput.js"></script>
   <script defer src="../js/iframeColorSchemeSync.js"></script>
   <script defer src="../js/tools/randFuck.js"></script>
 </head>
@@ -18,8 +20,16 @@
 
       <div id="config">
         <div><button id="start" class="shadow-button">开始草人</button></div>
-        <div>草人次数：<input id="count" type="number" value="10"></div>
-        <div>待草的人：<input id="target" value="a;b;c"></div>
+        <div class="text-input-container">
+          <input id="count" type="number" value="10">
+          <label for="count">草人次数</label>
+          <span></span>
+        </div>
+        <div class="text-input-container">
+          <input id="target" value="a;b;c">
+          <label for="target">待草的人</label>
+          <span></span>
+        </div>
       </div>
     </main>
   <div>

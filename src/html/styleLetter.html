@@ -6,9 +6,11 @@
 
   <link rel="stylesheet" href="../css/mainStyles.css">
   <link rel="stylesheet" href="../css/fontFallback.css">
+  <link rel="stylesheet" href="../css/materialTextInput.css">
   <link rel="stylesheet" href="../css/tools/styleLetter.css">
   <script defer src="../js/changeHeader.js"></script>
   <script defer src="../js/iframeColorSchemeSync.js"></script>
+  <script defer src="../js/materialTextInput.js"></script>
   <script defer src="../js/tools/styleLetter.js"></script>
 </head>
 <body>
@@ -16,8 +18,9 @@
     <main>
       <div>
         <div class="text-input-container">
-          <input type="text" id="input" class="font-without-ctrlctrl" required>
+          <input type="text" id="input" class="font-without-ctrlctrl" style="line-height: 1.2rem;">
           <label for="input">待转换字符</label>
+          <span></span>
         </div>
       </div>
       <div><pre>粗体：　　　　　</pre><input readonly type="text" id="bold" class="font-without-ctrlctrl"></div>
