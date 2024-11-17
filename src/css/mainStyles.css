@@ -34,38 +34,6 @@
   transition: filter 0.3s ease;
 }
 
-.text-input-container {
-  position: relative;
-  width: calc(100% - 20px);
-  margin: 0 10px 5px 10px;
-  overflow: visible;
-}
-
-.text-input-container > input {
-  padding: 0;
-  margin: 0;
-  width: 100%;
-}
-
-.text-input-container > input:focus {
-  outline: none;
-}
-
-.text-input-container > label {
-  position: absolute;
-  font-size: initial;
-  color: #00000055;
-  bottom: -5px;
-  left: 5px;
-  transition: bottom 0.3s ease, font-size 0.3s ease;
-}
-
-.text-input-container > input:valid ~ label,
-.text-input-container > input:focus ~ label {
-  font-size: 0.875rem;
-  bottom: 1rem;
-}
-
 .error-container {
   background: var(--md-sys-color-error-container);
   color: var(--md-sys-color-on-error-container);
@@ -145,14 +113,6 @@ body > div {
   min-height: 100vh;
 }
 
-header {
-  background-color: var(--md-sys-color-surface);
-  color: var(--md-sys-color-on-surface);
-  padding: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
 body {
   font-family: 'Roboto', sans-serif;
   background-color: var(--md-sys-color-background);
@@ -172,6 +132,7 @@ header {
   color: var(--md-sys-color-on-surface);
   padding: 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 h1 {
@@ -201,20 +162,12 @@ div > ul, div > ul > li {
   overflow: visible;
 }
 
-label {
-  font-size: 0.875rem;
-  color: var(--md-sys-color-on-surface-variant);
-  margin-bottom: 8px;
-  display: block;
-}
-
 textarea {
   width: calc(100% - 20px);
   border: none;
   border-bottom: 1px solid var(--md-sys-color-outline);
   padding: 7.5px 10px 0 10px;
   font-size: 1rem;
-  background-color: var(--md-sys-color-background-text);
   color: var(--md-sys-color-on-surface);
   resize: none;
   overflow: hidden;
@@ -222,8 +175,8 @@ textarea {
   transition: border-bottom 0.3s ease;
 }
 
-input:not([type="file"]) {
-  outline: none;
+input[type="text"],
+input[type="number"] {
   border: none;
   border-bottom: 1px solid var(--md-sys-color-outline);
   padding: 5px 10px;
@@ -231,11 +184,14 @@ input:not([type="file"]) {
   background-color: transparent;
   color: var(--md-sys-color-on-surface);
   resize: none;
+  margin-bottom: 5px;
   transition: border-bottom 0.3s ease;
 }
 
-input[type="text"] {
-  width: calc(100% - 20px);
+input[type="text"]:hover,
+input[type="number"]:hover {
+  outline: none;
+  border-bottom: 3px solid var(--md-sys-color-primary);
 }
 
 input[type="file"] {

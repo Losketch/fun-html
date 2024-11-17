@@ -39,7 +39,13 @@ const slider = document.getElementById('countSlider');
 const counter = document.getElementById('counter');
 const countInput = document.getElementById('countInput');
 const con = document.getElementById('con');
-const addEle = '<span>0x</span><input type="text" class="uni" oninput="inspect(this)"></input><span>-0x</span><input type="text" class="uni" oninput="inspect(this)"></input><button onclick="this.parentNode.remove()" class="rem">×</button>';
+const addEle = `
+  <span>0x</span>
+  <input type="text" class="uni" oninput="inspect(this)">
+  <span>-0x</span>
+  <input type="text" class="uni" oninput="inspect(this)">
+  <button onclick="this.parentNode.remove()" class="rem">×</button>
+`;
 
 const characterSets = {
   includeDigits: '0123456789'.toArray(),

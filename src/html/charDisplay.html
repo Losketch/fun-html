@@ -6,10 +6,12 @@
 
   <link rel="stylesheet" href="../css/mainStyles.css">
   <link rel="stylesheet" href="../css/fontFallback.css">
+  <link rel="stylesheet" href="../css/materialTextInput.css">
   <link rel="stylesheet" href="../css/rippleButton.css">
   <script defer src="../js/changeHeader.js"></script>
   <script defer src="../js/autoHeight.js"></script>
   <script defer src="../js/rippleButton.js"></script>
+  <script defer src="../js/materialTextInput.js"></script>
   <script defer src="../js/iframeColorSchemeSync.js"></script>
   <script defer src="../js/tools/charDisplay.js"></script>
 </head>
@@ -17,9 +19,10 @@
   <div>
     <main>
       <div>
-        <div>
-          <label for="text">请在以下文本区域中输入字符</label>
-          <textarea rows="1" placeholder="🝾请输入文本……" id="text" class="font auto-height"></textarea>
+        <div class="textarea-container">
+          <textarea rows="1" id="text" class="font auto-height"></textarea>
+          <label for="text">文本</label>
+          <span></span>
         </div>
 
         <div class="flex-end">

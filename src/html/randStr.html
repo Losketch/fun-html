@@ -8,10 +8,12 @@
   <link rel="stylesheet" href="../css/Material+Icons.css">
   <link rel="stylesheet" href="../css/fontFallback.css">
   <link rel="stylesheet" href="../css/rippleButton.css">
+  <link rel="stylesheet" href="../css/materialTextInput.css">
   <link rel="stylesheet" href="../css/tools/randStr.css">
   <script defer src="../js/changeHeader.js"></script>
   <script defer src="../js/rippleButton.js"></script>
   <script defer src="../js/iframeColorSchemeSync.js"></script>
+  <script defer src="../js/materialTextInput.js"></script>
   <script defer src="../js/tools/randStr.js"></script>
 </head>
 <body>
@@ -19,8 +21,9 @@
     <main>
       <div>
         <div class="text-input-container">
-          <input type="number" id="countInput" value="100" oninput="updateSliderValue()" required>
+          <input type="number" id="countInput" value="100" oninput="updateSliderValue()">
           <label for="countInput">数量</label>
+          <span></span>
         </div>
         <input type="range" id="countSlider" min="1" max="1000" value="100" oninput="updateInputValue()">
         <div class="shadow" id="shadowOverlay"></div>
@@ -47,8 +50,9 @@
         </div>
 
         <div class="custom-input-section text-input-container">
-          <input type="text" id="customChar" required>
+          <input type="text" id="customChar">
           <label for="customChar">自定义字符</label>
+          <span></span>
         </div>
 
         <div class="custom-interval-section options-container">
@@ -72,8 +76,11 @@
         </div>
 
         <div class="result-section">
-          <label for="resultTextarea">生成结果：</label>
-          <textarea readonly rows="5" id="resultTextarea" class="font" oninput="updateCount()"></textarea>
+          <div class="textarea-container">
+            <textarea readonly rows="5" id="resultTextarea" class="font" oninput="updateCount()"></textarea>
+            <label for="resultTextarea" class="top">生成结果</label>
+            <span></span>
+          </div>
           <span id="counter">0</span>
         </div>
       </div>

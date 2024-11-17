@@ -9,9 +9,11 @@
   <link rel="stylesheet" href="../css/mainStyles.css">
   <link rel="stylesheet" href="../css/fontFallback.css">
   <link rel="stylesheet" href="../css/rippleButton.css">
+  <link rel="stylesheet" href="../css/materialTextInput.css">
   <script defer src="../highlight.js/highlight.min.js"></script>
   <script defer src="../js/changeHeader.js"></script>
   <script defer src="../js/rippleButton.js"></script>
+  <script defer src="../js/materialTextInput.js"></script>
   <script defer src="../js/iframeColorSchemeSync.js"></script>
   <script defer src="../js/tools/idsToJson.js"></script>
 </head>
@@ -20,8 +22,9 @@
   <main>
     <div>
       <div class="text-input-container">
-        <input type="text" id="input" class="font-without-ctrlctrl" required>
+        <input type="text" id="input" class="font-without-ctrlctrl" style="line-height: 1.2rem;">
         <label for="input">IDS</label>
+        <span></span>
       </div>
       <div class="flex-end">
         <button id="convert" class="shadow-button">转换</button>
