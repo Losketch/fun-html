@@ -20,13 +20,14 @@
   <div class="app-container">
     <main>
       <div>
-        <div class="text-input-container">
-          <input type="number" id="countInput" value="100" oninput="updateSliderValue()">
-          <label for="countInput">数量</label>
-          <span></span>
+        <div class="count-section">
+          <div class="text-input-container">
+            <input type="number" id="countInput" value="100" oninput="updateSliderValue()">
+            <label for="countInput">数量</label>
+            <span></span>
+          </div>
+          <input type="range" id="countSlider" min="1" max="1000" value="100" oninput="updateInputValue()">
         </div>
-        <input type="range" id="countSlider" min="1" max="1000" value="100" oninput="updateInputValue()">
-        <div class="shadow" id="shadowOverlay"></div>
 
         <div class="checkbox-section">
           <label><input type="checkbox" id="includeDigits"> 包含数字</label>
