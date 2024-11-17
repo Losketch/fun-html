@@ -1,0 +1,20 @@
+.idc-inputer-container {
+  display: grid;
+  width: 100%;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(8, 1fr);
+  gap: 8px;
+}
+
+.idc-inputer {
+  all: unset;
+  overflow: hidden;
+  position: relative;
+  background-color: var(--md-sys-color-background-text);
+  border-radius: 10px;
+  padding: 0;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
