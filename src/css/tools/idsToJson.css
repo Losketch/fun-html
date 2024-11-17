@@ -1,12 +1,11 @@
-.idc-inputer-container {
+.inputer-container {
   display: grid;
-  width: 100%;
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(8, 1fr);
   gap: 8px;
 }
 
-.idc-inputer {
+.idc-inputer, .curve-inputer {
   all: unset;
   overflow: hidden;
   position: relative;
@@ -17,4 +16,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.placeholder {
+  grid-column: span 2;
 }

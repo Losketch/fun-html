@@ -413,11 +413,11 @@ const input = document.getElementById('input');
 const convertButton = document.getElementById('convert');
 const copyButton = document.getElementById('copy-button');
 const codeBlock = document.getElementById('json-code');
-const idcInputerContainer = document.querySelector('.idc-inputer-container');
+const inputerContainer = document.querySelector('.inputer-container');
 const errorRes = document.getElementById('error');
 
-idcInputerContainer.addEventListener('click', (e) => {
-  if (!e.target.classList.contains('idc-inputer')) return;
+inputerContainer.addEventListener('click', (e) => {
+  if (e.target.classList.contains('inputer-container')) return;
   input.value += e.target.innerText;
 });
 

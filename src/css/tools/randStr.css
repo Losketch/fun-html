@@ -56,7 +56,6 @@ button > span:last-child {
 
 textarea {
   border-radius: 4px;
-  resize: vertical;
   min-height: 100px;
   padding: 5px 10px 0 10px;
 }
