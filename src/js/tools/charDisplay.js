@@ -21,5 +21,6 @@ italic.addEventListener('click', () => {
 function clearText() {
   input.value = '';
   input.style.height = 'auto';
+  input.dispatchEvent(new Event('blur'));
   window.parent.postMessage({type: 'clearMainContentHeight'}, '*');
 }

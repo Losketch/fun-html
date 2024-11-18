@@ -38,14 +38,27 @@ const customCharEle = document.getElementById('customChar');
 const slider = document.getElementById('countSlider');
 const counter = document.getElementById('counter');
 const countInput = document.getElementById('countInput');
-const con = document.getElementById('con');
-const addEle = `
-  <span>0x</span>
-  <input type="text" class="uni" oninput="inspect(this)">
-  <span>-0x</span>
-  <input type="text" class="uni" oninput="inspect(this)">
-  <button onclick="this.parentNode.remove()" class="rem">×</button>
-`;
+const customIntervalContainer = document.getElementById('customIntervalContainer');
+
+let id = 0;
+const getAddEle = () => {
+  id++;
+  return `
+    U+
+    <div class="material-input-container">
+      <input id="${id}-1" type="text" class="uni" oninput="inspect(this)">
+      <label for="${id}-1">起始码位</label>
+      <span></span>
+    </div>
+    ~U+
+    <div class="material-input-container">
+      <input id="${id}-2" type="text" class="uni" oninput="inspect(this)">
+      <label for="${id}-2">结束码位</label>
+      <span></span>
+    </div>
+    <button onclick="remove(this.parentNode)" class="rem">×</button>
+  `
+};
 
 const characterSets = {
   includeDigits: '0123456789'.toArray(),
@@ -87,12 +100,20 @@ function inspect(ele) {
 
 function add() {
   const div = document.createElement('div');
-  div.innerHTML = addEle;
-  con.appendChild(div);
+  div.innerHTML = getAddEle();
+  customIntervalContainer.appendChild(div);
+  customIntervalContainer.style.display = 'block';
+}
+
+function remove(ele) {
+  ele.remove();
+  if (customIntervalContainer.children.length) return;
+  customIntervalContainer.style.display = 'none';
 }
 
 function updateInputValue() {
   countInput.value = slider.value;
+  countInput.dispatchEvent(new Event('focus'));
 }
 
 function updateSliderValue() {
@@ -124,7 +145,7 @@ function generateRandomCharacters() {
   }
   
   if (options.includeCustomInterval) {
-  	[...con.children].forEach((chi) => {
+  	[...customIntervalContainer.children].forEach((chi) => {
   	  const [inpu, inpu2] = chi.getElementsByTagName('input');
       if (inpu.value && inpu2.value) characters = characters.concat(rangeArr(parseInt(inpu.value, 16), parseInt(inpu2.value, 16)));
   	})
