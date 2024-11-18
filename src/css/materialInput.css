@@ -1,0 +1,65 @@
+.material-input-container {
+  position: relative;
+  margin: 0.8rem 5px 5px 5px;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.material-input-container > input,
+.material-input-container > textarea {
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+}
+
+.material-input-container > textarea {
+  background-color: var(--md-sys-color-background-text);
+}
+
+.material-input-container > input:hover {
+  border: none;
+  outline: none;
+}
+
+.material-input-container > textarea:hover {
+  border: none;
+  outline: none;
+}
+
+.material-input-container > label {
+  position: absolute;
+  font-size: initial;
+  margin: 0;
+  padding: 0;
+  color: #00000055;
+  left: 10px;
+  top: 100%;
+  transform: translateY(-100%);
+  transition: top 0.3s ease, font-size 0.3s ease;
+}
+
+
+.material-input-container > label.focus-label,
+.material-input-container > label.keep-top {
+  font-size: 0.65rem;
+  top: 0;
+}
+
+.material-input-container > span {
+  position: absolute;
+  background-color: var(--md-sys-color-outline);
+  height: 1px;
+  width: 100%;
+  bottom: 0;
+  transform-origin: top;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.material-input-container > input:focus~span,
+.material-input-container > textarea:focus~span {
+  transform: scaleY(3);
+  background-color: var(--md-sys-color-primary);
+}

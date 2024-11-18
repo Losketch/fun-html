@@ -175,7 +175,8 @@ div > ul, div > ul > li {
 }
 
 textarea {
-  width: calc(100% - 20px);
+  width: 100%;
+  box-sizing: border-box;
   border: none;
   border-bottom: 1px solid var(--md-sys-color-outline);
   padding: 7.5px 10px 0 10px;

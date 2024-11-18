@@ -418,7 +418,9 @@ const errorRes = document.getElementById('error');
 
 inputerContainer.addEventListener('click', (e) => {
   if (e.target.classList.contains('inputer-container')) return;
+  if (e.target.classList.contains('placeholder')) return;
   input.value += e.target.innerText;
+  input.dispatchEvent(new Event('focus'));
 });
 
 copyButton.addEventListener('click', () => {
