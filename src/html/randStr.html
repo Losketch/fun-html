@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="../css/counter.css">
   <link rel="stylesheet" href="../css/tools/randStr.css">
   <script defer src="../js/changeHeader.js"></script>
+  <script defer src="../js/autoHeight.js"></script>
   <script defer src="../js/rippleButton.js"></script>
   <script defer src="../js/iframeColorSchemeSync.js"></script>
   <script defer src="../js/materialInput.js"></script>
@@ -80,7 +81,7 @@
 
         <div class="result-section">
           <div class="material-input-container counter-container">
-            <textarea readonly rows="5" id="resultTextarea" class="font" oninput="updateCount()"></textarea>
+            <textarea readonly rows="5" id="resultTextarea" class="font auto-height" oninput="updateCount()"></textarea>
             <label for="resultTextarea" class="keep-top">生成结果</label>
             <span class="bar"></span>
             <span class="counter"></span>

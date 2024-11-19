@@ -163,8 +163,6 @@ function generateRandomCharacters() {
     }
   }
   resultTextarea.value = result;
-  resultTextarea.style.height = 'auto';
-  resultTextarea.style.height = `${resultTextarea.scrollHeight}px`;
   resultTextarea.dispatchEvent(new Event('input'));
 }
 
@@ -192,7 +190,5 @@ function copy(text) {
 
 function clearText() {
   resultTextarea.value = '';
-  resultTextarea.style.height = 'auto';
   resultTextarea.dispatchEvent(new Event('input'));
-  window.parent.postMessage({type: 'clearMainContentHeight'}, '*');
 }
