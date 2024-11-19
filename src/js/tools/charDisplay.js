@@ -22,5 +22,6 @@ function clearText() {
   input.value = '';
   input.style.height = 'auto';
   input.dispatchEvent(new Event('blur'));
+  input.dispatchEvent(new Event('input'));;
   window.parent.postMessage({type: 'clearMainContentHeight'}, '*');
 }
