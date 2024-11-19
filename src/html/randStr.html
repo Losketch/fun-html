@@ -9,11 +9,13 @@
   <link rel="stylesheet" href="../css/fontFallback.css">
   <link rel="stylesheet" href="../css/rippleButton.css">
   <link rel="stylesheet" href="../css/materialInput.css">
+  <link rel="stylesheet" href="../css/counter.css">
   <link rel="stylesheet" href="../css/tools/randStr.css">
   <script defer src="../js/changeHeader.js"></script>
   <script defer src="../js/rippleButton.js"></script>
   <script defer src="../js/iframeColorSchemeSync.js"></script>
   <script defer src="../js/materialInput.js"></script>
+  <script defer src="../js/counter.js"></script>
   <script defer src="../js/tools/randStr.js"></script>
 </head>
 <body>
@@ -24,7 +26,7 @@
           <div class="material-input-container">
             <input type="number" id="countInput" value="100" oninput="updateSliderValue()">
             <label for="countInput">数量</label>
-            <span></span>
+            <span class="bar"></span>
           </div>
           <input type="range" id="countSlider" min="1" max="1000" value="100" oninput="updateInputValue()">
         </div>
@@ -53,7 +55,7 @@
         <div class="custom-input-section material-input-container">
           <input type="text" id="customChar">
           <label for="customChar">自定义字符</label>
-          <span></span>
+          <span class="bar"></span>
         </div>
 
         <div class="custom-interval-section options-container">
@@ -77,12 +79,12 @@
         </div>
 
         <div class="result-section">
-          <div class="material-input-container">
+          <div class="material-input-container counter-container">
             <textarea readonly rows="5" id="resultTextarea" class="font" oninput="updateCount()"></textarea>
             <label for="resultTextarea" class="keep-top">生成结果</label>
-            <span></span>
+            <span class="bar"></span>
+            <span class="counter"></span>
           </div>
-          <span id="counter">0</span>
         </div>
       </div>
     </main>

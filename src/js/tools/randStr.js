@@ -36,7 +36,6 @@ const validCode = /^([0-9a-fA-F]|10)?[0-9a-fA-F]{0,4}$/;
 const resultTextarea = document.getElementById('resultTextarea');
 const customCharEle = document.getElementById('customChar');
 const slider = document.getElementById('countSlider');
-const counter = document.getElementById('counter');
 const countInput = document.getElementById('countInput');
 const customIntervalContainer = document.getElementById('customIntervalContainer');
 
@@ -121,10 +120,6 @@ function updateSliderValue() {
   slider.value = countInput.value;
 }
 
-function updateCount() {
-  counter.innerText = resultTextarea.value.codePointLength;
-}
-
 function generateRandomCharacters() {
   let count = parseInt(countInput.value);
   if (count > 1000) count = 1000;
@@ -168,9 +163,9 @@ function generateRandomCharacters() {
     }
   }
   resultTextarea.value = result;
-  updateCount();
   resultTextarea.style.height = 'auto';
   resultTextarea.style.height = `${resultTextarea.scrollHeight}px`;
+  resultTextarea.dispatchEvent(new Event('input'));
 }
 
 function rangeArr(start, end) {
@@ -198,6 +193,6 @@ function copy(text) {
 function clearText() {
   resultTextarea.value = '';
   resultTextarea.style.height = 'auto';
-  updateCount();
+  resultTextarea.dispatchEvent(new Event('input'));
   window.parent.postMessage({type: 'clearMainContentHeight'}, '*');
 }

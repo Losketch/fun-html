@@ -1,0 +1,18 @@
+.counter-container {
+  position: relative;
+}
+
+.counter-container > input,
+.counter-container > textarea {
+  padding-bottom: 1.1rem;
+}
+
+.counter-container > .counter {
+  position: absolute;
+  bottom: 3px;
+  right: 6px;
+  opacity: 0.7;
+  transform: translateX(-50%);
+  font-size: 0.875rem;
+  color: var(--md-sys-color-on-surface-variant);
+}

@@ -35,10 +35,10 @@
   margin: 0;
   padding: 0;
   color: #00000055;
-  left: 10px;
-  top: 100%;
+  left: 6px;
+  top: calc(100% - 3px);
   transform: translateY(-100%);
-  transition: top 0.3s ease, font-size 0.3s ease;
+  transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
 }
 
 
@@ -48,7 +48,7 @@
   top: 0;
 }
 
-.material-input-container > span {
+.material-input-container > span.bar {
   position: absolute;
   background-color: var(--md-sys-color-outline);
   height: 1px;
@@ -58,8 +58,13 @@
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.material-input-container > input:focus~span,
-.material-input-container > textarea:focus~span {
+.material-input-container > input:focus~span.bar,
+.material-input-container > textarea:focus~span.bar {
   transform: scaleY(3);
   background-color: var(--md-sys-color-primary);
+}
+
+.material-input-container > input:focus~label,
+.material-input-container > textarea:focus~label {
+  color: var(--md-sys-color-primary);
 }
