@@ -41,30 +41,13 @@
   transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
 }
 
+.material-input-container > input:focus~label,
+.material-input-container > textarea:focus~label {
+  color: var(--md-sys-color-primary);
+}
 
 .material-input-container > label.focus-label,
 .material-input-container > label.keep-top {
   font-size: 0.65rem;
   top: 0;
-}
-
-.material-input-container > span.bar {
-  position: absolute;
-  background-color: var(--md-sys-color-outline);
-  height: 1px;
-  width: 100%;
-  bottom: 0;
-  transform-origin: top;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-.material-input-container > input:focus~span.bar,
-.material-input-container > textarea:focus~span.bar {
-  transform: scaleY(3);
-  background-color: var(--md-sys-color-primary);
-}
-
-.material-input-container > input:focus~label,
-.material-input-container > textarea:focus~label {
-  color: var(--md-sys-color-primary);
 }
