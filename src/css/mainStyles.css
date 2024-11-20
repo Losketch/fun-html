@@ -185,20 +185,25 @@ textarea {
   resize: none;
   overflow: hidden;
   margin: 0;
-  border-bottom: 1px solid var(--md-sys-color-outline);
+  box-shadow: 
+    0 1px 0 var(--md-sys-color-outline);
+  transition: box-shadow 0.3s ease;
 }
 
 input[type="text"],
 input[type="number"] {
   box-sizing: border-box;
   border: none;
+  outline: none;
   padding: 3px 6px;
   overflow: hidden;
   font-size: 1rem;
   background-color: transparent;
   color: var(--md-sys-color-on-surface);
   margin: 0;
-  border-bottom: 1px solid var(--md-sys-color-outline);
+  box-shadow: 
+    0 1px 0 var(--md-sys-color-outline);
+  transition: box-shadow 0.3s ease;
 }
 
 input[type="text"]:hover,
@@ -206,17 +211,25 @@ input[type="number"]:hover {
   outline: none;
 }
 
+input[type="text"]:focus,
+input[type="number"]:focus {
+  outline: none;
+  box-shadow: 
+    0 1px 0 var(--md-sys-color-primary),
+    0 2px 0 var(--md-sys-color-primary),
+    0 3px 0 var(--md-sys-color-primary);
+}
+
 textarea:focus {
   outline: none;
+  box-shadow: 
+    0 1px 0 var(--md-sys-color-primary),
+    0 2px 0 var(--md-sys-color-primary),
+    0 3px 0 var(--md-sys-color-primary);
 }
 
 input[type="file"] {
   width: 100%;
-}
-
-textarea::placeholder, input::placeholder {
-  color: var(--md-sys-color-on-surface-variant);
-  opacity: 0.5;
 }
 
 button {
