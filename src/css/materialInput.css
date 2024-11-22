@@ -15,10 +15,6 @@
   border: none;
 }
 
-.material-input-container > textarea {
-  background-color: var(--md-sys-color-background-text);
-}
-
 .material-input-container > input:hover {
   border: none;
   outline: none;
