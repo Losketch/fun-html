@@ -19,6 +19,9 @@ const glyphFormSelectorChar = new Set([
   "a", "b", "c", "d", "e", "f", "g", "h", "j", "l", "m",
   "n", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]);
 
+const abstractStructureReg = /\{(\?|\?\d)?[\u4e00-\u9fff\u3400-\u4dbf\u{20000}-\u{2a6df}\u{2a700}-\u{2b73a}\u{2b740}-\u{2b81d}\u{2b820}-\u{2cea1}\u{2ceb0}-\u{2ebe0}\u{30000}-\u{3134a}\u{31350}-\u{323af}\u{2ebf0}-\u{2ee5d}\u{323b0}-\u{3347b}][BGHJKMPQSTUV]?\}/u;
+const glyphFormSelectorReg = /\((([BGHJKMPQSTUV]|(q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(\d{3})?|\.|(j|q)[abcdefghlmnprstuvwxyz.]+|\d?[bdefghlmnprstuvwxyz.]+|y\d+),)*([BGHJKMPQSTUV]|(q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(\d{3})?|\.|,|(j|q)[abcdefghlmnprstuvwxyz.]+|\d?[bdefghlmnprstuvwxyz.]+|y\d+)\)/;
+const singleZiGlyphFormSelectorReg = /^(([BGHJKMPQSTUV]|(q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(\d{3})?|\.|(j|q)[abcdefghlmnprstuvwxyz.]+|\d?[bdefghlmnprstuvwxyz.]+|y\d+),)*([BGHJKMPQSTUV]|(q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(\d{3})?|\.|,|(j|q)[abcdefghlmnprstuvwxyz.]+|\d?[bdefghlmnprstuvwxyz.]+|y\d+)$/;
 String.prototype.toArray = function() {
   var arr = [];
   for (let i = 0; i < this.length;) {
@@ -93,20 +96,22 @@ function idsToObj(string) {
     const char = string[charIndex];
 
     if (inSingleZiGlyphFormSelector) {
-      if (glyphFormSelectorChar.has(char)) {
-        let curStructure = res;
-        for (const i of indexes) {
-          curStructure = curStructure.structure[i];
-        }
+      let curStructure = res;
+      for (const i of indexes) {
+        curStructure = curStructure.structure[i];
+      }
 
-        const targetStructure = curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1];
-        if (!targetStructure.singleZiGlyphFormSelector) {
+      const targetStructure = curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1];
+
+      if (glyphFormSelectorChar.has(char)) {
+       if (!targetStructure.singleZiGlyphFormSelector) {
           targetStructure.singleZiGlyphFormSelector = "";
         }
         targetStructure.singleZiGlyphFormSelector += char;
         targetStructure.endIndex++;
         continue;
       } else {
+        if (!singleZiGlyphFormSelectorReg.test(targetStructure.singleZiGlyphFormSelector)) throw new IdsError(`非法的单字字形样式选择器“${targetStructure.singleZiGlyphFormSelector}”。`, targetStructure.index + 1, charIndex - targetStructure.index - 1);
         inSingleZiGlyphFormSelector = false;
       }
     }
@@ -114,6 +119,8 @@ function idsToObj(string) {
     if (inGlyphFormSelector) {
       res.glyphFormSelector += char;
       if (char === ")") {
+        if (charIndex != string.length - 1) throw new IdsError('字形样式选择器出现在非结尾。', lastGlyphFormSelectorIndex, charIndex - lastGlyphFormSelectorIndex + 1);
+        if (!glyphFormSelectorReg.test(res.glyphFormSelector)) throw new IdsError(`非法的字形样式选择器“${res.glyphFormSelector}”。`, lastGlyphFormSelectorIndex, charIndex - lastGlyphFormSelectorIndex + 1);
         inGlyphFormSelector = false;
       }
       continue;
@@ -144,6 +151,7 @@ function idsToObj(string) {
     } else if (inAbstractStructure) {
       res.abstractStructure += char;
       if (char === "}") {
+        if (!abstractStructureReg.test(res.abstractStructure)) throw new IdsError(`非法的抽象构形“${res.abstractStructure}”`, 0, charIndex + 1)
         inAbstractStructure = false;
       }
     } else if (inStrokeSequence) {
@@ -164,6 +172,7 @@ function idsToObj(string) {
         }
       }
     } else if (char === "{") {
+      if (charIndex != 0) throw new IdsError('抽象构形出现在非开头。', charIndex)
       inAbstractStructure = true;
       res.abstractStructure = "{";
     } else if (char === "(") {
@@ -387,7 +396,6 @@ function moveStructureToEnd(data) {
 
 function isZi(char) {
   const code = char.codePointAt();
-
   if (0x4E00 <= code && code <= 0x9FFF) return true;
   if (0x3400 <= code && code <= 0x4DBF) return true;
   if (0x20000 <= code && code <= 0x2A6DF) return true;
@@ -398,7 +406,7 @@ function isZi(char) {
   if (0x30000 <= code && code <= 0x3134A) return true;
   if (0x31350 <= code && code <= 0x323AF) return true;
   if (0x2EBF0 <= code && code <= 0x2EE5D) return true;
-  if (0x2EBF0 <= code && code <= 0x3347B) return true;
+  if (0x323B0 <= code && code <= 0x3347B) return true;
 
   return false;
 }
