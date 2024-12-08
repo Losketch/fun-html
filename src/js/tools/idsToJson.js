@@ -66,6 +66,10 @@ class IdsError extends Error {
     errorChar = `<span class="error">${errorChar.join('')}</span>`;
     ids.splice(this.errorCharIndex, 0, errorChar);
 
+    if (this.extraCharIndex > this.errorCharIndex + this.errorCharLength) {
+      this.extraCharIndex -= this.errorCharLength - 1;
+    }
+
     if (this.extraCharLength) {
       let extraChar = ids.splice(this.extraCharIndex, this.extraCharLength);
       extraChar = `<span class="extra">${extraChar.join('')}</span>`;
@@ -399,20 +403,32 @@ function moveStructureToEnd(data) {
 }
 
 function isZi(char) {
-  const code = char.codePointAt();
-  if (0x4E00 <= code && code <= 0x9FFF) return true;
-  if (0x3400 <= code && code <= 0x4DBF) return true;
-  if (0x20000 <= code && code <= 0x2A6DF) return true;
-  if (0x2A700 <= code && code <= 0x2B73A) return true;
-  if (0x2B740 <= code && code <= 0x2B81D) return true;
-  if (0x2B820 <= code && code <= 0x2CEA1) return true;
-  if (0x2CEB0 <= code && code <= 0x2EBE0) return true;
-  if (0x30000 <= code && code <= 0x3134A) return true;
-  if (0x31350 <= code && code <= 0x323AF) return true;
-  if (0x2EBF0 <= code && code <= 0x2EE5D) return true;
-  if (0x323B0 <= code && code <= 0x3347B) return true;
-
-  return false;
+    const code = char.codePointAt();
+    return (
+        (0x4E00 <= code && code <= 0x9FFF) ||
+        (0x3400 <= code && code <= 0x4DBF) ||
+        (0x20000 <= code && code <= 0x2A6DF) ||
+        (0x2A700 <= code && code <= 0x2B73A) ||
+        (0x2B740 <= code && code <= 0x2B81D) ||
+        (0x2B820 <= code && code <= 0x2CEA1) ||
+        (0x2CEB0 <= code && code <= 0x2EBE0) ||
+        (0x30000 <= code && code <= 0x3134A) ||
+        (0x31350 <= code && code <= 0x323AF) ||
+        (0x2EBF0 <= code && code <= 0x2EE5D) ||
+        (0x323B0 <= code && code <= 0x3347B) ||
+        (0x31C0 <= code && code <= 0x31E5) ||
+        (0x2E80 <= code && code <= 0x2EF3) ||
+        (code === 0x30E6) ||
+        (code === 0x30B3) ||
+        (code === 0x3022) ||
+        (code === 0x3023) ||
+        (code === 0x30B9) ||
+        (code === 0x30EA) ||
+        (code === 0x3007) ||
+        (code === 0xFA27) ||
+        (code === 0xFA24) ||
+        (code === 0xFA0E)
+    );
 }
 
 function getIdcArity(idc) {
