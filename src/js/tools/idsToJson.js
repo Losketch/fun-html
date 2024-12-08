@@ -20,8 +20,10 @@ const glyphFormSelectorChar = new Set([
   "n", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]);
 
 const abstractStructureReg = /\{(\?|\?\d)?[\u4e00-\u9fff\u3400-\u4dbf\u{20000}-\u{2a6df}\u{2a700}-\u{2b73a}\u{2b740}-\u{2b81d}\u{2b820}-\u{2cea1}\u{2ceb0}-\u{2ebe0}\u{30000}-\u{3134a}\u{31350}-\u{323af}\u{2ebf0}-\u{2ee5d}\u{323b0}-\u{3347b}][BGHJKMPQSTUV]?\}/u;
-const glyphFormSelectorReg = /\((([BGHJKMPQSTUV]|(q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(\d{3})?|\.|(j|q)[abcdefghlmnprstuvwxyz.]+|\d?[bdefghlmnprstuvwxyz.]+|y\d+),)*([BGHJKMPQSTUV]|(q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(\d{3})?|\.|,|(j|q)[abcdefghlmnprstuvwxyz.]+|\d?[bdefghlmnprstuvwxyz.]+|y\d+)\)/;
-const singleZiGlyphFormSelectorReg = /^(([BGHJKMPQSTUV]|(q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(\d{3})?|\.|(j|q)[abcdefghlmnprstuvwxyz.]+|\d?[bdefghlmnprstuvwxyz.]+|y\d+),)*([BGHJKMPQSTUV]|(q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(\d{3})?|\.|,|(j|q)[abcdefghlmnprstuvwxyz.]+|\d?[bdefghlmnprstuvwxyz.]+|y\d+)$/;
+const glyphFormSelectorReg = /\((([BGHJKMPQSTUV]|(q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(\d{3})?|\.|(j|q)[abcdefghlmnprstuvwxyz.]+|\d?[bdeghlmnprstuvwxyz.]+|y\d+),)*([BGHJKMPQSTUV]|(q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(\d{3})?|\.|,|(j|q)[abcdefghlmnprstuvwxyz.]+|\d?[bdeghlmnprstuvwxyz.]+|y\d+)\)/;
+const singleZiGlyphFormSelectorReg = /^(([BGHJKMPQSTUV]|(q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(\d{3})?|\.|(j|q)[abcdefghlmnprstuvwxyz.]+|\d?[bdeghlmnprstuvwxyz.]+|y\d+),)*([BGHJKMPQSTUV]|(q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(\d{3})?|\.|,|(j|q)[abcdefghlmnprstuvwxyz.]+|\d?[bdeghlmnprstuvwxyz.]+|y\d+)$/;
+const overlapTagReg = /\[(\d:((-|\|)(\d|b))?|\d?:(-|\|)(\d|b)|[lrbc_.,|x]+)\]/
+
 String.prototype.toArray = function() {
   var arr = [];
   for (let i = 0; i < this.length;) {
@@ -104,14 +106,15 @@ function idsToObj(string) {
       const targetStructure = curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1];
 
       if (glyphFormSelectorChar.has(char)) {
-       if (!targetStructure.singleZiGlyphFormSelector) {
+        if (!targetStructure.singleZiGlyphFormSelector) {
           targetStructure.singleZiGlyphFormSelector = "";
         }
         targetStructure.singleZiGlyphFormSelector += char;
         targetStructure.endIndex++;
+        if (charIndex === string.length - 1 && !singleZiGlyphFormSelectorReg.test(targetStructure.singleZiGlyphFormSelector)) throw new IdsError(`非法的单字字形样式选择器“${targetStructure.singleZiGlyphFormSelector}”。`, targetStructure.index + 1, charIndex - targetStructure.index);
         continue;
       } else {
-        if (!singleZiGlyphFormSelectorReg.test(targetStructure.singleZiGlyphFormSelector)) throw new IdsError(`非法的单字字形样式选择器“${targetStructure.singleZiGlyphFormSelector}”。`, targetStructure.index + 1, charIndex - targetStructure.index - 1);
+        if (targetStructure.singleZiGlyphFormSelector && !singleZiGlyphFormSelectorReg.test(targetStructure.singleZiGlyphFormSelector)) throw new IdsError(`非法的单字字形样式选择器“${targetStructure.singleZiGlyphFormSelector}”。`, targetStructure.index + 1, charIndex - targetStructure.index - 1);
         inSingleZiGlyphFormSelector = false;
       }
     }
@@ -146,12 +149,13 @@ function idsToObj(string) {
     } else if (inOverlapTag) {
       curStructure.overlapTag += char;
       if (char === "]") {
+        if (!overlapTagReg.test(curStructure.overlapTag)) throw new IdsError(`非法的重叠标记“${curStructure.overlapTag}”`, lastOverlapTagIndex, charIndex - lastOverlapTagIndex + 1);
         inOverlapTag = false;
       }
     } else if (inAbstractStructure) {
       res.abstractStructure += char;
       if (char === "}") {
-        if (!abstractStructureReg.test(res.abstractStructure)) throw new IdsError(`非法的抽象构形“${res.abstractStructure}”`, 0, charIndex + 1)
+        if (!abstractStructureReg.test(res.abstractStructure)) throw new IdsError(`非法的抽象构形“${res.abstractStructure}”`, 0, charIndex + 1);
         inAbstractStructure = false;
       }
     } else if (inStrokeSequence) {
