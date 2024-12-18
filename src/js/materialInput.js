@@ -5,16 +5,18 @@
       const label = materialInputContainer.querySelector('label');
       const input = materialInputContainer.querySelector('input') ||
         materialInputContainer.querySelector('textarea');
-      const bar = materialInputContainer.querySelector('span');
       if (label !== null) {
         if (input.value) label.classList.add('focus-label');
         input.addEventListener('focus', () => {
-          label.classList.add('focus-label');
+          if (!input.readOnly || input.value) label.classList.add('focus-label');
         });
         input.addEventListener('blur', () => {
           if (input.value) return;
           label.classList.remove('focus-label');
         });
+        input.addEventListener("input", () => {
+          if (input.value) label.classList.add('focus-label');
+        })
       }
     }
   }

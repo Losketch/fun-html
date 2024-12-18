@@ -7,8 +7,11 @@
   <link rel="stylesheet" href="../css/mainStyles.css">
   <link rel="stylesheet" href="../css/fontFallback.css">
   <link rel="stylesheet" href="../css/materialInput.css">
+  <link rel="stylesheet" href="../css/rippleButton.css">
+  <link rel="stylesheet" href="../css/nerd-fonts-generated.min.css">
   <link rel="stylesheet" href="../css/tools/styleLetter.css">
   <script defer src="../js/changeHeader.js"></script>
+  <script defer src="../js/rippleButton.js"></script>
   <script defer src="../js/iframeColorSchemeSync.js"></script>
   <script defer src="../js/materialInput.js"></script>
   <script defer src="../js/tools/styleLetter.js"></script>
@@ -21,20 +24,41 @@
           <input type="text" id="input" class="font-without-ctrlctrl" style="line-height: 1.2rem;">
           <label for="input">待转换字符</label>
         </div>
+        <div class="act-ele">
+            <div class="select-font">
+            <div class="select">
+              <span>选择字体</span>
+              <span class="nf nf-fa-angle_down"></span>
+            </div>
+            <div class="fonts-list">
+              <div data-font="bold" class="opt">粗体</div>
+              <div data-font="italic" class="opt">斜体</div>
+              <div data-font="boldItalic" class="opt">粗斜体</div>
+              <div data-font="script" class="opt">草体</div>
+              <div data-font="boldScript" class="opt">粗草体</div>
+              <div data-font="fraktur" class="opt">尖角体</div>
+              <div data-font="doubleStruck" class="opt">双线体</div>
+              <div data-font="boldFraktur" class="opt">粗尖角体</div>
+              <div data-font="sansSerif" class="opt">无衬线体</div>
+              <div data-font="sansSerifBold" class="opt">无衬线粗体</div>
+              <div data-font="sansSerifItalic" class="opt">无衬线斜体</div>
+              <div data-font="sansSerifBoldItalic" class="opt">无衬线粗斜体</div>
+              <div data-font="monospace" class="opt">等宽体</div>
+              <div data-font="circle" class="opt">圆圈</div>
+              <div data-font="negativeCircle" class="opt">负圆圈</div>
+              <div data-font="parenthesized" class="opt">括号</div>
+              <div data-font="square" class="opt">正方形</div>
+              <div data-font="superscript" class="opt">上标</div>
+              <div data-font="subscript" class="opt">下标</div>
+            </div>
+          </div>
+          <button id="cnvButton" class="shadow-button">转换</button>
+        </div>
+        <div class="material-input-container">
+          <input readonly type="text" id="output" class="font-without-ctrlctrl" style="line-height: 1.2rem;">
+          <label for="input">转换结果</label>
+        </div>
       </div>
-      <div><pre>粗体：　　　　　</pre><input readonly type="text" id="bold" class="font-without-ctrlctrl"></div>
-      <div><pre>斜体：　　　　　</pre><input readonly type="text" id="italic" class="font-without-ctrlctrl"></div>
-      <div><pre>粗斜体：　　　　</pre><input readonly type="text" id="boldItalic" class="font-without-ctrlctrl"></div>
-      <div><pre>草体：　　　　　</pre><input readonly type="text" id="script" class="font-without-ctrlctrl"></div>
-      <div><pre>粗草体：　　　　</pre><input readonly type="text" id="boldScript" class="font-without-ctrlctrl"></div>
-      <div><pre>尖角体：　　　　</pre><input readonly type="text" id="fraktur" class="font-without-ctrlctrl"></div>
-      <div><pre>双线体：　　　　</pre><input readonly type="text" id="doubleStruck" class="font-without-ctrlctrl"></div>
-      <div><pre>粗尖角体：　　　</pre><input readonly type="text" id="boldFraktur" class="font-without-ctrlctrl"></div>
-      <div><pre>无衬线体：　　　</pre><input readonly type="text" id="sansSerif" class="font-without-ctrlctrl"></div>
-      <div><pre>无衬线粗体：　　</pre><input readonly type="text" id="sansSerifBold" class="font-without-ctrlctrl"></div>
-      <div><pre>无衬线斜体：　　</pre><input readonly type="text" id="sansSerifItalic" class="font-without-ctrlctrl"></div>
-      <div><pre>无衬线粗斜体：　</pre><input readonly type="text" id="sansSerifBoldItalic" class="font-without-ctrlctrl"></div>
-      <div><pre>等宽体：　　　　</pre><input readonly type="text" id="monospace" class="font-without-ctrlctrl"></div>
     </main>
   </div>
 </body>
