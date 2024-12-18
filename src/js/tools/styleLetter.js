@@ -1,4 +1,3 @@
-
 String.prototype.toArray = function() {
   var arr = [];
   for (let i = 0; i < this.length;) {

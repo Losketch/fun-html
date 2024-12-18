@@ -36,16 +36,6 @@ button > span:last-child {
   font-size: 24px;
 }
 
-.primary-button {
-  background-color: var(--md-sys-color-primary);
-  color: var(--md-sys-color-on-primary);
-}
-
-.secondary-button {
-  background-color: var(--md-sys-color-secondary-container);
-  color: var(--md-sys-color-on-secondary-container);
-}
-
 textarea {
   min-height: 100px;
 }
