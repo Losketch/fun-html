@@ -41,8 +41,8 @@
   color: var(--md-sys-color-on-surface-variant);
   border-radius: 8px;
   max-height: 180px;
-  overflow-y: auto;
-  transition: 0.4s ease;
+  overflow: hidden;
+  transition: height 0.4s ease;
   height: 0;
 }
 
@@ -52,7 +52,7 @@
 
 .opt {
   box-sizing: border-box;
-  text-indent: 8px;
+  padding: 0 8px;
 }
 .opt:hover,
 .opt.selected {
@@ -61,4 +61,14 @@
 }
 .fonts-list.active {
   height: 180px;
+  overflow: scroll;
 }
+
+.fonts-list > .opt:first-child {
+  padding-top: 8px;
+}
+
+.fonts-list > .opt:last-child {
+  padding-bottom: 8px;
+}
+
