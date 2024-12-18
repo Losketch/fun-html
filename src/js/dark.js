@@ -46,7 +46,7 @@
       this.createDarkStyle();
       util.addThemeColor('#131313');
       this.mainContent.contentWindow.postMessage({
-        type: "outterColorSchemeChange",
+        type: 'outterColorSchemeChange',
         colorScheme: 'dark'
       }, '*');
     },
@@ -54,7 +54,7 @@
       util.removeElementById('dark-mode-style');
       util.addThemeColor(util.getValue('origin_theme_color'));
       this.mainContent.contentWindow.postMessage({
-        type: "outterColorSchemeChange",
+        type: 'outterColorSchemeChange',
         colorScheme: 'light'
       }, '*');
     },
@@ -89,7 +89,7 @@
 
       this.mainContent.addEventListener('load', function() {
         this.contentWindow.postMessage({
-          type: "outterColorSchemeChange",
+          type: 'outterColorSchemeChange',
           colorScheme: util.getValue('dark_mode')
         }, '*')
       })

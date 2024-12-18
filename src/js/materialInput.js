@@ -14,7 +14,7 @@
           if (input.value) return;
           label.classList.remove('focus-label');
         });
-        input.addEventListener("input", () => {
+        input.addEventListener('input', () => {
           if (input.value) label.classList.add('focus-label');
         })
       }
