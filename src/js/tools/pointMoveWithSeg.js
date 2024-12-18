@@ -12,13 +12,13 @@ init();
 
 function getRandom(min, max, threshold=0) {
   if (min >= max) {
-    throw new Error("最小值必须小于最大值。");
+    throw new Error('最小值必须小于最大值。');
   }
   if (threshold < 0) {
-    throw new Error("阈值必须为非负数。");
+    throw new Error('阈值必须为非负数。');
   }
   if (threshold >= max) {
-    throw new Error("阈值必须小于最大值。");
+    throw new Error('阈值必须小于最大值。');
   }
 
   let randomNum;

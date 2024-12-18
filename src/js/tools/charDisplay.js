@@ -1,8 +1,8 @@
 const input = document.getElementById('text');
 const bold = document.getElementById('bold');
 const italic = document.getElementById('italic');
-const boldstatus = document.getElementById("boldstatus")
-const italicstatus = document.getElementById("italicstatus");
+const boldstatus = document.getElementById('boldstatus')
+const italicstatus = document.getElementById('italicstatus');
 let boldOn = false;
 let italicOn = false;
 

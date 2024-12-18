@@ -278,7 +278,7 @@ const toStyleLetter = (str, style) => {
       if (0x61 <= char && char <= 0x7A) {
         return String.fromCodePoint(char + 0x246F);
       }
-      return char == 0x30 ? "⓪" : String.fromCodePoint(char);
+      return char == 0x30 ? '⓪' : String.fromCodePoint(char);
     },
     negativeCircle: char => {
       if (0x31 <= char && char <= 0x39) {
@@ -306,13 +306,13 @@ const toStyleLetter = (str, style) => {
     },
     superscript: char => {
       if (0x30 <= char && char <= 0x39) {
-        return "⁰¹²³⁴⁵⁶⁷⁸⁹"[char - 0x30];
+        return '⁰¹²³⁴⁵⁶⁷⁸⁹'[char - 0x30];
       }
       if (0x41 <= char && char <= 0x5A){
-        return "ᴬᴮꟲᴰᴱꟳᴳᴴᴵᴶᴷᴸᴹᴺᴼᴾꟴᴿˢᵀᵁⱽᵂˣʸᶻ"[char - 0x41];
+        return 'ᴬᴮꟲᴰᴱꟳᴳᴴᴵᴶᴷᴸᴹᴺᴼᴾꟴᴿˢᵀᵁⱽᵂˣʸᶻ'[char - 0x41];
       }
       if (0x61 <= char && char <= 0x7A){
-        return "ᵃᵇᶜᵈᵉᶠᶢʰⁱʲᵏˡᵐⁿᵒᵖ𐞥ʳˢᵗᵘᵛʷˣʸᶻ"[char - 0x61];
+        return 'ᵃᵇᶜᵈᵉᶠᶢʰⁱʲᵏˡᵐⁿᵒᵖ𐞥ʳˢᵗᵘᵛʷˣʸᶻ'[char - 0x61];
       }
       return char == 0x2B ? '⁺' :
         char == 0x2D ? '⁻' :
@@ -322,10 +322,10 @@ const toStyleLetter = (str, style) => {
     },
     subscript: char => {
       if (0x30 <= char && char <= 0x39) {
-        return "₀₁₂₃₄₅₆₇₈₉"[char - 0x30];
+        return '₀₁₂₃₄₅₆₇₈₉'[char - 0x30];
       }
       if (0x61 <= char && char <= 0x7A){
-        return "ₐbcdₑfgₕᵢⱼₖₗₘₙₒₚqᵣₛₜᵤᵥw᙮yz"[char - 0x61];
+        return 'ₐbcdₑfgₕᵢⱼₖₗₘₙₒₚqᵣₛₜᵤᵥw᙮yz'[char - 0x61];
       }
       return char == 0x2B ? '₊' :
         char == 0x2D ? '₋' :
@@ -339,31 +339,31 @@ const toStyleLetter = (str, style) => {
   }).join('')
 }
 
-const select = document.querySelector(".select");
-const optionsList = document.querySelector(".fonts-list");
-const options = document.querySelectorAll(".opt");
+const select = document.querySelector('.select');
+const optionsList = document.querySelector('.fonts-list');
+const options = document.querySelectorAll('.opt');
 const input = document.getElementById('input');
 const output = document.getElementById('output');
 const cnvButton = document.getElementById('cnvButton');
 let font;
 
-select.addEventListener("click",() => {
-  optionsList.classList.toggle("active");
-  select.querySelector(".nf-fa-angle_down").classList.toggle("nf-fa-angle_up");
+select.addEventListener('click',() => {
+  optionsList.classList.toggle('active');
+  select.querySelector('.nf-fa-angle_down').classList.toggle('nf-fa-angle_up');
 })
 
 options.forEach((option) => {
-  option.addEventListener("click",() => {
-    options.forEach((option) => {option.classList.remove("selected")});
-    select.querySelector("span").innerHTML = option.innerHTML;
+  option.addEventListener('click',() => {
+    options.forEach((option) => {option.classList.remove('selected')});
+    select.querySelector('span').innerHTML = option.innerHTML;
     font = option.dataset.font;
-    option.classList.add("selected");
-    optionsList.classList.toggle("active");
-    select.querySelector(".nf-fa-angle_up").classList.toggle("nf-fa-angle_up");
+    option.classList.add('selected');
+    optionsList.classList.toggle('active');
+    select.querySelector('.nf-fa-angle_up').classList.toggle('nf-fa-angle_up');
   })
 })
 
-cnvButton.addEventListener("click", () => {
+cnvButton.addEventListener('click', () => {
   output.value = toStyleLetter(input.value, font);
   output.dispatchEvent(new Event('input'));
   output.dispatchEvent(new Event('blur'));
