@@ -1,17 +1,64 @@
-body {
+.act-ele {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: visible;
+}
+
+.select-font {
+  margin: 8px 0;
+  width: 200px;
+  position: relative;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.select {
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
   width: 100%;
+  box-sizing: border-box;
+  background-color: var(--md-sys-color-surface-variant);
+  padding: 8px;
+  color: var(--md-sys-color-on-surface-variant);
+  font-weight: 500;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-pre {
-  margin: 0em 0px;
-  display: unset;
+.nf {
+  overflow: visible;
 }
 
-main > div > div:nth-child(2) {
-  display: block;
+.fonts-list {
+  margin-top: 8px;
+  z-index: 1;
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  background-color: var(--md-sys-color-surface-variant);
+  color: var(--md-sys-color-on-surface-variant);
+  border-radius: 8px;
+  max-height: 180px;
+  overflow-y: auto;
+  transition: 0.4s ease;
+  height: 0;
 }
 
-main > div {
-  display: grid;
-  gap: 5px;
+.fonts-list::-webkit-scrollbar {
+  display: none;
+}
+
+.opt {
+  box-sizing: border-box;
+  text-indent: 8px;
+}
+.opt:hover,
+.opt.selected {
+  color: var(--md-sys-color-on-secondary);
+  background-color: var(--md-sys-color-secondary);
+}
+.fonts-list.active {
+  height: 180px;
 }

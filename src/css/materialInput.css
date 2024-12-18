@@ -37,8 +37,8 @@
   transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
 }
 
-.material-input-container > input:focus~label,
-.material-input-container > textarea:focus~label {
+.material-input-container > input:not(:read-only):focus~label,
+.material-input-container > textarea:not(:read-only):focus~label {
   color: var(--md-sys-color-primary);
 }
 

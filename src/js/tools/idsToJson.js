@@ -19,10 +19,10 @@ const glyphFormSelectorChar = new Set([
   "a", "b", "c", "d", "e", "f", "g", "h", "j", "l", "m",
   "n", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]);
 
-const abstractStructureReg = /\{(\?|\?\d)?[\u4e00-\u9fff\u3400-\u4dbf\u{20000}-\u{2a6df}\u{2a700}-\u{2b73a}\u{2b740}-\u{2b81d}\u{2b820}-\u{2cea1}\u{2ceb0}-\u{2ebe0}\u{30000}-\u{3134a}\u{31350}-\u{323af}\u{2ebf0}-\u{2ee5d}\u{323b0}-\u{3347b}][BGHJKMPQSTUV]?\}/u;
-const glyphFormSelectorReg = /\((([BGHJKMPQSTUV]|(q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(\d{3})?|\.|(j|q)[abcdeghlmnprstuvwxyz.]+|\d?[bdeghlmnprstuvwxyz.]+|y\d+),)*([BGHJKMPQSTUV]|(q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(\d{3})?|\.|,|(j|q)[abcdeghlmnprstuvwxyz.]+|\d?[bdeghlmnprstuvwxyz.]+|y\d+)\)/;
-const singleZiGlyphFormSelectorReg = /^(([BGHJKMPQSTUV]|(q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(\d{3})?|\.|(j|q)[abcdeghlmnprstuvwxyz.]+|\d?[bdeghlmnprstuvwxyz.]+|y\d+),)*([BGHJKMPQSTUV]|(q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(\d{3})?|\.|,|(j|q)[abcdeghlmnprstuvwxyz.]+|\d?[bdeghlmnprstuvwxyz.]+|y\d+)$/;
-const overlapTagReg = /\[(\d:((-|\|)(\d|b))?|\d?:(-|\|)(\d|b)|[lrbc_.,|x]+)\]/
+const abstractStructureReg = /\{(?:\?|\?[0-3])?[\u4e00-\u9fff\u3400-\u4dbf\u{20000}-\u{2a6df}\u{2a700}-\u{2b73a}\u{2b740}-\u{2b81d}\u{2b820}-\u{2cea1}\u{2ceb0}-\u{2ebe0}\u{30000}-\u{3134a}\u{31350}-\u{323af}\u{2ebf0}-\u{2ee5d}\u{323b0}-\u{3347b}][BGHJKMPQSTUV]?\}/u;
+const glyphFormSelectorReg = /\((?:(?:[BGHJKMPQSTUV]|(?:q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(?:\d{3})?|\.|(?:j|q)[abcdghlmnprstuvwxyz.]+|\d?[abcdghlmnprstuvwxyz.]+|y\d+|e),)*(?:[BGHJKMPQSTUV]|(?:q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(?:\d{3})?|\.|,|(?:j|q)[abcdghlmnprstuvwxyz.]+|\d?[abcdghlmnprstuvwxyz.]+|y\d+|e)\)/;
+const singleZiGlyphFormSelectorReg = /^(?:(?:[BGHJKMPQSTUV]|(?:q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(?:\d{3})?|\.|(?:j|q)[abcdghlmnprstuvwxyz.]+|\d?[abcdghlmnprstuvwxyz.]+|y\d+|e),)*(?:[BGHJKMPQSTUV]|(?:q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(?:\d{3})?|\.|,|(?:j|q)[abcdghlmnprstuvwxyz.]+|\d?[abcdghlmnprstuvwxyz.]+|y\d+|e)$/;
+const overlapTagReg = /\[(?:\d:(?:(?:-|\|)(?:\d|b))?|\d?:(?:-|\|)(?:\d|b)|[lrbc_.,|x]+)\]/
 
 String.prototype.toArray = function() {
   var arr = [];
