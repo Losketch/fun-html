@@ -8,6 +8,16 @@ String.prototype.toArray = function() {
   return arr
 }
 
+String.prototype.toCharArray = function() {
+  var arr = [];
+  for (let i = 0; i < this.length;) {
+    const codePoint = this.codePointAt(i);
+    i += codePoint > 0xffff ? 2 : 1;
+    arr.push(String.fromCodePoint(codePoint));
+  }
+  return arr
+}
+
 const toStyleLetter = (str, style) => {
   const styleMap = {
     bold: char => {
@@ -311,7 +321,7 @@ const toStyleLetter = (str, style) => {
         return 'ᴬᴮꟲᴰᴱꟳᴳᴴᴵᴶᴷᴸᴹᴺᴼᴾꟴᴿˢᵀᵁⱽᵂˣʸᶻ'[char - 0x41];
       }
       if (0x61 <= char && char <= 0x7A){
-        return 'ᵃᵇᶜᵈᵉᶠᶢʰⁱʲᵏˡᵐⁿᵒᵖ𐞥ʳˢᵗᵘᵛʷˣʸᶻ'[char - 0x61];
+        return 'ᵃᵇᶜᵈᵉᶠᶢʰⁱʲᵏˡᵐⁿᵒᵖ𐞥ʳˢᵗᵘᵛʷˣʸᶻ'.toCharArray()[char - 0x61];
       }
       return char == 0x2B ? '⁺' :
         char == 0x2D ? '⁻' :
