@@ -88,6 +88,24 @@ window.addEventListener('message', function(event) {
   }
 });
 
+window.addEventListener('message', function(event) {
+  if (event.data.type === 'adjustIframeHeight') {
+    const iframe = document.querySelector('iframe');
+    if (iframe) {
+      iframe.style.height = event.data.height + 'px';
+    }
+  }
+});
+
+window.addEventListener('message', function(event) {
+  if (event.data === 'clearMainContentHeight') {
+    const mainContent = document.getElementById('mainContent');
+    if (mainContent) {
+      mainContent.style.removeProperty('height');
+    }
+  }
+});
+
 toggleNavButton.addEventListener('click', () => {
   nav.classList.toggle('nav-hidden');
   toggleNavButton.innerHTML = nav.classList.contains('nav-hidden') ?
