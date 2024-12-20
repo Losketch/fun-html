@@ -85,24 +85,11 @@ window.addEventListener('message', function(event) {
     case 'changeHeader':
       titleH1.innerText = event.data.text;
       break;
-  }
-});
-
-window.addEventListener('message', function(event) {
-  if (event.data.type === 'adjustIframeHeight') {
-    const iframe = document.querySelector('iframe');
-    if (iframe) {
-      iframe.style.height = event.data.height + 'px';
-    }
-  }
-});
-
-window.addEventListener('message', function(event) {
-  if (event.data === 'clearMainContentHeight') {
-    const mainContent = document.getElementById('mainContent');
-    if (mainContent) {
+    case 'adjustIframeHeight':
+      mainContent.style.height = event.data.height + 'px';
+      break;
+    case 'clearMainContentHeight':
       mainContent.style.removeProperty('height');
-    }
   }
 });
 
