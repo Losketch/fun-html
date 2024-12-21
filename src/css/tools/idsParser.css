@@ -2,12 +2,12 @@
   display: grid;
   grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(8, 1fr);
-  gap: 8px;
+  gap: 16px 8px;
 }
 
 .idc-inputer, .curve-inputer {
   all: unset;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
   background-color: var(--md-sys-color-background-text);
   border-radius: 10px;
@@ -19,9 +19,10 @@
   flex-direction: column;
 }
 .idc-inputer:after, .curve-inputer:after {
-  font-size: 10px;
-  margin: 0px 0px -9px;
-  transform: translateY(-5px);
+  font-size: 8px;
+  position: absolute;
+  top: 100%;
+  opacity: 0.5;
 }
 
 .idc-inputer:nth-child(1):after{content:"LR"}
