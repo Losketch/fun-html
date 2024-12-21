@@ -19,6 +19,12 @@ main > div {
   gap: 5px;
 }
 
+.inner-div {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 @font-face {
   font-family: 'icomoon';
   src:  url('../../../assets/fonts/icomoon/icomoon.eot?f93e9y');
