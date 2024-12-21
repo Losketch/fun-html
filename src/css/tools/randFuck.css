@@ -18,3 +18,7 @@
   line-height: 1em;
   font-size: 0.875em;
 }
+
+#res > span {
+  overflow: visible;
+}
