@@ -42,3 +42,9 @@
   font-style: normal;
   font-weight: 400;
 }
+
+.font-without-ctrlctrl-plgo2-top {
+  font-family: Plgo2, Plgo1, Noto-Color-Emoji, Noto, NotoSansSC, NotoSansKR, Monu, Segoe, Microsoft, others, sans-serif, Last;
+  font-style: normal;
+  font-weight: 400;
+}
