@@ -1,9 +1,9 @@
-const idc = new Set(['⿾', '⿿', '⿰', '⿱', '⿴', '⿵', '⿶', '⿷', '⿸', '⿹', '⿺', '⿻', '⿼', '⿽', '⿲', '⿳']);
+const idc = new Set(['⿾', '⿿', '⿰', '⿱', '⿴', '⿵', '⿶', '⿷', '⿸', '⿹', '⿺', '⿻', '⿼', '⿽', '㇯', '⿲', '⿳', '🔄']);
 const surroundIdc = new Set(['⿴', '⿵', '⿶', '⿷', '⿸', '⿹', '⿺', '⿼', '⿽']);
 
 const unaryIdc = new Set(['⿾', '⿿']);
-const binaryIdc = new Set(['⿰', '⿱', '⿴', '⿵', '⿶', '⿷', '⿸', '⿹', '⿺', '⿻', '⿼', '⿽']);
-const ternaryIdc = new Set(['⿲', '⿳']);
+const binaryIdc = new Set(['⿰', '⿱', '⿴', '⿵', '⿶', '⿷', '⿸', '⿹', '⿺', '⿻', '⿼', '⿽', '㇯']);
+const ternaryIdc = new Set(['⿲', '⿳', '🔄']);
 const number = new Set(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']);
 
 const strokes = new Set([
@@ -20,9 +20,10 @@ const glyphFormSelectorChar = new Set([
   'n', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']);
 
 const abstractStructureReg = /\{(?:\?|\?[0-3])?[\u4e00-\u9fff\u3400-\u4dbf\u{20000}-\u{2a6df}\u{2a700}-\u{2b73a}\u{2b740}-\u{2b81d}\u{2b820}-\u{2cea1}\u{2ceb0}-\u{2ebe0}\u{30000}-\u{3134a}\u{31350}-\u{323af}\u{2ebf0}-\u{2ee5d}\u{323b0}-\u{3347b}][BGHJKMPQSTUV]?\}/u;
-const glyphFormSelectorReg = /\((?:(?:[BGHJKMPQSTUV]|(?:q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(?:\d{3})?|\.|(?:j|q)[abcdghlmnprstuvwxyz.]+|\d?[abcdghlmnprstuvwxyz.]+|y\d+|e),)*(?:[BGHJKMPQSTUV]|(?:q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(?:\d{3})?|\.|,|(?:j|q)[abcdghlmnprstuvwxyz.]+|\d?[abcdghlmnprstuvwxyz.]+|y\d+|e)\)/;
-const singleZiGlyphFormSelectorReg = /^(?:(?:[BGHJKMPQSTUV]|(?:q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(?:\d{3})?|\.|(?:j|q)[abcdghlmnprstuvwxyz.]+|\d?[abcdghlmnprstuvwxyz.]+|y\d+|e),)*(?:[BGHJKMPQSTUV]|(?:q|p|x)\d{3}[a-z]?\d{1,2}[a-z.]?|qq\d{3}(?:\d{3})?|\.|,|(?:j|q)[abcdghlmnprstuvwxyz.]+|\d?[abcdghlmnprstuvwxyz.]+|y\d+|e)$/;
-const overlapTagReg = /\[(?:\d:(?:(?:-|\|)(?:\d|b))?|\d?:(?:-|\|)(?:\d|b)|[lrbc_.,|x]+)\]/
+const glyphFormSelectorReg = /\((?:(?:([jq\d]?)(?:[a-dghlnpr-z]+|[a-dghlnpr-z.]{2,}),)+\1(?:[a-dghlnpr-z]+|[a-dghlnpr-z.]{2,})|[jq\d]?(?:[a-dghlnpr-z]+|[a-dghlnpr-z.]{2,})|(?:[BGHJKMPQS-V.],)*[BGHJKMPQS-V.]|(?:[qpxy]\d{3}[a-z]?\d{1,2}[a-z.]?,)*(?:[qpxy]\d{3}[a-z]?\d{1,2}[a-z.]?|\.)|(?:qq(?:\d{3}[a-z]?)+,)*qq(?:\d{3}[a-z]?)+|y[2-9]|e|m|,)\)/;
+const singleZiGlyphFormSelectorReg = /^(?:(?:([jq\d]?)(?:[a-dghlnpr-z]+|[a-dghlnpr-z.]{2,}),)+\1(?:[a-dghlnpr-z]+|[a-dghlnpr-z.]{2,})|[jq\d]?(?:[a-dghlnpr-z]+|[a-dghlnpr-z.]{2,})|(?:[BGHJKMPQS-V.],)*[BGHJKMPQS-V.]|(?:[qpxy]\d{3}[a-z]?\d{1,2}[a-z.]?,)*(?:[qpxy]\d{3}[a-z]?\d{1,2}[a-z.]?|\.)|(?:qq(?:\d{3}[a-z]?)+,)*qq(?:\d{3}[a-z]?)+|y[2-9]|e|m|,)$/;
+const overlapTagReg = /\[(?:\d:(?:(?:-|\|)(?:\d|b))?|\d?:(?:-|\|)(?:\d|b)|[lrbc_.,|x]+)\]/;
+const numberTagReg = /\[[1-9]\d*\]/;
 
 String.prototype.toArray = function() {
   var arr = [];
@@ -92,6 +93,10 @@ function idsToObj(string) {
   let lastSurroundTagIndex;
   let inOverlapTag = false;
   let lastOverlapTagIndex;
+  let inSubtractionTag = false;
+  let lastSubtractionTagIndex
+  let inReplacementTag = false;
+  let lastReplacementTagIndex
   let inStrokeSequence = false;
   let lastStrokeSequenceIndex;
   let inGlyphFormSelector = false;
@@ -145,10 +150,22 @@ function idsToObj(string) {
     }
 
     if (inSurroundTag) {
-      if (!number.has(char) && char !== '[' && char !== ']') throw new IdsError(`非法的包围标记字符“${char}”。`, charIndex);
       curStructure.surroundTag += char;
       if (char === ']') {
+        if (!numberTagReg.test(curStructure.surroundTag)) throw new IdsError(`非法的包围标记“${curStructure.surroundTag}”`, lastSurroundTagIndex, charIndex - lastSurroundTagIndex + 1);
         inSurroundTag = false;
+      }
+    } else if (inSubtractionTag) {
+      curStructure.subtractionTag += char;
+      if (char === ']') {
+        if (!numberTagReg.test(curStructure.subtractionTag)) throw new IdsError(`非法的删减标记“${curStructure.subtractionTag}”`, lastSubtractionTagIndex, charIndex - lastSubtractionTagIndex + 1);
+        inSubtractionTag = false;
+      }
+    } else if (inReplacementTag) {
+      curStructure.replacementTag += char;
+      if (char === ']') {
+        if (!numberTagReg.test(curStructure.replacementTag)) throw new IdsError(`非法的替换标记“${curStructure.replacementTag}”`, lastReplacementTagIndex, charIndex - lastReplacementTagIndex + 1);
+        inReplacementTag = false;
       }
     } else if (inOverlapTag) {
       curStructure.overlapTag += char;
@@ -224,6 +241,18 @@ function idsToObj(string) {
         lastOverlapTagIndex = charIndex + 1;
         curStructure.overlapTag = '';
       }
+
+      if (char === '㇯' && string[charIndex + 1] === '[') {
+        inSubtractionTag = true;
+        lastSubtractionTagIndex = charIndex + 1;
+        curStructure.subtractionTag = '';
+      }
+
+      if (char === '🔄' && string[charIndex + 1] === '[') {
+        inReplacementTag = true;
+        lastReplacementTagIndex = charIndex + 1;
+        curStructure.replacementTag = '';
+      }
     } else {
       thisIdcHaveBeenPassedParametersCount++;
 
@@ -262,6 +291,8 @@ function idsToObj(string) {
   if (!Object.keys(res).length) throw new IdsError(`IDS为空。`, 0, 0);
   if (inAbstractStructure) throw new IdsError(`抽象构形未闭合。`, 0);
   if (inSurroundTag) throw new IdsError(`包围标记未闭合。`, lastSurroundTagIndex);
+  if (inSubtractionTag) throw new IdsError(`删减标记未闭合。`, lastSubtractionTagIndex);
+  if (inReplacementTag) throw new IdsError(`替换标记未闭合。`, lastReplacementTagIndex);
   if (inOverlapTag) throw new IdsError(`重叠标记未闭合。`, lastOverlapTagIndex);
   if (inStrokeSequence) throw new IdsError(`笔画序列未闭合。`, lastStrokeSequenceIndex, 2)
   if (inGlyphFormSelector) throw new IdsError(`字形样式选择器未闭合。`, lastGlyphFormSelectorIndex);

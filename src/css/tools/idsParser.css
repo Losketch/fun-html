@@ -18,6 +18,7 @@
   justify-content: center;
   flex-direction: column;
 }
+
 .idc-inputer:after, .curve-inputer:after {
   font-size: 8px;
   position: absolute;
@@ -40,16 +41,15 @@
 .idc-inputer:nth-child(13):after{content:"LU"}
 .idc-inputer:nth-child(14):after{content:"XX"}
 .idc-inputer:nth-child(15):after{content:"MI"}
-.idc-inputer:nth-child(16):after{content:"SU"}
+.idc-inputer:nth-child(16):after{content:"RO"}
+.idc-inputer:nth-child(17):after{content:"SU"}
+.idc-inputer:nth-child(24):after{content:"RE"}
 
-.curve-inputer:nth-child(18):after{content:"ULQ";}
-.curve-inputer:nth-child(19):after{content:"URQ";}
-.curve-inputer:nth-child(20):after{content:"LRQ";}
-.curve-inputer:nth-child(21):after{content:"LLQ";}
+.curve-inputer:nth-child(19):after{content:"ULQ"}
+.curve-inputer:nth-child(20):after{content:"URQ"}
+.curve-inputer:nth-child(21):after{content:"LRQ"}
+.curve-inputer:nth-child(22):after{content:"LLQ"}
 
-.placeholder {
-  grid-column: span 2;
-}
 
 pre {
   min-height: 68px;
