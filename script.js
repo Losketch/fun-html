@@ -1,11 +1,11 @@
 const content = document.getElementById('content');
-const mainContent = document.getElementById('mainContent');
+const mainContent = document.getElementById('main-content');
 const toolbox = document.getElementById('toolbox');
 const menuItems = document.querySelectorAll('.menuItem');
 const toolButtons = document.querySelectorAll('.tool-button');
 const nav = document.querySelector('nav');
-const toggleNavButton = document.getElementById('toggleNavButton');
-const titleH1 = document.getElementById('titleH1');
+const toggleNavButton = document.getElementById('toggle-nav-button');
+const titleH1 = document.getElementById('title-h1');
 let currentActiveMenu = 'home';
 
 function animateContent() {
