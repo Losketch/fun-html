@@ -2,8 +2,8 @@ const minimum = document.getElementById('min');
 const maximum = document.getElementById('max');
 const input = document.getElementById('input');
 const output = document.getElementById('output');
-const genButton = document.getElementById('genButton');
-const copyButton = document.getElementById('copyButton');
+const genButton = document.getElementById('gen-button');
+const copyButton = document.getElementById('copy-button');
 
 String.prototype.toArray = function() {
   var arr = [];

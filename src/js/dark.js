@@ -40,7 +40,7 @@
     }
   };
   let main = {
-    mainContent: document.getElementById('mainContent'),
+    mainContent: document.getElementById('main-content'),
     darkModeToggle: document.getElementById('darkmode-toggle'),
     enableDarkMode() {
       this.createDarkStyle();

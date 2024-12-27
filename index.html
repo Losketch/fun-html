@@ -12,20 +12,22 @@
 </head>
 <body>
   <header>
-    <h1 id="titleH1"></h1>
+    <h1 id="title-h1"></h1>
   </header>
   <div id="content">
-    <iframe id="mainContent" src="src/html/charDisplay.html"></iframe>
+    <iframe id="main-content" src="src/html/charDisplay.html"></iframe>
     <div id="toolbox">
       <h2>字符工具</h2>
       <hr>
-      <button class="tool-button" data-url="src/html/charDisplay.html">字符显示器</button>
-      <button class="tool-button" data-url="src/html/randStr.html">随机字符生成器</button>
-      <button class="tool-button" data-url="src/html/strokes.html">84-30画的汉字</button>
-      <button class="tool-button" data-url="src/html/styleLetter.html">字母样式生成器</button>
-      <button class="tool-button" data-url="src/html/zalog.html">zalog文本生成器</button>
-      <button class="tool-button" data-url="src/html/idsParser.html">IDS解析器</button>
-      <button class="tool-button" data-url="glyphs/index.html">离线字形检索</button>
+      <div class="grid-tool-buttons">
+        <button class="tool-button" data-url="src/html/charDisplay.html">字符显示器</button>
+        <button class="tool-button" data-url="src/html/randStr.html">随机字符生成器</button>
+        <button class="tool-button" data-url="src/html/strokes.html">84-30画的汉字</button>
+        <button class="tool-button" data-url="src/html/styleLetter.html">字母样式生成器</button>
+        <button class="tool-button" data-url="src/html/zalog.html">zalog文本生成器</button>
+        <button class="tool-button" data-url="src/html/idsParser.html">IDS解析器</button>
+        <button class="tool-button" data-url="glyphs/index.html">离线字形检索</button>
+      </div>
 
       <h2>其他工具</h2>
       <hr>
@@ -35,13 +37,15 @@
 
       <h2>娱乐</h2>
       <hr>
-      <button class="tool-button" data-url="src/html/GuClock.html">“骨”钟</button>
-      <button class="tool-button" data-url="src/html/DouCompass.html">“⿵門丶”指南针</button>
-      <button class="tool-button" data-url="src/html/HuAccelerometer.html">“户”加速度计</button>
-      <button class="tool-button" data-url="src/html/lifeGame.html">生命游戏</button>
-      <button class="tool-button" data-url="src/html/pointMoveWithSeg.html">点在移动时的连线</button>
-      <button class="tool-button" data-url="src/html/randFuck.html">随机草人器</button>
-      <button class="tool-button" data-url="index.html">套娃</button>
+      <div class="grid-tool-buttons">
+        <button class="tool-button" data-url="src/html/GuClock.html">“骨”钟</button>
+        <button class="tool-button" data-url="src/html/DouCompass.html">“⿵門丶”指南针</button>
+        <button class="tool-button" data-url="src/html/HuAccelerometer.html">“户”加速度计</button>
+        <button class="tool-button" data-url="src/html/lifeGame.html">生命游戏</button>
+        <button class="tool-button" data-url="src/html/pointMoveWithSeg.html">点在移动时的连线</button>
+        <button class="tool-button" data-url="src/html/randFuck.html">随机草人器</button>
+        <button class="tool-button" data-url="index.html">套娃</button>
+      </div>
 
       <h2>在线</h2>
       <hr>
@@ -102,7 +106,7 @@
         </label>
       </div>
 
-      <button id="toggleNavButton" class="toggle-nav-button">
+      <button id="toggle-nav-button" class="toggle-nav-button">
         <span class="material-icons">menu</span>
       </button>
 
