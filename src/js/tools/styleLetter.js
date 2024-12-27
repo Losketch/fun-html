@@ -353,7 +353,7 @@ const optionsList = document.querySelector('.fonts-list');
 const options = document.querySelectorAll('.opt');
 const input = document.getElementById('input');
 const output = document.getElementById('output');
-const cnvButton = document.getElementById('cnvButton');
+const cnvButton = document.getElementById('cnv-button');
 let font;
 
 select.addEventListener('click',() => {
