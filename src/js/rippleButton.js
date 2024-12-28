@@ -1,5 +1,5 @@
 (function() {
-  const buttons = document.querySelectorAll('button');
+  const buttons = document.querySelectorAll('button:not(.no-ripple)');
 
   for (let button of buttons) {
     button.addEventListener('click', function (e) {
@@ -12,9 +12,7 @@
       ripple.style.width = ripple.style.height = `${size}px`;
       ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
       ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
-  
-     
-  
+
       ripple.classList.add('ripple');
       ripple.classList.add('no-invert');
   

@@ -31,6 +31,13 @@
 
 @font-face{font-family:'Last';src:url("../../assets/fonts/display/Last Resort.woff2") format('woff2');font-display:swap;}
 
+@font-face{
+  font-family: 'IDC';
+  src: url("../../assets/fonts/display/Ideographic-Description-Character.woff2") format('woff2');
+  font-display: swap;
+  unicode-range: U+25DC-25DF, U+2FF?, U+31EF, U+1F504;
+}
+
 .font {
   font-family: Ctrl-Ctrl, Plgo1, Noto-Color-Emoji, Plgo2, Noto, NotoSansSC, NotoSansKR, Monu, Segoe, Microsoft, others, sans-serif, Last;
   font-style: normal;
@@ -43,8 +50,8 @@
   font-weight: 400;
 }
 
-.font-without-ctrlctrl-plgo2-top {
-  font-family: Plgo2, Plgo1, Noto-Color-Emoji, Noto, NotoSansSC, NotoSansKR, Monu, Segoe, Microsoft, others, sans-serif, Last;
+.font-idc {
+  font-family: IDC, Plgo1, Noto-Color-Emoji, Plgo2, Noto, NotoSansSC, NotoSansKR, Monu, Segoe, Microsoft, others, sans-serif, Last;
   font-style: normal;
   font-weight: 400;
 }
