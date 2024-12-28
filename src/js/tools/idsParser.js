@@ -22,7 +22,7 @@ const glyphFormSelectorChar = new Set([
 const abstractStructureReg = /\{(?:\?|\?[0-3])?[\u4e00-\u9fff\u3400-\u4dbf\u{20000}-\u{2a6df}\u{2a700}-\u{2b73a}\u{2b740}-\u{2b81d}\u{2b820}-\u{2cea1}\u{2ceb0}-\u{2ebe0}\u{30000}-\u{3134a}\u{31350}-\u{323af}\u{2ebf0}-\u{2ee5d}\u{323b0}-\u{3347b}][BGHJKMPQSTUV]?\}/u;
 const glyphFormSelectorReg = /\((?:(?:([jq\d]?)(?:[a-dghlnpr-z]+|[a-dghlnpr-z.]{2,}),)+\1(?:[a-dghlnpr-z]+|[a-dghlnpr-z.]{2,})|[jq\d]?(?:[a-dghlnpr-z]+|[a-dghlnpr-z.]{2,})|(?:[BGHJKMPQS-V.],)*[BGHJKMPQS-V.]|(?:[qpxy]\d{3}[a-z]?\d{1,2}[a-z.]?,)*(?:[qpxy]\d{3}[a-z]?\d{1,2}[a-z.]?|\.)|(?:qq(?:\d{3}[a-z]?)+,)*qq(?:\d{3}[a-z]?)+|y[2-9]|e|m|,)\)/;
 const singleZiGlyphFormSelectorReg = /^(?:(?:([jq\d]?)(?:[a-dghlnpr-z]+|[a-dghlnpr-z.]{2,}),)+\1(?:[a-dghlnpr-z]+|[a-dghlnpr-z.]{2,})|[jq\d]?(?:[a-dghlnpr-z]+|[a-dghlnpr-z.]{2,})|(?:[BGHJKMPQS-V.],)*[BGHJKMPQS-V.]|(?:[qpxy]\d{3}[a-z]?\d{1,2}[a-z.]?,)*(?:[qpxy]\d{3}[a-z]?\d{1,2}[a-z.]?|\.)|(?:qq(?:\d{3}[a-z]?)+,)*qq(?:\d{3}[a-z]?)+|y[2-9]|e|m|,)$/;
-const overlapTagReg = /\[(?:\d:(?:(?:-|\|)(?:\d|b))?|\d?:(?:-|\|)(?:\d|b)|[lrbc_.,|x]+)\]/;
+const overlapTagReg = /\[(?:\d:(?:(?:-|\|)(?:\d|b))?|\d?:(?:-|\|)(?:\d|b)|(?:(?:[bclr]|[xbc_.]{2,}|\.|[xbc_|]{2,})?,)*(?:[bclr]|[xbc_.]{2,}|\.|[xbc_|]{2,})|(?:(?:[bclr]|[xbc_.]{2,}|\.|[xbc_|]{2,})?,)+)\]/;
 const numberTagReg = /\[[1-9]\d*\]/;
 
 String.prototype.toArray = function() {
