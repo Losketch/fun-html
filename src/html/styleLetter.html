@@ -8,12 +8,14 @@
   <link rel="stylesheet" href="../css/fontFallback.css">
   <link rel="stylesheet" href="../css/materialInput.css">
   <link rel="stylesheet" href="../css/rippleButton.css">
+  <link rel="stylesheet" href="../css/select.css">
   <link rel="stylesheet" href="../css/nerd-fonts-generated.min.css">
   <link rel="stylesheet" href="../css/tools/styleLetter.css">
   <script defer src="../js/changeHeader.js"></script>
   <script defer src="../js/rippleButton.js"></script>
   <script defer src="../js/iframeColorSchemeSync.js"></script>
   <script defer src="../js/materialInput.js"></script>
+  <script defer src="../js/select.js"></script>
   <script defer src="../js/tools/styleLetter.js"></script>
 </head>
 <body>
@@ -25,31 +27,34 @@
           <label for="input">待转换字符</label>
         </div>
         <div class="act-ele">
-            <div class="select-font">
+          <div class="select-container" id="select-font">
             <div class="select">
-              <span>选择字体</span>
-              <span class="nf nf-fa-angle_down"></span>
+              <div class="select-content">
+                <span class="cur-select">选择字体</span>
+                <span class="nf nf-fa-angle_down"></span>
+              </div>
+              <input type="text" class="filter" placeholder="筛选">
             </div>
-            <div class="fonts-list">
-              <div data-font="bold" class="opt">粗体</div>
-              <div data-font="italic" class="opt">斜体</div>
-              <div data-font="boldItalic" class="opt">粗斜体</div>
-              <div data-font="script" class="opt">草体</div>
-              <div data-font="boldScript" class="opt">粗草体</div>
-              <div data-font="fraktur" class="opt">尖角体</div>
-              <div data-font="doubleStruck" class="opt">双线体</div>
-              <div data-font="boldFraktur" class="opt">粗尖角体</div>
-              <div data-font="sansSerif" class="opt">无衬线体</div>
-              <div data-font="sansSerifBold" class="opt">无衬线粗体</div>
-              <div data-font="sansSerifItalic" class="opt">无衬线斜体</div>
-              <div data-font="sansSerifBoldItalic" class="opt">无衬线粗斜体</div>
-              <div data-font="monospace" class="opt">等宽体</div>
-              <div data-font="circle" class="opt">圆圈</div>
-              <div data-font="negativeCircle" class="opt">负圆圈</div>
-              <div data-font="parenthesized" class="opt">括号</div>
-              <div data-font="square" class="opt">正方形</div>
-              <div data-font="superscript" class="opt">上标</div>
-              <div data-font="subscript" class="opt">下标</div>
+            <div class="opts-list">
+              <div data-select="bold" class="opt">粗体</div>
+              <div data-select="italic" class="opt">斜体</div>
+              <div data-select="boldItalic" class="opt">粗斜体</div>
+              <div data-select="script" class="opt">草体</div>
+              <div data-select="boldScript" class="opt">粗草体</div>
+              <div data-select="fraktur" class="opt">尖角体</div>
+              <div data-select="doubleStruck" class="opt">双线体</div>
+              <div data-select="boldFraktur" class="opt">粗尖角体</div>
+              <div data-select="sansSerif" class="opt">无衬线体</div>
+              <div data-select="sansSerifBold" class="opt">无衬线粗体</div>
+              <div data-select="sansSerifItalic" class="opt">无衬线斜体</div>
+              <div data-select="sansSerifBoldItalic" class="opt">无衬线粗斜体</div>
+              <div data-select="monospace" class="opt">等宽体</div>
+              <div data-select="circle" class="opt">圆圈</div>
+              <div data-select="negativeCircle" class="opt">负圆圈</div>
+              <div data-select="parenthesized" class="opt">括号</div>
+              <div data-select="square" class="opt">正方形</div>
+              <div data-select="superscript" class="opt">上标</div>
+              <div data-select="subscript" class="opt">下标</div>
             </div>
           </div>
           <button id="cnv-button" class="shadow-button">转换</button>
