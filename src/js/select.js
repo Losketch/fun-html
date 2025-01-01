@@ -122,11 +122,13 @@
   
     function updateOptionsListHeightAndFilterDisplay() {
       if (!optionsList.classList.contains('active')) {
+        optionsList.style.transition = 'height 0.2s ease';
         filter.style.display = 'none';
         selectContent.style.display = null;
         optionsList.style.height = '0';
         return;
       }
+      optionsList.style.transition = 'height 0.1s ease';
       filter.style.display = 'initial';
       selectContent.style.display = 'none';
       const prevHeight = optionsList.style.height;
