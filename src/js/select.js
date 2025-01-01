@@ -11,6 +11,7 @@
   });
   
   for (let selectContainer of selectContainers) {
+    const multi = selectContainer.classList.contains('multi');
     const select = selectContainer.querySelector('.select');
     const optionsList = selectContainer.querySelector('.opts-list');
     const curSelect = selectContainer.querySelector('.cur-select');
@@ -20,25 +21,104 @@
   
     select.addEventListener('click', (e) => {
       if (e.target.classList.contains('filter')) return;
-      optionsList.classList.toggle('active');
+      optionsList.classList.add('active');
       updateOptionsListHeightAndFilterDisplay();
     });
-  
-    options.forEach((option) => {
-      option.addEventListener('click', () => {
-        options.forEach((option) => option.classList.remove('selected'));
-        curSelect.innerHTML = option.innerHTML;
+
+    if (multi) {
+      selectContainer.dataset.selected = '[]';
+      selectContainer.dataset.selectedVisible = '[]';
+      document.addEventListener('click', (e) => {
+        if (select.contains(e.target) || optionsList.contains(e.target) || !optionsList.classList.contains('active')) return;
+        e.preventDefault();
+        optionsList.classList.remove('active');
+        const selected = JSON.parse(selectContainer.dataset.selected);
+        if (selected.length) {
+          curSelect.innerHTML = `已选择 ${selected.length} 个`;
+        } else {
+          curSelect.innerHTML = curSelect.dataset.defaultText;
+        }
         selectContainer.dispatchEvent(
           new CustomEvent('select', {
-            detail: { select: option.dataset.select },
+            detail: { select: selected, selectVisible: JSON.parse(selectContainer.dataset.selectedVisible) },
           })
         );
-        option.classList.add('selected');
-        optionsList.classList.toggle('active');
         updateOptionsListHeightAndFilterDisplay();
       });
-      option.dataset.visibleSelect = option.innerText;
-    });
+
+      options.forEach((option) => {
+        option.dataset.visibleSelect = option.innerText;
+        option.addEventListener('click', () => {
+          option.classList.toggle('selected');
+          if (option.classList.contains('selected')) {
+            const selected = new Set(JSON.parse(selectContainer.dataset.selected));
+            selected.add(option.dataset.select);
+            selectContainer.dataset.selected = JSON.stringify([...selected]);
+            const selectedVisible = new Set(JSON.parse(selectContainer.dataset.selectedVisible));
+            selectedVisible.add(option.dataset.visibleSelect);
+            selectContainer.dataset.selectedVisible = JSON.stringify([...selectedVisible]);
+          } else {
+            const selected = new Set(JSON.parse(selectContainer.dataset.selected));
+            selected.delete(option.dataset.select);
+            selectContainer.dataset.selected = JSON.stringify([...selected]);
+            const selectedVisible = new Set(JSON.parse(selectContainer.dataset.selectedVisible));
+            selectedVisible.delete(option.dataset.visibleSelect);
+            selectContainer.dataset.selectedVisible = JSON.stringify([...selectedVisible]);
+          }
+        });
+      });
+
+      selectContainer.addEventListener('cancelSelect', (e) => {
+        const targetSelect = e.detail.targetSelect;
+        const targetSelectVisible = e.detail.targetSelectVisible;
+
+        const selected = new Set(JSON.parse(selectContainer.dataset.selected));
+        selected.delete(targetSelect);
+        selectContainer.dataset.selected = JSON.stringify([...selected]);
+        const selectedVisible = new Set(JSON.parse(selectContainer.dataset.selectedVisible));
+        selectedVisible.delete(targetSelectVisible);
+        selectContainer.dataset.selectedVisible = JSON.stringify([...selectedVisible]);
+
+        options.forEach((option) => {
+          if (option.dataset.select == targetSelect) option.classList.remove('selected');
+        });
+
+        if ([...selected].length) {
+          curSelect.innerHTML = `已选择 ${[...selected].length} 个`;
+        } else {
+          curSelect.innerHTML = curSelect.dataset.defaultText;
+        }
+
+        selectContainer.dispatchEvent(
+          new CustomEvent('select', {
+            detail: { select: JSON.parse(selectContainer.dataset.selected), selectVisible: JSON.parse(selectContainer.dataset.selectedVisible) },
+          })
+        );
+      });
+    } else {
+      document.addEventListener('click', (e) => {
+        if (select.contains(e.target) || !optionsList.classList.contains('active')) return;
+        e.preventDefault();
+        optionsList.classList.remove('active');
+        updateOptionsListHeightAndFilterDisplay();
+      });
+
+      options.forEach((option) => {
+        option.dataset.visibleSelect = option.innerText;
+        option.addEventListener('click', () => {
+          options.forEach((option) => option.classList.remove('selected'));
+          curSelect.innerHTML = option.dataset.visibleSelect;
+          selectContainer.dispatchEvent(
+            new CustomEvent('select', {
+              detail: { select: option.dataset.select },
+            })
+          );
+          option.classList.add('selected');
+          optionsList.classList.remove('active');
+          updateOptionsListHeightAndFilterDisplay();
+        });
+      });
+    }
   
     function updateOptionsListHeightAndFilterDisplay() {
       if (!optionsList.classList.contains('active')) {

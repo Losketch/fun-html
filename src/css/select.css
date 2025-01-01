@@ -56,7 +56,6 @@ body {
   padding: 8px;
 }
 
-.opt:hover,
 .opt.selected {
   color: var(--md-sys-color-on-secondary);
   background-color: var(--md-sys-color-secondary);
@@ -75,4 +74,5 @@ body {
 .select-content {
   display: flex;
   align-items: center;
-  justify-content: space-between;   }
+  justify-content: space-between;
+}
