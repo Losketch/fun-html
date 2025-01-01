@@ -6,7 +6,7 @@ main > div > div {
   margin-bottom: 16px;
 }
 
-.checkbox-section label {
+.checkbox-section label:not(.placeholder) {
   display: flex;
   align-items: center;
   margin-bottom: 8px;
@@ -60,14 +60,25 @@ input[class="uni"]{
   font-size: 24px;
 }
 
-#customIntervalContainer {
+#customIntervalContainer, #customBlocksContainer {
   background-color: var(--md-sys-color-background-text);
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 5px;
   display: none;
+  flex-direction: column;
+  gap: 4px;
 }
 
-#customIntervalContainer > div {
+#customIntervalContainer > div,
+#customBlocksContainer > div {
   display: flex;
   align-items: center;
+}
+
+#customBlocksContainer > div {
+  justify-content: space-between;
+}
+
+.unicode-block-section, .checkbox-section {
+  overflow: visible;
 }
