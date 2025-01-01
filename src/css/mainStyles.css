@@ -110,6 +110,11 @@
   overflow: visible;
 }
 
+
+.more-gap {
+  gap: 16px;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   background-color: var(--md-sys-color-background);
@@ -118,7 +123,7 @@ body {
   padding: 0;
 }
 
-body > div {
+body>div {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -132,7 +137,7 @@ body {
   padding: 0;
 }
 
-body > div {
+body>div {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -161,7 +166,8 @@ main {
   gap: 16px;
 }
 
-main > div, .inner-div {
+main>div,
+.inner-div {
   background-color: var(--md-sys-color-surface);
   border-radius: 12px;
   padding: 16px;
@@ -178,11 +184,8 @@ main > div, .inner-div {
   gap: 8px;
 }
 
-.more-gap {
-  gap: 16px;
-}
-
-div > ul, div > ul > li {
+div>ul,
+div>ul>li {
   overflow: visible;
 }
 
@@ -196,7 +199,7 @@ textarea {
   resize: none;
   overflow: hidden;
   margin: 0;
-  box-shadow: 
+  box-shadow:
     0 1px 0 var(--md-sys-color-outline);
   transition: box-shadow 0.3s ease;
 }
@@ -212,7 +215,7 @@ input[type="number"] {
   background-color: transparent;
   color: var(--md-sys-color-on-surface);
   margin: 0;
-  box-shadow: 
+  box-shadow:
     0 1px 0 var(--md-sys-color-outline);
   transition: box-shadow 0.3s ease;
 }
@@ -225,15 +228,15 @@ input[type="number"]:hover {
 input[type="text"]:not(:read-only):focus,
 input[type="number"]:not(:read-only):focus {
   outline: none;
-  box-shadow: 
+  box-shadow:
     0 1px 0 var(--md-sys-color-primary),
     0 2px 0 var(--md-sys-color-primary),
     0 3px 0 var(--md-sys-color-primary);
 }
 
-textarea:focus {
+textarea:not(:read-only):focus {
   outline: none;
-  box-shadow: 
+  box-shadow:
     0 1px 0 var(--md-sys-color-primary),
     0 2px 0 var(--md-sys-color-primary),
     0 3px 0 var(--md-sys-color-primary),
@@ -267,45 +270,45 @@ button:disabled {
 }
 
 input[type="range"] {
-    -webkit-appearance: none;
-    width: 90%;
-    margin-top: 8px;
-    margin: 0;
-    outline: 0;
-    border-bottom: unset;
-    background-color: unset;
-    position: relative;
-    overflow: visible;
-    -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  width: 90%;
+  margin-top: 8px;
+  margin: 0;
+  outline: 0;
+  border-bottom: unset;
+  background-color: unset;
+  position: relative;
+  overflow: visible;
+  -webkit-tap-highlight-color: transparent;
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
-    height: 4px;
-    border-radius: 100px;
-    background: var(--md-sys-color-background-text);
+  height: 4px;
+  border-radius: 100px;
+  background: var(--md-sys-color-background-text);
 }
 
 input[type="range"]::-webkit-slider-thumb {
-    width: 100%;
-    transition: box-shadow 0.3s cubic-bezier(0, 1, 1, 1);
-    cursor: pointer;
-    position: relative;
-    -webkit-appearance: none;
-    appearance: none;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background-color: var(--md-sys-color-primary);
-    border: 1px solid transparent;
-    margin-top: -6px;
-    box-shadow: 0 0 0 12px rgba(0, 0, 0, 0);
-    border-image: linear-gradient(var(--md-sys-color-primary),var(--md-sys-color-primary)) 0 fill / 8 20 8 0 / 0px 0px 0 100%;
+  width: 100%;
+  transition: box-shadow 0.3s cubic-bezier(0, 1, 1, 1);
+  cursor: pointer;
+  position: relative;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--md-sys-color-primary);
+  border: 1px solid transparent;
+  margin-top: -6px;
+  box-shadow: 0 0 0 12px rgba(0, 0, 0, 0);
+  border-image: linear-gradient(var(--md-sys-color-primary), var(--md-sys-color-primary)) 0 fill / 8 20 8 0 / 0px 0px 0 100%;
 }
 
 input[type="range"]:active::-webkit-slider-thumb,
 input[type="range"]:focus::-webkit-slider-thumb {
-    box-shadow: 0 0 0 12px rgba(0, 0, 0, 0.2);
-    z-index: 3;
+  box-shadow: 0 0 0 12px rgba(0, 0, 0, 0.2);
+  z-index: 3;
 }
 
 h2 {
@@ -315,7 +318,8 @@ h2 {
   margin-bottom: 8px;
 }
 
-p, li {
+p,
+li {
   font-size: 0.875rem;
   color: var(--md-sys-color-on-surface-variant);
   margin: 5;
@@ -333,3 +337,4 @@ footer a {
   color: var(--md-sys-color-primary);
   text-decoration: none;
 }
+
