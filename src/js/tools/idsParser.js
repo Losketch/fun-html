@@ -478,8 +478,16 @@ const errorRes = document.getElementById('error');
 inputerContainer.addEventListener('click', (e) => {
   if (e.target.classList.contains('inputer-container')) return;
   if (e.target.classList.contains('placeholder')) return;
-  input.value += e.target.innerText;
-  input.dispatchEvent(new Event('focus'));
+
+  const charToInsert = e.target.innerText;
+  const startPos = input.selectionStart;
+  const endPos = input.selectionEnd;
+  const beforeInput = input.value.substring(0, startPos);
+  const afterInput = input.value.substring(endPos);
+
+  input.value = `${beforeInput}${charToInsert}${afterInput}`;
+  input.setSelectionRange(startPos + charToInsert.length, startPos + charToInsert.length);
+  input.focus();
 });
 
 copyButton.addEventListener('click', () => {

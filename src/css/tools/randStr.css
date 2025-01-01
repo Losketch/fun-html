@@ -65,13 +65,16 @@ input[class="uni"]{
   padding: 10px;
   border-radius: 5px;
   display: none;
-  flex-direction: column;
   gap: 4px;
+  max-height: 300px;
+  overflow: scroll;
+  flex-wrap: wrap;
 }
 
 #customIntervalContainer > div,
 #customBlocksContainer > div {
   display: flex;
+  width: 100%;
   align-items: center;
 }
 
