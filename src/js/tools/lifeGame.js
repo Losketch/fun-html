@@ -4,7 +4,24 @@ let typeCount = 2;
 
 const container = document.getElementById('container');
 const containerDiv = document.getElementById('containerDiv');
-const [generationsCountShow, exportBtn, importInp, generationsInp, jumpBtn, ruleSpan, stateBtn, stateShow, gridSizeBtn, gridSizeShow, gapBtn, gapShow, clearBtn] = 'generationsCountShow1export1import1generations1jump1rule1state1stateShow1gridSize1gridSizeShow1gap1gapShow'.split(1).map(n => document.getElementById(n));
+const [
+  generationsCountShow,
+  exportBtn,
+  importInp,
+  generationsInp,
+  jumpBtn,
+  ruleSpan,
+  stateBtn,
+  stateShow,
+  gridSizeBtn,
+  gridSizeShow,
+  gapBtn,
+  gapShow,
+  startBtn,
+] =
+  'generationsCountShow1export1import1generations1jump1rule1state1stateShow1gridSize1gridSizeShow1gap1gapShow1start'
+    .split(1)
+    .map((n) => document.getElementById(n));
 const wh = Math.min(window.innerWidth - 16, window.innerWidth - 16);
 let size = 20;
 let count = void 0;
@@ -19,7 +36,7 @@ let style = null;
 let cells = [];
 let gap = 50;
 
-let bitLen = BigInt((typeCount).toString(2).length);
+let bitLen = BigInt(typeCount.toString(2).length);
 
 function toggle(e) {
   const cell = e.target;
@@ -40,7 +57,7 @@ function resetGrid(size) {
 
   container.innerHTML = '';
   for (let i = 0; i < count; i++) {
-    cell = document.createElement('cell');
+    const cell = document.createElement('cell');
     cell.dataset.life = '0';
     cells.push(cell);
     container.appendChild(cell);
@@ -62,8 +79,7 @@ function resetStyle(typeCount) {
 }
 
 function loop(id) {
-  return id < 0 ? id + size :
-    id > (count - 1) ? id - size: id;
+  return id < 0 ? id + size : id > count - 1 ? id - size : id;
 }
 
 function prevCell(id) {
@@ -79,10 +95,10 @@ function nextCell(id) {
 }
 
 function getRoundCellsCount(id) {
-  let prevRow = id-size;
-  let nextRow = id+size;
+  let prevRow = id - size;
+  let nextRow = id + size;
   prevRow += prevRow < 0 ? count : 0;
-  nextRow -= nextRow > (count - 1) ? count : 0;
+  nextRow -= nextRow > count - 1 ? count : 0;
   return [
     cells[prevCell(prevRow)],
     cells[prevRow],
@@ -91,7 +107,7 @@ function getRoundCellsCount(id) {
     cells[nextCell(id)],
     cells[prevCell(nextRow)],
     cells[nextRow],
-    cells[nextCell(nextRow)]
+    cells[nextCell(nextRow)],
   ].filter((v) => v.dataset.life === '1').length;
 }
 
@@ -121,11 +137,9 @@ function nextGeneration() {
   for (let i = 0; i < count; i++) {
     const cell = cells[i];
     const roundCellsCount = getRoundCellsCount(i);
-    isStar = star.includes(roundCellsCount);
-    isBirth = birth.includes(roundCellsCount);
     cell.dataset.lifeTemp = getNextState(+cell.dataset.life, roundCellsCount);
   }
-  cells.forEach(v => v.dataset.life = v.dataset.lifeTemp);
+  cells.forEach((v) => (v.dataset.life = v.dataset.lifeTemp));
   saveGeneration();
 }
 
@@ -141,24 +155,58 @@ function saveGeneration() {
 
 function toGeneration(generation) {
   for (let i = count - 1; i >= 0; i--) {
-     cells[i].dataset.life = generation & (2n ** bitLen - 1n);
-     generation >>= bitLen;
+    cells[i].dataset.life = generation & (2n ** bitLen - 1n);
+    generation >>= bitLen;
   }
 }
 
 function prevGeneration() {
   generationsCount--;
-  generationsCount >= 0 ? toGeneration(generations[generationsMap[generationsCount]]) : generationsCount = 0;
+  generationsCount >= 0
+    ? toGeneration(generations[generationsMap[generationsCount]])
+    : (generationsCount = 0);
   updateCount();
 }
 
+function bigintToArray(bigint) {
+  const result = [];
+
+  while (bigint > 0) {
+    result.push(Number(bigint & BigInt(0xff)));
+    bigint >>= BigInt(8);
+  }
+
+  return result.reverse();
+}
+
+function intToArray(int) {
+  const result = [];
+
+  while (int > 0) {
+    result.push(Number(int & 0xff));
+    int >>= 8;
+  }
+
+  return result.reverse();
+}
+
+function uint8ArrayToHexString(uint8Array) {
+  return Array.from(uint8Array)
+    .map((i) => {
+      hex = i.toString(16);
+      hex = (hex.length == 2 ? '' : '0') + hex;
+      return hex;
+    })
+    .join('');
+}
+
 function toggleDisable(dis, ...btns) {
-  btns.forEach(btn => btn.disabled = dis ? '1' : '');
+  btns.forEach((btn) => (btn.disabled = dis ? '1' : ''));
 }
 
 function reset() {
-  cells.forEach(v => v.dataset.life = '0');
-  toggleDisable(false, prev, next, start, jump);
+  cells.forEach((v) => (v.dataset.life = '0'));
+  toggleDisable(false, prev, next, startBtn, jump);
   clearInterval(timerId);
   generationsCount = 0;
   maxGenerationsCount = 0;
@@ -173,10 +221,16 @@ function parseRule(rule) {
   BSC.forEach((v) => {
     switch (v[0]) {
       case 'B':
-        obj.birth = v.substring(1).split('').map((v2) => parseInt(v2, 10));
-        break
+        obj.birth = v
+          .substring(1)
+          .split('')
+          .map((v2) => parseInt(v2, 10));
+        break;
       case 'S':
-        obj.star = v.substring(1).split('').map((v2) => parseInt(v2, 10));
+        obj.star = v
+          .substring(1)
+          .split('')
+          .map((v2) => parseInt(v2, 10));
         break;
       case 'C':
         obj.typeCount = +v.substring(1);
@@ -196,9 +250,14 @@ function resetRule(rule) {
 
 function setRule() {
   const ruleReg = /B\d+\/S\d+\/C\d+/;
-  const rule = prompt('输入规则（格式（正则）：B\\d+/S\\d+/C\\d+）\n默认B3/S23/C2');
+  const rule = prompt(
+    '输入规则（格式（正则）：B\\d+/S\\d+/C\\d+）\n默认B3/S23/C2'
+  );
   if (rule === null) return;
-  if (!ruleReg.test(rule)) {alert('非法规则'); return};
+  if (!ruleReg.test(rule)) {
+    alert('非法规则');
+    return;
+  }
   if (confirm('警告：这将会重置网格，是否设置规则？')) {
     reset();
     resetRule(rule);
@@ -208,11 +267,14 @@ function setRule() {
 }
 
 function updateRule() {
-  ruleSpan.textContent = `当前规则：B${birth.join('')}/S${star.join('')}/C${typeCount}`;
+  ruleSpan.textContent = `当前规则：B${birth.join('')}/S${star.join(
+    ''
+  )}/C${typeCount}`;
 }
 
 function updateFillState() {
-  stateShow.textContent = '当前填充状态：' + (fillState === -1 ? '无(切换模式)' : fillState);
+  stateShow.textContent =
+    '当前填充状态：' + (fillState === -1 ? '无(切换模式)' : fillState);
 }
 
 function updateGridSize() {
@@ -224,23 +286,37 @@ function updateGap() {
 }
 
 function updateCount() {
-  if (generationsCount > maxGenerationsCount) maxGenerationsCount = generationsCount;
+  if (generationsCount > maxGenerationsCount)
+    maxGenerationsCount = generationsCount;
   generationsCountShow.innerHTML = `当前代：${generationsCount}/${maxGenerationsCount}`;
   generationsInp.max = maxGenerationsCount;
   generationsInp.value = generationsCount;
 }
 
 exportBtn.onclick = () => {
-  const blob = new Blob([`B${birth.join('')}/S${star.join('')}/C${typeCount};${size};${generations[generationsMap[generationsCount]].toString(16)}`], { type: 'text/plain' });
+  data = new Uint8Array([
+    Math.ceil((+birth.join('')).toString(16).length / 2),
+    ...intToArray(+birth.join('')),
+    Math.ceil((+star.join('')).toString(16).length / 2),
+    ...intToArray(+star.join('')),
+    Math.ceil(typeCount.toString(16).length / 2),
+    ...intToArray(typeCount),
+    Math.ceil(size.toString(16).length / 2),
+    ...intToArray(size),
+    ...bigintToArray(generations[generationsMap[generationsCount]]),
+  ]);
+  const blob = new Blob([data], { type: 'application/octet-stream' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  const fileName = prompt('请输入文件名（无后缀名）（点击取消则使用默认名字）');
+  const fileName = prompt(
+    '请输入文件名（无后缀名）（点击取消则使用默认文件名）'
+  );
   a.href = url;
-  a.download = fileName === null ? 'data.txt' : fileName + '.txt';
+  a.download = fileName === '' ? 'data.bin' : fileName + '.bin';
   a.click();
-}
+};
 
-importInp.onchange = event => {
+importInp.onchange = (event) => {
   const selectedFile = event.target.files[0];
   if (selectedFile) {
     let reader = new FileReader();
@@ -248,11 +324,34 @@ importInp.onchange = event => {
     reader.onload = () => {
       try {
         if (confirm('警告：这将会重置网格，是否导入？')) {
-          let text = reader.result.split(';');
-          alert(`规则：${text[0]} 网格大小：${text[1]}`);
-          resetRule(text[0]);
+          data = new Uint8Array(reader.result);
+          let mainInfo = [];
+          let generation;
+
+          let inInfo = false;
+          let infoLen = 0;
+          for (let i = 0; i < data.length; i++) {
+            if (inInfo) {
+              mainInfo.push(
+                parseInt(uint8ArrayToHexString(data.slice(i, i + infoLen)), 16)
+              );
+              i += infoLen - 1;
+              inInfo = false;
+            } else if (mainInfo.length < 4) {
+              infoLen = data[i];
+              inInfo = true;
+            } else {
+              generation = BigInt('0x' + uint8ArrayToHexString(data.slice(i)));
+              break;
+            }
+          }
+          alert(
+            `规则：B${mainInfo[0]}/S${mainInfo[1]}/C${mainInfo[2]} 网格大小：${mainInfo[3]}`
+          );
+
+          resetRule(`B${mainInfo[0]}/S${mainInfo[1]}/C${mainInfo[2]}`);
+          size = mainInfo[3];
           bitLen = BigInt((typeCount - 1).toString(2).length);
-          size = +text[1];
           gridSideLen = wh / size;
           count = size ** 2;
           cells = [];
@@ -260,55 +359,81 @@ importInp.onchange = event => {
           resetStyle(typeCount);
           reset();
           updateGridSize();
-          toGeneration(BigInt(`0x${text[2]}`));
+          toGeneration(generation);
           event.target.value = '';
         }
       } catch {
         alert('选择的文件可能无效');
         return;
       }
-    }
+    };
 
-    reader.readAsText(selectedFile);
+    reader.readAsArrayBuffer(selectedFile);
   }
-}
+};
 
 generationsInp.oninput = (e) => {
   generationsCount = e.target.value;
   toGeneration(generations[generationsMap[generationsCount]]);
   updateCount();
-}
+};
 
 jumpBtn.onclick = () => {
   _generationsCount = prompt('输入要跳转的代的编号');
   if (_generationsCount === null) return;
-  if (isNaN(_generationsCount) || _generationsCount === '') {alert('代的编号必须是数字'); return};
-  if (_generationsCount < 0 || _generationsCount > maxGenerationsCount) {alert('指定的代不存在'); return};
+  if (isNaN(_generationsCount) || _generationsCount === '') {
+    alert('代的编号必须是数字');
+    return;
+  }
+  if (_generationsCount < 0 || _generationsCount > maxGenerationsCount) {
+    alert('指定的代不存在');
+    return;
+  }
   generationsCount = _generationsCount;
   toGeneration(generations[generationsMap[generationsCount]]);
   updateCount();
-}
+};
 
 stateBtn.onclick = () => {
-  const sta = prompt('点击细胞时后胞变成的状态\n输入状态（留空则使用切换模式，0为擦除模式）');
+  const sta = prompt(
+    '点击细胞时后胞变成的状态\n输入状态（留空则使用切换模式，0为擦除模式）'
+  );
   if (sta === null) return;
   if (sta === '') {
     fillState = -1;
   } else {
-    if (isNaN(sta)) {alert('填充状态必须为数字'); return};
-    if (+sta > typeCount - 1) {alert('填充状态不能超过C规则的值减一'); return};
-    if (+sta < 0) {alert('填充状态不能小于0'); return};
+    if (isNaN(sta)) {
+      alert('填充状态必须为数字');
+      return;
+    }
+    if (+sta > typeCount - 1) {
+      alert('填充状态不能超过C规则的值减一');
+      return;
+    }
+    if (+sta < 0) {
+      alert('填充状态不能小于0');
+      return;
+    }
     fillState = Math.floor(+sta);
   }
   updateFillState();
-}
+};
 
 gridSizeBtn.onclick = () => {
   const sz = prompt('输入网格大小');
   if (sz === null) return;
-  if (isNaN(sz)) {alert('网格大小必须为数字'); return};
-  if (+sz <= 0) {alert('网格大小必须大于0'); return};
-  if (+sz > 100) {alert('网格大小不能超过100'); return};
+  if (isNaN(sz)) {
+    alert('网格大小必须为数字');
+    return;
+  }
+  if (+sz <= 0) {
+    alert('网格大小必须大于0');
+    return;
+  }
+  if (+sz > 100) {
+    alert('网格大小不能超过100');
+    return;
+  }
   if (confirm('警告：这将会重置网格，是否重设网格大小？')) {
     size = +sz;
     gridSideLen = wh / size;
@@ -318,16 +443,25 @@ gridSizeBtn.onclick = () => {
     updateGridSize();
     reset();
   }
-}
+};
 
 gapBtn.onclick = () => {
   let gp = prompt('输入迭代间隔(ms)');
-  if (isNaN(gp)) {alert('迭代间隔必须为数字'); return};
-  if (+gp < 3) {alert('迭代间隔不能小于3ms'); return};
-  if (+gp > 5000) {alert('迭代间隔不能超过5000ms'); return};
+  if (isNaN(gp)) {
+    alert('迭代间隔必须为数字');
+    return;
+  }
+  if (+gp < 3) {
+    alert('迭代间隔不能小于3ms');
+    return;
+  }
+  if (+gp > 5000) {
+    alert('迭代间隔不能超过5000ms');
+    return;
+  }
   gap = gp;
   updateGap();
-}
+};
 
 container.onclick = toggle;
 resetGrid(size);
