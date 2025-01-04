@@ -326,7 +326,7 @@ function strokeSequenceToObj(strokeSequence, index=0) {
     if (inCrossingTag && number.has(char)) {
       curUnit.crossing += char;
     } else if (inCurve) {
-      if (char !== 'a' && char !== 'b' && char !== 'c' && char !== 'd') throw new IdsError(`非法曲线方向字符“${char}”。（曲线方向字符只能是abcd中的一个）`, index + charIndex + 2, 1, index + charIndex + 1, 1);
+      if (char !== 'a' && char !== 'b' && char !== 'c' && char !== 'd') throw new IdsError(`非法<ruby>曲<rp>（</rp><rt>qū</rt><rp>）</rp></ruby>线方向字符“${char}”。（<ruby>曲<rp>（</rp><rt>qū</rt><rp>）</rp></ruby>线方向字符只能是abcd中的一个）`, index + charIndex + 2, 1, index + charIndex + 1, 1);
       curUnit.stroke += char;
       inCurve = false;
     } else if (strokes.has(char)) {
@@ -375,7 +375,7 @@ function strokeSequenceToObj(strokeSequence, index=0) {
   }
 
   if (nextIsReverseStroke) throw new IdsError(`逆运笔标记未指定目标笔画。`, index + strokeSequence.length + 1);
-  if (inCurve) throw new IdsError(`曲线未指定方向。`, index + strokeSequence.length + 1);
+  if (inCurve) throw new IdsError(`<ruby>曲<rp>（</rp><rt>qū</rt><rp>）</rp></ruby>线未指定方向。`, index + strokeSequence.length + 1);
 
   return res;
 }
