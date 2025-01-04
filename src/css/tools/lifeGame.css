@@ -25,6 +25,10 @@ main > div {
   justify-content: center;
 }
 
+#rule {
+  text-align: center;
+}
+
 @font-face {
   font-family: 'icomoon';
   src:  url('../../../assets/fonts/icomoon/icomoon.eot?f93e9y');
