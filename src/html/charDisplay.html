@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../css/materialInput.css">
   <link rel="stylesheet" href="../css/counter.css">
   <link rel="stylesheet" href="../css/rippleButton.css">
+  <link rel="stylesheet" href="../css/switch.css">
   <script defer src="../js/changeHeader.js"></script>
   <script defer src="../js/autoHeight.js"></script>
   <script defer src="../js/rippleButton.js"></script>
@@ -34,15 +35,9 @@
         </div>
 
         <div class="options-container">
-          <span class="other-options-span">其它设置：</span>
-          <button id="bold">
-            <span>粗体</span>
-            <span id="boldstatus" class="other-options-text">关</span>
-          </button>
-          <button id="italic">
-            <span>斜体</span>
-            <span id="italicstatus" class="other-options-text">关</span>
-          </button>
+          其他设置：
+          粗体<label class="md-switch"><input type="checkbox" id="bold"><span class="track"><span class="thumb"></span></span></label>
+          斜体<label class="md-switch"><input type="checkbox" id="italic"><span class="track"><span class="thumb"></span></span></label>
         </div>
       </div>
 

@@ -22,6 +22,7 @@ body {
   border-radius: 8px;
   overflow: visible;
   min-height: 40px;
+  cursor: pointer;
 }
 
 .select-content {
@@ -53,6 +54,7 @@ body {
 
 .opt {
   box-sizing: border-box;
+  cursor: pointer;
   padding: 8px;
 }
 
