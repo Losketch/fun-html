@@ -320,6 +320,7 @@ hr {
   justify-content: center;
   border-radius: 50%;
   position: relative;
+  cursor: pointer;
 }
 
 #svg-light,
