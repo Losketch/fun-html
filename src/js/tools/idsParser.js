@@ -469,7 +469,7 @@ function getIdcArity(idc) {
 }
 
 const input = document.getElementById('input');
-const convertButton = document.getElementById('convert');
+const parseButton = document.getElementById('parse');
 const copyButton = document.getElementById('copy-button');
 const codeBlock = document.getElementById('json-code');
 const inputerContainer = document.querySelector('.inputer-container');
@@ -495,7 +495,7 @@ copyButton.addEventListener('click', () => {
   navigator.clipboard.writeText(code);
 });
 
-convertButton.addEventListener('click', () => {
+parseButton.addEventListener('click', () => {
   errorRes.style.display = 'none';
   let jsonObject;
   try {
