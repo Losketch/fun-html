@@ -39,3 +39,7 @@ main > div > div {
 hr {
   margin: 1px;
 }
+
+.stroke {
+  margin-right: 0.5em;
+}
