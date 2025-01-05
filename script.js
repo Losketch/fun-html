@@ -22,7 +22,7 @@ function animateContent() {
 
 function updateActiveMenuItem(target) {
   currentActiveMenu = target;
-  menuItems.forEach(item => {
+  menuItems.forEach((item) => {
     if (item.dataset.target === target) {
       item.classList.add('active');
     } else {
@@ -36,7 +36,7 @@ function loadContent(url) {
   mainContent.src = `${url}?t=${timestamp}`;
 }
 
-menuItems.forEach(item => {
+menuItems.forEach((item) => {
   item.addEventListener('click', () => {
     if (currentActiveMenu === item.dataset.target) return;
 
@@ -56,7 +56,7 @@ menuItems.forEach(item => {
   });
 });
 
-toolButtons.forEach(button => {
+toolButtons.forEach((button) => {
   if (button.classList.contains('online-tool')) {
     button.addEventListener('click', () => {
       window.location.href = button.dataset.url;
@@ -76,11 +76,12 @@ toolButtons.forEach(button => {
       updateActiveMenuItem('home');
     }, 50);
 
-    if (button.classList.contains('inner-online-tool')) titleH1.innerText = button.innerText;
+    if (button.classList.contains('inner-online-tool'))
+      titleH1.innerText = button.innerText;
   });
 });
 
-window.addEventListener('message', function(event) {
+window.addEventListener('message', (event) => {
   switch (event.data.type) {
     case 'changeHeader':
       titleH1.innerText = event.data.text;
@@ -90,12 +91,33 @@ window.addEventListener('message', function(event) {
       break;
     case 'clearMainContentHeight':
       mainContent.style.removeProperty('height');
+    case 'fetchUrl':
+      fetch(event.data.url)
+        .then((response) => {
+          if (!response.ok) {
+            event.source.postMessage(
+              { type: 'featchResponseErrorState', state: response.state },
+              '*'
+            );
+            return;
+          }
+          return response.text();
+        })
+        .then((data) => {
+          event.source.postMessage({ type: 'fetchRes', data: data }, '*');
+        })
+        .catch((error) => {
+          event.source.postMessage(
+            { type: 'fetchError', error: error.message },
+            '*'
+          );
+        });
   }
 });
 
 toggleNavButton.addEventListener('click', () => {
   nav.classList.toggle('nav-hidden');
-  toggleNavButton.innerHTML = nav.classList.contains('nav-hidden') ?
-    '<span class="material-icons">close</span>' :
-    '<span class="material-icons">menu</span>';
+  toggleNavButton.innerHTML = nav.classList.contains('nav-hidden')
+    ? '<span class="material-icons">close</span>'
+    : '<span class="material-icons">menu</span>';
 });

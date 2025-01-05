@@ -4,17 +4,17 @@ body {
   letter-spacing: 0px;
 }
 
-main > div {
+main>div {
   display: grid;
   gap: 4px;
 }
 
-main > div > div:nth-child(2) {
+main>div>div:nth-child(2) {
   display: block;
   margin: 0;
 }
 
-main > div > div {
+main>div>div {
   display: block;
   font-size: 24px;
   color: #2d4059;

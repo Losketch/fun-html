@@ -15,6 +15,7 @@
   align-items: center;
 }
 
-#min-container, #max-container {
+#min-container,
+#max-container {
   width: 3rem;
 }

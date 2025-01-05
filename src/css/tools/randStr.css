@@ -1,8 +1,8 @@
-main > div > div:nth-child(2) {
+main>div>div:nth-child(2) {
   display: block;
 }
 
-main > div > div {
+main>div>div {
   margin-bottom: 16px;
 }
 
@@ -32,7 +32,7 @@ input[type="checkbox"] {
   margin-right: 8px;
 }
 
-button > span:last-child {
+button>span:last-child {
   font-size: 24px;
 }
 
@@ -40,7 +40,7 @@ textarea {
   min-height: 100px;
 }
 
-input[class="uni"]{
+input[class="uni"] {
   width: 4.5rem;
   padding: 4px;
   margin: 0 4px;
@@ -60,7 +60,8 @@ input[class="uni"]{
   font-size: 24px;
 }
 
-#customIntervalContainer, #customBlocksContainer {
+#customIntervalContainer,
+#customBlocksContainer {
   background-color: var(--md-sys-color-background-text);
   padding: 10px;
   border-radius: 5px;
@@ -71,17 +72,18 @@ input[class="uni"]{
   flex-wrap: wrap;
 }
 
-#customIntervalContainer > div,
-#customBlocksContainer > div {
+#customIntervalContainer>div,
+#customBlocksContainer>div {
   display: flex;
   width: 100%;
   align-items: center;
 }
 
-#customBlocksContainer > div {
+#customBlocksContainer>div {
   justify-content: space-between;
 }
 
-.unicode-block-section, .checkbox-section {
+.unicode-block-section,
+.checkbox-section {
   overflow: visible;
 }

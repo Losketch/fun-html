@@ -1,37 +1,154 @@
-@font-face{font-family:'Ctrl-Ctrl';src:url("../../assets/fonts/display/Ctrl Ctrl.woff2") format('woff2');font-display:swap;}
-@font-face{font-family:'Noto-Color-Emoji';src:url("../../assets/fonts/display/Noto Color Emoji.ttf") format('truetype');font-display:swap;}
+@font-face {
+  font-family: 'Ctrl-Ctrl';
+  src: url("../../assets/fonts/display/Ctrl Ctrl.woff2") format('woff2');
+  font-display: swap;
+}
 
-@font-face{font-family:'Plgo1';src:url("../../assets/fonts/display/Plgo1.woff2") format('woff2');font-display:swap;}
-@font-face{font-family:'Plgo2';src:url("../../assets/fonts/display/Plgo2.woff2") format('woff2');font-display:swap;}
+@font-face {
+  font-family: 'Noto-Color-Emoji';
+  src: url("../../assets/fonts/display/Noto Color Emoji.ttf") format('truetype');
+  font-display: swap;
+}
 
-@font-face{font-family:'Noto';src:url("../../assets/fonts/display/NotoUnicode.woff2") format('woff2');font-display:swap;}
-@font-face{font-family:'NotoSansSC';src:url("../../assets/fonts/display/NotoSansSC.woff2") format('woff2');font-display:swap;}
-@font-face{font-family:'NotoSansKR';src:url("../../assets/fonts/display/NotoSansKR.woff2") format('woff2');font-display:swap;}
+@font-face {
+  font-family: 'Plgo1';
+  src: url("../../assets/fonts/display/Plgo1.woff2") format('woff2');
+  font-display: swap;
+}
 
-@font-face{font-family:'Monu';src:url("../../assets/fonts/display/Monu Temp.woff2") format('woff2');font-display:swap;}
-@font-face{font-family:'Monu';src:url("../../assets/fonts/display/Monu Hanp.woff2") format('woff2');font-display:swap;}
+@font-face {
+  font-family: 'Plgo2';
+  src: url("../../assets/fonts/display/Plgo2.woff2") format('woff2');
+  font-display: swap;
+}
 
-@font-face{font-family:'Segoe';src:url("../../assets/fonts/display/Segoe UI Historic-edt.woff2") format('woff2');font-display:swap;}
-@font-face{font-family:'Segoe';src:url("../../assets/fonts/display/Segoe UI Symbol-edt.woff2") format('woff2');font-display:swap;}
-@font-face{font-family:'Segoe';src:url("../../assets/fonts/display/Segoe UI-edt.woff2") format('woff2');font-display:swap;}
+@font-face {
+  font-family: 'Noto';
+  src: url("../../assets/fonts/display/NotoUnicode.woff2") format('woff2');
+  font-display: swap;
+}
 
-@font-face{font-family:'Microsoft';src:url("../../assets/fonts/display/Microsoft Tai Le-edt.woff2") format('woff2');font-display:swap;}
-@font-face{font-family:'Microsoft';src:url("../../assets/fonts/display/Microsoft New Tai Lue-edt.woff2") format('woff2');font-display:swap;}
-@font-face{font-family:'Microsoft';src:url("../../assets/fonts/display/Microsoft Yi Baiti-edt.woff2") format('woff2');font-display:swap;}
-@font-face{font-family:'Microsoft';src:url("../../assets/fonts/display/Microsoft PhagsPa-edt.woff2") format('woff2');font-display:swap;}
+@font-face {
+  font-family: 'NotoSansSC';
+  src: url("../../assets/fonts/display/NotoSansSC.woff2") format('woff2');
+  font-display: swap;
+}
 
-@font-face{font-family:'others';src:url("../../assets/fonts/display/MV Boli-edt.woff2") format('woff2');font-display:swap;}
-@font-face{font-family:'others';src:url("../../assets/fonts/display/Ebrima-edt.woff2") format('woff2');font-display:swap;}
-@font-face{font-family:'others';src:url("../../assets/fonts/display/Nirmala UI-edt.woff2") format('woff2');font-display:swap;}
-@font-face{font-family:'others';src:url("../../assets/fonts/display/Leelawadee UI-edt.woff2") format('woff2');font-display:swap;}
-@font-face{font-family:'others';src:url("../../assets/fonts/display/Myanmar Text-edt.woff2") format('woff2');font-display:swap;}
-@font-face{font-family:'others';src:url("../../assets/fonts/display/Calibri-edt.woff2") format('woff2');font-display:swap;}
-@font-face{font-family:'others';src:url("../../assets/fonts/display/Gadugi-edt.woff2") format('woff2');font-display:swap;}
-@font-face{font-family:'others';src:url("../../assets/fonts/display/Javanese Text-edt.woff2") format('woff2');font-display:swap;}
+@font-face {
+  font-family: 'NotoSansKR';
+  src: url("../../assets/fonts/display/NotoSansKR.woff2") format('woff2');
+  font-display: swap;
+}
 
-@font-face{font-family:'Last';src:url("../../assets/fonts/display/Last Resort.woff2") format('woff2');font-display:swap;}
+@font-face {
+  font-family: 'Monu';
+  src: url("../../assets/fonts/display/Monu Temp.woff2") format('woff2');
+  font-display: swap;
+}
 
-@font-face{
+@font-face {
+  font-family: 'Monu';
+  src: url("../../assets/fonts/display/Monu Hanp.woff2") format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Segoe';
+  src: url("../../assets/fonts/display/Segoe UI Historic-edt.woff2") format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Segoe';
+  src: url("../../assets/fonts/display/Segoe UI Symbol-edt.woff2") format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Segoe';
+  src: url("../../assets/fonts/display/Segoe UI-edt.woff2") format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Microsoft';
+  src: url("../../assets/fonts/display/Microsoft Tai Le-edt.woff2") format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Microsoft';
+  src: url("../../assets/fonts/display/Microsoft New Tai Lue-edt.woff2") format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Microsoft';
+  src: url("../../assets/fonts/display/Microsoft Yi Baiti-edt.woff2") format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Microsoft';
+  src: url("../../assets/fonts/display/Microsoft PhagsPa-edt.woff2") format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'others';
+  src: url("../../assets/fonts/display/MV Boli-edt.woff2") format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'others';
+  src: url("../../assets/fonts/display/Ebrima-edt.woff2") format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'others';
+  src: url("../../assets/fonts/display/Nirmala UI-edt.woff2") format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'others';
+  src: url("../../assets/fonts/display/Leelawadee UI-edt.woff2") format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'others';
+  src: url("../../assets/fonts/display/Myanmar Text-edt.woff2") format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'others';
+  src: url("../../assets/fonts/display/Calibri-edt.woff2") format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'others';
+  src: url("../../assets/fonts/display/Gadugi-edt.woff2") format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'others';
+  src: url("../../assets/fonts/display/Javanese Text-edt.woff2") format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Last';
+  src: url("../../assets/fonts/display/Last Resort.woff2") format('woff2');
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'IDC';
   src: url("../../assets/fonts/display/Ideographic-Description-Character.woff2") format('woff2');
   font-display: swap;

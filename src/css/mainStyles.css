@@ -73,9 +73,38 @@
 }
 
 .copy-button {
+  all: unset;
+  width: 1.75rem;
+  height: 1.75rem;
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 17px;
+  display: flex;
+  background-color: var(--md-sys-color-primary-container);
+  border-radius: 8px;
+  color: var(--md-sys-color-on-primary-container);
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: outline-color 0.5s ease, background-color 0.5s ease;
+  outline-color: transparent;
+}
+
+.copy-button:hover {
+  outline: solid 1px #2224;
+  background-color: var(--md-sys-color-background-text-dark);
+}
+
+.copy-button::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon"><path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  vertical-align: middle;
 }
 
 .json {
@@ -111,10 +140,6 @@
   overflow: visible;
 }
 
-.more-gap {
-  gap: 16px;
-}
-
 body {
   font-family: 'Roboto', sans-serif;
   background-color: var(--md-sys-color-background);
@@ -135,12 +160,6 @@ body {
   color: var(--md-sys-color-on-background);
   margin: 0;
   padding: 0;
-}
-
-body>div {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
 }
 
 header {
@@ -182,6 +201,10 @@ main>div,
   flex-direction: column;
   align-items: center;
   gap: 8px;
+}
+
+.more-gap {
+  gap: 16px;
 }
 
 div>ul,
@@ -234,7 +257,7 @@ input[type="number"]:not(:read-only):focus {
     0 3px 0 var(--md-sys-color-primary);
 }
 
-textarea:not(:read-only):focus {
+textarea:focus {
   outline: none;
   box-shadow:
     0 1px 0 var(--md-sys-color-primary),
