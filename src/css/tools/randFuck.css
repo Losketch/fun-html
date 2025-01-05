@@ -1,15 +1,17 @@
-#count, #target {
+#count,
+#target {
   width: 10rem;
 }
 
-#res, #config {
+#res,
+#config {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5px;
 }
 
-#config > div {
+#config>div {
   overflow: visible;
 }
 
@@ -19,6 +21,6 @@
   font-size: 0.875em;
 }
 
-#res > span {
+#res>span {
   overflow: visible;
 }

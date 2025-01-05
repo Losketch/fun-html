@@ -3,7 +3,8 @@ table {
   width: 100%;
 }
 
-th, td {
+th,
+td {
   padding: 5px;
   text-align: center;
 }
@@ -25,19 +26,19 @@ tr:nth-child(odd) td {
   background-color: #DDEBF7;
 }
 
-tbody > tr:first-child > th:first-child {
+tbody>tr:first-child>th:first-child {
   border-top-left-radius: 10px;
 }
 
-tbody > tr:first-child > th:last-child {
+tbody>tr:first-child>th:last-child {
   border-top-right-radius: 10px;
 }
 
-tbody > tr:last-child > td:first-child {
+tbody>tr:last-child>td:first-child {
   border-bottom-left-radius: 10px;
 }
 
-tbody > tr:last-child > td:last-child {
+tbody>tr:last-child>td:last-child {
   border-bottom-right-radius: 10px;
 }
 
@@ -45,6 +46,7 @@ p {
   font-size: 3vw;
 }
 
-sup, sub {
+sup,
+sub {
   font-size: 10px;
 }
