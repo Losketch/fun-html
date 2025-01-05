@@ -16,17 +16,26 @@ body {
   gap: 5px;
 }
 #sele::-webkit-file-upload-button {
-  padding: 8px 12px;
-  border-radius: 100rem;
-  background-color: var(--md-sys-color-primary-container);
-  color: var(--md-sys-color-on-secondary-container);
-  border: none;
-  height: 2rem;
-  line-height: 0rem;
-  width: 85px;
-  position: relative;
-  overflow: hidden;
+    padding: 8px 12px;
+    border-radius: 100rem;
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-secondary-container);
+    border: none;
+    height: 2rem;
+    width: 85px;
+    position: relative;
+    overflow: hidden;
 }
+
 #controller > div, audio {
   width: 100%;
+}
+
+audio::-webkit-media-controls-panel {
+  background-color: var(--md-sys-color-disabled);
+}
+
+audio::-webkit-media-controls-play-button {
+  background-color: var(--md-sys-color-primary-container);
+  border-radius: 50%;
 }

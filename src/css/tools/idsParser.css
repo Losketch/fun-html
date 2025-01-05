@@ -5,7 +5,8 @@
   gap: 16px 8px;
 }
 
-.idc-inputer, .curve-inputer {
+.idc-inputer,
+.curve-inputer {
   all: unset;
   font-size: 4.4vw;
   overflow: visible;
@@ -23,12 +24,14 @@
   outline-color: transparent;
 }
 
-.idc-inputer:hover, .curve-inputer:hover {
+.idc-inputer:hover,
+.curve-inputer:hover {
   outline: solid 1px #2224;
   background-color: var(--md-sys-color-background-text-dark);
 }
 
-.idc-inputer:after, .curve-inputer:after {
+.idc-inputer:after,
+.curve-inputer:after {
   font-size: 8px;
   position: absolute;
   top: 100%;
@@ -36,36 +39,117 @@
   margin-top: 2px;
 }
 
-.idc-inputer:nth-child(1):after{content:"LR"}
-.idc-inputer:nth-child(2):after{content:"UD"}
-.idc-inputer:nth-child(3):after{content:"LL"}
-.idc-inputer:nth-child(4):after{content:"UU"}
-.idc-inputer:nth-child(5):after{content:"OC"}
-.idc-inputer:nth-child(6):after{content:"OD"}
-.idc-inputer:nth-child(7):after{content:"OU"}
-.idc-inputer:nth-child(8):after{content:"OR"}
-.idc-inputer:nth-child(9):after{content:"OL"}
-.idc-inputer:nth-child(10):after{content:"RD"}
-.idc-inputer:nth-child(11):after{content:"LD"}
-.idc-inputer:nth-child(12):after{content:"RU"}
-.idc-inputer:nth-child(13):after{content:"LU"}
-.idc-inputer:nth-child(14):after{content:"XX"}
-.idc-inputer:nth-child(15):after{content:"MI"}
-.idc-inputer:nth-child(16):after{content:"RO"}
-.idc-inputer:nth-child(17):after{content:"SU"}
-.idc-inputer:nth-child(24):after{content:"RE"}
+.idc-inputer:nth-child(1):after {
+  content: "LR"
+}
 
-.curve-inputer:nth-child(19):after{content:"ULQ"}
-.curve-inputer:nth-child(20):after{content:"URQ"}
-.curve-inputer:nth-child(21):after{content:"LRQ"}
-.curve-inputer:nth-child(22):after{content:"LLQ"}
+.idc-inputer:nth-child(2):after {
+  content: "UD"
+}
+
+.idc-inputer:nth-child(3):after {
+  content: "LL"
+}
+
+.idc-inputer:nth-child(4):after {
+  content: "UU"
+}
+
+.idc-inputer:nth-child(5):after {
+  content: "OC"
+}
+
+.idc-inputer:nth-child(6):after {
+  content: "OD"
+}
+
+.idc-inputer:nth-child(7):after {
+  content: "OU"
+}
+
+.idc-inputer:nth-child(8):after {
+  content: "OR"
+}
+
+.idc-inputer:nth-child(9):after {
+  content: "OL"
+}
+
+.idc-inputer:nth-child(10):after {
+  content: "RD"
+}
+
+.idc-inputer:nth-child(11):after {
+  content: "LD"
+}
+
+.idc-inputer:nth-child(12):after {
+  content: "RU"
+}
+
+.idc-inputer:nth-child(13):after {
+  content: "LU"
+}
+
+.idc-inputer:nth-child(14):after {
+  content: "XX"
+}
+
+.idc-inputer:nth-child(15):after {
+  content: "MI"
+}
+
+.idc-inputer:nth-child(16):after {
+  content: "RO"
+}
+
+.idc-inputer:nth-child(17):after {
+  content: "SU"
+}
+
+.idc-inputer:nth-child(24):after {
+  content: "RE"
+}
+
+.curve-inputer:nth-child(19):after {
+  content: "ULQ"
+}
+
+.curve-inputer:nth-child(20):after {
+  content: "URQ"
+}
+
+.curve-inputer:nth-child(21):after {
+  content: "LRQ"
+}
+
+.curve-inputer:nth-child(22):after {
+  content: "LLQ"
+}
 
 
 pre {
   min-height: 68px;
   white-space: unset;
+  margin: 0;
 }
 
 code {
   white-space: pre-wrap;
+}
+
+#ids-svg-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--md-sys-color-background-text);
+  padding: 10px;
+  border-radius: 10px;
+  display: none;
+}
+
+.res-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
