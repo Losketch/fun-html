@@ -267,7 +267,7 @@ function setRule() {
 }
 
 function updateRule() {
-  ruleSpan.textContent = `当前规则：B${birth.join('')}/S${star.join(
+  ruleSpan.textContent = `\u2001当前规则：B${birth.join('')}/S${star.join(
     ''
   )}/C${typeCount}`;
 }

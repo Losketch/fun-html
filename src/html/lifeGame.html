@@ -8,6 +8,7 @@
 
   <link rel="stylesheet" href="../css/mainStyles.css">
   <link rel="stylesheet" href="../css/rippleButton.css">
+  <link rel="stylesheet" href="../css/nerd-fonts-generated.min.css">
   <link rel="stylesheet" href="../css/tools/lifeGame.css">
   <script defer src="../js/changeHeader.js"></script>
   <script defer src="../js/rippleButton.js"></script>
@@ -20,38 +21,38 @@
       <div id="containerDiv"><span id="container"></span></div>
       <div class="more-gap">
         <div class="inner-div">
-          <button id="prev" onclick="prevGeneration()" class="icon-previous">上一代</button>
-          <button id="next" onclick="nextGeneration()" class="icon-next">下一代</button>
-          <button id="start" onclick="clearInterval(timerId);timerId = setInterval(nextGeneration, gap);toggleDisable(true, prev, next, jump, this)" class="icon-play">开始</button>
-          <button id="pause" onclick="clearInterval(timerId);toggleDisable(false, prev, next, start, jump)" class="icon-pause">暂停</button>
-          <button onclick="generationsCount++;updateCount();saveGeneration();" class="icon-floppy-disk">保存为一代</button>
+          <button id="prev" onclick="prevGeneration()" class="nf nf-fa-step_backward">&emsp;上一代</button>
+          <button id="next" onclick="nextGeneration()" class="nf nf-fa-step_forward">&emsp;下一代</button>
+          <button id="start" onclick="clearInterval(timerId);timerId = setInterval(nextGeneration, gap);toggleDisable(true, prev, next, jump, this)" class="nf nf-fa-play">&emsp;开始</button>
+          <button id="pause" onclick="clearInterval(timerId);toggleDisable(false, prev, next, start, jump)" class="nf nf-fa-pause">&emsp;暂停</button>
+          <button onclick="generationsCount++;updateCount();saveGeneration();" class="nf nf-md-content_save">&emsp;保存为一代</button>
         </div>
         <div class="inner-div">
            <div id="generationsCountShow">当前代：0/0</div>
            <input type="range" min="0" max="0" value="0" style="width: 50%;" id="generations">
-           <button id="jump" class="icon-redo">跳转代</button>
-           <button onclick="generations=[];generationsMap={};generationsCount=0;maxGenerationsCount=0;updateCount()" class="icon-bin">清空代</button>
+           <button id="jump" class="nf nf-md-arrow_collapse_down">&emsp;跳转代</button>
+           <button onclick="generations=[];generationsMap={};generationsCount=0;maxGenerationsCount=0;updateCount()" class="nf nf-md-delete_forever">&emsp;清空代</button>
         </div>
         <div class="inner-div">
-          <button onclick="reset()" class="icon-spinner">重置</button>
-          <button onclick="setRule()" class="icon-cog">设置规则</button>
-          <span id="rule" class="icon-list"></span>
+          <button onclick="reset()" class="nf nf-fa-arrow_rotate_right">&emsp;重置</button>
+          <button onclick="setRule()" class="nf nf-seti-config">&emsp;设置规则</button>
+          <span id="rule" class="nf nf-md-format_list_numbered"></span>
         </div>
         <input id="import" type="file" style="display: none;">
         <div class="inner-div">
-          <button id="export" class="icon-download">导出当前代</button>
-          <button onclick="importInp.click()" class="icon-upload">导入</button>
+          <button id="export" class="nf nf-fa-file_export">&emsp;导出当前代</button>
+          <button onclick="importInp.click()" class="nf nf-fa-file_import">&emsp;导入</button>
         </div>
         <div class="inner-div">
-          <button id="state" class="icon-paint-format">设置填充状态</button>
+          <button id="state" class="nf nf-md-format_paint">&emsp;设置填充状态</button>
           <span id="stateShow"></span>
         </div>
         <div class="inner-div">
-          <button id="gridSize" class="icon-enlarge">设置网格大小</button>
+          <button id="gridSize" class="nf nf-md-arrow_expand_all">&emsp;设置网格大小</button>
           <span id="gridSizeShow"></span>
         </div>
         <div class="inner-div">
-          <button id="gap" class="icon-stopwatch">设置迭代间隔</button>
+          <button id="gap" class="nf nf-md-clock_edit_outline">&emsp;设置迭代间隔</button>
           <span id="gapShow"></span>
         </div>
       </div>

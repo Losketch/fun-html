@@ -6,10 +6,13 @@ main>div>div {
   margin-bottom: 16px;
 }
 
+.checkbox-section>label:not(.placeholder) {
+  margin-bottom: 8px;
+}
+
 .checkbox-section label:not(.placeholder) {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
   font-size: 0.875rem;
   color: var(--md-sys-color-on-surface-variant);
 }
@@ -32,10 +35,6 @@ input[type="checkbox"] {
   margin-right: 8px;
 }
 
-button>span:last-child {
-  font-size: 24px;
-}
-
 textarea {
   min-height: 100px;
 }
@@ -50,14 +49,23 @@ input[class="uni"] {
   background-color: #90FF90;
   border: 1px solid #50FF50;
   border-radius: 4px;
-  margin-left: 8px;
+  height: 20px;
+  width: 20px;
+  margin-left: 4px;
 }
 
-.rem {
+.add-button>span {
+  overflow: visible;
+} 
+
+.rem-button {
   background-color: #FF9090;
   border: 1px solid #FF5050;
+  height: 20px;
+  width: 20px;
+  font-size: 0.5rem;
+  font-weight: 800;
   border-radius: 4px;
-  font-size: 24px;
 }
 
 #customIntervalContainer,
@@ -69,13 +77,17 @@ input[class="uni"] {
   gap: 4px;
   max-height: 300px;
   overflow: scroll;
+  width: 100%;
   flex-wrap: wrap;
+  box-sizing: border-box;
+  overflow: visible;
 }
 
 #customIntervalContainer>div,
 #customBlocksContainer>div {
   display: flex;
   width: 100%;
+  overflow: visible;
   align-items: center;
 }
 
@@ -86,4 +98,9 @@ input[class="uni"] {
 .unicode-block-section,
 .checkbox-section {
   overflow: visible;
+}
+
+.custom-interval-section,
+.unicode-block-section {
+  margin-bottom: 8px;
 }
