@@ -99,7 +99,7 @@ window.addEventListener('message', (event) => {
               { type: 'featchResponseErrorState', state: response.state },
               '*'
             );
-            return;
+            throw new Error(`${response.state}`);
           }
           return response.text();
         })
@@ -108,7 +108,7 @@ window.addEventListener('message', (event) => {
         })
         .catch((error) => {
           event.source.postMessage(
-            { type: 'fetchError', error: error.message },
+            { type: 'fetchError', error: error },
             '*'
           );
         });
