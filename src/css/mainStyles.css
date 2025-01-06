@@ -215,7 +215,7 @@ textarea {
   overflow: hidden;
   margin: 0;
   box-shadow:
-    0 1px 0 var(--md-sys-color-outline);
+    0 -1px 0 var(--md-sys-color-outline) inset;
 }
 
 input[type="text"],
@@ -230,7 +230,7 @@ input[type="number"] {
   color: var(--md-sys-color-on-surface);
   margin: 0;
   box-shadow:
-    0 1px 0 var(--md-sys-color-outline);
+    0 -1px 0 var(--md-sys-color-outline) inset;
   transition: box-shadow 0.3s ease;
 }
 
@@ -247,21 +247,17 @@ input[type="number"]:not(:read-only) {
   background: linear-gradient(to right,
       var(--md-sys-color-primary) 0%,
       var(--md-sys-color-primary) 100%) bottom;
-  background-color: var(--md-sys-color-on-primary);
+  background-color: transparent;
   background-size: 0% 2px;
   background-repeat: no-repeat;
   transition: background-size 0.3s ease;
 }
 
 input[type="text"]:not(:read-only):focus,
-input[type="number"]:not(:read-only):focus {
+input[type="number"]:not(:read-only):focus,
+textarea:not(:read-only):focus {
   outline: none;
-  background-size: 300% 2px;
-}
-
-textarea:focus {
-  outline: none;
-  background-size: 300% 2px;
+  background-size: 300% 3px;
 }
 
 input[type="file"] {

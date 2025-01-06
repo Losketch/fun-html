@@ -54,18 +54,18 @@ const getAddEle = () => {
   id++;
   return `
     U+
-    <div class="material-input-container">
+    <div class="material-input-container" style="margin-top: 5px;">
       <input id="${id}-1" type="text" class="uni" oninput="inspect(this)">
       <label for="${id}-1" class="placeholder">起始码位</label>
       <span></span>
     </div>
     ~U+
-    <div class="material-input-container">
+    <div class="material-input-container" style="margin-top: 5px;">
       <input id="${id}-2" type="text" class="uni" oninput="inspect(this)">
       <label for="${id}-2" class="placeholder">结束码位</label>
       <span></span>
     </div>
-    <button onclick="remove(this.parentNode)" class="rem">×</button>
+    <button onclick="remove(this.parentNode)" class="rem-button">×</button>
   `;
 };
 
@@ -263,7 +263,7 @@ selectBlocks.addEventListener('select', (e) => {
 
   selections.forEach((selection, i) => {
     add(customBlocksContainer, `
-      ${visibleSelections[i]}<button onclick="cancelSelect('${selection}', '${visibleSelections[i]}', this.parentNode)" class="rem">×</button>
+      ${visibleSelections[i]}<button onclick="cancelSelect('${selection}', '${visibleSelections[i]}', this.parentNode)" class="rem-button">×</button>
     `)
   });
 });
