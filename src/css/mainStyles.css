@@ -154,14 +154,6 @@ body>div {
   min-height: 100vh;
 }
 
-body {
-  font-family: 'Roboto', sans-serif;
-  background-color: var(--md-sys-color-background);
-  color: var(--md-sys-color-on-background);
-  margin: 0;
-  padding: 0;
-}
-
 header {
   background-color: var(--md-sys-color-surface);
   color: var(--md-sys-color-on-surface);
@@ -224,7 +216,6 @@ textarea {
   margin: 0;
   box-shadow:
     0 1px 0 var(--md-sys-color-outline);
-  transition: box-shadow 0.3s ease;
 }
 
 input[type="text"],
@@ -248,22 +239,29 @@ input[type="number"]:hover {
   outline: none;
 }
 
+textarea,
+input[type="text"]:not(:read-only),
+input[type="number"]:not(:read-only) {
+  position: relative;
+  border: none;
+  background: linear-gradient(to right,
+      var(--md-sys-color-primary) 0%,
+      var(--md-sys-color-primary) 100%) bottom;
+  background-color: var(--md-sys-color-on-primary);
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s ease;
+}
+
 input[type="text"]:not(:read-only):focus,
 input[type="number"]:not(:read-only):focus {
   outline: none;
-  box-shadow:
-    0 1px 0 var(--md-sys-color-primary),
-    0 2px 0 var(--md-sys-color-primary),
-    0 3px 0 var(--md-sys-color-primary);
+  background-size: 300% 2px;
 }
 
 textarea:focus {
   outline: none;
-  box-shadow:
-    0 1px 0 var(--md-sys-color-primary),
-    0 2px 0 var(--md-sys-color-primary),
-    0 3px 0 var(--md-sys-color-primary),
-    0 0 3px var(--md-sys-color-outline) inset;
+  background-size: 300% 2px;
 }
 
 input[type="file"] {
