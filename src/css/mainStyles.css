@@ -253,9 +253,7 @@ input[type="number"]:not(:read-only) {
   transition: background-size 0.3s ease;
 }
 
-input[type="text"]:not(:read-only):focus,
-input[type="number"]:not(:read-only):focus,
-textarea:not(:read-only):focus {
+:is(input[type="text"], input[type="number"], textarea):not(:read-only):focus {
   outline: none;
   background-size: 300% 3px;
 }

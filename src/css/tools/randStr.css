@@ -83,8 +83,7 @@ button>.material-icons {
   overflow: visible;
 }
 
-#customIntervalContainer>div,
-#customBlocksContainer>div {
+:is(#customIntervalContainer, #customBlocksContainer)>div {
   display: flex;
   width: 100%;
   overflow: visible;
