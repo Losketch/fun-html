@@ -54,19 +54,19 @@ input[class="uni"] {
   margin-left: 4px;
 }
 
-.add-button>span {
-  overflow: visible;
-} 
-
 .rem-button {
   background-color: #FF9090;
   border: 1px solid #FF5050;
   height: 20px;
   width: 20px;
-  font-size: 0.5rem;
   font-weight: 800;
   border-radius: 4px;
 }
+
+button>.material-icons {
+  overflow: visible;
+  font-size: 1rem;
+} 
 
 #customIntervalContainer,
 #customBlocksContainer {
