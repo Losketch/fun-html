@@ -65,7 +65,7 @@ const getAddEle = () => {
       <label for="${id}-2" class="placeholder">结束码位</label>
       <span></span>
     </div>
-    <button onclick="remove(this.parentNode)" class="rem-button">×</button>
+    <button onclick="remove(this.parentNode)" class="rem-button"><span class="material-icons">remove</span></button>
   `;
 };
 
@@ -263,7 +263,7 @@ selectBlocks.addEventListener('select', (e) => {
 
   selections.forEach((selection, i) => {
     add(customBlocksContainer, `
-      ${visibleSelections[i]}<button onclick="cancelSelect('${selection}', '${visibleSelections[i]}', this.parentNode)" class="rem-button">×</button>
+      ${visibleSelections[i]}<button onclick="cancelSelect('${selection}', '${visibleSelections[i]}', this.parentNode)" class="rem-button"><span class="material-icons">remove</span></button>
     `)
   });
 });
