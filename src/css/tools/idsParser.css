@@ -24,14 +24,12 @@
   outline-color: transparent;
 }
 
-.idc-inputer:hover,
-.curve-inputer:hover {
+:is(.idc-inputer, .curve-inputer):hover {
   outline: solid 1px #2224;
   background-color: var(--md-sys-color-background-text-dark);
 }
 
-.idc-inputer:after,
-.curve-inputer:after {
+:is(.idc-inputer, .curve-inputer):after {
   font-size: 8px;
   position: absolute;
   top: 100%;
