@@ -11,7 +11,7 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   -webkit-tap-highlight-color: transparent;
   outline: none;
