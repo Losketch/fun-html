@@ -59,12 +59,10 @@ input[class="uni"] {
   border: 1px solid #FF5050;
   height: 20px;
   width: 20px;
-  font-weight: 800;
   border-radius: 4px;
 }
 
-button>.material-icons {
-  overflow: visible;
+button.nf {
   font-size: 1rem;
 } 
 
