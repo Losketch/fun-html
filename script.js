@@ -118,6 +118,6 @@ window.addEventListener('message', (event) => {
 toggleNavButton.addEventListener('click', () => {
   nav.classList.toggle('nav-hidden');
   toggleNavButton.innerHTML = nav.classList.contains('nav-hidden')
-    ? '<span class="material-icons">close</span>'
-    : '<span class="material-icons">menu</span>';
+    ? '<span class="nf nf-md-close"></span>'
+    : '<span class="nf nf-md-menu"></span>';
 });
