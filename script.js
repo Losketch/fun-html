@@ -84,7 +84,7 @@ toolButtons.forEach((button) => {
 window.addEventListener('message', (event) => {
   switch (event.data.type) {
     case 'changeHeader':
-      titleH1.innerText = event.data.text;
+      titleH1.innerHTML = event.data.text;
       break;
     case 'adjustIframeHeight':
       mainContent.style.height = event.data.height + 'px';
