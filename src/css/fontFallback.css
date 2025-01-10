@@ -150,7 +150,7 @@
 
 @font-face {
   font-family: 'IDC';
-  src: url("../../assets/fonts/display/IdeographicDescriptionCharacter.woff2") format('woff2');
+  src: url("../../assets/fonts/display/Ideographic-Description-Character.woff2") format('woff2');
   font-display: swap;
   unicode-range: U+25DC-25DF, U+2FF?, U+31EF, U+1F504, U+E100;
 }
