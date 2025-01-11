@@ -182,6 +182,7 @@ hr {
 .toggle-nav-button>.nf {
   font-size: 24px;
   line-height: 1;
+  transform: translateY(0.06em);
 }
 
 .nav-hidden {

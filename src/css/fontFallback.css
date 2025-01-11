@@ -6,7 +6,7 @@
 
 @font-face {
   font-family: 'Noto-Color-Emoji';
-  src: url("../../assets/fonts/display/Noto Color Emoji.woff2") format('woff2');
+  src: url("../../assets/fonts/display/Noto Color Emoji.ttf") format('truetype');
   font-display: swap;
 }
 
