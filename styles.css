@@ -179,7 +179,7 @@ hr {
   overflow: hidden;
 }
 
-.toggle-nav-button > .nf {
+.toggle-nav-button>.nf {
   font-size: 24px;
   line-height: 1;
 }
