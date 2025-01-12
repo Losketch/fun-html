@@ -639,7 +639,7 @@ const inputerContainer = document.querySelector('.inputer-container');
 const errorRes = document.getElementById('error');
 const idsSvgContainer = document.getElementById('ids-svg-container');
 
-inputerContainer.addEventListener('touchend', (e) => {
+inputerContainer.addEventListener('click', (e) => {
   if (e.target.classList.contains('inputer-container')) return;
   if (e.target.classList.contains('placeholder')) return;
   e.preventDefault();
