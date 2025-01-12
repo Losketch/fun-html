@@ -35,10 +35,6 @@ input[type="checkbox"] {
   margin-right: 8px;
 }
 
-textarea {
-  min-height: 100px;
-}
-
 input[class="uni"] {
   width: 4.5rem;
   padding: 4px;
@@ -100,4 +96,31 @@ button.nf {
 .custom-interval-section,
 .unicode-block-section {
   margin-bottom: 8px;
+}
+
+.result-section {
+  margin: 0;
+}
+
+.result-container {
+  margin: 0;
+  width: 100%;
+  min-height: 68px;
+  box-sizing: border-box;
+  white-space: unset;
+}
+
+.result {
+  overflow: visible;
+}
+
+.result::before {
+  content: '';
+  width: 1.75rem;
+  height: 1.75rem;
+  float: right;
+}
+
+.action-buttons {
+  margin-bottom: 4px;
 }

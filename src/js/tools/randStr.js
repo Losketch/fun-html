@@ -33,7 +33,7 @@ Array.prototype.removeAll = function (value) {
 };
 
 const validCode = /^([0-9a-fA-F]|10)?[0-9a-fA-F]{0,4}$/;
-const resultTextarea = document.getElementById('resultTextarea');
+const resultEle = document.getElementById('result');
 const customCharEle = document.getElementById('customChar');
 const slider = document.getElementById('countSlider');
 const countInput = document.getElementById('countInput');
@@ -222,8 +222,8 @@ function generateRandomCharacters() {
       characters.removeAll(index);
     }
   }
-  resultTextarea.value = result;
-  resultTextarea.dispatchEvent(new Event('input'));
+  resultEle.innerHTML = '<button class="copy-button nf nf-fa-copy no-ripple" id="copy-button" onclick="copy(resultEle.innerText)"></button>' + result;
+  resultEle.dispatchEvent(new Event('input'));
 }
 
 function rangeArr(start, end) {
@@ -249,8 +249,8 @@ function copy(text) {
 }
 
 function clearText() {
-  resultTextarea.value = '';
-  resultTextarea.dispatchEvent(new Event('input'));
+  resultEle.innerHTML = '<button class="copy-button nf nf-fa-copy no-ripple" id="copy-button" onclick="copy(resultEle.innerText)"></button>';
+  resultEle.dispatchEvent(new Event('input'));
 }
 
 selectBlocks.addEventListener('select', (e) => {
