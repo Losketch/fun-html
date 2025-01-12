@@ -239,12 +239,12 @@ input[type="number"]:not(:read-only) {
   background-color: transparent;
   background-size: 0% 2px;
   background-repeat: no-repeat;
-  transition: background-size 0.3s ease;
+  transition: background-size 0.2s ease;
 }
 
 :is(input[type="text"], input[type="number"], textarea):not(:read-only):focus {
   outline: none;
-  background-size: 300% 3px;
+  background-size: 100% 3px;
 }
 
 input[type="file"] {
