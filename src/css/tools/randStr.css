@@ -6,24 +6,24 @@ main>div>div {
   margin-bottom: 16px;
 }
 
-.checkbox-section>label:not(.placeholder) {
+#checkbox-section>label:not(.placeholder) {
   margin-bottom: 8px;
 }
 
-.checkbox-section label:not(.placeholder) {
+#checkbox-section label:not(.placeholder) {
   display: flex;
   align-items: center;
   font-size: 0.875rem;
   color: var(--md-sys-color-on-surface-variant);
 }
 
-.checkbox-section {
+#checkbox-section {
   display: flex;
   align-items: unset;
   flex-direction: column;
 }
 
-.count-section {
+#count-section {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -62,8 +62,8 @@ button.nf {
   font-size: 1rem;
 } 
 
-#customIntervalContainer,
-#customBlocksContainer {
+#custom-interval-container,
+#custom-blocks-container {
   background-color: var(--md-sys-color-background-text);
   padding: 10px;
   border-radius: 5px;
@@ -77,32 +77,32 @@ button.nf {
   overflow: visible;
 }
 
-:is(#customIntervalContainer, #customBlocksContainer)>div {
+:is(#custom-interval-container, #custom-blocks-container)>div {
   display: flex;
   width: 100%;
   overflow: visible;
   align-items: center;
 }
 
-#customBlocksContainer>div {
+#custom-blocks-container>div {
   justify-content: space-between;
 }
 
-.unicode-block-section,
-.checkbox-section {
+#unicode-block-section,
+#checkbox-section {
   overflow: visible;
 }
 
-.custom-interval-section,
-.unicode-block-section {
+#custom-interval-section,
+#unicode-block-section {
   margin-bottom: 8px;
 }
 
-.result-section {
+#result-section {
   margin: 0;
 }
 
-.result-container {
+#result-container {
   margin: 0;
   width: 100%;
   min-height: 68px;
@@ -110,17 +110,18 @@ button.nf {
   white-space: unset;
 }
 
-.result {
+#result-ele {
   overflow: visible;
+  word-break: break-all;
 }
 
-.result::before {
+#result-ele::before {
   content: '';
   width: 1.75rem;
   height: 1.75rem;
   float: right;
 }
 
-.action-buttons {
+#action-buttons {
   margin-bottom: 4px;
 }

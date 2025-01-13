@@ -717,7 +717,8 @@ parseButton.addEventListener('click', () => {
 
   const jsonString = JSON.stringify(jsonObject, null, 2);
 
-  delete codeBlock.dataset.highlighted;
-  codeBlock.textContent = jsonString;
-  hljs.highlightElement(codeBlock);
+  highlightedJson = hljs.highlight(jsonString, { language: 'json' });
+  codeBlock.innerHTML = highlightedJson.value;
+  codeBlock.classList.add('hljs');
+  codeBlock.classList.add('language-json');
 });
