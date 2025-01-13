@@ -639,26 +639,30 @@ const inputerContainer = document.querySelector('.inputer-container');
 const errorRes = document.getElementById('error');
 const idsSvgContainer = document.getElementById('ids-svg-container');
 
-inputerContainer.addEventListener('click', (e) => {
+function handleInput(e) {
   if (e.target.classList.contains('inputer-container')) return;
   if (e.target.classList.contains('placeholder')) return;
-  e.preventDefault();
+  if (e.type === 'touchend') {
+    e.preventDefault();
+  }
 
   const charToInsert = e.target.innerText;
   const startPos = input.selectionStart;
   const endPos = input.selectionEnd;
+  const cursorPosition = input.selectionStart;
   const beforeInput = input.value.substring(0, startPos);
   const afterInput = input.value.substring(endPos);
 
   input.value = `${beforeInput}${charToInsert}${afterInput}`;
-  input.setSelectionRange(
-    startPos + charToInsert.length,
-    startPos + charToInsert.length
-  );
-  setTimeout(() => {
-    input.focus();
-  }, 0);
-});
+
+  const newPosition = cursorPosition + charToInsert.length;
+  input.setSelectionRange(newPosition, newPosition);
+
+  input.focus();
+}
+
+inputerContainer.addEventListener('touchend', handleInput);
+inputerContainer.addEventListener('click', handleInput);
 
 copyButton.addEventListener('click', () => {
   const code = document.getElementById('json-code').textContent;
