@@ -9,7 +9,7 @@
 .counter-container>.counter {
   position: absolute;
   bottom: 3px;
-  right: 6px;
+  right: 0;
   opacity: 0.5;
   transform: translateX(-50%);
   font-size: 0.875rem;

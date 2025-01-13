@@ -22,48 +22,48 @@
   <script defer src="../js/tools/randStr.js"></script>
 </head>
 <body>
-  <div class="app-container">
+  <div>
     <main>
       <div>
-        <div class="count-section">
+        <div id="count-section">
           <div class="material-input-container">
-            <input type="number" id="countInput" value="100" oninput="updateSliderValue()">
-            <label for="countInput">数量</label>
+            <input type="number" id="count-input" value="100" oninput="updateSliderValue()">
+            <label for="count-input">数量</label>
           </div>
-          <input type="range" id="countSlider" min="1" max="1000" value="100" oninput="updateInputValue()">
+          <input type="range" id="count-slider" min="1" max="1000" value="100" oninput="updateInputValue()">
         </div>
 
-        <div class="checkbox-section">
-          <label><input type="checkbox" id="includeDigits"> 包含数字</label>
-          <label><input type="checkbox" id="includeLowercase"> 包含小写字母</label>
-          <label><input type="checkbox" id="includeUppercase"> 包含大写字母</label>
-          <label><input type="checkbox" id="includeSpecialSymbols"> 包含特殊符号</label>
-          <label><input type="checkbox" id="includeBasicChinese"> 包含基本区汉字</label>
-          <label><input type="checkbox" id="includeExtendedAChinese"> 包含扩展 A 区汉字</label>
-          <label><input type="checkbox" id="includeExtendedBChinese"> 包含扩展 B 区汉字</label>
-          <label><input type="checkbox" id="includeExtendedCChinese"> 包含扩展 C 区汉字</label>
-          <label><input type="checkbox" id="includeExtendedDChinese"> 包含扩展 D 区汉字</label>
-          <label><input type="checkbox" id="includeExtendedEChinese"> 包含扩展 E 区汉字</label>
-          <label><input type="checkbox" id="includeExtendedFChinese"> 包含扩展 F 区汉字</label>
-          <label><input type="checkbox" id="includeExtendedGChinese"> 包含扩展 G 区汉字</label>
-          <label><input type="checkbox" id="includeExtendedHChinese"> 包含扩展 H 区汉字</label>
-          <label><input type="checkbox" id="includeExtendedIChinese"> 包含扩展 I 区汉字</label>
-          <label><input type="checkbox" id="includeCompatibleChinese"> 包含兼容区汉字</label>
-          <label><input type="checkbox" id="includeCompatibleSupplementChinese"> 包含兼容补充区汉字</label>
-          <label><input type="checkbox" id="includeCustomChar"> 包含自定义字符</label>
-          <div class="custom-input-section material-input-container">
-            <input type="text" id="customChar">
-            <label for="customChar" class="placeholder">自定义字符</label>
+        <div id="checkbox-section">
+          <label><input type="checkbox" id="include-digits"> 包含数字</label>
+          <label><input type="checkbox" id="include-lowercase"> 包含小写字母</label>
+          <label><input type="checkbox" id="include-uppercase"> 包含大写字母</label>
+          <label><input type="checkbox" id="include-special-symbols"> 包含特殊符号</label>
+          <label><input type="checkbox" id="include-basic-chinese"> 包含基本区汉字</label>
+          <label><input type="checkbox" id="include-extended-a-chinese"> 包含扩展 A 区汉字</label>
+          <label><input type="checkbox" id="include-extended-b-chinese"> 包含扩展 B 区汉字</label>
+          <label><input type="checkbox" id="include-extended-c-chinese"> 包含扩展 C 区汉字</label>
+          <label><input type="checkbox" id="include-extended-d-chinese"> 包含扩展 D 区汉字</label>
+          <label><input type="checkbox" id="include-extended-e-chinese"> 包含扩展 E 区汉字</label>
+          <label><input type="checkbox" id="include-extended-f-chinese"> 包含扩展 F 区汉字</label>
+          <label><input type="checkbox" id="include-extended-g-chinese"> 包含扩展 G 区汉字</label>
+          <label><input type="checkbox" id="include-extended-h-chinese"> 包含扩展 H 区汉字</label>
+          <label><input type="checkbox" id="include-extended-i-chinese"> 包含扩展 I 区汉字</label>
+          <label><input type="checkbox" id="include-compatible-chinese"> 包含兼容区汉字</label>
+          <label><input type="checkbox" id="include-compatible-supplement-chinese"> 包含兼容补充区汉字</label>
+          <label><input type="checkbox" id="include-custom-char"> 包含自定义字符</label>
+          <div class="material-input-container">
+            <input type="text" id="custom-char">
+            <label for="custom-char" class="placeholder">自定义字符</label>
           </div>
-          <div class="custom-interval-section options-container">
+          <div id="custom-interval-section" class="options-container">
             <label>
-              <input type="checkbox" id="includeCustomInterval"> 包含自定义区间
+              <input type="checkbox" id="include-custom-interval"> 包含自定义区间
             </label>
-            <button onclick="add(customIntervalContainer, getAddEle())" class="add-button nf nf-cod-add"></button>
-            <div id="customIntervalContainer"></div>
+            <button onclick="add(custom-interval-container, getAddEle())" class="add-button nf nf-cod-add"></button>
+            <div id="custom-interval-container"></div>
           </div>
-          <div class="unicode-block-section">
-            <label><input type="checkbox" id="includeCustomUnicodeBlocks"> 包含自定义 Unicode 区段</label>
+          <div id="unicode-block-section">
+            <label><input type="checkbox" id="include-custom-unicode-blocks"> 包含自定义 Unicode 区段</label>
             <div class="select-container multi" id="select-blocks">
               <div class="select">
                 <div class="select-content">
@@ -415,24 +415,23 @@
                 <div data-select="100000,10FFFF" class="opt">增补私用区乙</div>
               </div>
             </div>
-            <div id="customBlocksContainer"></div>
+            <div id="custom-blocks-container"></div>
           </div>
-          <label><input type="checkbox" id="noRepeat"> 不重复</label>
-          <label><input type="checkbox" id="containsNoUndefinedCharacters"> 不包含未定义字符</label>
+          <label><input type="checkbox" id="no-repeat"> 不重复</label>
+          <label><input type="checkbox" id="contains-no-undefined-characters"> 不包含未定义字符</label>
         </div>
 
-        <div class="action-buttons options-container">
+        <div id="action-buttons" class="options-container">
           <button onclick="generateRandomCharacters()" class="primary-button">生成随机字符</button>
-          <button onclick="copy(resultTextarea.value)" class="secondary-button">复制</button>
           <button onclick="clearText()" class="secondary-button">清空</button>
         </div>
 
-        <div class="result-section">
+        <div id="result-section">
           <div>
             <div>生成<ruby>结<rp>（</rp><rt>jié</rt><rp>）</rp></ruby>果</div>
-            <pre class="code-container result-container" id="result-container">
+            <pre class="code-container" id="result-container">
               <button class="copy-button nf nf-fa-copy" id="copy-button" onclick="copy(resultEle.innerText)"></button>
-              <div class="font result" id="result"></div>
+              <div class="font" id="result-ele"></div>
             </pre>
           </div>
         </div>
