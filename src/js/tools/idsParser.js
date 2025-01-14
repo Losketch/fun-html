@@ -635,12 +635,12 @@ const input = document.getElementById('input');
 const parseButton = document.getElementById('parse');
 const copyButton = document.getElementById('copy-button');
 const codeBlock = document.getElementById('json-code');
-const inputerContainer = document.querySelector('.inputer-container');
+const inputerContainer = document.getElementById('inputer-container');
 const errorRes = document.getElementById('error');
 const idsSvgContainer = document.getElementById('ids-svg-container');
 
 function handleInput(e) {
-  if (e.target.classList.contains('inputer-container')) return;
+  if (e.target.id === 'inputer-container') return;
   if (e.target.classList.contains('placeholder')) return;
   if (e.type === 'touchend') {
     e.preventDefault();
@@ -672,34 +672,20 @@ copyButton.addEventListener('click', () => {
 parseButton.addEventListener('click', () => {
   const inputValue = input.value;
 
-  window.parent.postMessage(
-    {
-      type: 'fetchUrl',
-      url: `http://zu.zi.tools/${inputValue}.svg`,
-    },
-    '*'
-  );
   idsSvgContainer.style.display = 'flex';
   idsSvgContainer.innerHTML = '正在生成 SVG……';
 
-  window.addEventListener('message', function messageHandler(event) {
-    if (!event.data.type.startsWith('fetch')) return;
-    console.log(event.data);
-
-    switch (event.data.type) {
-      case 'fetchRes':
-        idsSvgContainer.innerHTML = event.data.data;
-        break;
-      case 'fetchResponseErrorStatus':
-        idsSvgContainer.innerHTML = `<span style="text-align: center;">请求失败，状态码：${event.data.state}</span>`;
-        break;
-      case 'fetchError':
-        idsSvgContainer.innerHTML = `<span style="text-align: center;">Fetch API 报错：${event.data.error}</span>`;
-        break;
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', `http://zu.zi.tools/${inputValue}.svg`, true);
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      const data = xhr.responseText;
+      idsSvgContainer.innerHTML = data;
+    } else if (xhr.readyState === 4 && xhr.status !== 200) {
+      idsSvgContainer.innerHTML = `请求失败，状态码：${xhr.status}。`;
     }
-
-    window.removeEventListener('message', messageHandler);
-  });
+  };
+  xhr.send();
 
   errorRes.style.display = 'none';
   let jsonObject;
