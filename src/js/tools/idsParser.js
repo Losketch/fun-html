@@ -704,11 +704,11 @@ parseButton.addEventListener('click', () => {
       case 'fetchRes':
         idsSvgContainer.innerHTML = event.data.data;
         break;
-      case 'featchResponseErrorState':
-        idsSvgContainer.innerHTML = `请求失败，状态码：${event.data.state}`;
+      case 'fetchResponseErrorStatus':
+        idsSvgContainer.innerHTML = `<span style="text-align: center;">请求失败，状态码：${event.data.state}</span>`;
         break;
       case 'fetchError':
-        idsSvgContainer.innerHTML = `Fetch API 报错：${event.data.error}`;
+        idsSvgContainer.innerHTML = `<span style="text-align: center;">Fetch API 报错：${event.data.error}</span>`;
         break;
     }
 
