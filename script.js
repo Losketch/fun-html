@@ -8,6 +8,8 @@ const toggleNavButton = document.getElementById('toggle-nav-button');
 const titleH1 = document.getElementById('title-h1');
 let currentActiveMenu = 'home';
 
+class StatusError extends Error {}
+
 function animateContent() {
   content.style.transition = 'none';
   content.style.transform = 'translateY(20px)';
@@ -95,11 +97,7 @@ window.addEventListener('message', (event) => {
       fetch(event.data.url)
         .then((response) => {
           if (!response.ok) {
-            event.source.postMessage(
-              { type: 'featchResponseErrorState', state: response.state },
-              '*'
-            );
-            throw new Error(`${response.state}`);
+            throw new StatusError(`${response.status} ${response.statusText}`);
           }
           return response.text();
         })
@@ -107,6 +105,13 @@ window.addEventListener('message', (event) => {
           event.source.postMessage({ type: 'fetchRes', data: data }, '*');
         })
         .catch((error) => {
+          if (error instanceof StatusError) {
+            event.source.postMessage(
+              { type: 'fetchResponseErrorStatus', state: error.message },
+              '*'
+            );
+            return;
+          }
           event.source.postMessage(
             { type: 'fetchError', error: error },
             '*'
