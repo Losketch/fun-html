@@ -672,20 +672,6 @@ copyButton.addEventListener('click', () => {
 parseButton.addEventListener('click', () => {
   const inputValue = input.value;
 
-  errorRes.style.display = 'none';
-  let jsonObject;
-  try {
-    jsonObject = idsToObj(input.value);
-  } catch (e) {
-    try {
-      e.show(errorRes);
-    } catch (err) {
-      alert(e.stack);
-    }
-    errorRes.style.display = 'block';
-    return;
-  }
-
   window.parent.postMessage(
     {
       type: 'fetchUrl',
@@ -714,6 +700,20 @@ parseButton.addEventListener('click', () => {
 
     window.removeEventListener('message', messageHandler);
   });
+
+  errorRes.style.display = 'none';
+  let jsonObject;
+  try {
+    jsonObject = idsToObj(input.value);
+  } catch (e) {
+    try {
+      e.show(errorRes);
+    } catch (err) {
+      alert(e.stack);
+    }
+    errorRes.style.display = 'block';
+    return;
+  }
 
   const jsonString = JSON.stringify(jsonObject, null, 2);
 
