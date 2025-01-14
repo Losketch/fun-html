@@ -41,6 +41,7 @@ String.prototype.toArray = function () {
 
 function changeEndIndex(a, b, targetEndIndex) {
   let found = false;
+  if (b.hasOwnProperty('endIndex')) b.endIndex = Math.max(b.endIndex, targetEndIndex);
 
   function traverse(obj, parentStack = []) {
     if (obj === b) {
@@ -371,28 +372,28 @@ function idsToObj(string) {
         inSurroundTag = true;
         lastSurroundTagIndex = charIndex + 1;
         curStructure.surroundTag = '';
-        curStructure.mainEndIndex++;
+        change_end_index(res, curStructure, ++curStructure.mainEndIndex);
       }
 
       if (char === '⿻' && string[charIndex + 1] === '[') {
         inOverlapTag = true;
         lastOverlapTagIndex = charIndex + 1;
         curStructure.overlapTag = '';
-        curStructure.mainEndIndex++;
+        change_end_index(res, curStructure, ++curStructure.mainEndIndex);
       }
 
       if (char === '㇯' && string[charIndex + 1] === '[') {
         inSubtractionTag = true;
         lastSubtractionTagIndex = charIndex + 1;
         curStructure.subtractionTag = '';
-        curStructure.mainEndIndex++;
+        change_end_index(res, curStructure, ++curStructure.mainEndIndex);
       }
 
       if (char === '🔄' && string[charIndex + 1] === '[') {
         inReplacementTag = true;
         lastReplacementTagIndex = charIndex + 1;
         curStructure.replacementTag = '';
-        curStructure.mainEndIndex++;
+        change_end_index(res, curStructure, ++curStructure.mainEndIndex);
       }
     } else {
       thisIdcHaveBeenPassedParametersCount++;
