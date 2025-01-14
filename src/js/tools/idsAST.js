@@ -39,6 +39,40 @@ String.prototype.toArray = function () {
   return arr;
 };
 
+function changeEndIndex(a, b, targetEndIndex) {
+  let found = false;
+
+  function traverse(obj, parentStack = []) {
+    if (obj === b) {
+      found = true;
+
+      for (let parent of parentStack) {
+        if (parent.hasOwnProperty('endIndex')) {
+          parent.endIndex = Math.max(parent.endIndex, targetEndIndex);
+        }
+      }
+      return;
+    }
+
+    if (typeof obj === 'object' && obj !== null) {
+      for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          parentStack.push(obj);
+          traverse(obj[key], parentStack);
+
+          parentStack.pop();
+        }
+      }
+    }
+  }
+
+  traverse(a);
+
+  if (!found) {
+    console.warn('对象 b 不在对象 a 中。');
+  }
+}
+
 Object.defineProperty(String.prototype, 'codePointLength', {
   get() {
     let len = 0;
@@ -130,7 +164,7 @@ function idsToObj(string) {
           targetStructure.singleZiGlyphFormSelector = '';
         }
         targetStructure.singleZiGlyphFormSelector += char;
-        targetStructure.endIndex++;
+        changeEndIndex(res, targetStructure, ++targetStructure.endIndex);
         if (
           charIndex === string.length - 1 &&
           !singleZiGlyphFormSelectorReg.test(
@@ -197,6 +231,8 @@ function idsToObj(string) {
 
     if (inSurroundTag) {
       curStructure.surroundTag += char;
+      if (char !== '[') curStructure.mainEndIndex++;
+      changeEndIndex(res, curStructure, curStructure.mainEndIndex);
       if (char === ']') {
         if (!numberTagReg.test(curStructure.surroundTag))
           throw new IdsError(
@@ -208,6 +244,8 @@ function idsToObj(string) {
       }
     } else if (inSubtractionTag) {
       curStructure.subtractionTag += char;
+      if (char !== '[') curStructure.mainEndIndex++;
+      changeEndIndex(res, curStructure, curStructure.mainEndIndex);
       if (char === ']') {
         if (!numberTagReg.test(curStructure.subtractionTag))
           throw new IdsError(
@@ -219,6 +257,8 @@ function idsToObj(string) {
       }
     } else if (inReplacementTag) {
       curStructure.replacementTag += char;
+      if (char !== '[') curStructure.mainEndIndex++;
+      changeEndIndex(res, curStructure, curStructure.mainEndIndex);
       if (char === ']') {
         if (!numberTagReg.test(curStructure.replacementTag))
           throw new IdsError(
@@ -230,6 +270,8 @@ function idsToObj(string) {
       }
     } else if (inOverlapTag) {
       curStructure.overlapTag += char;
+      if (char !== '[') curStructure.mainEndIndex++;
+      changeEndIndex(res, curStructure, curStructure.mainEndIndex);
       if (char === ']') {
         if (!overlapTagReg.test(curStructure.overlapTag))
           throw new IdsError(
@@ -253,7 +295,7 @@ function idsToObj(string) {
     } else if (inStrokeSequence) {
       if (!curStructure.structure) {
         curStructure.strokeSequence += char;
-        curStructure.endIndex++;
+        changeEndIndex(res, curStructure, ++curStructure.endIndex);
         if (char === ')') {
           inStrokeSequence = false;
           curStructure.strokeSequence = strokeSequenceToObj(
@@ -265,7 +307,7 @@ function idsToObj(string) {
         const targetStructure =
           curStructure.structure[thisIdcHaveBeenPassedParametersCount - 1];
         targetStructure.strokeSequence += char;
-        targetStructure.endIndex++;
+        changeEndIndex(res, targetStructure, ++targetStructure.endIndex);
         if (char === ')') {
           inStrokeSequence = false;
           targetStructure.strokeSequence = strokeSequenceToObj(
@@ -304,6 +346,9 @@ function idsToObj(string) {
       curStructure.type = 'IDS';
       curStructure.idc = char;
       curStructure.index = charIndex;
+      curStructure.endIndex = charIndex;
+      curStructure.mainEndIndex = charIndex;
+      changeEndIndex(res, curStructure, charIndex);
 
       if (unaryIdc.has(char)) {
         thisIdcArity = 1;
@@ -326,24 +371,28 @@ function idsToObj(string) {
         inSurroundTag = true;
         lastSurroundTagIndex = charIndex + 1;
         curStructure.surroundTag = '';
+        curStructure.mainEndIndex++;
       }
 
       if (char === '⿻' && string[charIndex + 1] === '[') {
         inOverlapTag = true;
         lastOverlapTagIndex = charIndex + 1;
         curStructure.overlapTag = '';
+        curStructure.mainEndIndex++;
       }
 
       if (char === '㇯' && string[charIndex + 1] === '[') {
         inSubtractionTag = true;
         lastSubtractionTagIndex = charIndex + 1;
         curStructure.subtractionTag = '';
+        curStructure.mainEndIndex++;
       }
 
       if (char === '🔄' && string[charIndex + 1] === '[') {
         inReplacementTag = true;
         lastReplacementTagIndex = charIndex + 1;
         curStructure.replacementTag = '';
+        curStructure.mainEndIndex++;
       }
     } else {
       thisIdcHaveBeenPassedParametersCount++;
@@ -371,6 +420,7 @@ function idsToObj(string) {
           curStructure.index = charIndex;
           curStructure.endIndex = charIndex;
           curStructure.strokeSequence = '#';
+          changeEndIndex(res, curStructure, charIndex);
           continue;
         }
         const targetStructure =
@@ -379,6 +429,7 @@ function idsToObj(string) {
         targetStructure.index = charIndex;
         targetStructure.endIndex = charIndex;
         targetStructure.strokeSequence = '#';
+        changeEndIndex(res, targetStructure, charIndex);
         continue;
       }
 
@@ -401,6 +452,7 @@ function idsToObj(string) {
       targetStructure.index = charIndex;
       targetStructure.endIndex = charIndex;
       targetStructure.zi = char;
+      changeEndIndex(res, targetStructure, charIndex);
       inSingleZiGlyphFormSelector = true;
     }
   }
@@ -540,7 +592,8 @@ function checkObj(prevObj, data) {
     if (Object.keys(data).length === 0) {
       const idc = prevObj.idc;
       const index = prevObj.index;
-      const endIndex = getEndIndex(prevObj);
+      const endIndex = prevObj.endIndex;
+      const mainEndIndex = prevObj.mainEndIndex;
       throw new IdsError(
         `“${idc}”期望传递${getIdcArity(
           idc
@@ -549,8 +602,8 @@ function checkObj(prevObj, data) {
         )}个。`,
         index,
         1,
-        index + 1,
-        endIndex - index
+        mainEndIndex + 1,
+        endIndex - mainEndIndex
       );
     }
     for (let key in data) {
@@ -563,18 +616,6 @@ function countNonemptyObjects(arr) {
   return arr.filter((obj) => Object.keys(obj).length !== 0).length;
 }
 
-function getEndIndex(obj, result = []) {
-  for (let key in obj) {
-    if (typeof obj[key] === 'object') {
-      getEndIndex(obj[key], result);
-    }
-    if (key === 'index' || key === 'endIndex') {
-      result.push(obj[key]);
-    }
-  }
-  return Math.max(...result);
-}
-
 function moveStructureToEnd(data) {
   if (Array.isArray(data)) {
     return data.map((item) => moveStructureToEnd(item));
@@ -584,8 +625,6 @@ function moveStructureToEnd(data) {
       keys.splice(keys.indexOf('structure'), 1);
       keys.push('structure');
     }
-    if (keys.includes('index')) keys.splice(keys.indexOf('index'), 1);
-    if (keys.includes('endIndex')) keys.splice(keys.indexOf('endIndex'), 1);
 
     const newObject = {};
     for (let key of keys) {
