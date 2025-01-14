@@ -93,30 +93,6 @@ window.addEventListener('message', (event) => {
       break;
     case 'clearMainContentHeight':
       mainContent.style.removeProperty('height');
-    case 'fetchUrl':
-      fetch(event.data.url)
-        .then((response) => {
-          if (!response.ok) {
-            throw new StatusError(`${response.status} ${response.statusText}`);
-          }
-          return response.text();
-        })
-        .then((data) => {
-          event.source.postMessage({ type: 'fetchRes', data: data }, '*');
-        })
-        .catch((error) => {
-          if (error instanceof StatusError) {
-            event.source.postMessage(
-              { type: 'fetchResponseErrorStatus', state: error.message },
-              '*'
-            );
-            return;
-          }
-          event.source.postMessage(
-            { type: 'fetchError', error: error },
-            '*'
-          );
-        });
   }
 });
 
