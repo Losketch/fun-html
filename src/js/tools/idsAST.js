@@ -500,6 +500,7 @@ function strokeSequenceToObj(strokeSequence, index = 0) {
 
     if (inCrossingTag && number.has(char)) {
       curUnit.crossing += char;
+      curUnit.endIndex++;
     } else if (inCurve) {
       if (char !== 'a' && char !== 'b' && char !== 'c' && char !== 'd')
         throw new IdsError(
@@ -510,6 +511,7 @@ function strokeSequenceToObj(strokeSequence, index = 0) {
           1
         );
       curUnit.stroke += char;
+      curUnit.endIndex++;
       inCurve = false;
     } else if (strokes.has(char)) {
       if (curUnit !== null) {
@@ -528,12 +530,18 @@ function strokeSequenceToObj(strokeSequence, index = 0) {
       if (nextIsReverseStroke) {
         curUnit.reverseStroke = true;
         nextIsReverseStroke = false;
+        curUnit.index = charIndex + index + 1;
+        curUnit.endIndex = charIndex + index + 2;
       }
       if (char === 'Q') {
         inCurve = true;
         curUnit.stroke = 'Q';
       } else {
         curUnit.stroke = char;
+      }
+      if (!curUnit.hasOwnProperty('index')) {
+        curUnit.index = charIndex + index + 2;
+        curUnit.endIndex = charIndex + index + 2;
       }
     } else if (char === 'x') {
       if (curUnit === null)
@@ -545,12 +553,14 @@ function strokeSequenceToObj(strokeSequence, index = 0) {
         throw new IdsError(`笔画交叉标记重复使用。`, index + charIndex + 2);
       inCrossingTag = true;
       curUnit.crossing = '';
+      curUnit.endIndex++;
     } else if (char === 'b') {
       if (curUnit === null)
         throw new IdsError(`笔画撕开标记未指定目标。`, index + charIndex + 2);
       if (curUnit.break)
         throw new IdsError(`笔画撕开标记重复使用。`, index + charIndex + 2);
       curUnit.break = true;
+      curUnit.endIndex++;
     } else if (char === '-') {
       if (nextIsReverseStroke)
         throw new IdsError(`逆运笔标记重复使用。`, index + charIndex + 2);
