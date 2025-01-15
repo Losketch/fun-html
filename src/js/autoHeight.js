@@ -11,7 +11,7 @@
       textarea.style.height = (textarea.scrollHeight) + 'px';
     });
 
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && !textarea.readOnly) {
+    if (navigator.userAgentData.mobile && !textarea.readOnly) {
       originalViewportContent = viewport ? viewport.getAttribute('content') : '';
 
       textarea.addEventListener('input', () => {
