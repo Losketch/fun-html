@@ -248,9 +248,9 @@ function resetRule(rule) {
   updateRule();
 }
 
-function setRule() {
+async function setRule() {
   const ruleReg = /B\d+\/S\d+\/C\d+/;
-  const rule = prompt(
+  const rule = await prompt(
     '输入规则（格式（正则）：B\\d+/S\\d+/C\\d+）\n默认B3/S23/C2'
   );
   if (rule === null) return;
@@ -258,7 +258,7 @@ function setRule() {
     alert('非法规则');
     return;
   }
-  if (confirm('警告：这将会重置网格，是否设置规则？')) {
+  if (await confirm('警告：这将会重置网格，是否设置规则？')) {
     reset();
     resetRule(rule);
     bitLen = BigInt((typeCount - 1).toString(2).length);
@@ -293,7 +293,7 @@ function updateCount() {
   generationsInp.value = generationsCount;
 }
 
-exportBtn.onclick = () => {
+exportBtn.onclick = async () => {
   data = new Uint8Array([
     Math.ceil((+birth.join('')).toString(16).length / 2),
     ...intToArray(+birth.join('')),
@@ -308,11 +308,11 @@ exportBtn.onclick = () => {
   const blob = new Blob([data], { type: 'application/octet-stream' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  const fileName = prompt(
+  const fileName = await prompt(
     '请输入文件名（无后缀名）（点击取消则使用默认文件名）'
   );
   a.href = url;
-  a.download = fileName === '' ? 'data.bin' : fileName + '.bin';
+  a.download = fileName === null ? 'data.bin' : fileName + '.bin';
   a.click();
 };
 
@@ -321,9 +321,9 @@ importInp.onchange = (event) => {
   if (selectedFile) {
     let reader = new FileReader();
 
-    reader.onload = () => {
+    reader.onload = async () => {
       try {
-        if (confirm('警告：这将会重置网格，是否导入？')) {
+        if (await confirm('警告：这将会重置网格，是否导入？')) {
           data = new Uint8Array(reader.result);
           let mainInfo = [];
           let generation;
@@ -378,8 +378,8 @@ generationsInp.oninput = (e) => {
   updateCount();
 };
 
-jumpBtn.onclick = () => {
-  _generationsCount = prompt('输入要跳转的代的编号');
+jumpBtn.onclick = async () => {
+  _generationsCount = await prompt('输入要跳转的代的编号');
   if (_generationsCount === null) return;
   if (isNaN(_generationsCount) || _generationsCount === '') {
     alert('代的编号必须是数字');
@@ -394,8 +394,8 @@ jumpBtn.onclick = () => {
   updateCount();
 };
 
-stateBtn.onclick = () => {
-  const sta = prompt(
+stateBtn.onclick = async () => {
+  const sta = await prompt(
     '点击细胞时后胞变成的状态\n输入状态（留空则使用切换模式，0为擦除模式）'
   );
   if (sta === null) return;
@@ -419,8 +419,8 @@ stateBtn.onclick = () => {
   updateFillState();
 };
 
-gridSizeBtn.onclick = () => {
-  const sz = prompt('输入网格大小');
+gridSizeBtn.onclick = async () => {
+  const sz = await prompt('输入网格大小');
   if (sz === null) return;
   if (isNaN(sz)) {
     alert('网格大小必须为数字');
@@ -434,7 +434,7 @@ gridSizeBtn.onclick = () => {
     alert('网格大小不能超过100');
     return;
   }
-  if (confirm('警告：这将会重置网格，是否重设网格大小？')) {
+  if (await confirm('警告：这将会重置网格，是否重设网格大小？')) {
     size = +sz;
     gridSideLen = wh / size;
     count = size ** 2;
@@ -445,8 +445,8 @@ gridSizeBtn.onclick = () => {
   }
 };
 
-gapBtn.onclick = () => {
-  let gp = prompt('输入迭代间隔(ms)');
+gapBtn.onclick = async () => {
+  let gp = await prompt('输入迭代间隔(ms)');
   if (isNaN(gp)) {
     alert('迭代间隔必须为数字');
     return;

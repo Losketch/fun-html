@@ -93,6 +93,9 @@ window.addEventListener('message', (event) => {
       break;
     case 'clearMainContentHeight':
       mainContent.style.removeProperty('height');
+      break
+    case 'alert':
+      window.alert(event.data.message);
   }
 });
 

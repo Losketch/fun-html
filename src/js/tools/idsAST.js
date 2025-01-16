@@ -742,11 +742,8 @@ parseButton.addEventListener('click', () => {
   try {
     jsonObject = idsToObj(input.value);
   } catch (e) {
-    try {
-      e.show(errorRes);
-    } catch (err) {
-      alert(e.stack);
-    }
+    if (!(e instanceof IdsError)) throw e;
+    e.show(errorRes);
     errorRes.style.display = 'block';
     return;
   }
