@@ -5,12 +5,21 @@ const italic = document.getElementById('italic');
 let boldOn = false;
 let italicOn = false;
 
-const addFontFeatureSettingsButton = document.getElementById('add-font-feature-settings-button');
-const addFontFeatureSettingsDialog = document.getElementById('add-font-feature-settings-dialog');
-const addedFontFeatureSettingsContainer = document.getElementById('added-font-feature-settings-container');
-const addFontFeatureSettingsName = addFontFeatureSettingsDialog.querySelector('#name');
-const addFontFeatureSettingsAvailability = addFontFeatureSettingsDialog.querySelector('#availability-input');
-const addFontFeatureSettingsSubmit = addFontFeatureSettingsDialog.querySelector('#submit');
+const addFontFeatureSettingsButton = document.getElementById(
+  'add-font-feature-settings-button'
+);
+const addFontFeatureSettingsDialog = document.getElementById(
+  'add-font-feature-settings-dialog'
+);
+const addedFontFeatureSettingsContainer = document.getElementById(
+  'added-font-feature-settings-container'
+);
+const addFontFeatureSettingsName =
+  addFontFeatureSettingsDialog.querySelector('#name');
+const addFontFeatureSettingsAvailability =
+  addFontFeatureSettingsDialog.querySelector('#availability-input');
+const addFontFeatureSettingsSubmit =
+  addFontFeatureSettingsDialog.querySelector('#submit');
 const addedFontFeatureSettings = new Set();
 const addedFontFeatureSettingsName = new Set();
 
@@ -18,7 +27,6 @@ const container = document.getElementById('sortable-list-container');
 const fontUploadInput = document.getElementById('font-upload');
 const uploadButton = document.getElementById('upload-button');
 let itemsOrder = [];
-
 
 bold.addEventListener('click', () => {
   boldOn = boldOn ? false : true;
@@ -34,7 +42,7 @@ function clearText() {
   input.value = '';
   input.dispatchEvent(new Event('input'));
   input.dispatchEvent(new Event('blur'));
-  window.parent.postMessage({ type: 'clearMainContentHeight'}, '*');
+  window.parent.postMessage({ type: 'clearMainContentHeight' }, '*');
 }
 
 function changUrl(url) {
@@ -62,7 +70,9 @@ function addFontFeatureSetting(name, availability) {
     return;
   }
   if (!validFontFeatureSettings.has(name)) {
-    alert('该字体特征设置无效，请参见 https://learn.microsoft.com/zh-cn/typography/opentype/spec/featurelist 中定义的有效字体特征设置。');
+    alert(
+      '该字体特征设置无效，请参见 https://learn.microsoft.com/zh-cn/typography/opentype/spec/featurelist 中定义的有效字体特征设置。'
+    );
     return;
   }
 
@@ -72,13 +82,19 @@ function addFontFeatureSetting(name, availability) {
   addedFontFeatureSettingsName.add(name);
   updateEleFontFeatureSettings();
 
-  const fontFeatureSettingEle = add(addedFontFeatureSettingsContainer, `
+  const fontFeatureSettingEle = add(
+    addedFontFeatureSettingsContainer,
+    `
     ${name}
-    <label class="md-switch"><input type="checkbox" ${availability ? 'checked' : ''}><span class="track"><span class="thumb"></span></span></label>
+    <label class="md-switch"><input type="checkbox" ${
+      availability ? 'checked' : ''
+    }><span class="track"><span class="thumb"></span></span></label>
     <button class="rem-button nf nf-cod-remove"></button>
-  `)
-  
-  const fontFeatureSettingAvailabilityEle = fontFeatureSettingEle.querySelector('input');
+  `
+  );
+
+  const fontFeatureSettingAvailabilityEle =
+    fontFeatureSettingEle.querySelector('input');
   fontFeatureSettingAvailabilityEle.addEventListener('change', () => {
     fontFeatureSetting.availability = fontFeatureSettingAvailabilityEle.checked;
     updateEleFontFeatureSettings();
@@ -94,10 +110,12 @@ function addFontFeatureSetting(name, availability) {
 }
 
 function updateEleFontFeatureSettings() {
-  input.style.fontFeatureSettings = [...addedFontFeatureSettings].map((fontFeatureSetting) => {
-    const { name, availability } = fontFeatureSetting;
-    return `"${name}" ${availability ? 'on' : 'off'}`
-  }).join(', ');
+  input.style.fontFeatureSettings = [...addedFontFeatureSettings]
+    .map((fontFeatureSetting) => {
+      const { name, availability } = fontFeatureSetting;
+      return `"${name}" ${availability ? 'on' : 'off'}`;
+    })
+    .join(', ');
 }
 
 addFontFeatureSettingsButton.addEventListener('click', () => {
@@ -105,7 +123,9 @@ addFontFeatureSettingsButton.addEventListener('click', () => {
     event.preventDefault();
   }
   document.body.addEventListener('wheel', preventScroll, { passive: false });
-  document.body.addEventListener('touchmove', preventScroll, { passive: false });
+  document.body.addEventListener('touchmove', preventScroll, {
+    passive: false,
+  });
   addFontFeatureSettingsDialog.addEventListener('close', () => {
     document.body.removeEventListener('wheel', preventScroll);
     document.body.removeEventListener('touchmove', preventScroll);
@@ -163,9 +183,11 @@ fontUploadInput.addEventListener('change', function (event) {
   const file = event.target.files[0];
   if (file) {
     const allowedExtensions = ['.otf', '.ttf', '.woff', '.woff2'];
-    const fileExtension = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
+    const fileExtension = file.name
+      .slice(file.name.lastIndexOf('.'))
+      .toLowerCase();
     if (!allowedExtensions.includes(fileExtension)) {
-      alert('仅支持上传 .otf、.ttf、.woff、.woff2 格式的字体文件');
+      alert('仅支持上传 .otf、.ttf、.woff、.woff2 格式的字体文件。');
       return;
     }
 
@@ -210,7 +232,7 @@ function insertItem(text, index, fontObjectURL) {
   moveDownButton.className = 'move-down';
   moveDownButton.textContent = '↓';
   newItem.appendChild(moveDownButton);
-  
+
   const deleteButton = document.createElement('button');
   deleteButton.className = 'rem-button nf nf-cod-remove';
   newItem.appendChild(deleteButton);
@@ -246,29 +268,33 @@ function updateInputFont() {
   const items = Array.from(container.children);
 
   const existingFontFaces = document.querySelectorAll('style[data-font-faces]');
-  existingFontFaces.forEach(style => style.remove());
+  existingFontFaces.forEach((style) => style.remove());
 
-  const fontFaceRules = items.map((item, index) => {
-    const fontUrl = item.getAttribute('data-font-url');
-    const fontName = item.querySelector('span').textContent;
+  const fontFaceRules = items
+    .map((item, index) => {
+      const fontUrl = item.getAttribute('data-font-url');
+      const fontName = item.querySelector('span').textContent;
 
-    if (fontUrl) {
-      return `
+      if (fontUrl) {
+        return `
         @font-face {
           font-family: '${fontName}';
           src: url('${fontUrl}');
         }
       `;
-    }
-    return '';
-  }).join('');
+      }
+      return '';
+    })
+    .join('');
 
   const styleElement = document.createElement('style');
   styleElement.setAttribute('data-font-faces', 'true');
   styleElement.textContent = fontFaceRules;
   document.head.appendChild(styleElement);
 
-  const fontFamilyList = items.map(item => `'${item.querySelector('span').textContent}'`).join(', ');
+  const fontFamilyList = items
+    .map((item) => `'${item.querySelector('span').textContent}'`)
+    .join(', ');
   input.style.fontFamily = fontFamilyList;
 }
 
@@ -306,9 +332,14 @@ function applyFlipAnimation(element, deltaX, deltaY) {
 
 function updateOrderArray(item, targetItem) {
   const itemIndex = itemsOrder.indexOf(item.querySelector('span').textContent);
-  const targetIndex = itemsOrder.indexOf(targetItem.querySelector('span').textContent);
+  const targetIndex = itemsOrder.indexOf(
+    targetItem.querySelector('span').textContent
+  );
 
-  [itemsOrder[itemIndex], itemsOrder[targetIndex]] = [itemsOrder[targetIndex], itemsOrder[itemIndex]];
+  [itemsOrder[itemIndex], itemsOrder[targetIndex]] = [
+    itemsOrder[targetIndex],
+    itemsOrder[itemIndex],
+  ];
 }
 
 function updateButtonStates() {
@@ -333,130 +364,134 @@ function updateButtonStates() {
 }
 
 const validFontFeatureSettings = new Set([
-    "aalt",
-    "abvf",
-    "abvm",
-    "abvs",
-    "afrc",
-    "akhn",
-    "apkn",
-    "blwf",
-    "blwm",
-    "blws",
-    "calt",
-    "case",
-    "ccmp",
-    "cfar",
-    "chws",
-    "cjct",
-    "clig",
-    "cpct",
-    "cpsp",
-    "cswh",
-    "curs",
-    ...new Array(99).fill().map((_, i) => `cv${(i + 1).toString().padStart(2, '0')}`),
-    "c2pc",
-    "c2sc",
-    "dist",
-    "dlig",
-    "dnom",
-    "dtls",
-    "expt",
-    "falt",
-    "fin2",
-    "fin3",
-    "fina",
-    "flac",
-    "frac",
-    "fwid",
-    "half",
-    "haln",
-    "halt",
-    "hist",
-    "hkna",
-    "hlig",
-    "hngl",
-    "hojo",
-    "hwid",
-    "init",
-    "isol",
-    "ital",
-    "jalt",
-    "jp78",
-    "jp83",
-    "jp90",
-    "jp04",
-    "kern",
-    "lfbd",
-    "liga",
-    "ljmo",
-    "lnum",
-    "locl",
-    "ltra",
-    "ltrm",
-    "mark",
-    "med2",
-    "medi",
-    "mgrk",
-    "mkmk",
-    "mset",
-    "nalt",
-    "nlck",
-    "nukt",
-    "numr",
-    "onum",
-    "opbd",
-    "ordn",
-    "ornm",
-    "palt",
-    "pcap",
-    "pkna",
-    "pnum",
-    "pref",
-    "pres",
-    "pstf",
-    "psts",
-    "pwid",
-    "qwid",
-    "rand",
-    "rclt",
-    "rkrf",
-    "rlig",
-    "rphf",
-    "rtbd",
-    "rtla",
-    "rtlm",
-    "ruby",
-    "rvrn",
-    "salt",
-    "sinf",
-    "size",
-    "smcp",
-    "smpl",
-    ...new Array(20).fill().map((_, i) => `ss${(i + 1).toString().padStart(2, '0')}`),
-    "ssty",
-    "stch",
-    "subs",
-    "sups",
-    "swsh",
-    "titl",
-    "tjmo",
-    "tnam",
-    "tnum",
-    "trad",
-    "twid",
-    "unic",
-    "valt",
-    "vapk",
-    "vatu",
-    "vchw",
-    "vert",
-    "vhal",
-    "vjmo",
-    "vkna",
-    "vkrn",
-    "vpal",
-    "vrt2",
-    "vrtr",
-    "zero"
+  'aalt',
+  'abvf',
+  'abvm',
+  'abvs',
+  'afrc',
+  'akhn',
+  'apkn',
+  'blwf',
+  'blwm',
+  'blws',
+  'calt',
+  'case',
+  'ccmp',
+  'cfar',
+  'chws',
+  'cjct',
+  'clig',
+  'cpct',
+  'cpsp',
+  'cswh',
+  'curs',
+  ...new Array(99)
+    .fill()
+    .map((_, i) => `cv${(i + 1).toString().padStart(2, '0')}`),
+  'c2pc',
+  'c2sc',
+  'dist',
+  'dlig',
+  'dnom',
+  'dtls',
+  'expt',
+  'falt',
+  'fin2',
+  'fin3',
+  'fina',
+  'flac',
+  'frac',
+  'fwid',
+  'half',
+  'haln',
+  'halt',
+  'hist',
+  'hkna',
+  'hlig',
+  'hngl',
+  'hojo',
+  'hwid',
+  'init',
+  'isol',
+  'ital',
+  'jalt',
+  'jp78',
+  'jp83',
+  'jp90',
+  'jp04',
+  'kern',
+  'lfbd',
+  'liga',
+  'ljmo',
+  'lnum',
+  'locl',
+  'ltra',
+  'ltrm',
+  'mark',
+  'med2',
+  'medi',
+  'mgrk',
+  'mkmk',
+  'mset',
+  'nalt',
+  'nlck',
+  'nukt',
+  'numr',
+  'onum',
+  'opbd',
+  'ordn',
+  'ornm',
+  'palt',
+  'pcap',
+  'pkna',
+  'pnum',
+  'pref',
+  'pres',
+  'pstf',
+  'psts',
+  'pwid',
+  'qwid',
+  'rand',
+  'rclt',
+  'rkrf',
+  'rlig',
+  'rphf',
+  'rtbd',
+  'rtla',
+  'rtlm',
+  'ruby',
+  'rvrn',
+  'salt',
+  'sinf',
+  'size',
+  'smcp',
+  'smpl',
+  ...new Array(20)
+    .fill()
+    .map((_, i) => `ss${(i + 1).toString().padStart(2, '0')}`),
+  'ssty',
+  'stch',
+  'subs',
+  'sups',
+  'swsh',
+  'titl',
+  'tjmo',
+  'tnam',
+  'tnum',
+  'trad',
+  'twid',
+  'unic',
+  'valt',
+  'vapk',
+  'vatu',
+  'vchw',
+  'vert',
+  'vhal',
+  'vjmo',
+  'vkna',
+  'vkrn',
+  'vpal',
+  'vrt2',
+  'vrtr',
+  'zero',
 ]);
