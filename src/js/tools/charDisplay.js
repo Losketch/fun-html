@@ -37,6 +37,10 @@ function clearText() {
   window.parent.postMessage({ type: 'clearMainContentHeight'}, '*');
 }
 
+function changUrl(url) {
+  window.parent.postMessage({ type: 'changeUrl', url }, '*');
+}
+
 function add(ele, content) {
   const div = document.createElement('div');
   div.innerHTML = content;
