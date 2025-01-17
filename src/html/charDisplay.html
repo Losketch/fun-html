@@ -39,42 +39,32 @@
           </button>
         </div>
 
-        <div class="options-container">
+        <div class="options-container" id="other-options">
           其他设置：
           粗体<label class="md-switch"><input type="checkbox" id="bold"><span class="track"><span class="thumb"></span></span></label>
           斜体<label class="md-switch"><input type="checkbox" id="italic"><span class="track"><span class="thumb"></span></span></label>
         </div>
-        <div class="select-container multi" id="select-feature-settings">
-          <div class="select">
-            <div class="select-content">
-              <span class="cur-select" data-default-text="字体特征设置">字体特征设置</span>
-              <span class="nf nf-fa-angle_down"></span>
-            </div>
-            <input type="text" class="filter" placeholder="过滤">
-          </div>
-          <div class="opts-list">
-            <div data-select="liga" class="opt">连字（liga）</div>
-            <div data-select="dlig" class="opt">花体字符（dlig）</div>
-            <div data-select="hlig" class="opt">历史连字（hlig）</div>
-            <div data-select="clig" class="opt">上下文连字（clig）</div>
-            <div data-select="tnum" class="opt">表格数字（tnum）</div>
-            <div data-select="onum" class="opt">旧式数字（onum）</div>
-            <div data-select="pnum" class="opt">比例数字（pnum）</div>
-            <div data-select="lnum" class="opt">线性数字（lnum）</div>
-            <div data-select="calt" class="opt">上下文替代（calt）</div>
-            <div data-select="hist" class="opt">历史替代（hist）</div>
-            <div data-select="kern" class="opt">字距调整（kern）</div>
-            <div data-select="mark" class="opt">标记（mark）</div>
-            <div data-select="mkmk" class="opt">标记标记（mkmk）</div>
-            <div data-select="rlig" class="opt">必需连字（rlig）</div>
-            <div data-select="salt" class="opt">样式替代（salt）</div>
-          </div>
-        </div>
 
-        <div class="material-input-container">
-          <input type="text" id="custom-select-feature-settings"></input>
-          <label for="custom-select-feature-settings">自定义字体特征设置</label>
+        <button id="add-font-feature-settings-button">添加字体特征设置</button>
+        <dialog id="add-font-feature-settings-dialog">
+          <div class="material-input-container">
+            <input type="text" id="name">
+            <label for="name">字体特征设置名称</label>
+          </div>
+          <div id="availability-and-submit">
+            <div id="availability">
+              启用<label class="md-switch" id="availability-switch"><input type="checkbox" id="availability-input"><span class="track"><span class="thumb"></span></span></label>
+            </div>
+            <button id="submit" class="no-ripple">提交</button>
+          </div>
+        </dialog>
+        <div id="added-font-feature-settings-container"></div>
+
+        <div id="file-upload-container">
+          <input type="file" id="font-upload" accept=".otf,.ttf,.woff,.woff2" />
+          <button id="upload-button">上传字体文件</button>
         </div>
+        <div id="sortable-list-container" style="display: none;"></div>
       </div>
 
       <div>
@@ -83,8 +73,8 @@
         
         <h2>注意事项</h2>
         <ul>
-          <li>自定义字体特征设置由逗号分隔，如：pnum,rlig,cv07。其中不能有空格等字符。</li>
           <li style="word-break: break-all;">关于全部的字体特征设置，请见 https://learn.microsoft.com/zh-cn/typography/opentype/spec/featurelist。</li>
+          <li style="word-break: break-all;">字体特征设置仅对 otf 字体生效，若要查看某个 otf 字体支持的字体特征设置，请使用 https://wakamaifondue.com，选择文件后查看 Layout features。</li>
           <li>如果字符未编码，它将显示为方<ruby>框<rp>（</rp><rt>kuàng</rt><rp>）</rp></ruby>围着的字符。</li>
           <li>从第 4 平面到第 13 平面的字符都未编码，因此此软件会显示这些字符所在的平面。</li>
         </ul>
