@@ -28,10 +28,10 @@
       <div>
         <div id="count-section">
           <div class="material-input-container">
-            <input type="number" id="count-input" value="100" oninput="updateSliderValue()">
+            <input type="number" id="count-input" value="100">
             <label for="count-input">数量</label>
           </div>
-          <input type="range" id="count-slider" min="1" max="1000" value="100" oninput="updateInputValue()">
+          <input type="range" id="count-slider" min="1" max="1000" value="100">
         </div>
 
         <div id="checkbox-section">
@@ -60,7 +60,7 @@
             <label>
               <input type="checkbox" id="include-custom-interval"> 包含自定义区间
             </label>
-            <button onclick="add(customIntervalContainer, getAddEle())" class="add-button nf nf-cod-add"></button>
+            <button id="add-custom-interval" class="add-button nf nf-cod-add"></button>
             <div id="custom-interval-container"></div>
           </div>
           <div id="unicode-block-section">
@@ -423,15 +423,15 @@
         </div>
 
         <div id="action-buttons" class="options-container">
-          <button onclick="generateRandomCharacters()" class="primary-button">生成随机字符</button>
-          <button onclick="clearText()" class="secondary-button">清空</button>
+          <button id="gen" class="primary-button">生成随机字符</button>
+          <button id="clear-text" class="secondary-button">清空</button>
         </div>
 
         <div id="result-section">
           <div>
             <div>生成<ruby>结<rp>（</rp><rt>jié</rt><rp>）</rp></ruby>果</div>
             <pre class="code-container" id="result-container">
-              <button class="copy-button nf nf-fa-copy" id="copy-button" onclick="copy(resultEle.innerText)"></button>
+              <button class="copy-button nf nf-fa-copy" id="copy-button"></button>
               <div class="font" id="result-ele"></div>
             </pre>
           </div>

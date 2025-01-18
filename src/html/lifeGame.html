@@ -22,21 +22,21 @@
       <div id="containerDiv"><span id="container"></span></div>
       <div class="more-gap">
         <div class="inner-div">
-          <button id="prev" onclick="prevGeneration()" class="nf nf-fa-step_backward">&emsp;上一代</button>
-          <button id="next" onclick="nextGeneration()" class="nf nf-fa-step_forward">&emsp;下一代</button>
-          <button id="start" onclick="clearInterval(timerId);timerId = setInterval(nextGeneration, gap);toggleDisable(true, prev, next, jump, this)" class="nf nf-fa-play">&emsp;开始</button>
-          <button id="pause" onclick="clearInterval(timerId);toggleDisable(false, prev, next, start, jump)" class="nf nf-fa-pause">&emsp;暂停</button>
-          <button onclick="generationsCount++;updateCount();saveGeneration();" class="nf nf-md-content_save">&emsp;保存为一代</button>
+          <button id="prev" class="nf nf-fa-step_backward">&emsp;上一代</button>
+          <button id="next" class="nf nf-fa-step_forward">&emsp;下一代</button>
+          <button id="start" class="nf nf-fa-play">&emsp;开始</button>
+          <button id="pause" class="nf nf-fa-pause">&emsp;暂停</button>
+          <button id="save" class="nf nf-md-content_save">&emsp;保存为一代</button>
         </div>
         <div class="inner-div">
            <div id="generationsCountShow">当前代：0/0</div>
            <input type="range" min="0" max="0" value="0" style="width: 50%;" id="generations">
            <button id="jump" class="nf nf-md-arrow_collapse_down">&emsp;跳转代</button>
-           <button onclick="generations=[];generationsMap={};generationsCount=0;maxGenerationsCount=0;updateCount()" class="nf nf-md-delete_forever">&emsp;清空代</button>
+           <button id="clear-generations" class="nf nf-md-delete_forever">&emsp;清空代</button>
         </div>
         <div class="inner-div">
-          <button onclick="reset()" class="nf nf-fa-arrow_rotate_right">&emsp;重置</button>
-          <button onclick="setRule()" class="nf nf-seti-config">&emsp;设置规则</button>
+          <button id="reset" class="nf nf-fa-arrow_rotate_right">&emsp;重置</button>
+          <button id="set-rule" class="nf nf-seti-config">&emsp;设置规则</button>
           <span id="rule" class="nf nf-md-format_list_numbered"></span>
         </div>
         <input id="import" type="file" style="display: none;">

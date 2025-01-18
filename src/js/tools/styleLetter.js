@@ -42,26 +42,26 @@ const toStyleLetter = (str, style) => {
       return char === 0x3f4
         ? '𝚹'
         : char === 0x2202
-        ? '𝛛'
-        : char === 0x3f5
-        ? '𝛜'
-        : char === 0x3d1
-        ? '𝛝'
-        : char === 0x3f0
-        ? '𝛞'
-        : char === 0x3d5
-        ? '𝛟'
-        : char === 0x3f1
-        ? '𝛠'
-        : char === 0x3d6
-        ? '𝛡'
-        : char === 0x2207
-        ? '𝛁'
-        : char === 0x3dc
-        ? '𝟊'
-        : char === 0x3dd
-        ? '𝟋'
-        : String.fromCodePoint(char);
+          ? '𝛛'
+          : char === 0x3f5
+            ? '𝛜'
+            : char === 0x3d1
+              ? '𝛝'
+              : char === 0x3f0
+                ? '𝛞'
+                : char === 0x3d5
+                  ? '𝛟'
+                  : char === 0x3f1
+                    ? '𝛠'
+                    : char === 0x3d6
+                      ? '𝛡'
+                      : char === 0x2207
+                        ? '𝛁'
+                        : char === 0x3dc
+                          ? '𝟊'
+                          : char === 0x3dd
+                            ? '𝟋'
+                            : String.fromCodePoint(char);
     },
     italic: (char) => {
       if (0x41 <= char && char <= 0x5a) {
@@ -84,26 +84,26 @@ const toStyleLetter = (str, style) => {
       return char === 0x3f4
         ? '𝛳'
         : char === 0x2202
-        ? '𝜕'
-        : char === 0x3f5
-        ? '𝜖'
-        : char === 0x3d1
-        ? '𝜗'
-        : char === 0x3f0
-        ? '𝜘'
-        : char === 0x3d5
-        ? '𝜙'
-        : char === 0x3f1
-        ? '𝜚'
-        : char === 0x3d6
-        ? '𝜛'
-        : char === 0x2207
-        ? '𝛻'
-        : char === 0x131
-        ? '𝚤'
-        : char === 0x237
-        ? '𝚥'
-        : String.fromCodePoint(char);
+          ? '𝜕'
+          : char === 0x3f5
+            ? '𝜖'
+            : char === 0x3d1
+              ? '𝜗'
+              : char === 0x3f0
+                ? '𝜘'
+                : char === 0x3d5
+                  ? '𝜙'
+                  : char === 0x3f1
+                    ? '𝜚'
+                    : char === 0x3d6
+                      ? '𝜛'
+                      : char === 0x2207
+                        ? '𝛻'
+                        : char === 0x131
+                          ? '𝚤'
+                          : char === 0x237
+                            ? '𝚥'
+                            : String.fromCodePoint(char);
     },
     boldItalic: (char) => {
       if (0x41 <= char && char <= 0x5a) {
@@ -124,22 +124,22 @@ const toStyleLetter = (str, style) => {
       return char === 0x3f4
         ? '𝜭'
         : char === 0x2202
-        ? '𝝏'
-        : char === 0x3f5
-        ? '𝝐'
-        : char === 0x3d1
-        ? '𝝑'
-        : char === 0x3f0
-        ? '𝝒'
-        : char === 0x3d5
-        ? '𝝓'
-        : char === 0x3f1
-        ? '𝝔'
-        : char === 0x3d6
-        ? '𝝕'
-        : char === 0x2207
-        ? '𝜵'
-        : String.fromCodePoint(char);
+          ? '𝝏'
+          : char === 0x3f5
+            ? '𝝐'
+            : char === 0x3d1
+              ? '𝝑'
+              : char === 0x3f0
+                ? '𝝒'
+                : char === 0x3d5
+                  ? '𝝓'
+                  : char === 0x3f1
+                    ? '𝝔'
+                    : char === 0x3d6
+                      ? '𝝕'
+                      : char === 0x2207
+                        ? '𝜵'
+                        : String.fromCodePoint(char);
     },
     script: (char) => {
       if (0x41 <= char && char <= 0x5a) {
@@ -147,20 +147,20 @@ const toStyleLetter = (str, style) => {
           char === 0x42
             ? 0x212c
             : char === 0x45
-            ? 0x2130
-            : char === 0x46
-            ? 0x2131
-            : char === 0x48
-            ? 0x210b
-            : char === 0x49
-            ? 0x2110
-            : char === 0x4c
-            ? 0x2112
-            : char === 0x4d
-            ? 0x2133
-            : char === 0x52
-            ? 0x211b
-            : char + 0x1d49c - 0x41
+              ? 0x2130
+              : char === 0x46
+                ? 0x2131
+                : char === 0x48
+                  ? 0x210b
+                  : char === 0x49
+                    ? 0x2110
+                    : char === 0x4c
+                      ? 0x2112
+                      : char === 0x4d
+                        ? 0x2133
+                        : char === 0x52
+                          ? 0x211b
+                          : char + 0x1d49c - 0x41
         );
       }
       if (0x61 <= char && char <= 0x7a) {
@@ -168,10 +168,10 @@ const toStyleLetter = (str, style) => {
           char === 0x65
             ? 0x212f
             : char === 0x67
-            ? 0x210a
-            : char === 0x6f
-            ? 0x2134
-            : char + 0x1d4b6 - 0x61
+              ? 0x210a
+              : char === 0x6f
+                ? 0x2134
+                : char + 0x1d4b6 - 0x61
         );
       }
       return String.fromCodePoint(char);
@@ -191,14 +191,14 @@ const toStyleLetter = (str, style) => {
           char === 0x43
             ? 0x212d
             : char === 0x48
-            ? 0x210c
-            : char === 0x49
-            ? 0x2111
-            : char === 0x52
-            ? 0x211c
-            : char === 0x5a
-            ? 0x2128
-            : char + 0x1d504 - 0x41
+              ? 0x210c
+              : char === 0x49
+                ? 0x2111
+                : char === 0x52
+                  ? 0x211c
+                  : char === 0x5a
+                    ? 0x2128
+                    : char + 0x1d504 - 0x41
         );
       }
       if (0x61 <= char && char <= 0x7a) {
@@ -212,18 +212,18 @@ const toStyleLetter = (str, style) => {
           char === 0x43
             ? 0x2102
             : char === 0x48
-            ? 0x210d
-            : char === 0x4e
-            ? 0x2115
-            : char === 0x50
-            ? 0x2119
-            : char === 0x51
-            ? 0x211a
-            : char === 0x52
-            ? 0x211d
-            : char === 0x5a
-            ? 0x2124
-            : char + 0x1d538 - 0x41
+              ? 0x210d
+              : char === 0x4e
+                ? 0x2115
+                : char === 0x50
+                  ? 0x2119
+                  : char === 0x51
+                    ? 0x211a
+                    : char === 0x52
+                      ? 0x211d
+                      : char === 0x5a
+                        ? 0x2124
+                        : char + 0x1d538 - 0x41
         );
       }
       if (0x61 <= char && char <= 0x7a) {
@@ -277,22 +277,22 @@ const toStyleLetter = (str, style) => {
       return char === 0x3f4
         ? '𝝧'
         : char === 0x2202
-        ? '𝞉'
-        : char === 0x3f5
-        ? '𝞊'
-        : char === 0x3d1
-        ? '𝞋'
-        : char === 0x3f0
-        ? '𝞌'
-        : char === 0x3d5
-        ? '𝞍'
-        : char === 0x3f1
-        ? '𝞎'
-        : char === 0x3d6
-        ? '𝞏'
-        : char === 0x2207
-        ? '𝝯'
-        : String.fromCodePoint(char);
+          ? '𝞉'
+          : char === 0x3f5
+            ? '𝞊'
+            : char === 0x3d1
+              ? '𝞋'
+              : char === 0x3f0
+                ? '𝞌'
+                : char === 0x3d5
+                  ? '𝞍'
+                  : char === 0x3f1
+                    ? '𝞎'
+                    : char === 0x3d6
+                      ? '𝞏'
+                      : char === 0x2207
+                        ? '𝝯'
+                        : String.fromCodePoint(char);
     },
     sansSerifItalic: (char) => {
       if (0x41 <= char && char <= 0x5a) {
@@ -322,22 +322,22 @@ const toStyleLetter = (str, style) => {
       return char === 0x3f4
         ? '𝞡'
         : char === 0x2202
-        ? '𝟃'
-        : char === 0x3f5
-        ? '𝟄'
-        : char === 0x3d1
-        ? '𝟅'
-        : char === 0x3f0
-        ? '𝟆'
-        : char === 0x3d5
-        ? '𝟇'
-        : char === 0x3f1
-        ? '𝟈'
-        : char === 0x3d6
-        ? '𝟉'
-        : char === 0x2207
-        ? '𝞩'
-        : String.fromCodePoint(char);
+          ? '𝟃'
+          : char === 0x3f5
+            ? '𝟄'
+            : char === 0x3d1
+              ? '𝟅'
+              : char === 0x3f0
+                ? '𝟆'
+                : char === 0x3d5
+                  ? '𝟇'
+                  : char === 0x3f1
+                    ? '𝟈'
+                    : char === 0x3d6
+                      ? '𝟉'
+                      : char === 0x2207
+                        ? '𝞩'
+                        : String.fromCodePoint(char);
     },
     monospace: (char) => {
       if (0x41 <= char && char <= 0x5a) {
@@ -384,11 +384,10 @@ const toStyleLetter = (str, style) => {
       }
       return String.fromCodePoint(char);
     },
-    square: (char) => {
-      return 0x41 <= char && char <= 0x5a
+    square: (char) =>
+      0x41 <= char && char <= 0x5a
         ? String.fromCodePoint(char + 0x1f0ef)
-        : String.fromCodePoint(char);
-    },
+        : String.fromCodePoint(char),
     superscript: (char) => {
       if (0x30 <= char && char <= 0x39) {
         return '⁰¹²³⁴⁵⁶⁷⁸⁹'[char - 0x30];
@@ -402,14 +401,14 @@ const toStyleLetter = (str, style) => {
       return char == 0x2b
         ? '⁺'
         : char == 0x2d
-        ? '⁻'
-        : char == 0x3d
-        ? '⁼'
-        : char == 0x28
-        ? '⁽'
-        : char == 0x29
-        ? '⁾'
-        : String.fromCodePoint(char);
+          ? '⁻'
+          : char == 0x3d
+            ? '⁼'
+            : char == 0x28
+              ? '⁽'
+              : char == 0x29
+                ? '⁾'
+                : String.fromCodePoint(char);
     },
     subscript: (char) => {
       if (0x30 <= char && char <= 0x39) {
@@ -421,21 +420,19 @@ const toStyleLetter = (str, style) => {
       return char == 0x2b
         ? '₊'
         : char == 0x2d
-        ? '₋'
-        : char == 0x3d
-        ? '₌'
-        : char == 0x28
-        ? '₍'
-        : char == 0x29
-        ? '₎'
-        : String.fromCodePoint(char);
-    },
+          ? '₋'
+          : char == 0x3d
+            ? '₌'
+            : char == 0x28
+              ? '₍'
+              : char == 0x29
+                ? '₎'
+                : String.fromCodePoint(char);
+    }
   };
   return str
     .toArray()
-    .map((char) => {
-      return styleMap[style](char);
-    })
+    .map((char) => styleMap[style](char))
     .join('');
 };
 

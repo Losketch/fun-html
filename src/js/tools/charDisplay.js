@@ -1,4 +1,5 @@
 const input = document.getElementById('text');
+const clear = document.getElementById('clear');
 
 const bold = document.getElementById('bold');
 const italic = document.getElementById('italic');
@@ -36,6 +37,10 @@ const fontUploadInput = document.getElementById('font-upload');
 const uploadButton = document.getElementById('upload-button');
 let itemsOrder = [];
 
+document.querySelectorAll('a').forEach((a) => {
+  a.addEventListener('click', () => changeUrl(a.textContent));
+});
+
 bold.addEventListener('click', () => {
   boldOn = boldOn ? false : true;
   input.style.fontWeight = boldOn ? 'bold' : 'normal';
@@ -46,14 +51,14 @@ italic.addEventListener('click', () => {
   input.style.fontStyle = italicOn ? 'italic' : 'normal';
 });
 
-function clearText() {
+clear.addEventListener('click', () => {
   input.value = '';
   input.dispatchEvent(new Event('input'));
   input.dispatchEvent(new Event('blur'));
   window.parent.postMessage({ type: 'clearMainContentHeight' }, '*');
-}
+});
 
-function changUrl(url) {
+function changeUrl(url) {
   window.parent.postMessage({ type: 'changeUrl', url }, '*');
 }
 
@@ -72,7 +77,7 @@ function remove(ele) {
   ele.remove();
 }
 
-function updateDialogMargin(dialog, open=true) {
+function updateDialogMargin(dialog, open = true) {
   if (open) {
     const computedMargin = getComputedStyle(dialog).marginLeft;
     if (parseInt(computedMargin) < 16) {
@@ -87,13 +92,15 @@ function updateDialogMargin(dialog, open=true) {
 
 function addFontFeatureSetting(name, availability) {
   if (addedFontFeatureSettingsName.has(name)) {
-    addFontFeatureSettingsErrorText.innerText = "该字体特征设置已添加过了，不可再次添加。"
+    addFontFeatureSettingsErrorText.innerText =
+      '该字体特征设置已添加过了，不可再次添加。';
     addFontFeatureSettingsErrorDialog.showModal();
     updateDialogMargin(addFontFeatureSettingsErrorDialog);
     return false;
   }
   if (!validFontFeatureSettings.has(name)) {
-    addFontFeatureSettingsErrorText.innerHTML = '该字体特征设置无效，请参见 <a href="" onclick="changUrl(this.textContent)">https://learn.microsoft.com/zh-cn/typography/opentype/spec/featurelist</a> 中定义的有效字体特征设置。'
+    addFontFeatureSettingsErrorText.innerHTML =
+      '该字体特征设置无效，请参见 <a href="" onclick="changeUrl(this.textContent)">https://learn.microsoft.com/zh-cn/typography/opentype/spec/featurelist</a> 中定义的有效字体特征设置。';
     addFontFeatureSettingsErrorDialog.showModal();
     updateDialogMargin(addFontFeatureSettingsErrorDialog);
     return false;
@@ -154,17 +161,17 @@ function isFontFileByMagicNumber(file) {
 
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.onload = () => {
+    reader.addEventListener('load', () => {
       const buffer = new Uint8Array(reader.result);
       const hex = Array.from(buffer.slice(0, 4))
-        .map(byte => byte.toString(16).padStart(2, '0'))
+        .map((byte) => byte.toString(16).padStart(2, '0'))
         .join('')
         .toUpperCase();
 
-      console.log(hex)
+      console.log(hex);
       resolve(Object.values(fontMagicNumbers).includes(hex));
-    };
-    reader.onerror = reject;
+    });
+    reader.addEventListener('error', reject);
     reader.readAsArrayBuffer(file.slice(0, 4)); // 读取前4个字节
   });
 }
@@ -185,7 +192,7 @@ addFontFeatureSettingsButton.addEventListener('click', () => {
   }
   document.body.addEventListener('wheel', preventScroll, { passive: false });
   document.body.addEventListener('touchmove', preventScroll, {
-    passive: false,
+    passive: false
   });
   addFontFeatureSettingsDialog.addEventListener('close', () => {
     document.body.removeEventListener('wheel', preventScroll);
@@ -207,13 +214,13 @@ addFontFeatureSettingsSubmit.addEventListener('click', () => {
   const success = addFontFeatureSetting(name, availability);
   if (success) {
     addFontFeatureSettingsDialog.close();
-    updateDialogMargin(addFontFeatureSettingsDialog, false)
-  };
+    updateDialogMargin(addFontFeatureSettingsDialog, false);
+  }
 });
 
 updateListVisibility();
 
-container.addEventListener('click', function (event) {
+container.addEventListener('click', (event) => {
   const button = event.target;
   const item = button.closest('.sortable-item');
 
@@ -242,18 +249,18 @@ container.addEventListener('click', function (event) {
   }
 });
 
-uploadButton.addEventListener('click', function () {
+uploadButton.addEventListener('click', () => {
   fontUploadInput.click();
 });
 
-fontUploadInput.addEventListener('change', async function (event) {
+fontUploadInput.addEventListener('change', async (event) => {
   const file = event.target.files[0];
   if (file) {
     const isFont = await isFontFileByMagicNumber(file);
     if (!isFont) {
       alert('仅支持上传 .otf、.ttf、.woff、.woff2、.eot 格式的字体文件。');
       return;
-    };
+    }
 
     const fontObjectURL = URL.createObjectURL(file);
 
@@ -333,7 +340,7 @@ function updateInputFont() {
   existingFontFaces.forEach((style) => style.remove());
 
   const fontFaceRules = items
-    .map((item, index) => {
+    .map((item) => {
       const fontUrl = item.dataset.fontUrl;
       const fontName = item.querySelector('span').textContent;
 
@@ -361,9 +368,9 @@ function updateInputFont() {
 }
 
 function flipAnimation(item, targetItem, direction) {
-  item.style.zIndex = "1";
-  item.dataset.animating = "true";
-  targetItem.dataset.animating = "true";
+  item.style.zIndex = '1';
+  item.dataset.animating = 'true';
+  targetItem.dataset.animating = 'true';
 
   const firstRectItem = item.getBoundingClientRect();
   const firstRectTarget = targetItem.getBoundingClientRect();
@@ -411,7 +418,7 @@ function updateOrderArray(item, targetItem) {
 
   [itemsOrder[itemIndex], itemsOrder[targetIndex]] = [
     itemsOrder[targetIndex],
-    itemsOrder[itemIndex],
+    itemsOrder[itemIndex]
   ];
 }
 
@@ -566,5 +573,5 @@ const validFontFeatureSettings = new Set([
   'vpal',
   'vrt2',
   'vrtr',
-  'zero',
+  'zero'
 ]);
