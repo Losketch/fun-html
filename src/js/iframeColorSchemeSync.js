@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
   let util = {
     getValue(name) {
@@ -12,7 +12,7 @@
       let style = doc.createElement(tag);
       style.rel = 'stylesheet';
       style.id = id;
-      tag === 'style' ? style.innerHTML = css : style.href = css;
+      tag === 'style' ? (style.innerHTML = css) : (style.href = css);
       doc.head.appendChild(style);
     },
     addThemeColor(color) {
@@ -46,7 +46,10 @@
       util.addThemeColor(util.getValue('origin_theme_color'));
     },
     createDarkStyle() {
-      util.addStyle('dark-mode-style', 'style', `
+      util.addStyle(
+        'dark-mode-style',
+        'style',
+        `
         img, video, canvas {
             filter: invert(1) hue-rotate(180deg);
             fill: unset;
@@ -60,7 +63,8 @@
         .no-invert {
           filter: invert(1) hue-rotate(180deg);
         }
-      `);
+      `
+      );
     },
     toggleDarkMode() {
       window.addEventListener('message', (event) => {

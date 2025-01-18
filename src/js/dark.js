@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
   let util = {
     getValue(name) {
@@ -15,7 +15,7 @@
       let style = doc.createElement(tag);
       style.rel = 'stylesheet';
       style.id = id;
-      tag === 'style' ? style.innerHTML = css : style.href = css;
+      tag === 'style' ? (style.innerHTML = css) : (style.href = css);
       doc.head.appendChild(style);
     },
     addThemeColor(color) {
@@ -45,21 +45,30 @@
     enableDarkMode() {
       this.createDarkStyle();
       util.addThemeColor('#131313');
-      this.mainContent.contentWindow.postMessage({
-        type: 'outterColorSchemeChange',
-        colorScheme: 'dark'
-      }, '*');
+      this.mainContent.contentWindow.postMessage(
+        {
+          type: 'outterColorSchemeChange',
+          colorScheme: 'dark'
+        },
+        '*'
+      );
     },
     disableDarkMode() {
       util.removeElementById('dark-mode-style');
       util.addThemeColor(util.getValue('origin_theme_color'));
-      this.mainContent.contentWindow.postMessage({
-        type: 'outterColorSchemeChange',
-        colorScheme: 'light'
-      }, '*');
+      this.mainContent.contentWindow.postMessage(
+        {
+          type: 'outterColorSchemeChange',
+          colorScheme: 'light'
+        },
+        '*'
+      );
     },
     createDarkStyle() {
-      util.addStyle('dark-mode-style', 'style', `
+      util.addStyle(
+        'dark-mode-style',
+        'style',
+        `
         html {
             filter: invert(1) hue-rotate(180deg);
             scrollbar-color: #454a4d #202324;
@@ -74,7 +83,8 @@
         .no-invert {
           filter: invert(1) hue-rotate(180deg);
         }
-      `);
+      `
+      );
     },
     toggleDarkMode() {
       this.darkModeToggle.addEventListener('change', () => {
@@ -87,12 +97,15 @@
         }
       });
 
-      this.mainContent.addEventListener('load', function() {
-        this.contentWindow.postMessage({
-          type: 'outterColorSchemeChange',
-          colorScheme: util.getValue('dark_mode')
-        }, '*')
-      })
+      this.mainContent.addEventListener('load', function () {
+        this.contentWindow.postMessage(
+          {
+            type: 'outterColorSchemeChange',
+            colorScheme: util.getValue('dark_mode')
+          },
+          '*'
+        );
+      });
 
       if (util.getValue('dark_mode') === 'dark') {
         this.darkModeToggle.checked = true;

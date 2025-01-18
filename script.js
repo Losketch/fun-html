@@ -8,8 +8,6 @@ const toggleNavButton = document.getElementById('toggle-nav-button');
 const titleH1 = document.getElementById('title-h1');
 let currentActiveMenu = 'home';
 
-class StatusError extends Error {}
-
 function animateContent() {
   content.style.transition = 'none';
   content.style.transform = 'translateY(20px)';
@@ -93,7 +91,7 @@ window.addEventListener('message', (event) => {
       break;
     case 'clearMainContentHeight':
       mainContent.style.removeProperty('height');
-      break
+      break;
     case 'changeUrl':
       window.open(event.data.url, '_blank');
   }
