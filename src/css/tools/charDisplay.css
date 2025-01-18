@@ -1,5 +1,5 @@
 #text {
-  line-height: 1.2rem !important;
+  line-height: 1.2rem;
 }
 
 #other-options {
@@ -18,10 +18,14 @@
   margin-top: 8px;
 }
 
-#availability-and-submit {
+#act-opts {
   display: flex;
-  justify-content: space-between;
   overflow: visible;
+  gap: 8px;
+}
+
+#close {
+  margin-left: auto;
 }
 
 #availability {
@@ -62,6 +66,17 @@
 #added-font-feature-settings-container>div>label {
   margin-left: auto;
   margin-right: 8px;
+}
+
+#error-text {
+  text-align: center;
+  word-break: break-all;
+}
+
+#error[open] {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 #file-upload-container {
