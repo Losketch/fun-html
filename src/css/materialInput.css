@@ -7,19 +7,19 @@
   align-items: center;
 }
 
-.material-input-container>:is(input, textarea) {
+.material-input-container > :is(input, textarea) {
   margin: 0;
   width: 100%;
   box-sizing: border-box;
   border: none;
 }
 
-.material-input-container>:is(input, textarea):hover {
+.material-input-container > :is(input, textarea):hover {
   border: none;
   outline: none;
 }
 
-.material-input-container>label {
+.material-input-container > label {
   position: absolute;
   font-size: initial;
   margin: 0;
@@ -28,15 +28,18 @@
   left: 6px;
   top: calc(100% - 3px);
   transform: translateY(-100%);
-  transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+  transition:
+    top 0.3s ease,
+    font-size 0.3s ease,
+    color 0.3s ease;
   cursor: pointer;
 }
 
-.material-input-container>:is(input, textarea):not(:read-only):focus~label {
+.material-input-container > :is(input, textarea):not(:read-only):focus ~ label {
   color: var(--md-sys-color-primary);
 }
 
-.material-input-container>label:is(.focus-label, .keep-top) {
+.material-input-container > label:is(.focus-label, .keep-top) {
   font-size: 0.65rem;
   top: 0;
 }

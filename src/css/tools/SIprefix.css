@@ -14,31 +14,31 @@ td {
 }
 
 th {
-  background-color: #1E88E5;
+  background-color: #1e88e5;
   color: white;
 }
 
 tr:nth-child(even) td {
-  background-color: #EAF2F8;
+  background-color: #eaf2f8;
 }
 
 tr:nth-child(odd) td {
-  background-color: #DDEBF7;
+  background-color: #ddebf7;
 }
 
-tbody>tr:first-child>th:first-child {
+tbody > tr:first-child > th:first-child {
   border-top-left-radius: 10px;
 }
 
-tbody>tr:first-child>th:last-child {
+tbody > tr:first-child > th:last-child {
   border-top-right-radius: 10px;
 }
 
-tbody>tr:last-child>td:first-child {
+tbody > tr:last-child > td:first-child {
   border-bottom-left-radius: 10px;
 }
 
-tbody>tr:last-child>td:last-child {
+tbody > tr:last-child > td:last-child {
   border-bottom-right-radius: 10px;
 }
 
