@@ -116,7 +116,7 @@ const dom = {};
   'include-custom-unicode-blocks',
   'no-repeat',
   'contains-no-undefined-characters'
-].forEach((name) => (dom[name] = document.getElementById(name)));
+].forEach(name => (dom[name] = document.getElementById(name)));
 
 function add(ele, content) {
   const div = document.createElement('div');
@@ -179,7 +179,7 @@ function generateRandomCharacters() {
   }
 
   if (options.includeCustomInterval) {
-    [...customIntervalContainer.children].forEach((chi) => {
+    [...customIntervalContainer.children].forEach(chi => {
       const [inpu, inpu2] = chi.getElementsByTagName('input');
       if (inpu.value && inpu2.value)
         characters = characters.concat(
@@ -195,7 +195,7 @@ function generateRandomCharacters() {
   }
 
   if (options.containsNoUndefinedCharacters) {
-    characters = characters.filter((i) => window.definedCharacterList.has(i));
+    characters = characters.filter(i => window.definedCharacterList.has(i));
   }
 
   let result = '';
@@ -248,11 +248,11 @@ function clearText() {
   resultEle.dispatchEvent(new Event('input'));
 }
 
-selectBlocks.addEventListener('select', (e) => {
+selectBlocks.addEventListener('select', e => {
   const selections = e.detail.select;
   const visibleSelections = e.detail.selectVisible;
-  selectedBlocks = selections.map((selection) =>
-    selection.split(',').map((e) => parseInt(e, 16))
+  selectedBlocks = selections.map(selection =>
+    selection.split(',').map(e => parseInt(e, 16))
   );
 
   customBlocksContainer.innerHTML = '';
@@ -275,7 +275,7 @@ selectBlocks.addEventListener('select', (e) => {
 
 addCustomInterval.addEventListener('click', () => {
   const customIntervalEle = add(customIntervalContainer, getAddEle());
-  customIntervalEle.querySelectorAll('input').forEach((inputEle) => {
+  customIntervalEle.querySelectorAll('input').forEach(inputEle => {
     let lastValidValue = '';
     inputEle.addEventListener('input', () => {
       if (!validCode.test(inputEle.value)) {

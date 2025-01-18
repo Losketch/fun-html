@@ -12,7 +12,7 @@
 
     if (callback) store[data.id] = callback;
     else
-      return new Promise((resolve) => {
+      return new Promise(resolve => {
         store[data.id] = resolve;
       });
   };
@@ -47,7 +47,7 @@
 
   window.addEventListener(
     'message',
-    (event) => {
+    event => {
       try {
         var data = JSON.parse(event.data);
       } catch {

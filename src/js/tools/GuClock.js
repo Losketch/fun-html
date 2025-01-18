@@ -57,7 +57,7 @@ start();
 const timeEle = document.getElementById('time');
 timeEle.addEventListener('change', () => {
   isStop = true;
-  setTime(...timeEle.value.split(':').map((e) => +e));
+  setTime(...timeEle.value.split(':').map(e => +e));
   start();
 });
 
@@ -77,10 +77,10 @@ let isNewPath = false;
 
 togglePathButton.addEventListener('click', () => {
   framePath.setAttribute('d', isNewPath ? originalFramePath : newFramePath);
-  handPaths.forEach((handPath) => {
+  handPaths.forEach(handPath => {
     handPath.setAttribute('d', isNewPath ? originalHandPath : newHandPath);
   });
-  hands.forEach((hand) => {
+  hands.forEach(hand => {
     hand.style.height = isNewPath ? '19px' : '13px';
     hand.style.top = isNewPath ? '84px' : '87px';
   });

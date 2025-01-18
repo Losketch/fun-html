@@ -67,7 +67,7 @@
       );
     },
     toggleDarkMode() {
-      window.addEventListener('message', (event) => {
+      window.addEventListener('message', event => {
         if (event.data.type === 'outterColorSchemeChange') {
           if (event.data.colorScheme === 'dark') {
             this.enableDarkMode();
