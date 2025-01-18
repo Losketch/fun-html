@@ -1,12 +1,12 @@
-main>div>div:nth-child(2) {
+main > div > div:nth-child(2) {
   display: block;
 }
 
-main>div>div {
+main > div > div {
   margin-bottom: 16px;
 }
 
-#checkbox-section>label:not(.placeholder) {
+#checkbox-section > label:not(.placeholder) {
   margin-bottom: 8px;
 }
 
@@ -42,8 +42,8 @@ input[class="uni"] {
 }
 
 .add-button {
-  background-color: #90FF90;
-  border: 1px solid #50FF50;
+  background-color: #90ff90;
+  border: 1px solid #50ff50;
   border-radius: 4px;
   height: 20px;
   width: 20px;
@@ -51,8 +51,8 @@ input[class="uni"] {
 }
 
 .rem-button {
-  background-color: #FF9090;
-  border: 1px solid #FF5050;
+  background-color: #ff9090;
+  border: 1px solid #ff5050;
   height: 20px;
   width: 20px;
   border-radius: 4px;
@@ -60,7 +60,7 @@ input[class="uni"] {
 
 button.nf {
   font-size: 1rem;
-} 
+}
 
 #custom-interval-container,
 #custom-blocks-container {
@@ -77,14 +77,14 @@ button.nf {
   overflow: visible;
 }
 
-:is(#custom-interval-container, #custom-blocks-container)>div {
+:is(#custom-interval-container, #custom-blocks-container) > div {
   display: flex;
   width: 100%;
   overflow: visible;
   align-items: center;
 }
 
-#custom-blocks-container>div {
+#custom-blocks-container > div {
   justify-content: space-between;
 }
 
@@ -116,7 +116,7 @@ button.nf {
 }
 
 #result-ele::before {
-  content: '';
+  content: "";
   width: 1.75rem;
   height: 1.75rem;
   float: right;

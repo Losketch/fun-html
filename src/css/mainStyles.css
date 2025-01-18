@@ -1,29 +1,29 @@
 :root {
-  --md-sys-color-primary: #6750A4;
-  --md-sys-color-alpha-primary: #6750A41A;
-  --md-sys-color-on-primary: #FFFFFF;
-  --md-sys-color-primary-container: #EADDFF;
-  --md-sys-color-on-primary-container: #21005D;
-  --md-sys-color-secondary: #625B71;
-  --md-sys-color-on-secondary: #FFFFFF;
-  --md-sys-color-secondary-container: #E8DEF8;
-  --md-sys-color-on-secondary-container: #1D192B;
-  --md-sys-color-surface: #FFFBFE;
-  --md-sys-color-on-surface: #1C1B1F;
-  --md-sys-color-surface-variant: #E7E0EC;
-  --md-sys-color-on-surface-variant: #49454F;
-  --md-sys-color-error: #B3261E;
-  --md-sys-color-on-error: #FFFFFF;
-  --md-sys-color-error-container: #F9DEDC;
-  --md-sys-color-on-error-container: #8C1D18;
-  --md-sys-color-outline: #79747E;
-  --md-sys-color-background: #FFFBFE;
-  --md-sys-color-on-background: #1C1B1F;
+  --md-sys-color-primary: #6750a4;
+  --md-sys-color-alpha-primary: #6750a41a;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #eaddff;
+  --md-sys-color-on-primary-container: #21005d;
+  --md-sys-color-secondary: #625b71;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: #e8def8;
+  --md-sys-color-on-secondary-container: #1d192b;
+  --md-sys-color-surface: #fffbfe;
+  --md-sys-color-on-surface: #1c1b1f;
+  --md-sys-color-surface-variant: #e7e0ec;
+  --md-sys-color-on-surface-variant: #49454f;
+  --md-sys-color-error: #b3261e;
+  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-error-container: #f9dedc;
+  --md-sys-color-on-error-container: #8c1d18;
+  --md-sys-color-outline: #79747e;
+  --md-sys-color-background: #fffbfe;
+  --md-sys-color-on-background: #1c1b1f;
 
-  --md-sys-color-ripple: #FFFFFF80;
-  --md-sys-color-background-text: #0000000F;
-  --md-sys-color-disabled: #F6F0FF;
-  --md-sys-color-on-disabled: #3C2A5C;
+  --md-sys-color-ripple: #ffffff80;
+  --md-sys-color-background-text: #0000000f;
+  --md-sys-color-disabled: #f6f0ff;
+  --md-sys-color-on-disabled: #3c2a5c;
   --md-sys-color-background-text-dark: #00000027;
 }
 
@@ -34,7 +34,6 @@
   transition: filter 0.3s ease;
   -webkit-tap-highlight-color: transparent;
 }
-
 
 .primary-button {
   background-color: var(--md-sys-color-primary);
@@ -87,7 +86,9 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: outline-color 0.5s ease, background-color 0.5s ease;
+  transition:
+    outline-color 0.5s ease,
+    background-color 0.5s ease;
   outline-color: transparent;
 }
 
@@ -134,7 +135,9 @@ dialog {
   border-radius: 8px;
   background-color: var(--md-sys-color-surface);
   color: var(--md-sys-color-on-surface);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    0 1px 2px rgba(0, 0, 0, 0.24);
   overflow: hidden;
   position: fixed;
   margin: 0;
@@ -145,14 +148,14 @@ dialog {
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   background-color: var(--md-sys-color-background);
   color: var(--md-sys-color-on-background);
   margin: 0;
   padding: 0;
 }
 
-body>div {
+body > div {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -181,12 +184,14 @@ main {
   gap: 16px;
 }
 
-main>div,
+main > div,
 .inner-div {
   background-color: var(--md-sys-color-surface);
   border-radius: 12px;
   padding: 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    0 1px 2px rgba(0, 0, 0, 0.24);
   overflow: visible;
 }
 
@@ -203,8 +208,8 @@ main>div,
   gap: 16px;
 }
 
-div>ul,
-div>ul>li {
+div > ul,
+div > ul > li {
   overflow: visible;
 }
 
@@ -218,8 +223,7 @@ textarea {
   resize: none;
   overflow: hidden;
   margin: 0;
-  box-shadow:
-    0 -1px 0 var(--md-sys-color-outline) inset;
+  box-shadow: 0 -1px 0 var(--md-sys-color-outline) inset;
 }
 
 input[type="text"],
@@ -233,8 +237,7 @@ input[type="number"] {
   background-color: transparent;
   color: var(--md-sys-color-on-surface);
   margin: 0;
-  box-shadow:
-    0 -1px 0 var(--md-sys-color-outline) inset;
+  box-shadow: 0 -1px 0 var(--md-sys-color-outline) inset;
   transition: box-shadow 0.3s ease;
 }
 
@@ -248,9 +251,12 @@ input[type="text"]:not(:read-only),
 input[type="number"]:not(:read-only) {
   position: relative;
   border: none;
-  background: linear-gradient(to right,
+  background: linear-gradient(
+      to right,
       var(--md-sys-color-primary) 0%,
-      var(--md-sys-color-primary) 100%) bottom;
+      var(--md-sys-color-primary) 100%
+    )
+    bottom;
   background-color: transparent;
   background-size: 0% 2px;
   background-repeat: no-repeat;
@@ -321,7 +327,11 @@ input[type="range"]::-webkit-slider-thumb {
   border: 1px solid transparent;
   margin-top: -6px;
   box-shadow: 0 0 0 12px rgba(0, 0, 0, 0);
-  border-image: linear-gradient(var(--md-sys-color-primary), var(--md-sys-color-primary)) 0 fill / 8 20 8 0 / 0px 0px 0 100%;
+  border-image: linear-gradient(
+      var(--md-sys-color-primary),
+      var(--md-sys-color-primary)
+    )
+    0 fill / 8 20 8 0 / 0px 0px 0 100%;
 }
 
 input[type="range"]:active::-webkit-slider-thumb,
