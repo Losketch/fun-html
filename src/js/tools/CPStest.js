@@ -16,22 +16,22 @@ function updateCountdown() {
     cancelAnimationFrame(timer);
     clickButton.disabled = true;
     recoverButton.disabled = false;
-    result.innerText = 'CPS: ' + counter/30;
+    result.innerText = 'CPS: ' + counter / 30;
   }
-  clicksElement.innerHTML = '点击数：' + counter
-  countdown = 30 - (Date.now() - startTime)/1000;
+  clicksElement.innerHTML = '点击数：' + counter;
+  countdown = 30 - (Date.now() - startTime) / 1000;
 }
 
-clickButton.onclick = () => counter++;
+clickButton.addEventListener('click', () => counter++);
 
-startButton.onclick = () => {
+startButton.addEventListener('click', () => {
   startTime = Date.now();
   updateCountdown();
   clickButton.disabled = false;
   startButton.disabled = true;
-}
+});
 
-recoverButton.onclick = () => {
+recoverButton.addEventListener('click', () => {
   location.reload();
   recoverButton.disabled = true;
-}
+});

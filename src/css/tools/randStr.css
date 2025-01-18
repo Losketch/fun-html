@@ -70,7 +70,7 @@ button.nf {
   display: none;
   gap: 4px;
   max-height: 300px;
-  overflow: scroll;
+  overflow: scroll !important;
   width: 100%;
   flex-wrap: wrap;
   box-sizing: border-box;

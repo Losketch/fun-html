@@ -19,7 +19,7 @@ Object.defineProperty(String.prototype, 'codePointLength', {
     return len;
   },
   enumerable: false,
-  configurable: false,
+  configurable: false
 });
 
 Array.prototype.removeAll = function (value) {
@@ -37,6 +37,10 @@ const resultEle = document.getElementById('result-ele');
 const customCharEle = document.getElementById('custom-char');
 const slider = document.getElementById('count-slider');
 const countInput = document.getElementById('count-input');
+const copyBtn = document.getElementById('copy-button');
+const clearTextBtn = document.getElementById('clear-text');
+const genBtn = document.getElementById('gen');
+const addCustomInterval = document.getElementById('add-custom-interval');
 const customIntervalContainer = document.getElementById(
   'custom-interval-container'
 );
@@ -52,17 +56,17 @@ const getAddEle = () => {
   return `
     U+
     <div class="material-input-container" style="margin-top: 5px;">
-      <input id="${id}-1" type="text" class="uni" oninput="inspect(this)">
+      <input id="${id}-1" type="text" class="uni">
       <label for="${id}-1" class="placeholder">起始码位</label>
       <span></span>
     </div>
     ~U+
     <div class="material-input-container" style="margin-top: 5px;">
-      <input id="${id}-2" type="text" class="uni" oninput="inspect(this)">
+      <input id="${id}-2" type="text" class="uni">
       <label for="${id}-2" class="placeholder">结束码位</label>
       <span></span>
     </div>
-    <button onclick="remove(this.parentNode)" class="rem-button nf nf-cod-remove"></button>
+    <button class="rem-button nf nf-cod-remove"></button>
   `;
 };
 
@@ -84,9 +88,9 @@ const characterSets = {
   includeExtendedJChinese: rangeArr(0x323b0, 0x3347b),
   includeCompatibleChinese: [
     ...rangeArr(0xf900, 0xfa6d),
-    ...rangeArr(0xfa70, 0xfad9),
+    ...rangeArr(0xfa70, 0xfad9)
   ],
-  includeCompatibleSupplementChinese: rangeArr(0x2f800, 0x2fa1d),
+  includeCompatibleSupplementChinese: rangeArr(0x2f800, 0x2fa1d)
 };
 const dom = {};
 
@@ -111,22 +115,16 @@ const dom = {};
   'include-custom-interval',
   'include-custom-unicode-blocks',
   'no-repeat',
-  'contains-no-undefined-characters',
+  'contains-no-undefined-characters'
 ].forEach((name) => (dom[name] = document.getElementById(name)));
-
-function inspect(ele) {
-  const inputValue = ele.value;
-
-  if (!validCode.test(inputValue)) {
-    ele.value = '';
-  }
-}
 
 function add(ele, content) {
   const div = document.createElement('div');
   div.innerHTML = content;
   ele.appendChild(div);
   ele.style.display = 'flex';
+
+  return div;
 }
 
 function remove(ele) {
@@ -151,16 +149,14 @@ function cancelSelect(targetSelect, targetSelectVisible) {
     new CustomEvent('cancelSelect', {
       detail: {
         targetSelect: targetSelect,
-        targetSelectVisible: targetSelectVisible,
-      },
+        targetSelectVisible: targetSelectVisible
+      }
     })
   );
 }
 
 function kebabToCamel(str) {
-  return str.replace(/-([a-z])/g, function (_, letter) {
-    return letter.toUpperCase();
-  });
+  return str.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
 }
 
 function generateRandomCharacters() {
@@ -221,8 +217,8 @@ function generateRandomCharacters() {
       characters.removeAll(index);
     }
   }
-  resultEle.innerHTML = result;
-  resultEle.dispatchEvent(new Event('input'));
+
+  return result;
 }
 
 function rangeArr(start, end) {
@@ -263,11 +259,43 @@ selectBlocks.addEventListener('select', (e) => {
   customBlocksContainer.style.display = null;
 
   selections.forEach((selection, i) => {
-    add(
+    const customBlockEle = add(
       customBlocksContainer,
       `
-      ${visibleSelections[i]}<button onclick="cancelSelect('${selection}', '${visibleSelections[i]}')" class="rem-button nf nf-cod-remove"></button>
+      ${visibleSelections[i]}<button class="rem-button nf nf-cod-remove"></button>
     `
     );
+    customBlockEle
+      .querySelector('button')
+      .addEventListener('click', () =>
+        cancelSelect(selection, visibleSelections[i])
+      );
   });
+});
+
+addCustomInterval.addEventListener('click', () => {
+  const customIntervalEle = add(customIntervalContainer, getAddEle());
+  customIntervalEle.querySelectorAll('input').forEach((inputEle) => {
+    let lastValidValue = '';
+    inputEle.addEventListener('input', () => {
+      if (!validCode.test(inputEle.value)) {
+        inputEle.value = lastValidValue;
+      } else {
+        lastValidValue = inputEle.value;
+      }
+    });
+  });
+
+  customIntervalEle
+    .querySelector('button')
+    .addEventListener('click', () => remove(customIntervalEle));
+});
+
+countInput.addEventListener('input', updateSliderValue);
+slider.addEventListener('input', updateInputValue);
+copyBtn.addEventListener('click', () => copy(resultEle.innerText));
+clearTextBtn.addEventListener('click', clearText);
+genBtn.addEventListener('click', () => {
+  resultEle.innerHTML = generateRandomCharacters();
+  resultEle.dispatchEvent(new Event('input'));
 });

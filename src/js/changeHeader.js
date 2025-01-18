@@ -1,4 +1,7 @@
-window.parent.postMessage({
-  type: 'changeHeader',
-  text: document.title
-}, '*');
+window.parent.postMessage(
+  {
+    type: 'changeHeader',
+    text: document.title
+  },
+  '*'
+);

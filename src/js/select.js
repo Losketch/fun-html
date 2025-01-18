@@ -1,15 +1,15 @@
-(function() {
+(function () {
   const selectContainers = document.querySelectorAll('.select-container');
   let isComposing = false;
-  
+
   document.addEventListener('compositionstart', () => {
     isComposing = true;
   });
-  
+
   document.addEventListener('compositionend', () => {
     isComposing = false;
   });
-  
+
   for (let selectContainer of selectContainers) {
     const multi = selectContainer.classList.contains('multi');
     const select = selectContainer.querySelector('.select');
@@ -18,7 +18,7 @@
     const options = selectContainer.querySelectorAll('.opt');
     const selectContent = selectContainer.querySelector('.select-content');
     const filter = selectContainer.querySelector('.filter');
-  
+
     select.addEventListener('click', (e) => {
       if (e.target.classList.contains('filter')) return;
       optionsList.classList.add('active');
@@ -29,7 +29,12 @@
       selectContainer.dataset.selected = '[]';
       selectContainer.dataset.selectedVisible = '[]';
       document.addEventListener('click', (e) => {
-        if (select.contains(e.target) || optionsList.contains(e.target) || !optionsList.classList.contains('active')) return;
+        if (
+          select.contains(e.target) ||
+          optionsList.contains(e.target) ||
+          !optionsList.classList.contains('active')
+        )
+          return;
         e.preventDefault();
         optionsList.classList.remove('active');
         const selected = JSON.parse(selectContainer.dataset.selected);
@@ -40,7 +45,10 @@
         }
         selectContainer.dispatchEvent(
           new CustomEvent('select', {
-            detail: { select: selected, selectVisible: JSON.parse(selectContainer.dataset.selectedVisible) },
+            detail: {
+              select: selected,
+              selectVisible: JSON.parse(selectContainer.dataset.selectedVisible)
+            }
           })
         );
         updateOptionsListHeightAndFilterDisplay();
@@ -51,19 +59,31 @@
         option.addEventListener('click', () => {
           option.classList.toggle('selected');
           if (option.classList.contains('selected')) {
-            const selected = new Set(JSON.parse(selectContainer.dataset.selected));
+            const selected = new Set(
+              JSON.parse(selectContainer.dataset.selected)
+            );
             selected.add(option.dataset.select);
             selectContainer.dataset.selected = JSON.stringify([...selected]);
-            const selectedVisible = new Set(JSON.parse(selectContainer.dataset.selectedVisible));
+            const selectedVisible = new Set(
+              JSON.parse(selectContainer.dataset.selectedVisible)
+            );
             selectedVisible.add(option.dataset.visibleSelect);
-            selectContainer.dataset.selectedVisible = JSON.stringify([...selectedVisible]);
+            selectContainer.dataset.selectedVisible = JSON.stringify([
+              ...selectedVisible
+            ]);
           } else {
-            const selected = new Set(JSON.parse(selectContainer.dataset.selected));
+            const selected = new Set(
+              JSON.parse(selectContainer.dataset.selected)
+            );
             selected.delete(option.dataset.select);
             selectContainer.dataset.selected = JSON.stringify([...selected]);
-            const selectedVisible = new Set(JSON.parse(selectContainer.dataset.selectedVisible));
+            const selectedVisible = new Set(
+              JSON.parse(selectContainer.dataset.selectedVisible)
+            );
             selectedVisible.delete(option.dataset.visibleSelect);
-            selectContainer.dataset.selectedVisible = JSON.stringify([...selectedVisible]);
+            selectContainer.dataset.selectedVisible = JSON.stringify([
+              ...selectedVisible
+            ]);
           }
         });
       });
@@ -75,12 +95,17 @@
         const selected = new Set(JSON.parse(selectContainer.dataset.selected));
         selected.delete(targetSelect);
         selectContainer.dataset.selected = JSON.stringify([...selected]);
-        const selectedVisible = new Set(JSON.parse(selectContainer.dataset.selectedVisible));
+        const selectedVisible = new Set(
+          JSON.parse(selectContainer.dataset.selectedVisible)
+        );
         selectedVisible.delete(targetSelectVisible);
-        selectContainer.dataset.selectedVisible = JSON.stringify([...selectedVisible]);
+        selectContainer.dataset.selectedVisible = JSON.stringify([
+          ...selectedVisible
+        ]);
 
         options.forEach((option) => {
-          if (option.dataset.select == targetSelect) option.classList.remove('selected');
+          if (option.dataset.select == targetSelect)
+            option.classList.remove('selected');
         });
 
         if ([...selected].length) {
@@ -91,13 +116,20 @@
 
         selectContainer.dispatchEvent(
           new CustomEvent('select', {
-            detail: { select: JSON.parse(selectContainer.dataset.selected), selectVisible: JSON.parse(selectContainer.dataset.selectedVisible) },
+            detail: {
+              select: JSON.parse(selectContainer.dataset.selected),
+              selectVisible: JSON.parse(selectContainer.dataset.selectedVisible)
+            }
           })
         );
       });
     } else {
       document.addEventListener('click', (e) => {
-        if (select.contains(e.target) || !optionsList.classList.contains('active')) return;
+        if (
+          select.contains(e.target) ||
+          !optionsList.classList.contains('active')
+        )
+          return;
         e.preventDefault();
         optionsList.classList.remove('active');
         updateOptionsListHeightAndFilterDisplay();
@@ -110,7 +142,7 @@
           curSelect.innerHTML = option.dataset.visibleSelect;
           selectContainer.dispatchEvent(
             new CustomEvent('select', {
-              detail: { select: option.dataset.select },
+              detail: { select: option.dataset.select }
             })
           );
           option.classList.add('selected');
@@ -119,7 +151,7 @@
         });
       });
     }
-  
+
     function updateOptionsListHeightAndFilterDisplay() {
       if (!optionsList.classList.contains('active')) {
         optionsList.style.transition = 'height 0.2s ease';
@@ -139,7 +171,7 @@
       optionsList.clientTop;
       optionsList.style.height = `${height}px`;
     }
-  
+
     filter.addEventListener('input', () => {
       if (isComposing) return;
       if (!filter.value) {
@@ -157,7 +189,7 @@
         .forEach((ele) => (ele.style.display = 'block'));
       updateOptionsListHeightAndFilterDisplay();
     });
-  
+
     filter.addEventListener('compositionend', () => {
       setTimeout(() => filter.dispatchEvent(new Event('input')), 0);
     });

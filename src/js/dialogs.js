@@ -28,7 +28,7 @@
         event: 'dialog',
         type: 'confirm',
         id: id++,
-        message: message,
+        message: message
       };
       return processInteractiveDialog(data, callback);
     };
@@ -39,7 +39,7 @@
         type: 'prompt',
         id: id++,
         message: message,
-        value: value || '',
+        value: value || ''
       };
       return processInteractiveDialog(data, callback);
     };
@@ -47,10 +47,10 @@
 
   window.addEventListener(
     'message',
-    function (event) {
+    (event) => {
       try {
         var data = JSON.parse(event.data);
-      } catch (error) {
+      } catch {
         return;
       }
 
@@ -61,19 +61,19 @@
       if (!isIframe) {
         if (data.type == 'alert') alert(data.message);
         else if (data.type == 'confirm') {
-          var data = {
+          data = {
             event: 'dialog',
             type: 'confirm',
             id: data.id,
-            result: confirm(data.message),
+            result: confirm(data.message)
           };
           sendMessage(event.source, data);
         } else if (data.type == 'prompt') {
-          var data = {
+          data = {
             event: 'dialog',
             type: 'prompt',
             id: data.id,
-            result: prompt(data.message, data.value),
+            result: prompt(data.message, data.value)
           };
           sendMessage(event.source, data);
         }

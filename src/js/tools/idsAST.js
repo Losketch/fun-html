@@ -1,23 +1,152 @@
-const idc = new Set(['⿾', '⿿', '⿰', '⿱', '⿴', '⿵', '⿶', '⿷', '⿸', '⿹', '⿺', '⿻', '⿼', '⿽', '㇯', '⿲', '⿳', '🔄']);
-const surroundIdc = new Set(['⿴', '⿵', '⿶', '⿷', '⿸', '⿹', '⿺', '⿼', '⿽']);
+const idc = new Set([
+  '⿾',
+  '⿿',
+  '⿰',
+  '⿱',
+  '⿴',
+  '⿵',
+  '⿶',
+  '⿷',
+  '⿸',
+  '⿹',
+  '⿺',
+  '⿻',
+  '⿼',
+  '⿽',
+  '㇯',
+  '⿲',
+  '⿳',
+  '🔄'
+]);
+const surroundIdc = new Set([
+  '⿴',
+  '⿵',
+  '⿶',
+  '⿷',
+  '⿸',
+  '⿹',
+  '⿺',
+  '⿼',
+  '⿽'
+]);
 
 const unaryIdc = new Set(['⿾', '⿿']);
-const binaryIdc = new Set(['⿰', '⿱', '⿴', '⿵', '⿶', '⿷', '⿸', '⿹', '⿺', '⿻', '⿼', '⿽', '㇯']);
+const binaryIdc = new Set([
+  '⿰',
+  '⿱',
+  '⿴',
+  '⿵',
+  '⿶',
+  '⿷',
+  '⿸',
+  '⿹',
+  '⿺',
+  '⿻',
+  '⿼',
+  '⿽',
+  '㇯'
+]);
 const ternaryIdc = new Set(['⿲', '⿳', '🔄']);
 const number = new Set(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']);
 
 const strokes = new Set([
-  'D', 'H', 'J', 'N', 'P', 'Q', 'S', 'T', 'W', 'Z', 'g', 'w',
-  '◜', '◝', '◞', '◟', '⺄', '㇀', '㇂', '㇄', '㇅', '㇇',
-  '㇈', '㇉', '㇊', '㇋', '㇌', '㇍', '㇎', '㇝', '一',
-  '丨', '丶', '丿', '乀', '乁', '乙', '乚', '乛', '亅',
-  '𠃊', '𠃋', '𠃌', '𠃍', '𠃑', '𠄌', '𠄎']);
+  'D',
+  'H',
+  'J',
+  'N',
+  'P',
+  'Q',
+  'S',
+  'T',
+  'W',
+  'Z',
+  'g',
+  'w',
+  '◜',
+  '◝',
+  '◞',
+  '◟',
+  '⺄',
+  '㇀',
+  '㇂',
+  '㇄',
+  '㇅',
+  '㇇',
+  '㇈',
+  '㇉',
+  '㇊',
+  '㇋',
+  '㇌',
+  '㇍',
+  '㇎',
+  '㇝',
+  '一',
+  '丨',
+  '丶',
+  '丿',
+  '乀',
+  '乁',
+  '乙',
+  '乚',
+  '乛',
+  '亅',
+  '𠃊',
+  '𠃋',
+  '𠃌',
+  '𠃍',
+  '𠃑',
+  '𠄌',
+  '𠄎'
+]);
 
 const glyphFormSelectorChar = new Set([
-  '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.',
-  'B', 'G', 'H', 'J', 'K', 'M', 'P', 'Q', 'S', 'T', 'U', 'V',
-  'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'l', 'm',
-  'n', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']);
+  '0',
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  '.',
+  'B',
+  'G',
+  'H',
+  'J',
+  'K',
+  'M',
+  'P',
+  'Q',
+  'S',
+  'T',
+  'U',
+  'V',
+  'a',
+  'b',
+  'c',
+  'd',
+  'e',
+  'f',
+  'g',
+  'h',
+  'j',
+  'l',
+  'm',
+  'n',
+  'p',
+  'q',
+  'r',
+  's',
+  't',
+  'u',
+  'v',
+  'w',
+  'x',
+  'y',
+  'z'
+]);
 
 const abstractStructureReg =
   /\{(?:\?|\?[0-3])?[\u4e00-\u9fff\u3400-\u4dbf\u{20000}-\u{2a6df}\u{2a700}-\u{2b73a}\u{2b740}-\u{2b81d}\u{2b820}-\u{2cea1}\u{2ceb0}-\u{2ebe0}\u{30000}-\u{3134a}\u{31350}-\u{323af}\u{2ebf0}-\u{2ee5d}\u{323b0}-\u{3347b}][BGHJKMPQSTUV]?\}/u;
@@ -41,14 +170,15 @@ String.prototype.toArray = function () {
 
 function changeEndIndex(a, b, targetEndIndex) {
   let found = false;
-  if (b.hasOwnProperty('endIndex')) b.endIndex = Math.max(b.endIndex, targetEndIndex);
+  if (Object.hasOwnProperty.call(b, 'endIndex'))
+    b.endIndex = Math.max(b.endIndex, targetEndIndex);
 
   function traverse(obj, parentStack = []) {
     if (obj === b) {
       found = true;
 
       for (let parent of parentStack) {
-        if (parent.hasOwnProperty('endIndex')) {
+        if (Object.hasOwnProperty.call(parent, 'endIndex')) {
           parent.endIndex = Math.max(parent.endIndex, targetEndIndex);
         }
       }
@@ -57,7 +187,7 @@ function changeEndIndex(a, b, targetEndIndex) {
 
     if (typeof obj === 'object' && obj !== null) {
       for (let key in obj) {
-        if (obj.hasOwnProperty(key)) {
+        if (Object.hasOwnProperty.call(obj, key)) {
           parentStack.push(obj);
           traverse(obj[key], parentStack);
 
@@ -85,7 +215,7 @@ Object.defineProperty(String.prototype, 'codePointLength', {
     return len;
   },
   enumerable: false,
-  configurable: false,
+  configurable: false
 });
 
 class IdsError extends Error {
@@ -362,7 +492,7 @@ function idsToObj(string) {
       if (!curStructure.structure) {
         curStructure.structure = Array.from(
           {
-            length: thisIdcArity,
+            length: thisIdcArity
           },
           () => ({})
         );
@@ -372,28 +502,28 @@ function idsToObj(string) {
         inSurroundTag = true;
         lastSurroundTagIndex = charIndex + 1;
         curStructure.surroundTag = '';
-        change_end_index(res, curStructure, ++curStructure.mainEndIndex);
+        changeEndIndex(res, curStructure, ++curStructure.mainEndIndex);
       }
 
       if (char === '⿻' && string[charIndex + 1] === '[') {
         inOverlapTag = true;
         lastOverlapTagIndex = charIndex + 1;
         curStructure.overlapTag = '';
-        change_end_index(res, curStructure, ++curStructure.mainEndIndex);
+        changeEndIndex(res, curStructure, ++curStructure.mainEndIndex);
       }
 
       if (char === '㇯' && string[charIndex + 1] === '[') {
         inSubtractionTag = true;
         lastSubtractionTagIndex = charIndex + 1;
         curStructure.subtractionTag = '';
-        change_end_index(res, curStructure, ++curStructure.mainEndIndex);
+        changeEndIndex(res, curStructure, ++curStructure.mainEndIndex);
       }
 
       if (char === '🔄' && string[charIndex + 1] === '[') {
         inReplacementTag = true;
         lastReplacementTagIndex = charIndex + 1;
         curStructure.replacementTag = '';
-        change_end_index(res, curStructure, ++curStructure.mainEndIndex);
+        changeEndIndex(res, curStructure, ++curStructure.mainEndIndex);
       }
     } else {
       thisIdcHaveBeenPassedParametersCount++;
@@ -478,7 +608,7 @@ function idsToObj(string) {
 
 function strokeSequenceToObj(strokeSequence, index = 0) {
   const res = {
-    structure: [],
+    structure: []
   };
   strokeSequence = strokeSequence.toArray();
   strokeSequence = strokeSequence.slice(2, -1);
@@ -539,7 +669,7 @@ function strokeSequenceToObj(strokeSequence, index = 0) {
       } else {
         curUnit.stroke = char;
       }
-      if (!curUnit.hasOwnProperty('index')) {
+      if (!Object.hasOwnProperty.call(curUnit, 'index')) {
         curUnit.index = charIndex + index + 2;
         curUnit.endIndex = charIndex + index + 2;
       }
@@ -727,14 +857,14 @@ parseButton.addEventListener('click', () => {
 
   const xhr = new XMLHttpRequest();
   xhr.open('GET', `http://zu.zi.tools/${inputValue}.svg`, true);
-  xhr.onreadystatechange = () => {
+  xhr.addEventListener('readystatechange', () => {
     if (xhr.readyState === 4 && xhr.status === 200) {
       const data = xhr.responseText;
       idsSvgContainer.innerHTML = data;
     } else if (xhr.readyState === 4 && xhr.status !== 200) {
       idsSvgContainer.innerHTML = `请求失败，状态码：${xhr.status}。`;
     }
-  };
+  });
   xhr.send();
 
   errorRes.style.display = 'none';
@@ -750,7 +880,7 @@ parseButton.addEventListener('click', () => {
 
   const jsonString = JSON.stringify(jsonObject, null, 2);
 
-  highlightedJson = hljs.highlight(jsonString, { language: 'json' });
+  const highlightedJson = hljs.highlight(jsonString, { language: 'json' });
   codeBlock.innerHTML = highlightedJson.value;
   codeBlock.classList.add('hljs');
   codeBlock.classList.add('language-json');

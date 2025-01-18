@@ -10,7 +10,7 @@ function init() {
 
 init();
 
-function getRandom(min, max, threshold=0) {
+function getRandom(min, max, threshold = 0) {
   if (min >= max) {
     throw new Error('最小值必须小于最大值。');
   }
@@ -33,7 +33,7 @@ function getRandom(min, max, threshold=0) {
 class Point {
   #lastDrawTime = null;
 
-  constructor(vxSpan=[-50, 50, 10], vySpan=[-50, 50, 10], r=6) {
+  constructor(vxSpan = [-50, 50, 10], vySpan = [-50, 50, 10], r = 6) {
     this.r = r;
     this.x = getRandom(this.r * 2, cvs.width - this.r);
     this.y = getRandom(this.r * 2, cvs.height - this.r);
@@ -44,18 +44,23 @@ class Point {
   draw() {
     if (this.#lastDrawTime) {
       const deltaTime = (Date.now() - this.#lastDrawTime) / 1000;
-      
+
       let x = this.x + this.vx * deltaTime;
       let y = this.y + this.vy * deltaTime;
-      
+
       if (x <= this.r || x >= cvs.width - this.r) {
         this.vx *= -1;
       }
       if (y <= this.r || y >= cvs.height - this.r) {
         this.vy *= -1;
       }
-      
-      if (x > this.r && x < cvs.width - this.r && y > this.r && y < cvs.height - this.r) {
+
+      if (
+        x > this.r &&
+        x < cvs.width - this.r &&
+        y > this.r &&
+        y < cvs.height - this.r
+      ) {
         this.x = x;
         this.y = y;
       }
@@ -76,11 +81,19 @@ class Point {
 class Graph {
   #stop;
 
-  constructor(vxSpan=[-50, 50, 10], vySpan=[-50, 50, 10], maxDis=300, pointNumber=80, r=6) {
+  constructor(
+    vxSpan = [-50, 50, 10],
+    vySpan = [-50, 50, 10],
+    maxDis = 300,
+    pointNumber = 80,
+    r = 6
+  ) {
     this.maxDis = maxDis;
     this.r = r;
-    this.#stop = false
-    this.points = new Array(pointNumber).fill(0).map(() => new Point(vxSpan, vySpan, r));
+    this.#stop = false;
+    this.points = new Array(pointNumber)
+      .fill(0)
+      .map(() => new Point(vxSpan, vySpan, r));
   }
 
   draw() {
@@ -114,7 +127,7 @@ class Graph {
       }
     }
   }
-  
+
   stop() {
     this.#stop = true;
   }
@@ -136,16 +149,9 @@ const update = document.querySelector('#update');
 
 update.addEventListener('click', () => {
   g.stop();
-  g = new Graph([
-      +vxMin.value,
-      +vxMax.value,
-      +vxThreshold.value
-    ],
-    [
-      +vyMin.value,
-      +vyMax.value,
-      +vyThreshold.value
-    ],
+  g = new Graph(
+    [+vxMin.value, +vxMax.value, +vxThreshold.value],
+    [+vyMin.value, +vyMax.value, +vyThreshold.value],
     +maxLen.value,
     +count.value,
     +pointRadius.value

@@ -2,7 +2,7 @@
   Object.defineProperty(String.prototype, 'codePointLength_', {
     get() {
       let len = 0;
-      for (let i = 0; i < this.length;) {
+      for (let i = 0; i < this.length; ) {
         const codePoint = this.codePointAt(i);
         i += codePoint > 0xffff ? 2 : 1;
         len++;
@@ -14,8 +14,9 @@
   });
 
   const counterContainers = document.querySelectorAll('.counter-container');
-  for (counterContainer of counterContainers) {
-    const input = counterContainer.querySelector('input') ||
+  for (let counterContainer of counterContainers) {
+    const input =
+      counterContainer.querySelector('input') ||
       counterContainer.querySelector('textarea');
     const counter = counterContainer.querySelector('.counter');
     counter.innerText = input.value.codePointLength_.toString();

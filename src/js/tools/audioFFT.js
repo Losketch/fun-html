@@ -34,7 +34,7 @@ seleEle.addEventListener('change', (event) => {
 let isInit = false;
 let dataArray, analyser;
 
-audioEle.onplay = () => {
+audioEle.addEventListener('play', () => {
   if (isInit) {
     return;
   }
@@ -51,7 +51,7 @@ audioEle.onplay = () => {
   dataArray = new Uint8Array(analyser.frequencyBinCount);
 
   isInit = true;
-}
+});
 
 function draw() {
   requestAnimationFrame(draw);
@@ -70,12 +70,12 @@ function draw() {
   const barWidth = width / len / 2;
   for (let i = 0; i < len; i++) {
     const data = dataArray[i];
-    const barHeight = data / 255 * height;
-    const x = i * barWidth + width/2;
-    const x2 = width/2 - (i+1)*barWidth;
+    const barHeight = (data / 255) * height;
+    const x = i * barWidth + width / 2;
+    const x2 = width / 2 - (i + 1) * barWidth;
     let y = height - barHeight;
-    ctx.fillRect(x + spaceWidth/2, y, barWidth - spaceWidth, barHeight);
-    ctx.fillRect(x2 + spaceWidth/2, y, barWidth - spaceWidth, barHeight);
+    ctx.fillRect(x + spaceWidth / 2, y, barWidth - spaceWidth, barHeight);
+    ctx.fillRect(x2 + spaceWidth / 2, y, barWidth - spaceWidth, barHeight);
   }
 }
 draw();
