@@ -146,30 +146,17 @@ function updateEleFontFeatureSettings() {
     .join(', ');
 }
 
-function isFontFileByMagicNumber(file) {
-  const fontMagicNumbers = {
-    ttf: '00010000',
-    otf: '4F54544F',
-    woff: '774F4646',
-    woff2: '774F4632',
-    eot: '504C5020'
-  };
+function isFontFile(file) {
+  const fontMimeTypes = [
+    'font/ttf',
+    'font/otf',
+    'font/woff',
+    'font/woff2',
+    'application/vnd.ms-fontobject',
+    'font/collection'
+  ];
 
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => {
-      const buffer = new Uint8Array(reader.result);
-      const hex = Array.from(buffer.slice(0, 4))
-        .map(byte => byte.toString(16).padStart(2, '0'))
-        .join('')
-        .toUpperCase();
-
-      console.log(hex);
-      resolve(Object.values(fontMagicNumbers).includes(hex));
-    });
-    reader.addEventListener('error', reject);
-    reader.readAsArrayBuffer(file.slice(0, 4)); // 读取前4个字节
-  });
+  return fontMimeTypes.includes(file.type);
 }
 
 addFontFeatureSettingsClose.addEventListener('click', () => {
@@ -246,12 +233,12 @@ uploadButton.addEventListener('click', () => {
   fontUploadInput.click();
 });
 
-fontUploadInput.addEventListener('change', async event => {
+fontUploadInput.addEventListener('change', event => {
   const file = event.target.files[0];
   if (file) {
-    const isFont = await isFontFileByMagicNumber(file);
+    const isFont = isFontFile(file);
     if (!isFont) {
-      alert('仅支持上传 .otf、.ttf、.woff、.woff2、.eot 格式的字体文件。');
+      alert('仅支持上传字体文件。');
       return;
     }
 
