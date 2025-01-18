@@ -26,8 +26,8 @@
   }
   initializeMaterialInputs();
 
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
       if (mutation.type === 'childList') {
         initializeMaterialInputs();
       }

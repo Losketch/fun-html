@@ -14,7 +14,7 @@ function mapLogScale(value) {
   return Math.exp(Math.log(max / min) * ((value - min) / (max - min))) * min;
 }
 
-window.addEventListener('devicemotion', (event) => {
+window.addEventListener('devicemotion', event => {
   const acceleration = event.acceleration;
   const accelerationValue = Math.sqrt(
     acceleration.x ** 2 + acceleration.y ** 2 + acceleration.z ** 2

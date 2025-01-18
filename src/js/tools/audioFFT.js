@@ -12,7 +12,7 @@ cvs.height = cvsH * devicePixelRatio;
 cvs.style.width = cvsW + 'px';
 cvs.style.Height = cvsH + 'px';
 
-seleEle.addEventListener('change', (event) => {
+seleEle.addEventListener('change', event => {
   const selectedFile = event.target.files[0];
   if (!selectedFile.type.startsWith('audio/')) {
     alert('只能上传音频文件');

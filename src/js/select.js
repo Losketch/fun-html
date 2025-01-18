@@ -19,7 +19,7 @@
     const selectContent = selectContainer.querySelector('.select-content');
     const filter = selectContainer.querySelector('.filter');
 
-    select.addEventListener('click', (e) => {
+    select.addEventListener('click', e => {
       if (
         e.target.classList.contains('filter') ||
         optionsList.classList.contains('active')
@@ -60,7 +60,7 @@
         updateOptionsListHeightAndFilterDisplay();
       };
 
-      options.forEach((option) => {
+      options.forEach(option => {
         option.dataset.visibleSelect = option.innerText;
         option.addEventListener('click', () => {
           option.classList.toggle('selected');
@@ -94,7 +94,7 @@
         });
       });
 
-      selectContainer.addEventListener('cancelSelect', (e) => {
+      selectContainer.addEventListener('cancelSelect', e => {
         const targetSelect = e.detail.targetSelect;
         const targetSelectVisible = e.detail.targetSelectVisible;
 
@@ -109,7 +109,7 @@
           ...selectedVisible
         ]);
 
-        options.forEach((option) => {
+        options.forEach(option => {
           if (option.dataset.select == targetSelect)
             option.classList.remove('selected');
         });
@@ -135,10 +135,10 @@
         updateOptionsListHeightAndFilterDisplay();
       };
 
-      options.forEach((option) => {
+      options.forEach(option => {
         option.dataset.visibleSelect = option.innerText;
         option.addEventListener('click', () => {
-          options.forEach((option) => option.classList.remove('selected'));
+          options.forEach(option => option.classList.remove('selected'));
           curSelect.innerHTML = option.dataset.visibleSelect;
           selectContainer.dispatchEvent(
             new CustomEvent('select', {
@@ -177,16 +177,16 @@
       if (!filter.value) {
         optionsList
           .querySelectorAll('.opt')
-          .forEach((ele) => (ele.style.display = 'block'));
+          .forEach(ele => (ele.style.display = 'block'));
         updateOptionsListHeightAndFilterDisplay();
         return;
       }
       optionsList
         .querySelectorAll(`.opt:not([data-visible-select*="${filter.value}"])`)
-        .forEach((ele) => (ele.style.display = 'none'));
+        .forEach(ele => (ele.style.display = 'none'));
       optionsList
         .querySelectorAll(`.opt[data-visible-select*="${filter.value}"]`)
-        .forEach((ele) => (ele.style.display = 'block'));
+        .forEach(ele => (ele.style.display = 'block'));
       updateOptionsListHeightAndFilterDisplay();
     });
 

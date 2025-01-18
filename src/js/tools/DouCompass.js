@@ -3,7 +3,7 @@ const framePath = document.getElementById('framePath');
 const handPath = document.getElementById('handPath');
 const togglePathButton = document.getElementById('togglePathButton');
 
-window.addEventListener('deviceorientationabsolute', (ev) => {
+window.addEventListener('deviceorientationabsolute', ev => {
   document.body.style.setProperty('--deg', ev.alpha + 90 + 'deg');
 });
 

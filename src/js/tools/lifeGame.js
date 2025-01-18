@@ -27,7 +27,7 @@ const [
 ] =
   'generationsCountShow export import generations jump rule state stateShow gridSize gridSizeShow gap gapShow start pause prev next save clear-generations reset set-rule'
     .split(' ')
-    .map((n) => document.getElementById(n));
+    .map(n => document.getElementById(n));
 let size = 20;
 let count;
 let timerId;
@@ -112,7 +112,7 @@ function getRoundCellsCount(id) {
     cells[prevCell(nextRow)],
     cells[nextRow],
     cells[nextCell(nextRow)]
-  ].filter((v) => v.dataset.life === '1').length;
+  ].filter(v => v.dataset.life === '1').length;
 }
 
 function getNextState(state, roundCellsCount) {
@@ -143,7 +143,7 @@ function nextGeneration() {
     const roundCellsCount = getRoundCellsCount(i);
     cell.dataset.lifeTemp = getNextState(+cell.dataset.life, roundCellsCount);
   }
-  cells.forEach((v) => (v.dataset.life = v.dataset.lifeTemp));
+  cells.forEach(v => (v.dataset.life = v.dataset.lifeTemp));
   saveGeneration();
 }
 
@@ -196,7 +196,7 @@ function intToArray(int) {
 
 function uint8ArrayToHexString(uint8Array) {
   return Array.from(uint8Array)
-    .map((i) => {
+    .map(i => {
       let hex = i.toString(16);
       hex = (hex.length == 2 ? '' : '0') + hex;
       return hex;
@@ -205,11 +205,11 @@ function uint8ArrayToHexString(uint8Array) {
 }
 
 function toggleDisable(dis, ...btns) {
-  btns.forEach((btn) => (btn.disabled = dis ? '1' : ''));
+  btns.forEach(btn => (btn.disabled = dis ? '1' : ''));
 }
 
 function reset() {
-  cells.forEach((v) => (v.dataset.life = '0'));
+  cells.forEach(v => (v.dataset.life = '0'));
   toggleDisable(false, prevBtn, nextBtn, startBtn, jumpBtn);
   clearInterval(timerId);
   generationsCount = 0;
@@ -222,19 +222,19 @@ function reset() {
 function parseRule(rule) {
   const BSC = rule.split('/');
   const obj = {};
-  BSC.forEach((v) => {
+  BSC.forEach(v => {
     switch (v[0]) {
       case 'B':
         obj.birth = v
           .substring(1)
           .split('')
-          .map((v2) => parseInt(v2, 10));
+          .map(v2 => parseInt(v2, 10));
         break;
       case 'S':
         obj.star = v
           .substring(1)
           .split('')
-          .map((v2) => parseInt(v2, 10));
+          .map(v2 => parseInt(v2, 10));
         break;
       case 'C':
         obj.typeCount = +v.substring(1);
@@ -320,7 +320,7 @@ exportBtn.addEventListener('click', async () => {
   a.click();
 });
 
-importInp.addEventListener('change', (event) => {
+importInp.addEventListener('change', event => {
   const selectedFile = event.target.files[0];
   if (selectedFile) {
     let reader = new FileReader();
@@ -375,7 +375,7 @@ importInp.addEventListener('change', (event) => {
   }
 });
 
-generationsInp.addEventListener('input', (e) => {
+generationsInp.addEventListener('input', e => {
   generationsCount = e.target.value;
   toGeneration(generations[generationsMap[generationsCount]]);
   updateCount();
