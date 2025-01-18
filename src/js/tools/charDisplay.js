@@ -18,8 +18,16 @@ const addFontFeatureSettingsName =
   addFontFeatureSettingsDialog.querySelector('#name');
 const addFontFeatureSettingsAvailability =
   addFontFeatureSettingsDialog.querySelector('#availability-input');
+const addFontFeatureSettingsClose =
+  addFontFeatureSettingsDialog.querySelector('#close');
 const addFontFeatureSettingsSubmit =
   addFontFeatureSettingsDialog.querySelector('#submit');
+const addFontFeatureSettingsErrorDialog =
+  addFontFeatureSettingsDialog.querySelector('#error');
+const addFontFeatureSettingsErrorText =
+  addFontFeatureSettingsErrorDialog.querySelector('#error-text');
+const addFontFeatureSettingsErrorClose =
+  addFontFeatureSettingsErrorDialog.querySelector('#error-close');
 const addedFontFeatureSettings = new Set();
 const addedFontFeatureSettingsName = new Set();
 
@@ -64,16 +72,31 @@ function remove(ele) {
   ele.remove();
 }
 
+function updateDialogMargin(dialog, open=true) {
+  if (open) {
+    const computedMargin = getComputedStyle(dialog).marginLeft;
+    if (parseInt(computedMargin) < 16) {
+      dialog.style.marginLeft = '16px';
+      dialog.style.marginRight = '16px';
+    }
+  } else {
+    dialog.style.marginLeft = null;
+    dialog.style.marginRight = null;
+  }
+}
+
 function addFontFeatureSetting(name, availability) {
   if (addedFontFeatureSettingsName.has(name)) {
-    alert('该字体特征设置已添加过了，不可再次添加。');
-    return;
+    addFontFeatureSettingsErrorText.innerText = "该字体特征设置已添加过了，不可再次添加。"
+    addFontFeatureSettingsErrorDialog.showModal();
+    updateDialogMargin(addFontFeatureSettingsErrorDialog);
+    return false;
   }
   if (!validFontFeatureSettings.has(name)) {
-    alert(
-      '该字体特征设置无效，请参见 https://learn.microsoft.com/zh-cn/typography/opentype/spec/featurelist 中定义的有效字体特征设置。'
-    );
-    return;
+    addFontFeatureSettingsErrorText.innerHTML = '该字体特征设置无效，请参见 <a href="" onclick="changUrl(this.textContent)">https://learn.microsoft.com/zh-cn/typography/opentype/spec/featurelist</a> 中定义的有效字体特征设置。'
+    addFontFeatureSettingsErrorDialog.showModal();
+    updateDialogMargin(addFontFeatureSettingsErrorDialog);
+    return false;
   }
 
   const fontFeatureSetting = { name, availability };
@@ -107,6 +130,8 @@ function addFontFeatureSetting(name, availability) {
     updateEleFontFeatureSettings();
     remove(fontFeatureSettingEle);
   });
+
+  return true;
 }
 
 function updateEleFontFeatureSettings() {
@@ -117,6 +142,42 @@ function updateEleFontFeatureSettings() {
     })
     .join(', ');
 }
+
+function isFontFileByMagicNumber(file) {
+  const fontMagicNumbers = {
+    ttf: '00010000',
+    otf: '4F54544F',
+    woff: '774F4646',
+    woff2: '774F4632',
+    eot: '504C5020'
+  };
+
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const buffer = new Uint8Array(reader.result);
+      const hex = Array.from(buffer.slice(0, 4))
+        .map(byte => byte.toString(16).padStart(2, '0'))
+        .join('')
+        .toUpperCase();
+
+      console.log(hex)
+      resolve(Object.values(fontMagicNumbers).includes(hex));
+    };
+    reader.onerror = reject;
+    reader.readAsArrayBuffer(file.slice(0, 4)); // 读取前4个字节
+  });
+}
+
+addFontFeatureSettingsClose.addEventListener('click', () => {
+  addFontFeatureSettingsDialog.close();
+  updateDialogMargin(addFontFeatureSettingsDialog, false);
+});
+
+addFontFeatureSettingsErrorClose.addEventListener('click', () => {
+  addFontFeatureSettingsErrorDialog.close();
+  updateDialogMargin(addFontFeatureSettingsErrorDialog, false);
+});
 
 addFontFeatureSettingsButton.addEventListener('click', () => {
   function preventScroll(event) {
@@ -137,13 +198,17 @@ addFontFeatureSettingsButton.addEventListener('click', () => {
   addFontFeatureSettingsAvailability.checked = true;
 
   addFontFeatureSettingsDialog.showModal();
+  updateDialogMargin(addFontFeatureSettingsDialog);
 });
 
 addFontFeatureSettingsSubmit.addEventListener('click', () => {
   const name = addFontFeatureSettingsName.value;
   const availability = addFontFeatureSettingsAvailability.checked;
-  addFontFeatureSetting(name, availability);
-  addFontFeatureSettingsDialog.close();
+  const success = addFontFeatureSetting(name, availability);
+  if (success) {
+    addFontFeatureSettingsDialog.close();
+    updateDialogMargin(addFontFeatureSettingsDialog, false)
+  };
 });
 
 updateListVisibility();
@@ -155,6 +220,7 @@ container.addEventListener('click', function (event) {
   if (button.classList.contains('move-up')) {
     const prevItem = item.previousElementSibling;
     if (prevItem) {
+      if (item.dataset.animating || prevItem.dataset.animating) return;
       flipAnimation(item, prevItem, 'up');
       updateOrderArray(item, prevItem);
       updateButtonStates();
@@ -163,6 +229,7 @@ container.addEventListener('click', function (event) {
   } else if (button.classList.contains('move-down')) {
     const nextItem = item.nextElementSibling;
     if (nextItem) {
+      if (item.dataset.animating || nextItem.dataset.animating) return;
       flipAnimation(item, nextItem, 'down');
       updateOrderArray(item, nextItem);
       updateButtonStates();
@@ -179,17 +246,14 @@ uploadButton.addEventListener('click', function () {
   fontUploadInput.click();
 });
 
-fontUploadInput.addEventListener('change', function (event) {
+fontUploadInput.addEventListener('change', async function (event) {
   const file = event.target.files[0];
   if (file) {
-    const allowedExtensions = ['.otf', '.ttf', '.woff', '.woff2'];
-    const fileExtension = file.name
-      .slice(file.name.lastIndexOf('.'))
-      .toLowerCase();
-    if (!allowedExtensions.includes(fileExtension)) {
-      alert('仅支持上传 .otf、.ttf、.woff、.woff2 格式的字体文件。');
+    const isFont = await isFontFileByMagicNumber(file);
+    if (!isFont) {
+      alert('仅支持上传 .otf、.ttf、.woff、.woff2、.eot 格式的字体文件。');
       return;
-    }
+    };
 
     const fontObjectURL = URL.createObjectURL(file);
 
@@ -224,13 +288,11 @@ function insertItem(text, index, fontObjectURL) {
   newItem.appendChild(newItemText);
 
   const moveUpButton = document.createElement('button');
-  moveUpButton.className = 'move-up';
-  moveUpButton.textContent = '↑';
+  moveUpButton.className = 'move-up nf nf-cod-arrow_up';
   newItem.appendChild(moveUpButton);
 
   const moveDownButton = document.createElement('button');
-  moveDownButton.className = 'move-down';
-  moveDownButton.textContent = '↓';
+  moveDownButton.className = 'move-down nf nf-cod-arrow_down';
   newItem.appendChild(moveDownButton);
 
   const deleteButton = document.createElement('button');
@@ -238,7 +300,7 @@ function insertItem(text, index, fontObjectURL) {
   newItem.appendChild(deleteButton);
 
   if (fontObjectURL) {
-    newItem.setAttribute('data-font-url', fontObjectURL);
+    newItem.dataset.fontUrl = fontObjectURL;
   }
 
   if (index >= container.children.length) {
@@ -272,7 +334,7 @@ function updateInputFont() {
 
   const fontFaceRules = items
     .map((item, index) => {
-      const fontUrl = item.getAttribute('data-font-url');
+      const fontUrl = item.dataset.fontUrl;
       const fontName = item.querySelector('span').textContent;
 
       if (fontUrl) {
@@ -288,7 +350,7 @@ function updateInputFont() {
     .join('');
 
   const styleElement = document.createElement('style');
-  styleElement.setAttribute('data-font-faces', 'true');
+  styleElement.dataset.fontFaces = 'true';
   styleElement.textContent = fontFaceRules;
   document.head.appendChild(styleElement);
 
@@ -299,6 +361,10 @@ function updateInputFont() {
 }
 
 function flipAnimation(item, targetItem, direction) {
+  item.style.zIndex = "1";
+  item.dataset.animating = "true";
+  targetItem.dataset.animating = "true";
+
   const firstRectItem = item.getBoundingClientRect();
   const firstRectTarget = targetItem.getBoundingClientRect();
 
@@ -318,16 +384,23 @@ function flipAnimation(item, targetItem, direction) {
 
   applyFlipAnimation(item, deltaXItem, deltaYItem);
   applyFlipAnimation(targetItem, deltaXTarget, deltaYTarget);
+
+  item.addEventListener('transitionend', (e) => {
+    if (e.srcElement !== item) return;
+    item.style.zIndex = null;
+    delete item.dataset.animating;
+    delete targetItem.dataset.animating;
+  });
 }
 
 function applyFlipAnimation(element, deltaX, deltaY) {
   element.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
   element.style.transition = 'transform 0s';
 
-  requestAnimationFrame(() => {
-    element.style.transform = '';
-    element.style.transition = 'transform 0.3s ease';
-  });
+  element.clientTop;
+
+  element.style.transform = '';
+  element.style.transition = 'transform 0.2s ease';
 }
 
 function updateOrderArray(item, targetItem) {

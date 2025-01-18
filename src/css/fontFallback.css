@@ -65,119 +65,102 @@
   font-family: 'Segoe';
   src: url("../../assets/fonts/display/Segoe UI Historic-edt.woff2") format('woff2');
   font-display: swap;
-  unicode-range: U+0700-070D, U+070F-074A, U+074D-074F, U+1680-169C, U+10280-1029C, U+102A0-102D0, U+10330-1034A, U+10380-1039D, U+1039F-103C3, U+103C8-103D5, U+10450-1047F, U+10800-10805, U+10808, U+1080A-10835, U+10837-10838, U+1083C, U+1083F-10855, U+10857-1085F, U+10900-1091B, U+1091F-10939, U+1093F, U+10A60-10A7F, U+10B40-10B55, U+10B58-10B72, U+10B78-10B7F, U+10C00-10C48, U+12400-1246E, U+12470-12474;
 }
 
 @font-face {
   font-family: 'Segoe';
   src: url("../../assets/fonts/display/Segoe UI Symbol-edt.woff2") format('woff2');
   font-display: swap;
-  unicode-range: U+2190-22FF, U+2400-2426, U+2440-244A, U+2460-2AFF, U+2C80-2CF3, U+2CF9-2CFF, U+4DC0-4DFF, U+10400-1044F, U+1D300-1D356, U+1D400-1D6A5, U+1D6A8-1D7CB, U+1D7CE-1D7FF, U+1F030-1F093, U+1F0A0-1F0AE, U+1F0B1-1F0BF, U+1F0C1-1F0CF, U+1F0D1-1F0F5, U+1F650-1F67F;
 }
 
 @font-face {
   font-family: 'Segoe';
   src: url("../../assets/fonts/display/Segoe UI-edt.woff2") format('woff2');
   font-display: swap;
-  unicode-range: U+A4D0-A4FF, U+A700-A71F;
 }
 
 @font-face {
   font-family: 'Microsoft';
   src: url("../../assets/fonts/display/Microsoft Tai Le-edt.woff2") format('woff2');
   font-display: swap;
-  unicode-range: U+1950-196D, U+1970-1974;
 }
 
 @font-face {
   font-family: 'Microsoft';
   src: url("../../assets/fonts/display/Microsoft New Tai Lue-edt.woff2") format('woff2');
   font-display: swap;
-  unicode-range: U+1980-19AB, U+19B0-19C9, U+19D0-19DA, U+19DE-19DF;
 }
 
 @font-face {
   font-family: 'Microsoft';
   src: url("../../assets/fonts/display/Microsoft Yi Baiti-edt.woff2") format('woff2');
   font-display: swap;
-  unicode-range: U+A000-A48C, U+A490-A4C6;
 }
 
 @font-face {
   font-family: 'Microsoft';
   src: url("../../assets/fonts/display/Microsoft PhagsPa-edt.woff2") format('woff2');
   font-display: swap;
-  unicode-range: U+A840-A877;
 }
 
 @font-face {
   font-family: 'others';
   src: url("../../assets/fonts/display/MV Boli-edt.woff2") format('woff2');
   font-display: swap;
-  unicode-range: U+0780-07B1;
 }
 
 @font-face {
   font-family: 'others';
   src: url("../../assets/fonts/display/Ebrima-edt.woff2") format('woff2');
   font-display: swap;
-  unicode-range: U+07C0-07FA, U+07FD-07FF, U+1200-1248, U+124A-124D, U+1250-1256, U+1258, U+125A-125D, U+1260-1288, U+128A-128D, U+1290-12B0, U+12B2-12B5, U+12B8-12BE, U+12C0, U+12C2-12C5, U+12C8-12D6, U+12D8-1310, U+1312-1315, U+1318-135A, U+135D-137C, U+1380-1399, U+2D30-2D67, U+2D6F-2D70, U+2D7F-2D96, U+2DA0-2DA6, U+2DA8-2DAE, U+2DB0-2DB6, U+2DB8-2DBE, U+2DC0-2DC6, U+2DC8-2DCE, U+2DD0-2DD6, U+2DD8-2DDE, U+A500-A62B, U+AB01-AB06, U+AB09-AB0E, U+AB11-AB16, U+AB20-AB26, U+AB28-AB2E, U+10480-1049D, U+104A0-104A9, U+1E900-1E94B, U+1E950-1E959, U+1E95E-1E95F;
 }
 
 @font-face {
   font-family: 'others';
   src: url("../../assets/fonts/display/Nirmala UI-edt.woff2") format('woff2');
   font-display: swap;
-  unicode-range: U+0B82-0B83, U+0B85-0B8A, U+0B8E-0B90, U+0B92-0B95, U+0B99-0B9A, U+0B9C, U+0B9E-0B9F, U+0BA3-0BA4, U+0BA8-0BAA, U+0BAE-0BB9, U+0BBE-0BC2, U+0BC6-0BC8, U+0BCA-0BCD, U+0BD0, U+0BD7, U+0BE6-0BFA, U+1C50-1C7F, U+ABC0-ABED, U+ABF0-ABF9, U+110D0-110E8, U+110F0-110F9;
 }
 
 @font-face {
   font-family: 'others';
   src: url("../../assets/fonts/display/Leelawadee UI-edt.woff2") format('woff2');
   font-display: swap;
-  unicode-range: U+0E01-0E3A, U+0E3F-0E5B, U+1780-17DD, U+17E0-17E9, U+17F0-17F9, U+19E0-1A1B, U+1A1E-1A1F;
 }
 
 @font-face {
   font-family: 'others';
   src: url("../../assets/fonts/display/Myanmar Text-edt.woff2") format('woff2');
   font-display: swap;
-  unicode-range: U+1000-109F, U+A9E0-A9FE, U+AA60-AA7F;
 }
 
 @font-face {
   font-family: 'others';
   src: url("../../assets/fonts/display/Calibri-edt.woff2") format('woff2');
   font-display: swap;
-  unicode-range: U+10A0-10C5, U+10C7, U+10CD, U+10D0-10FF, U+1C90-1CBA, U+1CBD-1CBF, U+2D00-2D25, U+2D27, U+2D2D;
 }
 
 @font-face {
   font-family: 'others';
   src: url("../../assets/fonts/display/Gadugi-edt.woff2") format('woff2');
   font-display: swap;
-  unicode-range: U+13A0-13F5, U+13F8-13FD, U+1400-167F, U+18B0-18F5, U+AB70-ABBF, U+104B0-104D3, U+104D8-104FB;
 }
 
 @font-face {
   font-family: 'others';
   src: url("../../assets/fonts/display/Javanese Text-edt.woff2") format('woff2');
   font-display: swap;
-  unicode-range: U+A980-A9CD, U+A9CF-A9D9, U+A9DE-A9DF;
 }
 
 @font-face {
   font-family: 'Last';
   src: url("../../assets/fonts/display/Last Resort.woff2") format('woff2');
   font-display: swap;
-  unicode-range: U+0000-10FFFF;
 }
 
 @font-face {
   font-family: 'IDC';
   src: url("../../assets/fonts/display/Ideographic-Description-Character.woff2") format('woff2');
   font-display: swap;
-  unicode-range: U+25DC-25DF, U+2FF?, U+31EF, U+1F504, U+E100;
 }
 
 .font {
