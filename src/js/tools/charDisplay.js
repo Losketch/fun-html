@@ -1,3 +1,6 @@
+const windowWidth = window.innerWidth;
+const windowHeight = window.innerHeight;
+
 const input = document.getElementById('text');
 const clear = document.getElementById('clear');
 
@@ -77,17 +80,10 @@ function remove(ele) {
   ele.remove();
 }
 
-function updateDialogMargin(dialog, open = true) {
-  if (open) {
-    const computedMargin = getComputedStyle(dialog).marginLeft;
-    if (parseInt(computedMargin) < 16) {
-      dialog.style.marginLeft = '16px';
-      dialog.style.marginRight = '16px';
-    }
-  } else {
-    dialog.style.marginLeft = null;
-    dialog.style.marginRight = null;
-  }
+function updateDialogDimension(dialog) {
+  const rect = dialog.getBoundingClientRect();
+  dialog.style.left = `${(windowWidth - rect.width) / 2}px`;
+  dialog.style.top = `${(windowHeight - rect.height) / 2}px`;
 }
 
 function addFontFeatureSetting(name, availability) {
@@ -95,14 +91,14 @@ function addFontFeatureSetting(name, availability) {
     addFontFeatureSettingsErrorText.innerText =
       '该字体特征设置已添加过了，不可再次添加。';
     addFontFeatureSettingsErrorDialog.showModal();
-    updateDialogMargin(addFontFeatureSettingsErrorDialog);
+    updateDialogDimension(addFontFeatureSettingsErrorDialog);
     return false;
   }
   if (!validFontFeatureSettings.has(name)) {
     addFontFeatureSettingsErrorText.innerHTML =
       '该字体特征设置无效，请参见 <a href="" onclick="changeUrl(this.textContent)">https://learn.microsoft.com/zh-cn/typography/opentype/spec/featurelist</a> 中定义的有效字体特征设置。';
     addFontFeatureSettingsErrorDialog.showModal();
-    updateDialogMargin(addFontFeatureSettingsErrorDialog);
+    updateDialogDimension(addFontFeatureSettingsErrorDialog);
     return false;
   }
 
@@ -178,12 +174,10 @@ function isFontFileByMagicNumber(file) {
 
 addFontFeatureSettingsClose.addEventListener('click', () => {
   addFontFeatureSettingsDialog.close();
-  updateDialogMargin(addFontFeatureSettingsDialog, false);
 });
 
 addFontFeatureSettingsErrorClose.addEventListener('click', () => {
   addFontFeatureSettingsErrorDialog.close();
-  updateDialogMargin(addFontFeatureSettingsErrorDialog, false);
 });
 
 addFontFeatureSettingsButton.addEventListener('click', () => {
@@ -205,7 +199,7 @@ addFontFeatureSettingsButton.addEventListener('click', () => {
   addFontFeatureSettingsAvailability.checked = true;
 
   addFontFeatureSettingsDialog.showModal();
-  updateDialogMargin(addFontFeatureSettingsDialog);
+  updateDialogDimension(addFontFeatureSettingsDialog);
 });
 
 addFontFeatureSettingsSubmit.addEventListener('click', () => {
@@ -214,7 +208,6 @@ addFontFeatureSettingsSubmit.addEventListener('click', () => {
   const success = addFontFeatureSetting(name, availability);
   if (success) {
     addFontFeatureSettingsDialog.close();
-    updateDialogMargin(addFontFeatureSettingsDialog, false);
   }
 });
 
