@@ -20,23 +20,29 @@
     const filter = selectContainer.querySelector('.filter');
 
     select.addEventListener('click', (e) => {
-      if (e.target.classList.contains('filter')) return;
+      if (
+        e.target.classList.contains('filter') ||
+        optionsList.classList.contains('active')
+      )
+        return;
       optionsList.classList.add('active');
+      const backdrop = document.createElement('div');
+      backdrop.className = 'backdrop';
+      backdrop.addEventListener('click', () => {
+        optionsList.close();
+        backdrop.remove();
+      });
+      document.body.appendChild(backdrop);
       updateOptionsListHeightAndFilterDisplay();
     });
 
     if (multi) {
       selectContainer.dataset.selected = '[]';
       selectContainer.dataset.selectedVisible = '[]';
-      document.addEventListener('click', (e) => {
-        if (
-          select.contains(e.target) ||
-          optionsList.contains(e.target) ||
-          !optionsList.classList.contains('active')
-        )
-          return;
-        e.preventDefault();
+
+      optionsList.close = () => {
         optionsList.classList.remove('active');
+        if (!selectContainer.dataset.selected) return;
         const selected = JSON.parse(selectContainer.dataset.selected);
         if (selected.length) {
           curSelect.innerHTML = `已选择 ${selected.length} 个`;
@@ -52,7 +58,7 @@
           })
         );
         updateOptionsListHeightAndFilterDisplay();
-      });
+      };
 
       options.forEach((option) => {
         option.dataset.visibleSelect = option.innerText;
@@ -124,16 +130,10 @@
         );
       });
     } else {
-      document.addEventListener('click', (e) => {
-        if (
-          select.contains(e.target) ||
-          !optionsList.classList.contains('active')
-        )
-          return;
-        e.preventDefault();
+      optionsList.close = () => {
         optionsList.classList.remove('active');
         updateOptionsListHeightAndFilterDisplay();
-      });
+      };
 
       options.forEach((option) => {
         option.dataset.visibleSelect = option.innerText;
@@ -146,8 +146,8 @@
             })
           );
           option.classList.add('selected');
-          optionsList.classList.remove('active');
-          updateOptionsListHeightAndFilterDisplay();
+          document.querySelector('.backdrop').remove();
+          optionsList.close();
         });
       });
     }
