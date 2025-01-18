@@ -22,7 +22,7 @@ function animateContent() {
 
 function updateActiveMenuItem(target) {
   currentActiveMenu = target;
-  menuItems.forEach((item) => {
+  menuItems.forEach(item => {
     if (item.dataset.target === target) {
       item.classList.add('active');
     } else {
@@ -36,7 +36,7 @@ function loadContent(url) {
   mainContent.src = `${url}?t=${timestamp}`;
 }
 
-menuItems.forEach((item) => {
+menuItems.forEach(item => {
   item.addEventListener('click', () => {
     if (currentActiveMenu === item.dataset.target) return;
 
@@ -56,7 +56,7 @@ menuItems.forEach((item) => {
   });
 });
 
-toolButtons.forEach((button) => {
+toolButtons.forEach(button => {
   if (button.classList.contains('online-tool')) {
     button.addEventListener('click', () => {
       window.location.href = button.dataset.url;
@@ -81,7 +81,7 @@ toolButtons.forEach((button) => {
   });
 });
 
-window.addEventListener('message', (event) => {
+window.addEventListener('message', event => {
   switch (event.data.type) {
     case 'changeHeader':
       titleH1.innerHTML = event.data.text;

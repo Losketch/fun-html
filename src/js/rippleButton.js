@@ -2,7 +2,7 @@
   const buttons = document.querySelectorAll('button:not(.no-ripple)');
 
   for (let button of buttons) {
-    button.addEventListener('click', (e) => {
+    button.addEventListener('click', e => {
       const button = e.currentTarget;
 
       const ripple = document.createElement('span');

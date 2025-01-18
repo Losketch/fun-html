@@ -728,7 +728,7 @@ function strokeSequenceToObj(strokeSequence, index = 0) {
 
 function checkObj(prevObj, data) {
   if (Array.isArray(data)) {
-    data.forEach((item) => checkObj(prevObj, item));
+    data.forEach(item => checkObj(prevObj, item));
   } else if (typeof data === 'object' && data !== null) {
     if (Object.keys(data).length === 0) {
       const idc = prevObj.idc;
@@ -754,12 +754,12 @@ function checkObj(prevObj, data) {
 }
 
 function countNonemptyObjects(arr) {
-  return arr.filter((obj) => Object.keys(obj).length !== 0).length;
+  return arr.filter(obj => Object.keys(obj).length !== 0).length;
 }
 
 function moveStructureToEnd(data) {
   if (Array.isArray(data)) {
-    return data.map((item) => moveStructureToEnd(item));
+    return data.map(item => moveStructureToEnd(item));
   } else if (typeof data === 'object' && data !== null) {
     const keys = Object.keys(data);
     if (keys.includes('structure')) {

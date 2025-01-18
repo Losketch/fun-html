@@ -23,7 +23,7 @@ function zalog(s, minimum = 5, maximum = 10) {
   return s
     .toArray()
     .map(
-      (c) =>
+      c =>
         String.fromCodePoint(c) +
         Array.from(
           {

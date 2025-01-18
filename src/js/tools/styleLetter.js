@@ -20,7 +20,7 @@ String.prototype.toCharArray = function () {
 
 const toStyleLetter = (str, style) => {
   const styleMap = {
-    bold: (char) => {
+    bold: char => {
       if (0x41 <= char && char <= 0x5a) {
         return String.fromCodePoint(char + 0x1d400 - 0x41);
       }
@@ -63,7 +63,7 @@ const toStyleLetter = (str, style) => {
                             ? '𝟋'
                             : String.fromCodePoint(char);
     },
-    italic: (char) => {
+    italic: char => {
       if (0x41 <= char && char <= 0x5a) {
         return String.fromCodePoint(char + 0x1d434 - 0x41);
       }
@@ -105,7 +105,7 @@ const toStyleLetter = (str, style) => {
                             ? '𝚥'
                             : String.fromCodePoint(char);
     },
-    boldItalic: (char) => {
+    boldItalic: char => {
       if (0x41 <= char && char <= 0x5a) {
         return String.fromCodePoint(char + 0x1d468 - 0x41);
       }
@@ -141,7 +141,7 @@ const toStyleLetter = (str, style) => {
                         ? '𝜵'
                         : String.fromCodePoint(char);
     },
-    script: (char) => {
+    script: char => {
       if (0x41 <= char && char <= 0x5a) {
         return String.fromCodePoint(
           char === 0x42
@@ -176,7 +176,7 @@ const toStyleLetter = (str, style) => {
       }
       return String.fromCodePoint(char);
     },
-    boldScript: (char) => {
+    boldScript: char => {
       if (0x41 <= char && char <= 0x5a) {
         return String.fromCodePoint(char + 0x1d4d0 - 0x41);
       }
@@ -185,7 +185,7 @@ const toStyleLetter = (str, style) => {
       }
       return String.fromCodePoint(char);
     },
-    fraktur: (char) => {
+    fraktur: char => {
       if (0x41 <= char && char <= 0x5a) {
         return String.fromCodePoint(
           char === 0x43
@@ -206,7 +206,7 @@ const toStyleLetter = (str, style) => {
       }
       return String.fromCodePoint(char);
     },
-    doubleStruck: (char) => {
+    doubleStruck: char => {
       if (0x41 <= char && char <= 0x5a) {
         return String.fromCodePoint(
           char === 0x43
@@ -234,7 +234,7 @@ const toStyleLetter = (str, style) => {
       }
       return String.fromCodePoint(char);
     },
-    boldFraktur: (char) => {
+    boldFraktur: char => {
       if (0x41 <= char && char <= 0x5a) {
         return String.fromCodePoint(char + 0x1d56c - 0x41);
       }
@@ -243,7 +243,7 @@ const toStyleLetter = (str, style) => {
       }
       return String.fromCodePoint(char);
     },
-    sansSerif: (char) => {
+    sansSerif: char => {
       if (0x41 <= char && char <= 0x5a) {
         return String.fromCodePoint(char + 0x1d5a0 - 0x41);
       }
@@ -255,7 +255,7 @@ const toStyleLetter = (str, style) => {
       }
       return String.fromCodePoint(char);
     },
-    sansSerifBold: (char) => {
+    sansSerifBold: char => {
       if (0x41 <= char && char <= 0x5a) {
         return String.fromCodePoint(char + 0x1d5d4 - 0x41);
       }
@@ -294,7 +294,7 @@ const toStyleLetter = (str, style) => {
                         ? '𝝯'
                         : String.fromCodePoint(char);
     },
-    sansSerifItalic: (char) => {
+    sansSerifItalic: char => {
       if (0x41 <= char && char <= 0x5a) {
         return String.fromCodePoint(char + 0x1d608 - 0x41);
       }
@@ -303,7 +303,7 @@ const toStyleLetter = (str, style) => {
       }
       return String.fromCodePoint(char);
     },
-    sansSerifBoldItalic: (char) => {
+    sansSerifBoldItalic: char => {
       if (0x41 <= char && char <= 0x5a) {
         return String.fromCodePoint(char + 0x1d63c - 0x41);
       }
@@ -339,7 +339,7 @@ const toStyleLetter = (str, style) => {
                         ? '𝞩'
                         : String.fromCodePoint(char);
     },
-    monospace: (char) => {
+    monospace: char => {
       if (0x41 <= char && char <= 0x5a) {
         return String.fromCodePoint(char + 0x1d670 - 0x41);
       }
@@ -351,7 +351,7 @@ const toStyleLetter = (str, style) => {
       }
       return String.fromCodePoint(char);
     },
-    circle: (char) => {
+    circle: char => {
       if (0x31 <= char && char <= 0x39) {
         return String.fromCodePoint(char + 0x242f);
       }
@@ -363,7 +363,7 @@ const toStyleLetter = (str, style) => {
       }
       return char == 0x30 ? '⓪' : String.fromCodePoint(char);
     },
-    negativeCircle: (char) => {
+    negativeCircle: char => {
       if (0x31 <= char && char <= 0x39) {
         return String.fromCodePoint(char + 0x2745);
       }
@@ -372,7 +372,7 @@ const toStyleLetter = (str, style) => {
       }
       return char == 0x30 ? '⓿' : String.fromCodePoint(char);
     },
-    parenthesized: (char) => {
+    parenthesized: char => {
       if (0x31 <= char && char <= 0x39) {
         return String.fromCodePoint(char + 0x2443);
       }
@@ -384,11 +384,11 @@ const toStyleLetter = (str, style) => {
       }
       return String.fromCodePoint(char);
     },
-    square: (char) =>
+    square: char =>
       0x41 <= char && char <= 0x5a
         ? String.fromCodePoint(char + 0x1f0ef)
         : String.fromCodePoint(char),
-    superscript: (char) => {
+    superscript: char => {
       if (0x30 <= char && char <= 0x39) {
         return '⁰¹²³⁴⁵⁶⁷⁸⁹'[char - 0x30];
       }
@@ -410,7 +410,7 @@ const toStyleLetter = (str, style) => {
                 ? '⁾'
                 : String.fromCodePoint(char);
     },
-    subscript: (char) => {
+    subscript: char => {
       if (0x30 <= char && char <= 0x39) {
         return '₀₁₂₃₄₅₆₇₈₉'[char - 0x30];
       }
@@ -432,7 +432,7 @@ const toStyleLetter = (str, style) => {
   };
   return str
     .toArray()
-    .map((char) => styleMap[style](char))
+    .map(char => styleMap[style](char))
     .join('');
 };
 
@@ -442,7 +442,7 @@ const selectFont = document.getElementById('select-font');
 const cnvButton = document.getElementById('cnv-button');
 let font;
 
-selectFont.addEventListener('select', (e) => {
+selectFont.addEventListener('select', e => {
   font = e.detail.select;
 });
 

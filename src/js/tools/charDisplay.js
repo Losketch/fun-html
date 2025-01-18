@@ -40,7 +40,7 @@ const fontUploadInput = document.getElementById('font-upload');
 const uploadButton = document.getElementById('upload-button');
 let itemsOrder = [];
 
-document.querySelectorAll('a').forEach((a) => {
+document.querySelectorAll('a').forEach(a => {
   a.addEventListener('click', () => changeUrl(a.textContent));
 });
 
@@ -139,7 +139,7 @@ function addFontFeatureSetting(name, availability) {
 
 function updateEleFontFeatureSettings() {
   input.style.fontFeatureSettings = [...addedFontFeatureSettings]
-    .map((fontFeatureSetting) => {
+    .map(fontFeatureSetting => {
       const { name, availability } = fontFeatureSetting;
       return `"${name}" ${availability ? 'on' : 'off'}`;
     })
@@ -160,7 +160,7 @@ function isFontFileByMagicNumber(file) {
     reader.addEventListener('load', () => {
       const buffer = new Uint8Array(reader.result);
       const hex = Array.from(buffer.slice(0, 4))
-        .map((byte) => byte.toString(16).padStart(2, '0'))
+        .map(byte => byte.toString(16).padStart(2, '0'))
         .join('')
         .toUpperCase();
 
@@ -213,7 +213,7 @@ addFontFeatureSettingsSubmit.addEventListener('click', () => {
 
 updateListVisibility();
 
-container.addEventListener('click', (event) => {
+container.addEventListener('click', event => {
   const button = event.target;
   const item = button.closest('.sortable-item');
 
@@ -246,7 +246,7 @@ uploadButton.addEventListener('click', () => {
   fontUploadInput.click();
 });
 
-fontUploadInput.addEventListener('change', async (event) => {
+fontUploadInput.addEventListener('change', async event => {
   const file = event.target.files[0];
   if (file) {
     const isFont = await isFontFileByMagicNumber(file);
@@ -330,10 +330,10 @@ function updateInputFont() {
   const items = Array.from(container.children);
 
   const existingFontFaces = document.querySelectorAll('style[data-font-faces]');
-  existingFontFaces.forEach((style) => style.remove());
+  existingFontFaces.forEach(style => style.remove());
 
   const fontFaceRules = items
-    .map((item) => {
+    .map(item => {
       const fontUrl = item.dataset.fontUrl;
       const fontName = item.querySelector('span').textContent;
 
@@ -355,7 +355,7 @@ function updateInputFont() {
   document.head.appendChild(styleElement);
 
   const fontFamilyList = items
-    .map((item) => `'${item.querySelector('span').textContent}'`)
+    .map(item => `'${item.querySelector('span').textContent}'`)
     .join(', ');
   input.style.fontFamily = fontFamilyList;
 }
@@ -385,7 +385,7 @@ function flipAnimation(item, targetItem, direction) {
   applyFlipAnimation(item, deltaXItem, deltaYItem);
   applyFlipAnimation(targetItem, deltaXTarget, deltaYTarget);
 
-  item.addEventListener('transitionend', (e) => {
+  item.addEventListener('transitionend', e => {
     if (e.srcElement !== item) return;
     item.style.zIndex = null;
     delete item.dataset.animating;
