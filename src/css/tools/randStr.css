@@ -14,6 +14,8 @@ main > div > div {
   display: flex;
   align-items: center;
   font-size: 0.875rem;
+  width: fit-content;
+  overflow: visible;
   color: var(--md-sys-color-on-surface-variant);
 }
 
