@@ -133,11 +133,6 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-/* 设置整个视图过渡的时长 */
-::view-transition {
-  animation-duration: 15s; /* 将过渡时间改为 1.5 秒 */
-}
-
 .add-button {
   background-color: var(--md-sys-color-add-button-background);
   border: 1px solid var(--md-sys-color-add-button-border);
