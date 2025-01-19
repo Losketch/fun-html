@@ -59,6 +59,7 @@
   --md-sys-color-sidebar: #fffbfe99;
   --md-sys-color-shadow-sidebar: #00000080;
   --md-sys-color-border-darkmode-label: #f6f6f6;
+  --md-sys-color-dialog-backdrop: #0000001a;
 }
 
 :root.dark {
@@ -122,6 +123,7 @@
   --md-sys-color-sidebar: #1c1b1eaa;
   --md-sys-color-shadow-sidebar: #ffffff85;
   --md-sys-color-border-darkmode-label: #090909;
+  --md-sys-color-dialog-backdrop: #0000004a;
 }
 
 * {
@@ -487,40 +489,78 @@ footer a {
   text-decoration: none;
 }
 
-/* 隐藏原生复选框 */
 input[type="checkbox"] {
-  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+  appearance: none;
   width: 20px;
   height: 20px;
+  overflow: visible;
   border: 2px solid var(--md-sys-color-outline);
+  background-color: var(--md-sys-color-surface);
   border-radius: 4px;
-  outline: none;
+  accent-color: var(--md-sys-color-primary);
   cursor: pointer;
   position: relative;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  margin: 3px;
+  background-color: var(--md-sys-color-on-primary);
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform: scale(0);
+  transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input[type="checkbox"]::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background-color: var(--md-sys-color-primary);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 input[type="checkbox"]:checked {
-  background-color: var(--md-sys-color-primary-container);
-  border-color: var(--md-sys-color-primary-container);
+  background-color: var(--md-sys-color-primary);
+  border-color: var(--md-sys-color-primary);
 }
 
-input[type="checkbox"]:checked::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: auto;
-  height: auto;
-  font-family: "NerdFontsSymbols Nerd Font";
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: var(--md-sys-color-on-primary-container);
-  transform: translate(-50%, -50%);
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+input[type="checkbox"]:hover::after {
+  opacity: 0.08;
+  transform: scale(1);
+}
+
+input[type="checkbox"]:active::after {
+  opacity: 0.12;
+  transform: scale(1);
+}
+
+input[type="checkbox"]:disabled {
+  background-color: var(--md-sys-color-surface-disabled, #f5f5f5);
+  border-color: var(--md-sys-color-outline);
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+input[type="checkbox"]:disabled::after {
+  display: none;
+}
+
+::backdrop {
+  background-color: var(--md-sys-color-dialog-backdrop);
 }
