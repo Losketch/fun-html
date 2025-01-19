@@ -14,16 +14,18 @@ td {
 }
 
 th {
-  background-color: #1e88e5;
-  color: white;
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
 }
 
 tr:nth-child(even) td {
-  background-color: #eaf2f8;
+  background-color: var(--md-sys-color-secondary);
+  color: var(--md-sys-color-on-secondary);
 }
 
 tr:nth-child(odd) td {
-  background-color: #ddebf7;
+  background-color: var(--md-sys-color-tertiary);
+  color: var(--md-sys-color-on-tertiary);
 }
 
 tbody > tr:first-child > th:first-child {

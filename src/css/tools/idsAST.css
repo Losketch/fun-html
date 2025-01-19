@@ -22,11 +22,11 @@
   transition:
     outline-color 0.5s ease,
     background-color 0.5s ease;
-  outline-color: transparent;
+  outline: solid 1px transparent;
 }
 
 :is(.idc-inputer, .curve-inputer):hover {
-  outline: solid 1px #2224;
+  outline: solid 1px var(--md-sys-color-outline-inputer);
   background-color: var(--md-sys-color-background-text-dark);
 }
 

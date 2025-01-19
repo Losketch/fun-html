@@ -24,7 +24,7 @@
   font-size: initial;
   margin: 0;
   padding: 0;
-  color: #00000055;
+  color: var(--md-sys-color-alpha-on-background);
   left: 6px;
   top: calc(100% - 3px);
   transform: translateY(-100%);

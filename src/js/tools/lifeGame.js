@@ -75,7 +75,7 @@ function resetStyle(typeCount) {
   for (let i = 1; i < typeCount; i++) {
     style.innerHTML += `
       cell[data-life='${i}'] {
-        background-color: rgb(0, 0, 0, ${(typeCount - i) * unit});
+        background-color: rgb(${getComputedStyle(document.documentElement).getPropertyValue('--md-sys-color-cell-life-max')}, ${(typeCount - i) * unit});
       }
     `;
   }

@@ -8,7 +8,7 @@
 }
 
 .select {
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 5px var(--md-sys-color-shadow-alpha-33);
   width: 100%;
   box-sizing: border-box;
   background-color: var(--md-sys-color-surface-variant);

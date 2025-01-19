@@ -70,12 +70,13 @@
       1 86.4%,
       1 100%
     );
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 3px var(--md-sys-color-shadow-alpha-33);
   transform-origin: center;
+  transition: transform 0.1s ease;
 }
 
 .md-switch input:active + .track .thumb {
-  transform: scale(1.3);
+  transform: scale(1.2);
 }
 
 .md-switch input:checked + .track {
@@ -100,7 +101,7 @@
           var(--distance-error)
       )
     )
-    scale(1.3);
+    scale(1.2);
 }
 
 .md-switch .thumb::before {
@@ -125,7 +126,7 @@
 }
 
 .md-switch:hover .thumb {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 4px var(--md-sys-color-shadow-alpha-4c);
 }
 
 .md-switch input:focus-visible + .track {
