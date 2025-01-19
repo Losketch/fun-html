@@ -6,45 +6,13 @@
     },
     setValue(name, value) {
       localStorage.setItem(name, value);
-    },
-    addStyle(id, tag, css) {
-      tag = tag || 'style';
-      let doc = document,
-        styleDom = doc.getElementById(id);
-      if (styleDom) return;
-      let style = doc.createElement(tag);
-      style.rel = 'stylesheet';
-      style.id = id;
-      tag === 'style' ? (style.innerHTML = css) : (style.href = css);
-      doc.head.appendChild(style);
-    },
-    addThemeColor(color) {
-      let doc = document,
-        meta = doc.getElementsByName('theme-color')[0];
-      if (meta) return meta.setAttribute('content', color);
-      let metaEle = doc.createElement('meta');
-      metaEle.name = 'theme-color';
-      metaEle.content = color;
-      doc.head.appendChild(metaEle);
-    },
-    getThemeColor() {
-      let meta = document.getElementsByName('theme-color')[0];
-      if (meta) {
-        return meta.content;
-      }
-      return '#ffffff';
-    },
-    removeElementById(eleId) {
-      let ele = document.getElementById(eleId);
-      ele && ele.parentNode.removeChild(ele);
     }
   };
   let main = {
     mainContent: document.getElementById('main-content'),
     darkModeToggle: document.getElementById('darkmode-toggle'),
     enableDarkMode() {
-      this.createDarkStyle();
-      util.addThemeColor('#131313');
+      document.documentElement.classList.add('dark');
       this.mainContent.contentWindow.postMessage(
         {
           type: 'outterColorSchemeChange',
@@ -54,36 +22,13 @@
       );
     },
     disableDarkMode() {
-      util.removeElementById('dark-mode-style');
-      util.addThemeColor(util.getValue('origin_theme_color'));
+      document.documentElement.classList.remove('dark');
       this.mainContent.contentWindow.postMessage(
         {
           type: 'outterColorSchemeChange',
           colorScheme: 'light'
         },
         '*'
-      );
-    },
-    createDarkStyle() {
-      util.addStyle(
-        'dark-mode-style',
-        'style',
-        `
-        html {
-            filter: invert(1) hue-rotate(180deg);
-            scrollbar-color: #454a4d #202324;
-        }
-        img, video, canvas, svg {
-            filter: invert(1) hue-rotate(180deg);
-            fill: unset;
-        }
-        ::-webkit-scrollbar {
-            display: none;
-        }
-        .no-invert {
-          filter: invert(1) hue-rotate(180deg);
-        }
-      `
       );
     },
     toggleDarkMode() {
@@ -116,7 +61,6 @@
       }
     },
     init() {
-      util.setValue('origin_theme_color', util.getThemeColor());
       this.toggleDarkMode();
     }
   };
