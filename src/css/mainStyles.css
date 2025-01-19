@@ -1,38 +1,158 @@
 :root {
   --md-sys-color-primary: #6750a4;
-  --md-sys-color-alpha-primary: #6750a41a;
   --md-sys-color-on-primary: #ffffff;
-  --md-sys-color-primary-container: #eaddff;
-  --md-sys-color-on-primary-container: #21005d;
+  --md-sys-color-primary-container: #e9ddff;
+  --md-sys-color-on-primary-container: #22005d;
   --md-sys-color-secondary: #625b71;
   --md-sys-color-on-secondary: #ffffff;
   --md-sys-color-secondary-container: #e8def8;
-  --md-sys-color-on-secondary-container: #1d192b;
-  --md-sys-color-surface: #fffbfe;
-  --md-sys-color-on-surface: #1c1b1f;
-  --md-sys-color-surface-variant: #e7e0ec;
-  --md-sys-color-on-surface-variant: #49454f;
-  --md-sys-color-error: #b3261e;
+  --md-sys-color-on-secondary-container: #1e192b;
+  --md-sys-color-tertiary: #7e5260;
+  --md-sys-color-on-tertiary: #ffffff;
+  --md-sys-color-tertiary-container: #ffd9e3;
+  --md-sys-color-on-tertiary-container: #31101d;
+  --md-sys-color-error: #ba1a1a;
   --md-sys-color-on-error: #ffffff;
-  --md-sys-color-error-container: #f9dedc;
-  --md-sys-color-on-error-container: #8c1d18;
-  --md-sys-color-outline: #79747e;
-  --md-sys-color-background: #fffbfe;
-  --md-sys-color-on-background: #1c1b1f;
+  --md-sys-color-error-container: #ffdad6;
+  --md-sys-color-on-error-container: #410002;
+  --md-sys-color-background: #fffbff;
+  --md-sys-color-on-background: #1c1b1e;
+  --md-sys-color-surface: #fffbff;
+  --md-sys-color-on-surface: #1c1b1e;
+  --md-sys-color-surface-variant: #e7e0eb;
+  --md-sys-color-on-surface-variant: #49454e;
+  --md-sys-color-outline: #7a757f;
+  --md-sys-color-outline-variant: #cac4cf;
+  --md-sys-color-shadow: #000000;
+  --md-sys-color-scrim: #000000;
+  --md-sys-color-inverse-surface: #313033;
+  --md-sys-color-inverse-on-surface: #f4eff4;
+  --md-sys-color-inverse-primary: #cfbcff;
 
+  --md-sys-color-alpha-primary: #6750a42a;
+  --md-sys-color-alpha-on-background: #1c1b1e3f;
   --md-sys-color-ripple: #ffffff80;
   --md-sys-color-background-text: #0000000f;
-  --md-sys-color-disabled: #f6f0ff;
-  --md-sys-color-on-disabled: #3c2a5c;
+  --md-sys-color-disabled: #f2ebff;
+  --md-sys-color-on-disabled: #7d788a;
   --md-sys-color-background-text-dark: #00000027;
+  --md-sys-color-add-button-background: #90ff90;
+  --md-sys-color-add-button-border: #50ee50;
+  --md-sys-color-rem-button-background: #ff9090;
+  --md-sys-color-rem-button-border: #ee5050;
+  --md-sys-color-copy-button-hover-outline: #22222244;
+  --md-sys-color-shadow-alpha-33: #00000033;
+  --md-sys-color-shadow-alpha-1f: #0000001f;
+  --md-sys-color-shadow-alpha-3d: #0000003d;
+  --md-sys-color-shadow-alpha-1a: #0000001a;
+  --md-sys-color-shadow-alpha-4c: #0000004c;
+  --md-sys-color-shadow-alpha-05: #00000005;
+  --md-sys-color-shadow-alpha-21: #00000021;
+  --md-sys-color-sortable-item: #f5f5f5;
+  --md-sys-color-shadow-gray: #bdc3c780;
+  --md-sys-color-shadow-gray-hover: #bdc3c7b2;
+  --md-sys-color-on-no-glyph-in-plgo: #ff2020;
+  --md-sys-color-cell: #ffffff;
+  --md-sys-color-cell-life-max: 0, 0, 0;
+  --md-sys-color-shadow-cell: #777777;
+  --md-sys-color-outline-inputer: #22222244;
+  --md-sys-color-sidebar: #fffbfe99;
+  --md-sys-color-shadow-sidebar: #00000080;
+  --md-sys-color-border-darkmode-label: #f6f6f6;
+}
+
+:root.dark {
+  --md-sys-color-primary: #cfbcff;
+  --md-sys-color-on-primary: #381e72;
+  --md-sys-color-primary-container: #4f378a;
+  --md-sys-color-on-primary-container: #e9ddff;
+  --md-sys-color-secondary: #cbc2db;
+  --md-sys-color-on-secondary: #332d41;
+  --md-sys-color-secondary-container: #4a4458;
+  --md-sys-color-on-secondary-container: #e8def8;
+  --md-sys-color-tertiary: #efb8c8;
+  --md-sys-color-on-tertiary: #4a2532;
+  --md-sys-color-tertiary-container: #633b48;
+  --md-sys-color-on-tertiary-container: #ffd9e3;
+  --md-sys-color-error: #ffb4ab;
+  --md-sys-color-on-error: #690005;
+  --md-sys-color-error-container: #93000a;
+  --md-sys-color-on-error-container: #ffb4ab;
+  --md-sys-color-background: #1c1b1e;
+  --md-sys-color-on-background: #e6e1e6;
+  --md-sys-color-surface: #1c1b1e;
+  --md-sys-color-on-surface: #e6e1e6;
+  --md-sys-color-surface-variant: #49454e;
+  --md-sys-color-on-surface-variant: #cac4cf;
+  --md-sys-color-outline: #948f99;
+  --md-sys-color-outline-variant: #49454e;
+  --md-sys-color-shadow: #000000;
+  --md-sys-color-scrim: #000000;
+  --md-sys-color-inverse-surface: #e6e1e6;
+  --md-sys-color-inverse-on-surface: #313033;
+  --md-sys-color-inverse-primary: #6750a4;
+
+  --md-sys-color-alpha-primary: #cfbcff3a;
+  --md-sys-color-alpha-on-background: #e6e1e65f;
+  --md-sys-color-ripple: #ffffff80;
+  --md-sys-color-background-text: #ffffff1a;
+  --md-sys-color-disabled: #70668a;
+  --md-sys-color-on-disabled: #ae82ff;
+  --md-sys-color-background-text-dark: #ffffff37;
+  --md-sys-color-add-button-background: #70ee70;
+  --md-sys-color-add-button-border: #30dd30;
+  --md-sys-color-rem-button-background: #ee7070;
+  --md-sys-color-rem-button-border: #dd3030;
+  --md-sys-color-copy-button-hover-outline: #dddddd44;
+  --md-sys-color-shadow-alpha-33: #ffffff43;
+  --md-sys-color-shadow-alpha-1f: #ffffff2f;
+  --md-sys-color-shadow-alpha-3d: #ffffff4d;
+  --md-sys-color-shadow-alpha-1a: #ffffff2a;
+  --md-sys-color-shadow-alpha-4c: #ffffff5c;
+  --md-sys-color-shadow-alpha-05: #ffffff15;
+  --md-sys-color-shadow-alpha-21: #ffffff31;
+  --md-sys-color-sortable-item: #0a0a0a;
+  --md-sys-color-shadow-gray: #bdc3c750;
+  --md-sys-color-shadow-gray-hover: #bdc3c772;
+  --md-sys-color-on-no-glyph-in-plgo: #de7c7c;
+  --md-sys-color-cell: #000000;
+  --md-sys-color-cell-life-max: 255, 255, 255;
+  --md-sys-color-shadow-cell: #777777;
+  --md-sys-color-outline-inputer: #dddddd66;
+  --md-sys-color-sidebar: #1c1b1eaa;
+  --md-sys-color-shadow-sidebar: #ffffff85;
+  --md-sys-color-border-darkmode-label: #090909;
 }
 
 * {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   overflow: auto;
-  transition: filter 0.3s ease;
   -webkit-tap-highlight-color: transparent;
+}
+
+/* 设置整个视图过渡的时长 */
+::view-transition {
+  animation-duration: 15s; /* 将过渡时间改为 1.5 秒 */
+}
+
+.add-button {
+  background-color: var(--md-sys-color-add-button-background);
+  border: 1px solid var(--md-sys-color-add-button-border);
+  color: black;
+  border-radius: 4px;
+  width: 0;
+  height: 20px;
+  margin-left: 4px;
+}
+
+.rem-button {
+  background-color: var(--md-sys-color-rem-button-background);
+  border: 1px solid var(--md-sys-color-rem-button-border);
+  color: black;
+  width: 0;
+  height: 20px;
+  border-radius: 4px;
 }
 
 .primary-button {
@@ -89,11 +209,11 @@
   transition:
     outline-color 0.5s ease,
     background-color 0.5s ease;
-  outline-color: transparent;
+  outline: solid 1px transparent;
 }
 
 .copy-button:hover {
-  outline: solid 1px #2224;
+  outline: solid 1px var(--md-sys-color-copy-button-hover-outline);
   background-color: var(--md-sys-color-background-text-dark);
 }
 
@@ -109,7 +229,7 @@
 }
 
 .shadow-button {
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 5px var(--md-sys-color-shadow-alpha-33);
 }
 
 .other-options-span {
@@ -136,8 +256,8 @@ dialog {
   background-color: var(--md-sys-color-surface);
   color: var(--md-sys-color-on-surface);
   box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.12),
-    0 1px 2px rgba(0, 0, 0, 0.24);
+    0 1px 3px var(--md-sys-color-shadow-alpha-1f),
+    0 1px 2px var(--md-sys-color-shadow-alpha-3d);
   overflow: hidden;
   position: fixed;
   margin: 0;
@@ -165,7 +285,7 @@ header {
   background-color: var(--md-sys-color-surface);
   color: var(--md-sys-color-on-surface);
   padding: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--md-sys-color-shadow-alpha-1a);
   overflow: hidden;
 }
 
@@ -190,8 +310,8 @@ main > div,
   border-radius: 12px;
   padding: 16px;
   box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.12),
-    0 1px 2px rgba(0, 0, 0, 0.24);
+    0 1px 3px var(--md-sys-color-shadow-alpha-1f),
+    0 1px 2px var(--md-sys-color-shadow-alpha-3d);
   overflow: visible;
 }
 
@@ -326,7 +446,7 @@ input[type="range"]::-webkit-slider-thumb {
   background-color: var(--md-sys-color-primary);
   border: 1px solid transparent;
   margin-top: -6px;
-  box-shadow: 0 0 0 12px rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 12px transparent;
   border-image: linear-gradient(
       var(--md-sys-color-primary),
       var(--md-sys-color-primary)
@@ -336,7 +456,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 input[type="range"]:active::-webkit-slider-thumb,
 input[type="range"]:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 12px var(--md-sys-color-shadow-alpha-33);
   z-index: 3;
 }
 
@@ -365,4 +485,42 @@ footer {
 footer a {
   color: var(--md-sys-color-primary);
   text-decoration: none;
+}
+
+/* 隐藏原生复选框 */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--md-sys-color-outline);
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--md-sys-color-primary-container);
+  border-color: var(--md-sys-color-primary-container);
+}
+
+input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: auto;
+  height: auto;
+  font-family: "NerdFontsSymbols Nerd Font";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--md-sys-color-on-primary-container);
+  transform: translate(-50%, -50%);
 }

@@ -41,23 +41,6 @@ input[class="uni"] {
   margin: 0 4px;
 }
 
-.add-button {
-  background-color: #90ff90;
-  border: 1px solid #50ff50;
-  border-radius: 4px;
-  height: 20px;
-  width: 20px;
-  margin-left: 4px;
-}
-
-.rem-button {
-  background-color: #ff9090;
-  border: 1px solid #ff5050;
-  height: 20px;
-  width: 20px;
-  border-radius: 4px;
-}
-
 button.nf {
   font-size: 1rem;
 }
