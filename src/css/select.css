@@ -39,7 +39,6 @@
   color: var(--md-sys-color-on-surface-variant);
   max-height: 180px;
   overflow: hidden;
-  transition: height 0.1s ease;
   border-radius: 8px;
 }
 
