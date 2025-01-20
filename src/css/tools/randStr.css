@@ -34,7 +34,7 @@ main > div > div {
 }
 
 input[type="checkbox"] {
-  margin-right: 8px;
+  margin-right: 8px !important;
 }
 
 input[class="uni"] {
