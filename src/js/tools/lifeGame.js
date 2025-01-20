@@ -496,6 +496,12 @@ clearGenerationsBtn.addEventListener('click', () => {
   updateCount();
 });
 
+window.addEventListener('message', event => {
+  if (event.data.type === 'outterColorSchemeChange') {
+    resetStyle(typeCount);
+  }
+});
+
 container.addEventListener('click', toggle);
 resetGrid(size);
 resetStyle(typeCount);
