@@ -385,13 +385,21 @@ function flipAnimation(item, targetItem, direction) {
 }
 
 function applyFlipAnimation(element, deltaX, deltaY) {
-  element.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
-  element.style.transition = 'transform 0s';
-
-  element.clientTop;
-
-  element.style.transform = '';
-  element.style.transition = 'transform 0.2s ease';
+  const animation = element.animate(
+    [
+      {
+        transform: `translate(${deltaX}px, ${deltaY}px)`
+      },
+      {
+        transform: ''
+      }
+    ],
+    { duration: 500, easing: 'ease' }
+  );
+  animation.addEventListener('finish', () => {
+    element.style.zIndex = null;
+    delete element.dataset.animating;
+  });
 }
 
 function updateOrderArray(item, targetItem) {

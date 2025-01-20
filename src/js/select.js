@@ -19,6 +19,12 @@
     const selectContent = selectContainer.querySelector('.select-content');
     const filter = selectContainer.querySelector('.filter');
 
+    let animate = optionsList.animate([{ height: 0 }], {
+      duration: 0,
+      easing: 'ease',
+      fill: 'forwards'
+    });
+
     select.addEventListener('click', e => {
       if (
         e.target.classList.contains('filter') ||
@@ -153,23 +159,30 @@
     }
 
     function updateOptionsListHeightAndFilterDisplay() {
+      let duration;
       if (!optionsList.classList.contains('active')) {
-        optionsList.style.transition = 'height 0.2s ease';
+        duration = 350;
         filter.style.display = 'none';
         selectContent.style.display = null;
-        optionsList.style.height = '0';
+        animate = optionsList.animate([{ height: '0' }], {
+          duration,
+          easing: 'ease',
+          fill: 'forwards'
+        });
         return;
       }
-      optionsList.style.transition = 'height 0.1s ease';
+      duration = 230;
       filter.style.display = 'initial';
       selectContent.style.display = 'none';
-      const prevHeight = optionsList.style.height;
-      optionsList.style.height = 'auto';
+      const prevHeight = getComputedStyle(optionsList).height;
+      animate.cancel();
       const rects = optionsList.getBoundingClientRect();
       const height = rects.bottom - rects.top;
-      optionsList.style.height = prevHeight;
-      optionsList.clientTop;
-      optionsList.style.height = `${height}px`;
+      optionsList.animate([{ height: prevHeight }, { height: `${height}px` }], {
+        duration,
+        easing: 'ease',
+        fill: 'forwards'
+      });
     }
 
     filter.addEventListener('input', () => {
