@@ -818,6 +818,7 @@ const codeBlock = document.getElementById('json-code');
 const inputerContainer = document.getElementById('inputer-container');
 const errorRes = document.getElementById('error');
 const idsSvgContainer = document.getElementById('ids-svg-container');
+const highlightJsStyle = document.getElementById('highlight-js-style');
 
 function handleInput(e) {
   if (e.target.id === 'inputer-container') return;
@@ -884,4 +885,14 @@ parseButton.addEventListener('click', () => {
   codeBlock.innerHTML = highlightedJson.value;
   codeBlock.classList.add('hljs');
   codeBlock.classList.add('language-json');
+});
+
+window.addEventListener('message', event => {
+  if (event.data.type === 'outterColorSchemeChange') {
+    if (event.data.colorScheme === 'dark') {
+      highlightJsStyle.setAttribute('href', '../highlight.js/dark.min.css');
+    } else if (event.data.colorScheme === 'light') {
+      highlightJsStyle.setAttribute('href', '../highlight.js/default.min.css');
+    }
+  }
 });

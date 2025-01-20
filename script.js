@@ -59,9 +59,8 @@ menuItems.forEach(item => {
 toolButtons.forEach(button => {
   if (button.classList.contains('online-tool')) {
     button.addEventListener('click', () => {
-      window.location.href = button.dataset.url;
+      window.open(button.dataset.url, '_blank');
     });
-
     return;
   }
 
@@ -75,9 +74,6 @@ toolButtons.forEach(button => {
       toolbox.style.display = 'none';
       updateActiveMenuItem('home');
     }, 50);
-
-    if (button.classList.contains('inner-online-tool'))
-      titleH1.innerText = button.innerText;
   });
 });
 
