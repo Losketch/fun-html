@@ -553,16 +553,6 @@ label:not(.md-switch) input[type="checkbox"]:active::after {
   background-color: var(--md-sys-color-shadow-alpha-1a);
 }
 
-label:not(.md-switch) input[type="checkbox"]:disabled {
-  background-color: var(--md-sys-color-surface-disabled, #f5f5f5);
-  border-color: var(--md-sys-color-outline);
-  cursor: not-allowed;
-}
-
-label:not(.md-switch) input[type="checkbox"]:disabled::after {
-  display: none;
-}
-
 dialog::backdrop {
   background-color: var(--md-sys-color-dialog-backdrop);
 }
