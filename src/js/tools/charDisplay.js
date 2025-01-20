@@ -372,12 +372,16 @@ function flipAnimation(item, targetItem, direction) {
   applyFlipAnimation(item, deltaXItem, deltaYItem);
   applyFlipAnimation(targetItem, deltaXTarget, deltaYTarget);
 
-  item.addEventListener('transitionend', e => {
-    if (e.srcElement !== item) return;
-    item.style.zIndex = null;
-    delete item.dataset.animating;
-    delete targetItem.dataset.animating;
-  });
+  item.addEventListener(
+    'transitionend',
+    e => {
+      if (e.srcElement !== item) return;
+      item.style.zIndex = null;
+      delete item.dataset.animating;
+      delete targetItem.dataset.animating;
+    },
+    { once: true }
+  );
 }
 
 function applyFlipAnimation(element, deltaX, deltaY) {
