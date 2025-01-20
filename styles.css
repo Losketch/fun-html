@@ -38,29 +38,6 @@ footer p {
   margin: 5px;
 }
 
-footer p a {
-  color: var(--md-sys-color-primary);
-  text-decoration: none;
-  box-shadow: 0 -2px var(--md-sys-color-shadow-gray) inset;
-  transition: all 0.3s ease;
-}
-
-footer p a:hover {
-  cursor: pointer;
-  box-shadow: 0px -1.85rem 0px var(--md-sys-color-shadow-gray-hover) inset;
-}
-
-footer p a::after {
-  content: "";
-  display: inline-block;
-  width: 12px;
-  height: 16px;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12px" height="12px" viewBox="0 0 24 24" style="cursor:pointer;"><g stroke-width="2.1" stroke="%23666" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 13.5 17 19.5 5 19.5 5 7.5 11 7.5"></polyline><path d="M14,4.5 L20,4.5 L20,10.5 M20,4.5 L11,13.5"></path></g></svg>');
-  background-size: contain;
-  background-repeat: no-repeat;
-  vertical-align: middle;
-}
-
 #content {
   flex-grow: 1;
   overflow: auto;
@@ -123,7 +100,7 @@ nav {
   z-index: 1;
 }
 
-.menuItem {
+.menu-item {
   display: flex;
   overflow: hidden;
   flex-direction: column;
@@ -150,14 +127,14 @@ nav {
     color 0.3s ease;
 }
 
-.menuItemName {
+.menu-item-name {
   font-size: 12px;
   margin-top: 4px;
   overflow: visible;
   user-select: none;
 }
 
-.menuItem.active .nf {
+.menu-item.active .nf {
   color: var(--md-sys-color-primary);
   background-color: var(--md-sys-color-alpha-primary);
 }
