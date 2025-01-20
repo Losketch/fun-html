@@ -63,6 +63,8 @@
   --md-sys-color-border-darkmode-label: #f6f6f6;
   --md-sys-color-dialog-backdrop: #0000001a;
   --md-sys-color-check: #c7c5c9;
+  --md-sys-color-extra: #ffaa33;
+  --md-sys-color-on-extra: #653f14;
 }
 
 :root.dark {
@@ -130,6 +132,8 @@
   --md-sys-color-border-darkmode-label: #090909;
   --md-sys-color-dialog-backdrop: #0000004a;
   --md-sys-color-check: #999599;
+  --md-sys-color-extra: #ffbe73;
+  --md-sys-color-on-extra: #472d12;
 }
 
 * {
@@ -179,11 +183,15 @@
 .error {
   background: var(--md-sys-color-error);
   color: var(--md-sys-color-on-error);
+  padding: 2px 1px;
+  margin: 0 1px;
 }
 
 .extra {
-  background: green;
-  color: var(--md-sys-color-on-error);
+  background: var(--md-sys-color-extra);
+  color: var(--md-sys-color-on-extra);
+  padding: 2px 1px;
+  margin: 0 1px;
 }
 
 .code-container {

@@ -156,3 +156,7 @@ code {
 #json-code {
   background-color: transparent;
 }
+
+#error {
+  line-height: 1.2rem;
+}

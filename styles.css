@@ -171,26 +171,6 @@ hr {
   display: none;
 }
 
-.online {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-}
-
-.online > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  overflow: hidden;
-}
-
-.online > div > button {
-  margin: 7px 10px;
-  width: 90%;
-  overflow: hidden;
-}
-
 ::-webkit-scrollbar {
   display: none;
 }

@@ -19,13 +19,13 @@ th {
 }
 
 tr:nth-child(even) td {
-  background-color: var(--md-sys-color-secondary);
-  color: var(--md-sys-color-on-secondary);
+  background-color: var(--md-sys-color-background-text-dark);
+  color: var(--md-sys-color-shadow-sidebar);
 }
 
 tr:nth-child(odd) td {
-  background-color: var(--md-sys-color-tertiary);
-  color: var(--md-sys-color-on-tertiary);
+  background-color: var(--md-sys-color-background-text);
+  color: var(--md-sys-color-shadow-sidebar);
 }
 
 tbody > tr:first-child > th:first-child {
