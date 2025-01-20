@@ -62,6 +62,7 @@
   --md-sys-color-shadow-sidebar: #00000080;
   --md-sys-color-border-darkmode-label: #f6f6f6;
   --md-sys-color-dialog-backdrop: #0000001a;
+  --md-sys-color-check: #a4afb9;
 }
 
 :root.dark {
@@ -128,6 +129,7 @@
   --md-sys-color-shadow-sidebar: #ffffff85;
   --md-sys-color-border-darkmode-label: #090909;
   --md-sys-color-dialog-backdrop: #0000004a;
+  --md-sys-color-check: #8a8690;
 }
 
 * {
@@ -495,7 +497,7 @@ label:not(.md-switch):has(input[type="checkbox"]) {
 label:not(.md-switch):has(input[type="checkbox"]) svg {
   position: absolute;
   left: 4.5px;
-  stroke: var(--md-sys-color-on-primary-container);
+  stroke: var(--md-sys-color-check);
   stroke-dasharray: 28.5px;
   stroke-dashoffset: 28.5px;
   transition: stroke-dashoffset 0.25s ease;
@@ -537,8 +539,8 @@ label:not(.md-switch) input[type="checkbox"]::after {
 }
 
 label:not(.md-switch) input[type="checkbox"]:checked {
-  background-color: var(--md-sys-color-primary-container);
-  border-color: var(--md-sys-color-primary-container);
+  background-color: var(--md-sys-color-primary);
+  border-color: var(--md-sys-color-primary);
 }
 
 label:not(.md-switch) input[type="checkbox"]:hover::after {
