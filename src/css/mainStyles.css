@@ -42,6 +42,8 @@
   --md-sys-color-rem-button-background: #ff9090;
   --md-sys-color-rem-button-border: #ee5050;
   --md-sys-color-copy-button-hover-outline: #22222266;
+  --md-sys-color-on-copy-button: #22222275;
+  --md-sys-color-on-hover-copy-button: #22222295;
   --md-sys-color-shadow-alpha-33: #00000033;
   --md-sys-color-shadow-alpha-1f: #0000001f;
   --md-sys-color-shadow-alpha-3d: #0000003d;
@@ -111,6 +113,8 @@
   --md-sys-color-rem-button-background: #ee7070;
   --md-sys-color-rem-button-border: #dd3030;
   --md-sys-color-copy-button-hover-outline: #dddddd72;
+  --md-sys-color-on-copy-button: #dddddd75;
+  --md-sys-color-on-hover-copy-button: #dddddd95;
   --md-sys-color-shadow-alpha-33: #ffffff4f;
   --md-sys-color-shadow-alpha-1f: #ffffff3a;
   --md-sys-color-shadow-alpha-3d: #ffffff51;
@@ -212,13 +216,14 @@
   display: flex;
   background-color: var(--md-sys-color-background-text-middle);
   border-radius: 8px;
-  color: var(--md-sys-color-on-primary-container);
+  color: var(--md-sys-color-on-copy-button);
   overflow: hidden;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition:
     outline-color 0.5s ease,
+    color 0.5s ease,
     background-color 0.5s ease;
   outline: solid 1px transparent;
 }
@@ -226,6 +231,7 @@
 .copy-button:hover {
   outline: solid 1px var(--md-sys-color-copy-button-hover-outline);
   background-color: var(--md-sys-color-background-text-dark);
+  color: var(--md-sys-color-on-hover-copy-button);
 }
 
 .json {
