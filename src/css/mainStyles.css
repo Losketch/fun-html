@@ -288,6 +288,11 @@ a:not(.menu-item)::after {
   background-size: contain;
   background-repeat: no-repeat;
   vertical-align: middle;
+  transform: translateY(-0.3em);
+}
+
+:root.dark a:not(.menu-item)::after {
+  filter: brightness(1.8);
 }
 
 dialog {
