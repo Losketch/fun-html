@@ -33,7 +33,7 @@
   --md-sys-color-alpha-on-background: #1c1b1e3f;
   --md-sys-color-ripple: #ffffff80;
   --md-sys-color-background-text: #0000000f;
-  --md-sys-color-disabled: #f2ebff;
+  --md-sys-color-disabled: #efe8ff;
   --md-sys-color-on-disabled: #7d788a;
   --md-sys-color-background-text-middle: #00000015;
   --md-sys-color-background-text-dark: #00000027;
@@ -62,7 +62,7 @@
   --md-sys-color-shadow-sidebar: #00000080;
   --md-sys-color-border-darkmode-label: #f6f6f6;
   --md-sys-color-dialog-backdrop: #0000001a;
-  --md-sys-color-check: #a4afb9;
+  --md-sys-color-check: #c7c5c9;
 }
 
 :root.dark {
@@ -101,7 +101,7 @@
   --md-sys-color-ripple: #ffffff80;
   --md-sys-color-background-text: #ffffff1a;
   --md-sys-color-disabled: #70668a;
-  --md-sys-color-on-disabled: #ae82ff;
+  --md-sys-color-on-disabled: #eee6ff;
   --md-sys-color-background-text-middle: #ffffff2a;
   --md-sys-color-background-text-dark: #ffffff37;
   --md-sys-color-add-button-background: #70ee70;
@@ -129,7 +129,7 @@
   --md-sys-color-shadow-sidebar: #ffffff85;
   --md-sys-color-border-darkmode-label: #090909;
   --md-sys-color-dialog-backdrop: #0000004a;
-  --md-sys-color-check: #8a8690;
+  --md-sys-color-check: #999599;
 }
 
 * {
@@ -517,12 +517,12 @@ label:not(.md-switch) input[type="checkbox"] {
   height: 20px;
   overflow: visible;
   border: 2px solid var(--md-sys-color-outline);
-  background-color: var(--md-sys-color-surface);
+  background-color: transparent;
   border-radius: 4px;
   accent-color: var(--md-sys-color-primary);
   cursor: pointer;
   position: relative;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 label:not(.md-switch) input[type="checkbox"]::after {
@@ -535,7 +535,7 @@ label:not(.md-switch) input[type="checkbox"]::after {
   background-color: transparent;
   border-radius: 50%;
   transform: scale(0);
-  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 label:not(.md-switch) input[type="checkbox"]:checked {
