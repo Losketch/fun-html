@@ -30,10 +30,6 @@ main > div {
   overflow: visible;
 }
 
-.nf::before {
-  transform: translateY(-0.055555em);
-}
-
-.nf {
-  transform: translateY(0.115555em);
+#generations {
+  width: 50%;
 }

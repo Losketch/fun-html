@@ -18,7 +18,7 @@ main > div > div {
   display: block;
   font-size: 24px;
   box-shadow: 0 1px 0px var(--md-sys-color-shadow-alpha-05);
-  background-color: var(--md-sys-color-background-text);
+  background-color: var(--md-sys-color-surface-container-low);
   padding: 8px;
   border-radius: 10px;
 }

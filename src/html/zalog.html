@@ -8,48 +8,52 @@
     <title>zalog 文本生成器</title>
 
     <link rel="stylesheet" href="../css/mainStyles.css" />
-    <link rel="stylesheet" href="../css/materialInput.css" />
-    <link rel="stylesheet" href="../css/rippleButton.css" />
     <link rel="stylesheet" href="../css/nerd-fonts-generated.min.css" />
     <link rel="stylesheet" href="../css/tools/zalog.css" />
+    <script src="../../m3ui.js"></script>
     <script defer src="../js/changeHeader.js"></script>
-    <script defer src="../js/rippleButton.js"></script>
     <script defer src="../js/iframeColorSchemeSync.js"></script>
-    <script defer src="../js/materialInput.js"></script>
     <script defer src="../js/tools/zalog.js"></script>
   </head>
   <body>
     <div>
       <main>
         <div>
-          <div class="material-input-container">
-            <input type="text" id="input" />
-            <label for="input">待转换字符</label>
-          </div>
+          <md-outlined-text-field
+            label="待转换的字符"
+            id="input"
+            class="font-without-ctrlctrl">
+          </md-outlined-text-field>
+          <md-outlined-text-field
+            label="生成结（jié）果"
+            id="output"
+            class="font-without-ctrlctrl"
+            readonly>
+          </md-outlined-text-field>
           <div class="opts">
-            <div id="range">
-              重叠字符数范围：
-              <div id="min-container" class="material-input-container">
-                <input value="5" type="number" id="min" />
-                <label for="min">下限</label>
-              </div>
-              ~
-              <div id="max-container" class="material-input-container">
-                <input value="10" type="number" id="max" />
-                <label for="max">上限</label>
-              </div>
-            </div>
+            重叠字符数范围：
+            <md-slider
+              labeled
+              range
+              min="1"
+              max="100"
+              value-start="5"
+              value-end="10"
+              step="1"
+              id="count-range">
+            </md-slider>
             <div class="btns">
-              <button id="gen-button" class="primary-button">生成</button>
-              <button id="copy-button" class="secondary-button">复制</button>
+              <md-filled-button
+                id="gen-button"
+                class="primary-button">
+                生成
+              </md-filled-button>
+              <md-filled-tonal-button
+                id="copy-button"
+                class="secondary-button">
+                复制
+              </md-filled-tonal-button>
             </div>
-          </div>
-          <div class="material-input-container">
-            <input readonly type="text" id="output" />
-            <label for="input"
-              >生成<ruby>结<rp>（</rp><rt>jié</rt><rp>）</rp></ruby
-              >果</label
-            >
           </div>
         </div>
       </main>

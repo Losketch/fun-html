@@ -7,12 +7,9 @@
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <title>随机草人器</title>
     <link rel="stylesheet" href="../css/mainStyles.css" />
-    <link rel="stylesheet" href="../css/rippleButton.css" />
-    <link rel="stylesheet" href="../css/materialInput.css" />
     <link rel="stylesheet" href="../css/tools/randFuck.css" />
+    <script src="../../m3ui.js"></script>
     <script defer src="../js/changeHeader.js"></script>
-    <script defer src="../js/rippleButton.js"></script>
-    <script defer src="../js/materialInput.js"></script>
     <script defer src="../js/iframeColorSchemeSync.js"></script>
     <script defer src="../js/tools/randFuck.js"></script>
   </head>
@@ -22,14 +19,32 @@
         <div id="res"></div>
 
         <div id="config">
-          <div><button id="start" class="shadow-button">开始草人</button></div>
-          <div class="material-input-container">
-            <input id="count" type="number" value="10" />
-            <label for="count">草人次数</label>
-          </div>
-          <div class="material-input-container">
-            <input id="target" type="text" value="a;b;c" />
-            <label for="target">待草的人</label>
+          <md-list>
+            <md-list-item>
+              草人次数
+              <md-outlined-text-field
+                type="number"
+                id="count"
+                value="10"
+                min="1"
+                max="10000"
+                slot="end">
+              </md-outlined-text-field>
+            </md-list-item>
+            <md-list-item>
+              待草的人
+              <md-outlined-text-field
+                value="a;b;c"
+                id="target"
+                supporting-text="每个人名之间用半角分号（“;”）分隔。如果同一个人名出现了多次，则其出现次数代表着这个人被草的权重，比如填写“a;a;b;b;b;c”则表示 a、b、c 的被草的权重分别为 2、3、1，即 a、b、c 被草的概率分别为六分之二、六分之三和六分之一。"
+                slot="end">
+              </md-outlined-text-field>
+            </md-list-item>
+          </md-list>
+          <div class="start-container">
+            <md-filled-button id="start" class="shadow-button">
+              开始草人
+            </md-filled-button>
           </div>
         </div>
       </main>

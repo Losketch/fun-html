@@ -2,12 +2,20 @@ const windowWidth = window.innerWidth;
 const windowHeight = window.innerHeight;
 
 const input = document.getElementById('text');
+const counter =
+  input
+    .shadowRoot
+    .querySelector('md-filled-field')
+    .shadowRoot
+    .querySelector('.counter');
+const textarea = input.shadowRoot.querySelector('textarea');
 const clear = document.getElementById('clear');
 
-const bold = document.getElementById('bold');
+const fontWeightSlider = document.getElementById('font-weight-slider');
 const italic = document.getElementById('italic');
-let boldOn = false;
 let italicOn = false;
+const fontSizeSlider = document.getElementById('font-size-slider');
+let pressedFontSizeSliderTop = 0;
 
 const addFontFeatureSettingsButton = document.getElementById(
   'add-font-feature-settings-button'
@@ -21,17 +29,11 @@ const addedFontFeatureSettingsContainer = document.getElementById(
 const addFontFeatureSettingsName =
   addFontFeatureSettingsDialog.querySelector('#name');
 const addFontFeatureSettingsAvailability =
-  addFontFeatureSettingsDialog.querySelector('#availability-input');
+  addFontFeatureSettingsDialog.querySelector('#availability-switch');
 const addFontFeatureSettingsClose =
   addFontFeatureSettingsDialog.querySelector('#close');
 const addFontFeatureSettingsSubmit =
   addFontFeatureSettingsDialog.querySelector('#submit');
-const addFontFeatureSettingsErrorDialog =
-  addFontFeatureSettingsDialog.querySelector('#error');
-const addFontFeatureSettingsErrorText =
-  addFontFeatureSettingsErrorDialog.querySelector('#error-text');
-const addFontFeatureSettingsErrorClose =
-  addFontFeatureSettingsErrorDialog.querySelector('#error-close');
 const addedFontFeatureSettings = new Set();
 const addedFontFeatureSettingsName = new Set();
 
@@ -40,25 +42,77 @@ const fontUploadInput = document.getElementById('font-upload');
 const uploadButton = document.getElementById('upload-button');
 let itemsOrder = [];
 
+counter.innerText = '0';
+
+Object.defineProperty(String.prototype, 'codePointLength', {
+  get() {
+    let len = 0;
+    for (let i = 0; i < this.length; ) {
+      const codePoint = this.codePointAt(i);
+      i += codePoint > 0xffff ? 2 : 1;
+      len++;
+    }
+    return len;
+  },
+  enumerable: false,
+  configurable: false
+});
+
 document.querySelectorAll('a').forEach(a => {
   a.addEventListener('click', () => changeUrl(a.textContent));
 });
 
-bold.addEventListener('click', () => {
-  boldOn = boldOn ? false : true;
-  input.style.fontWeight = boldOn ? 'bold' : 'normal';
+fontWeightSlider.addEventListener('input', () => {
+  input.style.setProperty(
+    '--md-filled-text-field-input-text-weight',
+    fontWeightSlider.value
+  );
 });
 
-italic.addEventListener('click', () => {
+italic.addEventListener('change', () => {
   italicOn = italicOn ? false : true;
-  input.style.fontStyle = italicOn ? 'italic' : 'normal';
+  textarea.style.fontStyle = italicOn ? 'italic' : 'normal';
 });
+
+fontSizeSlider.addEventListener('input', () => {
+  input.style.setProperty(
+    '--md-filled-text-field-input-text-size',
+    fontSizeSlider.value + 'rem'
+  );
+  input.style.setProperty(
+    '--md-filled-text-field-input-text-line-height',
+    (+fontSizeSlider.value) * 1.65 + 'rem'
+  );
+
+  const fontSizeSliderTop = fontSizeSlider.getBoundingClientRect().top;
+  window.scrollTo({
+    top: window.scrollY + fontSizeSliderTop - pressedFontSizeSliderTop,
+    behavior: 'instant'
+  });
+});
+
+function onFontSizeSliderDragStart() {
+  pressedFontSizeSliderTop = fontSizeSlider.getBoundingClientRect().top;
+  setTimeout(() => {
+    const fontSizeSliderTop = fontSizeSlider.getBoundingClientRect().top;
+    window.scrollTo({
+      top: window.scrollY + fontSizeSliderTop - pressedFontSizeSliderTop,
+      behavior: 'instant'
+    });
+  }, 0);
+}
+
+fontSizeSlider.addEventListener('mousedown', onFontSizeSliderDragStart);
+fontSizeSlider.addEventListener('touchstart', onFontSizeSliderDragStart);
 
 clear.addEventListener('click', () => {
   input.value = '';
   input.dispatchEvent(new Event('input'));
-  input.dispatchEvent(new Event('blur'));
-  window.parent.postMessage({ type: 'clearMainContentHeight' }, '*');
+});
+
+input.addEventListener('input', () => {
+  textarea.removeAttribute('maxlength');
+  counter.innerText = input.value.codePointLength;
 });
 
 function changeUrl(url) {
@@ -80,27 +134,10 @@ function remove(ele) {
   ele.remove();
 }
 
-function updateDialogDimension(dialog) {
-  const rect = dialog.getBoundingClientRect();
-  dialog.style.left = `${(windowWidth - rect.width) / 2}px`;
-  dialog.style.top = `${(windowHeight - rect.height) / 2}px`;
-}
-
 function addFontFeatureSetting(name, availability) {
-  if (addedFontFeatureSettingsName.has(name)) {
-    addFontFeatureSettingsErrorText.innerText =
-      '该字体特征设置已添加过了，不可再次添加。';
-    addFontFeatureSettingsErrorDialog.showModal();
-    updateDialogDimension(addFontFeatureSettingsErrorDialog);
+  if (addedFontFeatureSettingsName.has(name) ||
+        !validFontFeatureSettings.has(name))
     return false;
-  }
-  if (!validFontFeatureSettings.has(name)) {
-    addFontFeatureSettingsErrorText.innerHTML =
-      '该字体特征设置无效，请参见 <a href="" onclick="changeUrl(this.textContent)">https://learn.microsoft.com/zh-cn/typography/opentype/spec/featurelist</a> 中定义的有效字体特征设置。';
-    addFontFeatureSettingsErrorDialog.showModal();
-    updateDialogDimension(addFontFeatureSettingsErrorDialog);
-    return false;
-  }
 
   const fontFeatureSetting = { name, availability };
 
@@ -112,21 +149,21 @@ function addFontFeatureSetting(name, availability) {
     addedFontFeatureSettingsContainer,
     `
     ${name}
-    <label class="md-switch"><input type="checkbox" ${
-      availability ? 'checked' : ''
-    }><span class="track"><span class="thumb"></span></span></label>
-    <button class="rem-button nf nf-cod-remove"></button>
+    <md-switch ${availability ? 'selected' : ''}></md-switch>
+    <md-filled-tonal-icon-button class="rem-button">
+      <md-icon class="nf nf-fa-times"></md-icon>
+    </md-filled-tonal-icon-button>
   `
   );
 
   const fontFeatureSettingAvailabilityEle =
-    fontFeatureSettingEle.querySelector('input');
+    fontFeatureSettingEle.querySelector('md-switch');
   fontFeatureSettingAvailabilityEle.addEventListener('change', () => {
-    fontFeatureSetting.availability = fontFeatureSettingAvailabilityEle.checked;
+    fontFeatureSetting.availability = fontFeatureSettingAvailabilityEle.selected;
     updateEleFontFeatureSettings();
   });
 
-  const remButton = fontFeatureSettingEle.querySelector('button');
+  const remButton = fontFeatureSettingEle.querySelector('md-filled-tonal-icon-button');
   remButton.addEventListener('click', () => {
     addedFontFeatureSettings.delete(fontFeatureSetting);
     addedFontFeatureSettingsName.delete(fontFeatureSetting.name);
@@ -138,7 +175,7 @@ function addFontFeatureSetting(name, availability) {
 }
 
 function updateEleFontFeatureSettings() {
-  input.style.fontFeatureSettings = [...addedFontFeatureSettings]
+  textarea.style.fontFeatureSettings = [...addedFontFeatureSettings]
     .map(fontFeatureSetting => {
       const { name, availability } = fontFeatureSetting;
       return `"${name}" ${availability ? 'on' : 'off'}`;
@@ -159,13 +196,33 @@ function isFontFile(file) {
   return fontMimeTypes.includes(file.type);
 }
 
+function checkFontFeatureSettingsName() {
+  const name = addFontFeatureSettingsName.value;
+  if (!name ||
+        addedFontFeatureSettingsName.has(name) ||
+        !validFontFeatureSettings.has(name)) {
+    if (!addFontFeatureSettingsName.children.length) {
+      const errorIcon = document.createElement('md-icon');
+      errorIcon.setAttribute('slot', 'trailing-icon');
+      errorIcon.className = 'nf nf-fa-circle_exclamation';
+      addFontFeatureSettingsName.appendChild(errorIcon);
+    }
+    addFontFeatureSettingsName.error = true;
+    addFontFeatureSettingsName.errorText = !name ? '字体特性设置名称不能为空。' :
+      addedFontFeatureSettingsName.has(name) ? '该字体特征设置已添加过了，不可再次添加。' :
+      '该字体特征设置无效，请参见 https://learn.microsoft.com/zh-cn/typography/opentype/spec/featurelist 中定义的有效字体特征设置。'
+  } else {
+    if (addFontFeatureSettingsName.children.length)
+      addFontFeatureSettingsName.children[0].remove();
+    addFontFeatureSettingsName.error = false;
+  }
+}
+
 addFontFeatureSettingsClose.addEventListener('click', () => {
   addFontFeatureSettingsDialog.close();
 });
 
-addFontFeatureSettingsErrorClose.addEventListener('click', () => {
-  addFontFeatureSettingsErrorDialog.close();
-});
+addFontFeatureSettingsName.addEventListener('input', checkFontFeatureSettingsName);
 
 addFontFeatureSettingsButton.addEventListener('click', () => {
   function preventScroll(event) {
@@ -181,17 +238,15 @@ addFontFeatureSettingsButton.addEventListener('click', () => {
   });
 
   addFontFeatureSettingsName.value = '';
-  addFontFeatureSettingsName.dispatchEvent(new Event('input'));
-  addFontFeatureSettingsName.dispatchEvent(new Event('blur'));
-  addFontFeatureSettingsAvailability.checked = true;
+  addFontFeatureSettingsAvailability.selected = true;
+  checkFontFeatureSettingsName();
 
-  addFontFeatureSettingsDialog.showModal();
-  updateDialogDimension(addFontFeatureSettingsDialog);
+  addFontFeatureSettingsDialog.show();
 });
 
 addFontFeatureSettingsSubmit.addEventListener('click', () => {
   const name = addFontFeatureSettingsName.value;
-  const availability = addFontFeatureSettingsAvailability.checked;
+  const availability = addFontFeatureSettingsAvailability.selected;
   const success = addFontFeatureSetting(name, availability);
   if (success) {
     addFontFeatureSettingsDialog.close();
@@ -274,16 +329,31 @@ function insertItem(text, index, fontObjectURL) {
   newItemText.textContent = text;
   newItem.appendChild(newItemText);
 
-  const moveUpButton = document.createElement('button');
-  moveUpButton.className = 'move-up nf nf-cod-arrow_up';
+  const moveUpButton = document.createElement('md-filled-tonal-icon-button');
+  moveUpButton.className = 'move-up';
+
+  const moveUpIcon = document.createElement('md-icon');
+  moveUpIcon.className = 'nf nf-cod-arrow_up';
+
+  moveUpButton.appendChild(moveUpIcon);
   newItem.appendChild(moveUpButton);
 
-  const moveDownButton = document.createElement('button');
-  moveDownButton.className = 'move-down nf nf-cod-arrow_down';
+  const moveDownButton = document.createElement('md-filled-tonal-icon-button');
+  moveDownButton.className = 'move-down';
+
+  const moveDownIcon = document.createElement('md-icon');
+  moveDownIcon.className = 'nf nf-cod-arrow_down';
+
+  moveDownButton.appendChild(moveDownIcon);
   newItem.appendChild(moveDownButton);
 
-  const deleteButton = document.createElement('button');
-  deleteButton.className = 'rem-button nf nf-cod-remove';
+  const deleteButton = document.createElement('md-filled-tonal-icon-button');
+  deleteButton.className = 'rem-button';
+
+  const deleteIcon = document.createElement('md-icon');
+  deleteIcon.className = 'nf nf-fa-times';
+  
+  deleteButton.appendChild(deleteIcon);
   newItem.appendChild(deleteButton);
 
   if (fontObjectURL) {
@@ -344,7 +414,7 @@ function updateInputFont() {
   const fontFamilyList = items
     .map(item => `'${item.querySelector('span').textContent}'`)
     .join(', ');
-  input.style.fontFamily = fontFamilyList;
+  input.style.setProperty('--md-filled-text-field-input-text-font', fontFamilyList);
 }
 
 function flipAnimation(item, targetItem, direction) {

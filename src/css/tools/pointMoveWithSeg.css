@@ -27,3 +27,18 @@ input.more-wide {
   display: flex;
   align-items: center;
 }
+
+md-list-item {
+  --md-list-item-label-text-size: 1rem;
+  --md-list-item-label-text-line-height: 1.5rem;
+  --md-list-item-one-line-container-height: 3rem;
+}
+
+md-slider {
+  margin: 0 -10px;
+  min-width: 150px;
+}
+
+#config-list {
+  width: 100%;
+}

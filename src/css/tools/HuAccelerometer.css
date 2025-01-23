@@ -29,3 +29,7 @@ body {
   top: 75px;
   font-size: 35px;
 }
+
+md-slider {
+  width: 90vw;
+}

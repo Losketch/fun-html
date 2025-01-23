@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../src/css/materialInput.css" />
     <link rel="stylesheet" href="../src/css/switch.css" />
     <link rel="stylesheet" href="./styles.css" />
+    <script src="../m3ui.js" ></script>
     <script>
       var time;
       var popup;
@@ -53,7 +54,10 @@
           <h3>可检索<span id="datasize"></span>字</h3>
         </div>
         <div id="sk_toolbar">
-          <input id="input" class="han" />
+          <md-outlined-text-field
+            id="input"
+            class="han">
+          </md-outlined-text-field>
           <button title="清除" id="buttClear">清</button>
           <button title="解构" id="buttDecompose">拆</button>
           <!--button title="独体" onclick="UI.clearFind();UI.key('#')"><b>#</b></button-->
@@ -64,27 +68,24 @@
       <div id="funcs">
         <span>・遍黑体扩展B区尚有许多字未完成，将会显示成宋体。</span>
         <div>
-          <div
-            >包含异体<label class="md-switch"
-              ><input
-                type="checkbox"
-                id="variant"
-                onclick="UI.setMode(this, 'variant')" /><span class="track"
-                ><span class="thumb"></span></span></label
-          ></div>
-          <div
-            >强行拆分<label class="md-switch"
-              ><input
-                type="checkbox"
-                id="subdivide"
-                onclick="UI.setMode(this, 'subdivide')" /><span class="track"
-                ><span class="thumb"></span></span></label
-          ></div>
-          <div
-            >部件键盘<label class="md-switch"
-              ><input type="checkbox" id="showkeypad" /><span class="track"
-                ><span class="thumb"></span></span></label
-          ></div>
+          <div>
+            包含异体
+            <md-switch
+              id="variant" 
+              onclick="UI.setMode(this, 'variant')">
+            </md-switch>
+          </div>
+          <div>
+            强行拆分
+            <md-switch
+              id="subdivide"
+              onclick="UI.setMode(this, 'subdivide')">
+            </md-switch>
+          </div>
+          <div>
+            部件键盘
+            <md-switch id="showkeypad"></md-switch>
+          </div>
         </div>
         <span id="scKey" class="grp">快捷栏：</span>
       </div>

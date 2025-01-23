@@ -1,4 +1,24 @@
 :root {
+  --md-filled-tonal-button-container-height: 2rem;
+  --md-filled-button-container-height: 2rem;
+  --md-outlined-button-container-height: 2rem;
+
+  --md-switch-track-width: 50px;
+  --md-switch-track-height: 24px;
+  --md-switch-handle-width: 12px;
+  --md-switch-handle-height: 12px;
+  --md-switch-pressed-handle-width: 20px;
+  --md-switch-pressed-handle-height: 20px;
+  --md-switch-selected-handle-width: 16px;
+  --md-switch-selected-handle-height: 16px;
+  --md-switch-state-layer-size: 40px;
+
+  --md-list-item-leading-space: 10px;
+  --md-list-item-trailing-space: 10px;
+
+  --md-outlined-text-field-supporting-text-size: 0.5rem;
+  --md-outlined-text-field-supporting-text-line-height: 0.6rem;
+
   --md-sys-color-primary: #6750a4;
   --md-sys-color-on-primary: #ffffff;
   --md-sys-color-primary-container: #e9ddff;
@@ -28,22 +48,19 @@
   --md-sys-color-inverse-surface: #313033;
   --md-sys-color-inverse-on-surface: #f4eff4;
   --md-sys-color-inverse-primary: #cfbcff;
+  --md-sys-color-surface-dim: #ded8e0;
+  --md-sys-color-surface-bright: #fdf7ff;
+  --md-sys-color-surface-container-lowest: #ffffff;
+  --md-sys-color-surface-container-low: #f8f2fa;
+  --md-sys-color-surface-container: #f2ecf4;
+  --md-sys-color-surface-container-high: #ece6ee;
+  --md-sys-color-surface-container-highest: #e6e0e9;
 
-  --md-sys-color-alpha-primary: #6750a42a;
-  --md-sys-color-alpha-on-background: #1c1b1e3f;
-  --md-sys-color-ripple: #ffffff80;
-  --md-sys-color-background-text: #0000000f;
-  --md-sys-color-disabled: #efe8ff;
-  --md-sys-color-on-disabled: #7d788a;
-  --md-sys-color-background-text-middle: #00000015;
-  --md-sys-color-background-text-dark: #00000027;
-  --md-sys-color-add-button-background: #90ff90;
-  --md-sys-color-add-button-border: #50ee50;
-  --md-sys-color-rem-button-background: #ff9090;
-  --md-sys-color-rem-button-border: #ee5050;
-  --md-sys-color-copy-button-hover-outline: #22222266;
-  --md-sys-color-on-copy-button: #22222275;
-  --md-sys-color-on-hover-copy-button: #22222295;
+  --md-sys-color-media-controls-panel: #efe8ff;
+  --md-sys-color-add-button: #90ff90;
+  --md-sys-color-on-add-button: #325932;
+  --md-sys-color-rem-button: #ff9090;
+  --md-sys-color-on-rem-button: #593232;
   --md-sys-color-shadow-alpha-33: #00000033;
   --md-sys-color-shadow-alpha-1f: #0000001f;
   --md-sys-color-shadow-alpha-3d: #0000003d;
@@ -52,19 +69,14 @@
   --md-sys-color-shadow-alpha-4c: #0000004c;
   --md-sys-color-shadow-alpha-05: #00000005;
   --md-sys-color-shadow-alpha-21: #00000021;
-  --md-sys-color-sortable-item: #f5f5f5;
   --md-sys-color-shadow-gray: #bdc3c780;
   --md-sys-color-shadow-gray-hover: #bdc3c7b2;
   --md-sys-color-on-no-glyph-in-plgo: #ff2020;
   --md-sys-color-cell: #ffffff;
   --md-sys-color-cell-life-max: 0, 0, 0;
   --md-sys-color-shadow-cell: #777777;
-  --md-sys-color-outline-inputer: #22222244;
   --md-sys-color-sidebar: #fffbfe99;
   --md-sys-color-shadow-sidebar: #00000080;
-  --md-sys-color-border-darkmode-label: #f6f6f6;
-  --md-sys-color-dialog-backdrop: #0000001a;
-  --md-sys-color-check: #c7c5c9;
   --md-sys-color-extra: #ffaa33;
   --md-sys-color-on-extra: #653f14;
 }
@@ -99,22 +111,19 @@
   --md-sys-color-inverse-surface: #e6e1e6;
   --md-sys-color-inverse-on-surface: #313033;
   --md-sys-color-inverse-primary: #6750a4;
+  --md-sys-color-surface-dim: #141218;
+  --md-sys-color-surface-bright: #3e383e;
+  --md-sys-color-surface-container-lowest: #0f0d13;
+  --md-sys-color-surface-container-low: #1d1b20;
+  --md-sys-color-surface-container: #211f24;
+  --md-sys-color-surface-container-high: #2b292f;
+  --md-sys-color-surface-container-highest: #36343a;
 
-  --md-sys-color-alpha-primary: #cfbcff3a;
-  --md-sys-color-alpha-on-background: #e6e1e65f;
-  --md-sys-color-ripple: #ffffff80;
-  --md-sys-color-background-text: #ffffff1a;
-  --md-sys-color-disabled: #70668a;
-  --md-sys-color-on-disabled: #eee6ff;
-  --md-sys-color-background-text-middle: #ffffff2a;
-  --md-sys-color-background-text-dark: #ffffff37;
-  --md-sys-color-add-button-background: #70ee70;
-  --md-sys-color-add-button-border: #30dd30;
-  --md-sys-color-rem-button-background: #ee7070;
-  --md-sys-color-rem-button-border: #dd3030;
-  --md-sys-color-copy-button-hover-outline: #dddddd72;
-  --md-sys-color-on-copy-button: #dddddd75;
-  --md-sys-color-on-hover-copy-button: #dddddd95;
+  --md-sys-color-media-controls-panel: #70668a;
+  --md-sys-color-add-button: #70ee70;
+  --md-sys-color-on-add-button: #244c24;
+  --md-sys-color-rem-button: #ee7070;
+  --md-sys-color-on-rem-button: #4c2424;
   --md-sys-color-shadow-alpha-33: #ffffff4f;
   --md-sys-color-shadow-alpha-1f: #ffffff3a;
   --md-sys-color-shadow-alpha-3d: #ffffff51;
@@ -123,19 +132,14 @@
   --md-sys-color-shadow-alpha-4c: #ffffff5f;
   --md-sys-color-shadow-alpha-05: #ffffff1f;
   --md-sys-color-shadow-alpha-21: #ffffff43;
-  --md-sys-color-sortable-item: #0a0a0a;
   --md-sys-color-shadow-gray: #dde3e750;
   --md-sys-color-shadow-gray-hover: #dde3e772;
   --md-sys-color-on-no-glyph-in-plgo: #de7c7c;
   --md-sys-color-cell: #000000;
   --md-sys-color-cell-life-max: 255, 255, 255;
   --md-sys-color-shadow-cell: #777777;
-  --md-sys-color-outline-inputer: #dddddd66;
   --md-sys-color-sidebar: #1c1b1eaa;
   --md-sys-color-shadow-sidebar: #ffffff85;
-  --md-sys-color-border-darkmode-label: #090909;
-  --md-sys-color-dialog-backdrop: #0000004a;
-  --md-sys-color-check: #999599;
   --md-sys-color-extra: #ffbe73;
   --md-sys-color-on-extra: #472d12;
 }
@@ -143,37 +147,72 @@
 * {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  overflow: auto;
   -webkit-tap-highlight-color: transparent;
 }
 
-.add-button {
-  background-color: var(--md-sys-color-add-button-background);
-  border: 1px solid var(--md-sys-color-add-button-border);
-  color: black;
-  border-radius: 4px;
-  width: 0;
-  height: 20px;
-  margin-left: 4px;
+md-outlined-text-field {
+  --md-outlined-field-bottom-space: 8px;
+  --md-outlined-field-top-space: 8px;
+  --md-outlined-field-leading-space: 8px;
+  --md-outlined-field-trailing-space: 8px;
 }
 
-.rem-button {
-  background-color: var(--md-sys-color-rem-button-background);
-  border: 1px solid var(--md-sys-color-rem-button-border);
-  color: black;
-  width: 0;
-  height: 20px;
-  border-radius: 4px;
+md-filled-tonal-button,
+md-filled-button {
+  padding: 4px 16px;
 }
 
-.primary-button {
-  background-color: var(--md-sys-color-primary);
-  color: var(--md-sys-color-on-primary);
+md-filled-tonal-icon-button.add-button {
+  --md-filled-tonal-icon-button-container-color: var(--md-sys-color-add-button);
+  --md-filled-tonal-icon-button-icon-color: var(--md-sys-color-on-add-button);
 }
 
-.secondary-button {
-  background-color: var(--md-sys-color-secondary-container);
-  color: var(--md-sys-color-on-secondary-container);
+md-filled-tonal-icon-button.rem-button {
+  --md-filled-tonal-icon-button-container-color: var(--md-sys-color-rem-button);
+  --md-filled-tonal-icon-button-icon-color: var(--md-sys-color-on-rem-button);
+}
+
+md-filled-tonal-icon-button.copy-button {
+  min-width: 1.75rem;
+  --md-filled-tonal-icon-button-container-width: 1.75rem;
+  --md-filled-tonal-icon-button-container-height: 1.75rem;
+  --md-filled-tonal-icon-button-container-shape: 8px;
+  --md-filled-tonal-icon-button-icon-color: var(--md-sys-color-on-surface-variant);
+  --md-filled-tonal-icon-button-container-color: var(--md-sys-color-surface-container-highest);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+md-filled-tonal-icon-button {
+  min-width: 1.5rem;
+  --md-filled-tonal-icon-button-container-width: 1.5rem;
+  --md-filled-tonal-icon-button-container-height: 1.5rem;
+  --md-filled-tonal-icon-button-disabled-container-color: var(--md-sys-color-on-background);
+  --md-filled-tonal-icon-button-icon-size: 1rem;
+  --md-filled-tonal-icon-button-disabled-container-opacity: 0.16;
+}
+
+md-list-item {
+  --md-list-item-top-space: 0;
+  --md-list-item-bottom-space: 0;
+  --md-list-item-label-text-size: 0.875rem;
+  --md-list-item-supporting-text-size: 0.5rem;
+  --md-list-item-supporting-text-line-height: 0.6rem;
+}
+
+::part(focus-ring) {
+  display: none;
+}
+
+md-list-item::part(item) {
+  overflow: visible;
+  z-index: 1;
+}
+
+md-filled-text-field,
+md-outlined-text-field {
+  resize: none;
 }
 
 .error-container {
@@ -199,39 +238,11 @@
 }
 
 .code-container {
-  background: var(--md-sys-color-background-text);
+  background: var(--md-sys-color-surface-container-low);
   padding: 10px;
   border-radius: 10px;
   overflow: auto;
   position: relative;
-}
-
-.copy-button {
-  all: unset;
-  width: 1.75rem;
-  height: 1.75rem;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  display: flex;
-  background-color: var(--md-sys-color-background-text-middle);
-  border-radius: 8px;
-  color: var(--md-sys-color-on-copy-button);
-  overflow: hidden;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition:
-    outline-color 0.5s ease,
-    color 0.5s ease,
-    background-color 0.5s ease;
-  outline: solid 1px transparent;
-}
-
-.copy-button:hover {
-  outline: solid 1px var(--md-sys-color-copy-button-hover-outline);
-  background-color: var(--md-sys-color-background-text-dark);
-  color: var(--md-sys-color-on-hover-copy-button);
 }
 
 .json {
@@ -249,37 +260,19 @@
   box-shadow: 0 3px 5px var(--md-sys-color-shadow-alpha-33);
 }
 
-.other-options-span {
-  font-size: 0.875rem;
-  color: var(--md-sys-color-on-surface-variant);
-}
-
-.other-options-text {
-  font-size: 0.75rem;
-  opacity: 0.8;
-}
-
-.options-container {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  flex-wrap: wrap;
-  overflow: visible;
-}
-
-a:not(.menu-item) {
+a.a {
   color: var(--md-sys-color-primary);
   text-decoration: none;
   box-shadow: 0 -2px var(--md-sys-color-shadow-gray) inset;
   transition: all 0.3s ease;
 }
 
-a:not(.menu-item):hover {
+a.a:hover {
   cursor: pointer;
   box-shadow: 0px -1.85rem 0px var(--md-sys-color-shadow-gray-hover) inset;
 }
 
-a:not(.menu-item)::after {
+a.a::after {
   content: "";
   display: inline-block;
   width: 12px;
@@ -291,25 +284,8 @@ a:not(.menu-item)::after {
   transform: translateY(-0.3em);
 }
 
-:root.dark a:not(.menu-item)::after {
+:root.dark a.a::after {
   filter: brightness(1.8);
-}
-
-dialog {
-  border: none;
-  border-radius: 8px;
-  background-color: var(--md-sys-color-surface);
-  color: var(--md-sys-color-on-surface);
-  box-shadow:
-    0 1px 3px var(--md-sys-color-shadow-alpha-1f),
-    0 1px 2px var(--md-sys-color-shadow-alpha-3d);
-  overflow: hidden;
-  position: fixed;
-  margin: 0;
-  inset: 0;
-  box-sizing: border-box;
-  max-width: calc(100vw - 32px);
-  max-height: unset;
 }
 
 body {
@@ -378,133 +354,6 @@ div > ul > li {
   overflow: visible;
 }
 
-textarea {
-  width: 100%;
-  box-sizing: border-box;
-  border: none;
-  padding: 3px 6px;
-  font-size: 1rem;
-  color: var(--md-sys-color-on-surface);
-  resize: none;
-  overflow: hidden;
-  margin: 0;
-  box-shadow: 0 -1px 0 var(--md-sys-color-outline) inset;
-}
-
-input[type="text"],
-input[type="number"] {
-  box-sizing: border-box;
-  border: none;
-  outline: none;
-  padding: 3px 6px;
-  overflow: hidden;
-  font-size: 1rem;
-  background-color: transparent;
-  color: var(--md-sys-color-on-surface);
-  margin: 0;
-  box-shadow: 0 -1px 0 var(--md-sys-color-outline) inset;
-  transition: box-shadow 0.3s ease;
-}
-
-input[type="text"]:hover,
-input[type="number"]:hover {
-  outline: none;
-}
-
-textarea,
-input[type="text"]:not(:read-only),
-input[type="number"]:not(:read-only) {
-  position: relative;
-  border: none;
-  background: linear-gradient(
-      to right,
-      var(--md-sys-color-primary) 0%,
-      var(--md-sys-color-primary) 100%
-    )
-    bottom;
-  background-color: transparent;
-  background-size: 0% 2px;
-  background-repeat: no-repeat;
-  transition: background-size 0.2s ease;
-}
-
-:is(input[type="text"], input[type="number"], textarea):not(:read-only):focus {
-  outline: none;
-  background-size: 100% 3px;
-}
-
-input[type="file"] {
-  width: 100%;
-}
-
-button {
-  padding: 8px 12px;
-  border-radius: 100rem;
-  background-color: var(--md-sys-color-primary-container);
-  color: var(--md-sys-color-on-primary-container);
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  margin: 0;
-  height: 2rem;
-  line-height: 1;
-  position: relative;
-  overflow: hidden;
-}
-
-button:disabled {
-  background-color: var(--md-sys-color-disabled);
-  color: var(--md-sys-color-on-disabled);
-}
-
-input[type="range"] {
-  -webkit-appearance: none;
-  width: 90%;
-  margin-top: 8px;
-  margin: 0;
-  outline: 0;
-  border-bottom: unset;
-  background-color: unset;
-  position: relative;
-  overflow: visible;
-  -webkit-tap-highlight-color: transparent;
-}
-
-input[type="range"]::-webkit-slider-runnable-track {
-  height: 4px;
-  border-radius: 100px;
-  background: var(--md-sys-color-background-text);
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  width: 100%;
-  transition: box-shadow 0.3s cubic-bezier(0, 1, 1, 1);
-  cursor: pointer;
-  position: relative;
-  -webkit-appearance: none;
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background-color: var(--md-sys-color-primary);
-  border: 1px solid transparent;
-  margin-top: -6px;
-  box-shadow: 0 0 0 12px transparent;
-  border-image: linear-gradient(
-      var(--md-sys-color-primary),
-      var(--md-sys-color-primary)
-    )
-    0 fill / 8 20 8 0 / 0px 0px 0 100%;
-}
-
-input[type="range"]:active::-webkit-slider-thumb,
-input[type="range"]:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 12px var(--md-sys-color-shadow-alpha-33);
-  z-index: 3;
-}
-
 h2 {
   font-size: 1rem;
   color: var(--md-sys-color-on-surface);
@@ -527,78 +376,6 @@ footer {
   text-align: right;
 }
 
-footer a {
-  color: var(--md-sys-color-primary);
-  text-decoration: none;
-}
-
-label:not(.md-switch):has(input[type="checkbox"]) {
-  position: relative;
-}
-
-label:not(.md-switch):has(input[type="checkbox"]) svg {
-  position: absolute;
-  left: 4.5px;
-  stroke: var(--md-sys-color-check);
-  stroke-dasharray: 28.5px;
-  stroke-dashoffset: 28.5px;
-  transition: stroke-dashoffset 0.25s ease;
-}
-
-label:not(.md-switch):has(input[type="checkbox"]:checked) svg {
-  stroke-dasharray: 28.5px;
-  stroke-dashoffset: 0px;
-}
-
-label:not(.md-switch) input[type="checkbox"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  margin: 0;
-  width: 20px;
-  height: 20px;
-  overflow: visible;
-  border: 2px solid var(--md-sys-color-outline);
-  background-color: transparent;
-  border-radius: 4px;
-  accent-color: var(--md-sys-color-primary);
-  cursor: pointer;
-  position: relative;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-label:not(.md-switch) input[type="checkbox"]::after {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  background-color: transparent;
-  border-radius: 50%;
-  transform: scale(0);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-label:not(.md-switch) input[type="checkbox"]:checked {
-  background-color: var(--md-sys-color-primary);
-  border-color: var(--md-sys-color-primary);
-}
-
-label:not(.md-switch) input[type="checkbox"]:hover::after {
-  transform: scale(1);
-  background-color: var(--md-sys-color-shadow-alpha-0f);
-}
-
-label:not(.md-switch) input[type="checkbox"]:active::after {
-  transform: scale(1);
-  background-color: var(--md-sys-color-shadow-alpha-1a);
-}
-
-dialog::backdrop {
-  background-color: var(--md-sys-color-dialog-backdrop);
-}
-
 path {
-  fill: var(--md-sys-color-on-background);
+  fill: var(--md-sys-color-on-surface-variant);
 }

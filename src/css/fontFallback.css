@@ -820,22 +820,31 @@
 }
 
 .font {
-  font-family: Ctrl-Ctrl, Plgo1, Noto-Color-Emoji, Plgo2, Noto, NotoSansSC,
+  --font: Ctrl-Ctrl, Plgo1, Noto-Color-Emoji, Plgo2, Noto, NotoSansSC,
     NotoSansKR, Monu, Segoe, Microsoft, others, sans-serif, Last;
+  font-family: var(--font);
+  --md-filled-text-field-input-text-font: var(--font);
+  --md-outlined-text-field-input-text-font: var(--font);
   font-style: normal;
   font-weight: 400;
 }
 
 .font-without-ctrlctrl {
-  font-family: Plgo1, Noto-Color-Emoji, Plgo2, Noto, NotoSansSC, NotoSansKR,
+  --font: Plgo1, Noto-Color-Emoji, Plgo2, Noto, NotoSansSC, NotoSansKR,
     Monu, Segoe, Microsoft, others, sans-serif, Last;
+  font-family: var(--font);
+  --md-filled-text-field-input-text-font: var(--font);
+  --md-outlined-text-field-input-text-font: var(--font);
   font-style: normal;
   font-weight: 400;
 }
 
 .font-idc {
-  font-family: IDC, Plgo1, Noto-Color-Emoji, Plgo2, Noto, NotoSansSC,
+  --font: IDC, Plgo1, Noto-Color-Emoji, Plgo2, Noto, NotoSansSC,
     NotoSansKR, Monu, Segoe, Microsoft, others, sans-serif, Last;
+  font-family: var(--font);
+  --md-filled-text-field-input-text-font: var(--font);
+  --md-outlined-text-field-input-text-font: var(--font);
   font-style: normal;
   font-weight: 400;
 }

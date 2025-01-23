@@ -448,6 +448,4 @@ selectFont.addEventListener('select', e => {
 
 cnvButton.addEventListener('click', () => {
   output.value = toStyleLetter(input.value, font);
-  output.dispatchEvent(new Event('input'));
-  output.dispatchEvent(new Event('blur'));
 });
