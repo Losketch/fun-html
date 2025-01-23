@@ -4,7 +4,6 @@ let typeCount = 2;
 
 const container = document.getElementById('container');
 const [
-  generationsCountShow,
   exportBtn,
   importInp,
   generationsInp,
@@ -25,7 +24,7 @@ const [
   resetBtn,
   setRuleBtn
 ] =
-  'generationsCountShow export import generations jump rule state stateShow gridSize gridSizeShow gap gapShow start pause prev next save clear-generations reset set-rule'
+  'export import generations jump rule state stateShow gridSize gridSizeShow gap gapShow start pause prev next save clear-generations reset set-rule'
     .split(' ')
     .map(n => document.getElementById(n));
 let size = 20;
@@ -292,7 +291,7 @@ function updateGap() {
 function updateCount() {
   if (generationsCount > maxGenerationsCount)
     maxGenerationsCount = generationsCount;
-  generationsCountShow.innerHTML = `当前代：${generationsCount}/${maxGenerationsCount}`;
+  generationsInp.valueLabel = `${generationsCount}/${maxGenerationsCount}`;
   generationsInp.max = maxGenerationsCount;
   generationsInp.value = generationsCount;
 }

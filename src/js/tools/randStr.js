@@ -50,26 +50,6 @@ const customBlocksContainer = document.getElementById(
 const selectBlocks = document.getElementById('select-blocks');
 let selectedBlocks = [];
 
-let id = 0;
-const getAddEle = () => {
-  id++;
-  return `
-    U+
-    <div class="material-input-container" style="margin-top: 5px;">
-      <input id="${id}-1" type="text" class="uni">
-      <label for="${id}-1" class="placeholder">起始码位</label>
-      <span></span>
-    </div>
-    ~U+
-    <div class="material-input-container" style="margin-top: 5px;">
-      <input id="${id}-2" type="text" class="uni">
-      <label for="${id}-2" class="placeholder">结束码位</label>
-      <span></span>
-    </div>
-    <button class="rem-button nf nf-cod-remove"></button>
-  `;
-};
-
 const characterSets = {
   includeDigits: '0123456789'.toArray(),
   includeLowercase: 'abcdefghijklmnopqrstuvwxyz'.toArray(),
@@ -119,12 +99,12 @@ const dom = {};
 ].forEach(name => (dom[name] = document.getElementById(name)));
 
 function add(ele, content) {
-  const div = document.createElement('div');
-  div.innerHTML = content;
-  ele.appendChild(div);
-  ele.style.display = 'flex';
+  const addedEle = document.createElement('md-list-item');
+  addedEle.innerHTML = content;
+  ele.appendChild(addedEle);
+  ele.style.display = 'block';
 
-  return div;
+  return addedEle;
 }
 
 function remove(ele) {
@@ -136,11 +116,11 @@ function remove(ele) {
 
 function updateInputValue() {
   countInput.value = slider.value;
-  countInput.dispatchEvent(new Event('focus'));
 }
 
 function updateSliderValue() {
   if (+countInput.value > 1000) countInput.value = 1000;
+  if (+countInput.value <= 0) countInput.value = 1;
   slider.value = countInput.value;
 }
 
@@ -180,7 +160,7 @@ function generateRandomCharacters() {
 
   if (options.includeCustomInterval) {
     [...customIntervalContainer.children].forEach(chi => {
-      const [inpu, inpu2] = chi.getElementsByTagName('input');
+      const [inpu, inpu2] = chi.getElementsByTagName('md-outlined-text-field');
       if (inpu.value && inpu2.value)
         characters = characters.concat(
           rangeArr(parseInt(inpu.value, 16), parseInt(inpu2.value, 16))
@@ -245,7 +225,6 @@ function copy(text) {
 
 function clearText() {
   resultEle.innerHTML = '';
-  resultEle.dispatchEvent(new Event('input'));
 }
 
 selectBlocks.addEventListener('select', e => {
@@ -262,11 +241,16 @@ selectBlocks.addEventListener('select', e => {
     const customBlockEle = add(
       customBlocksContainer,
       `
-      ${visibleSelections[i]}<button class="rem-button nf nf-cod-remove"></button>
+      ${visibleSelections[i]}
+      <md-filled-tonal-icon-button
+        class="rem-button"
+        slot="end">
+        <md-icon class="nf nf-fa-times"></md-icon>
+      </md-filled-tonal-icon-button>
     `
     );
     customBlockEle
-      .querySelector('button')
+      .querySelector('md-filled-tonal-icon-button')
       .addEventListener('click', () =>
         cancelSelect(selection, visibleSelections[i])
       );
@@ -274,8 +258,22 @@ selectBlocks.addEventListener('select', e => {
 });
 
 addCustomInterval.addEventListener('click', () => {
-  const customIntervalEle = add(customIntervalContainer, getAddEle());
-  customIntervalEle.querySelectorAll('input').forEach(inputEle => {
+  const customIntervalEle = add(customIntervalContainer, `
+    <md-outlined-text-field
+      label="起始码位"
+      prefix-text="U+">
+    </md-outlined-text-field>
+    <md-outlined-text-field
+      label="结束码位"
+      prefix-text="U+">
+    </md-outlined-text-field>
+    <md-filled-tonal-icon-button
+      class="rem-button"
+      slot="end">
+      <md-icon class="nf nf-fa-times"></md-icon>
+    </md-filled-tonal-icon-button>
+  `);
+  customIntervalEle.querySelectorAll('md-outlined-text-field').forEach(inputEle => {
     let lastValidValue = '';
     inputEle.addEventListener('input', () => {
       if (!validCode.test(inputEle.value)) {
@@ -287,7 +285,7 @@ addCustomInterval.addEventListener('click', () => {
   });
 
   customIntervalEle
-    .querySelector('button')
+    .querySelector('md-filled-tonal-icon-button')
     .addEventListener('click', () => remove(customIntervalEle));
 });
 

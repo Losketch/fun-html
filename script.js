@@ -1,12 +1,10 @@
 const content = document.getElementById('content');
 const mainContent = document.getElementById('main-content');
 const toolbox = document.getElementById('toolbox');
-const menuItems = document.querySelectorAll('.menu-item');
+const tabs = document.querySelector('md-tabs');
 const toolButtons = document.querySelectorAll('.tool-button');
-const nav = document.querySelector('nav');
 const toggleNavButton = document.getElementById('toggle-nav-button');
 const titleH1 = document.getElementById('title-h1');
-let currentActiveMenu = 'home';
 
 function animateContent() {
   content.style.transition = 'none';
@@ -20,40 +18,23 @@ function animateContent() {
   }, 50);
 }
 
-function updateActiveMenuItem(target) {
-  currentActiveMenu = target;
-  menuItems.forEach(item => {
-    if (item.dataset.target === target) {
-      item.classList.add('active');
-    } else {
-      item.classList.remove('active');
-    }
-  });
-}
-
 function loadContent(url) {
   const timestamp = new Date().getTime();
   mainContent.src = `${url}?t=${timestamp}`;
 }
 
-menuItems.forEach(item => {
-  item.addEventListener('click', () => {
-    if (currentActiveMenu === item.dataset.target) return;
-
-    currentActiveMenu = item.dataset.target;
-    updateActiveMenuItem(item.dataset.target);
-    animateContent();
-
-    setTimeout(() => {
-      if (item.dataset.target === 'home') {
-        mainContent.style.display = 'block';
-        toolbox.style.display = 'none';
-      } else if (item.dataset.target === 'toolbox') {
-        mainContent.style.display = 'none';
-        toolbox.style.display = 'grid';
-      }
-    }, 50);
-  });
+tabs.addEventListener('change', (event) => {
+  const index = tabs.activeTabIndex;
+  animateContent();
+  setTimeout(() => {
+    if (index === 0) {
+      mainContent.style.display = 'block';
+      toolbox.style.display = 'none';
+    } else if (index === 1) {
+      mainContent.style.display = 'none';
+      toolbox.style.display = 'grid';
+    }
+  }, 50);
 });
 
 toolButtons.forEach(button => {
@@ -66,14 +47,13 @@ toolButtons.forEach(button => {
 
   button.addEventListener('click', () => {
     animateContent();
+    loadContent(button.dataset.url);
 
     setTimeout(() => {
-      loadContent(button.dataset.url);
+      tabs.activeTabIndex = 0;
       mainContent.style.display = 'block';
-      mainContent.style.removeProperty('height');
       toolbox.style.display = 'none';
-      updateActiveMenuItem('home');
-    }, 50);
+    }, 100);
   });
 });
 
@@ -82,20 +62,11 @@ window.addEventListener('message', event => {
     case 'changeHeader':
       titleH1.innerHTML = event.data.text;
       break;
-    case 'adjustIframeHeight':
-      mainContent.style.height = event.data.height + 'px';
-      break;
-    case 'clearMainContentHeight':
-      mainContent.style.removeProperty('height');
-      break;
     case 'changeUrl':
       window.open(event.data.url, '_blank');
   }
 });
 
 toggleNavButton.addEventListener('click', () => {
-  nav.classList.toggle('nav-hidden');
-  toggleNavButton.innerHTML = nav.classList.contains('nav-hidden')
-    ? '<span class="nf nf-md-close"></span>'
-    : '<span class="nf nf-md-menu"></span>';
+  tabs.classList.toggle('tabs-hidden');
 });

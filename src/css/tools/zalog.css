@@ -10,12 +10,15 @@
   gap: 8px;
 }
 
-#range {
-  display: flex;
-  align-items: center;
+#count-range {
+  width: 100%;
 }
 
-#min-container,
-#max-container {
-  width: 3rem;
+#input,
+#output {
+  width: 100%;
+}
+
+#output {
+  margin: 8px 0;
 }

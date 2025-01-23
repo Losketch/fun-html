@@ -9,15 +9,12 @@
 
     <link rel="stylesheet" href="../css/mainStyles.css" />
     <link rel="stylesheet" href="../css/fontFallback.css" />
-    <link rel="stylesheet" href="../css/materialInput.css" />
-    <link rel="stylesheet" href="../css/rippleButton.css" />
     <link rel="stylesheet" href="../css/select.css" />
     <link rel="stylesheet" href="../css/nerd-fonts-generated.min.css" />
     <link rel="stylesheet" href="../css/tools/styleLetter.css" />
+    <script src="../../m3ui.js"></script>
     <script defer src="../js/changeHeader.js"></script>
-    <script defer src="../js/rippleButton.js"></script>
     <script defer src="../js/iframeColorSchemeSync.js"></script>
-    <script defer src="../js/materialInput.js"></script>
     <script defer src="../js/select.js"></script>
     <script defer src="../js/tools/styleLetter.js"></script>
   </head>
@@ -25,14 +22,17 @@
     <div>
       <main>
         <div>
-          <div class="material-input-container">
-            <input
-              type="text"
-              id="input"
-              class="font-without-ctrlctrl"
-              style="line-height: 1.2rem" />
-            <label for="input">待转换字符</label>
-          </div>
+          <md-outlined-text-field
+            label="待转换的字符"
+            id="input"
+            class="font-without-ctrlctrl">
+          </md-outlined-text-field>
+          <md-outlined-text-field
+            label="转换结（jié）果"
+            id="output"
+            class="font-without-ctrlctrl"
+            readonly>
+          </md-outlined-text-field>
           <div class="act-ele">
             <div class="select-container" id="select-font">
               <div class="select">
@@ -40,7 +40,10 @@
                   <span class="cur-select">选择字体</span>
                   <span class="nf nf-fa-angle_down"></span>
                 </div>
-                <input type="text" class="filter" placeholder="筛选" />
+                <md-outlined-text-field
+                  class="filter"
+                  label="筛选">
+                </md-outlined-text-field>
               </div>
               <div class="opts-list">
                 <div data-select="bold" class="opt">粗体</div>
@@ -66,19 +69,11 @@
                 <div data-select="subscript" class="opt">下标</div>
               </div>
             </div>
-            <button id="cnv-button" class="shadow-button">转换</button>
-          </div>
-          <div class="material-input-container">
-            <input
-              readonly
-              type="text"
-              id="output"
-              class="font-without-ctrlctrl"
-              style="line-height: 1.2rem" />
-            <label for="output"
-              >转换<ruby>结<rp>（</rp><rt>jié</rt><rp>）</rp></ruby
-              >果</label
-            >
+            <md-filled-tonal-button
+              id="cnv-button"
+              class="shadow-button">
+              转换
+            </md-filled-tonal-button>
           </div>
         </div>
       </main>

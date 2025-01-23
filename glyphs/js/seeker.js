@@ -448,7 +448,7 @@ UI.decompose = function() {
 		}
 		if (w.length > 1) m--;
 
-		var d = _('subdivide').checked;
+		var d = _('subdivide').selected;
 		var t = Seeker.exhaust(w, d, false);
 		if (t.length) {
 			$_.value = s.slice(0, m) + t + s.slice(n).replace(/\\/g, '');
@@ -474,8 +474,8 @@ UI.go = function(force) {
 		$('#counter').text('');
 		$('#output').text('');
 	} else {
-		var divide = _('subdivide').checked;
-		var variant = _('variant').checked;
+		var divide = _('subdivide').selected;
+		var variant = _('variant').selected;
 		//var l = [];
 		if (s.charAt(0) == ':') {
 			$('#output').html(Seeker.getTree(s.slice(1), divide));
@@ -492,13 +492,13 @@ UI.go = function(force) {
 
 // 更新勾選框Cookie
 UI.setMode = function(chk, key) {
-	UI.setCookie(key, chk.checked ? '1' : '0');
+	UI.setCookie(key, chk.selected ? '1' : '0');
 	UI.go();
 };
 
 // 鍵盤開關改變
 UI.updatePad = function() {
-	UI.keypadMode = $('#showkeypad:checked').length > 0;
+	UI.keypadMode = $('#showkeypad:selected').length > 0;
 	UI.setCookie('keypad', UI.keypadMode ? '1' : '0');
 	if (UI.keypadMode) {
 		UI.initKeyboard(UI.strokeKeyboard);
@@ -741,9 +741,9 @@ UI.init = function() {
 	$('#datasize').text(cnt);
 
 	// Status
-	$('#variant').prop('checked', UI.getCookie('variant', '1') == '1');
-	$('#subdivide').prop('checked', UI.getCookie('subdivide', '0') == '1');
-	$('#showkeypad').prop('checked', UI.getCookie('keypad', '0') == '1');
+	$('#variant').prop('selected', UI.getCookie('variant', '1') == '1');
+	$('#subdivide').prop('selected', UI.getCookie('subdivide', '0') == '1');
+	$('#showkeypad').prop('selected', UI.getCookie('keypad', '0') == '1');
 	UI.addShortcut();
 
 	// Events

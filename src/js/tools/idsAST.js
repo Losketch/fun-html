@@ -823,6 +823,9 @@ const highlightJsStyle = document.getElementById('highlight-js-style');
 function handleInput(e) {
   if (e.target.id === 'inputer-container') return;
   if (e.target.classList.contains('placeholder')) return;
+  if (e.type === 'touchend') {
+    e.preventDefault();
+  }
 
   const charToInsert = e.target.innerText;
   const startPos = input.selectionStart;
@@ -839,8 +842,8 @@ function handleInput(e) {
   input.focus();
 }
 
-inputerContainer.addEventListener('touchend', handleInput);
 inputerContainer.addEventListener('click', handleInput);
+inputerContainer.addEventListener('touchend', handleInput);
 
 copyButton.addEventListener('click', () => {
   const code = document.getElementById('json-code').textContent;

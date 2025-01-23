@@ -3,7 +3,6 @@ const framePath = document.getElementById('framePath');
 const handPath = document.getElementById('handPath');
 const togglePathButton = document.getElementById('togglePathButton');
 const scaleInput = document.getElementById('scale');
-const scaleText = document.getElementById('scaleText');
 const accelerationText = document.getElementById('acceleration');
 
 let scale = 1;
@@ -28,7 +27,7 @@ window.addEventListener('devicemotion', event => {
 });
 
 scaleInput.addEventListener('input', () => {
-  scaleText.innerText = scale = mapLogScale(scaleInput.value).toFixed(4);
+  scaleInput.valueLabel = scale = mapLogScale(scaleInput.value).toFixed(4);
 });
 
 let isNewPath = false;

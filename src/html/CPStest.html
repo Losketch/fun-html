@@ -8,10 +8,9 @@
     <title>CPS 测试器</title>
 
     <link rel="stylesheet" href="../css/mainStyles.css" />
-    <link rel="stylesheet" href="../css/rippleButton.css" />
     <link rel="stylesheet" href="../css/tools/CPStest.css" />
+    <script src="../../m3ui.js"></script>
     <script defer src="../js/changeHeader.js"></script>
-    <script defer src="../js/rippleButton.js"></script>
     <script defer src="../js/iframeColorSchemeSync.js"></script>
     <script defer src="../js/tools/CPStest.js"></script>
   </head>
@@ -24,9 +23,13 @@
           <div id="result">CPS: 0</div>
         </div>
         <div>
-          <button id="start">开始</button>
-          <button id="click" disabled>点击</button>
-          <button id="recover" disabled>重置</button>
+          <md-filled-button id="start">开始</md-filled-button>
+          <md-filled-tonal-button id="click" disabled>
+            点击
+          </md-filled-tonal-button>
+          <md-filled-tonal-button id="recover" disabled>
+            重置
+          </md-filled-tonal-button>
         </div>
       </main>
     </div>
