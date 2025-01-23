@@ -70,7 +70,7 @@ body > div {
   column-gap: 10px;
 }
 
-.grid-tool-buttons > button {
+.grid-tool-buttons > md-outlined-button {
   margin: 0;
 }
 
@@ -80,63 +80,18 @@ body > div {
 }
 
 .tool-button {
+  --md-outlined-button-container-shape: 10px;
+  --md-outlined-button-label-text-color: var(--md-sys-color-on-surface-variant);
+  --md-outlined-button-hover-label-text-color: var(--md-sys-color-on-surface-variant);
+  --md-outlined-button-focus-label-text-color: var(--md-sys-color-on-surface-variant);
+  --md-outlined-button-pressed-label-text-color: var(--md-sys-color-on-surface-variant);
   margin: 7px 80px;
-  padding: 7px;
-  background-color: var(--md-sys-color-shadow-alpha-05);
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  overflow: hidden;
-  color: var(--md-sys-color-on-surface-variant);
-  border: 1px solid var(--md-sys-color-outline);
+  padding: 0;
 }
 
-nav {
-  display: flex;
-  justify-content: space-around;
-  background-color: var(--md-sys-color-background);
-  padding: 10px 0;
+md-tabs {
   box-shadow: 0 -2px 10px var(--md-sys-color-shadow-alpha-1a);
-  z-index: 1;
-}
-
-.menu-item {
-  display: flex;
-  overflow: hidden;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  color: var(--md-sys-color-on-surface-variant);
-  position: relative;
-  padding: 5px 15px;
-  border-radius: 20px;
-}
-
-.nf {
-  font-size: 24px;
-  padding: 8px;
-  width: 100%;
-  border-radius: 100rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  overflow: hidden;
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
-}
-
-.menu-item-name {
-  font-size: 12px;
-  margin-top: 4px;
-  overflow: visible;
-  user-select: none;
-}
-
-.menu-item.active .nf {
-  color: var(--md-sys-color-primary);
-  background-color: var(--md-sys-color-alpha-primary);
+  --md-primary-tab-icon-size: 24px;
 }
 
 h2 {
@@ -148,26 +103,26 @@ hr {
 }
 
 .toggle-nav-button {
+  --md-filled-tonal-icon-button-container-width: 32px;
+  --md-filled-tonal-icon-button-container-height: 32px;
+  --md-filled-tonal-icon-button-icon-size: 1.25rem;
   position: fixed;
   right: 13px;
   top: 95px;
   z-index: 1000;
-  background: var(--md-sys-color-shadow-alpha-21);
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  font-size: 24px;
-  box-shadow: 0 2px 5px var(--md-sys-color-shadow-alpha-33);
-  overflow: hidden;
 }
 
-.toggle-nav-button > .nf {
-  font-size: 24px;
-  line-height: 1;
-  transform: translateY(0.06em);
+.toggle-dark-button {
+  --md-filled-tonal-icon-button-container-width: 32px;
+  --md-filled-tonal-icon-button-container-height: 32px;
+  --md-filled-tonal-icon-button-icon-size: 1.25rem;
+  position: fixed;
+  right: 13px;
+  top: 50px;
+  z-index: 1000;
 }
 
-.nav-hidden {
+.tabs-hidden {
   display: none;
 }
 
@@ -183,7 +138,7 @@ hr {
 .sidebar {
   z-index: 2;
   position: fixed;
-  right: calc(-90vw - 5px);
+  right: calc(-90vw - 10px);
   top: 0;
   width: 90vw;
   height: 100%;
@@ -286,70 +241,4 @@ hr {
   stroke-dasharray: 90 207;
   stroke-dashoffset: -134;
   stroke-width: 6;
-}
-
-#darkmode-container {
-  position: fixed;
-  right: 13px;
-  top: 50px;
-  cursor: pointer;
-  z-index: 64;
-  user-select: none;
-}
-
-#darkmode-label {
-  width: 32px;
-  height: 32px;
-  background: var(--md-sys-color-shadow-alpha-21);
-  border: 1px solid var(--md-sys-color-border-darkmode-label);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  position: relative;
-  cursor: pointer;
-}
-
-#svg-light,
-#svg-dark {
-  width: 20px;
-  height: 20px;
-  margin: 0;
-  padding: 0;
-  transition:
-    transform 0.3s,
-    opacity 0.3s;
-  position: absolute;
-}
-
-#svg-light {
-  transform: scale(0);
-  opacity: 0;
-}
-
-#svg-light path {
-  fill: #fff;
-}
-
-#svg-dark {
-  transform: scale(1);
-  opacity: 1;
-}
-
-#darkmode-toggle:checked ~ label #svg-light {
-  transform: scale(1);
-  opacity: 1;
-}
-
-#darkmode-toggle:checked ~ label #svg-dark {
-  transform: scale(0);
-  opacity: 0;
-}
-
-#sidebar-toggle-svg {
-  filter: none;
-}
-
-#darkmode-toggle {
-  display: none;
 }

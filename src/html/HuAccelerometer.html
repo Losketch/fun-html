@@ -9,10 +9,9 @@
 
     <link rel="stylesheet" href="../css/mainStyles.css" />
     <link rel="stylesheet" href="../css/refuse.css" />
-    <link rel="stylesheet" href="../css/rippleButton.css" />
     <link rel="stylesheet" href="../css/tools/HuAccelerometer.css" />
+    <script src="../../m3ui.js"></script>
     <script defer src="../js/changeHeader.js"></script>
-    <script defer src="../js/rippleButton.js"></script>
     <script defer src="../js/iframeColorSchemeSync.js"></script>
     <script defer src="../js/tools/HuAccelerometer.js"></script>
   </head>
@@ -27,16 +26,20 @@
     </svg>
     <span id="acceleration"></span>
     <div>
-      <button id="togglePathButton">更换样式</button>
-      <div
-        >缩放：<input
+      <md-filled-tonal-button id="togglePathButton">
+        更换样式
+      </md-filled-tonal-button>
+      <div>
+        缩放：
+        <md-slider
+          labeled
           id="scale"
-          type="range"
           min="0.0001"
           max="10"
           step="0.0001"
-          value="8.00005" /><span id="scaleText">1.0000</span></div
-      >
+          value="8.00005">
+        </md-slider>
+      </div>
     </div>
   </body>
 </html>

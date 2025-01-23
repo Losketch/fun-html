@@ -1,5 +1,4 @@
-const minimum = document.getElementById('min');
-const maximum = document.getElementById('max');
+const countRange = document.getElementById('count-range');
 const input = document.getElementById('input');
 const output = document.getElementById('output');
 const genButton = document.getElementById('gen-button');
@@ -37,9 +36,11 @@ function zalog(s, minimum = 5, maximum = 10) {
 }
 
 genButton.addEventListener('click', () => {
-  output.value = zalog(input.value, +minimum.value, +maximum.value);
-  output.dispatchEvent(new Event('input'));
-  output.dispatchEvent(new Event('blur'));
+  output.value = zalog(
+    input.value,
+    +countRange.valueStart,
+    +countRange.valueEnd
+  );
 });
 
 copyButton.addEventListener('click', () => {

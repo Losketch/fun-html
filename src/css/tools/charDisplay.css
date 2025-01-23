@@ -1,5 +1,6 @@
 #text {
   line-height: 1.2rem;
+  width: 100%;
 }
 
 #other-options {
@@ -8,12 +9,6 @@
 
 #add-font-feature-settings-button {
   margin-top: 8px;
-}
-
-#act-opts {
-  display: flex;
-  overflow: visible;
-  gap: 8px;
 }
 
 #close {
@@ -25,50 +20,35 @@
   align-items: center;
   overflow: visible;
   line-height: 1;
+  color: var(--md-sys-color-on-surface);
 }
 
 #availability-switch {
   margin-left: 0.5rem;
 }
 
-#added-font-feature-settings-container,
-#sortable-list-container {
-  background-color: var(--md-sys-color-background-text);
-  padding: 10px;
-  border-radius: 5px;
-  display: none;
-  gap: 4px;
-  max-height: 300px;
-  overflow: scroll !important;
-  width: 100%;
-  flex-wrap: wrap;
-  box-sizing: border-box;
-  overflow: visible;
-  margin-top: 8px;
-}
-
-:is(#added-font-feature-settings-container, #sortable-list-container) > div {
-  display: flex;
-  width: 100%;
-  overflow: visible;
-  align-items: center;
-  line-height: 1;
-}
-
-#added-font-feature-settings-container > div > label {
+#added-font-feature-settings-container md-switch {
   margin-left: auto;
   margin-right: 8px;
 }
 
-#error-text {
-  text-align: center;
-  word-break: break-all;
+#added-font-feature-settings-container,
+#sortable-list-container {
+  background-color: var(--md-sys-color-surface-container-low);
+  padding: 10px;
+  border-radius: 5px;
+  display: none;
+  flex-direction: column;
+  margin-top: 8px;
+  row-gap: 8px;
+  box-sizing: border-box;
 }
 
-#error[open] {
+:is(#added-font-feature-settings-container, #sortable-list-container) > div {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  overflow: visible;
+  align-items: center;
+  line-height: 1;
 }
 
 #file-upload-container {
@@ -83,9 +63,10 @@
   display: flex;
   align-items: center;
   padding: 8px;
-  background-color: var(--md-sys-color-sortable-item);
+  background-color: var(--md-sys-color-surface-dim);
   border-radius: 4px;
   box-shadow: 0 1px 3px var(--md-sys-color-shadow-alpha-1a);
+  column-gap: 8px;
 }
 
 .sortable-item span {
@@ -93,15 +74,21 @@
   margin-right: auto;
 }
 
-.sortable-item button {
-  margin-left: 8px;
+.other-options md-list-item:first-child {
+  background-color: var(--md-sys-color-surface-container-highest);
+  --md-list-item-label-text-size: 1.5rem;
+  --md-list-item-label-text-line-height: 1.5rem;
+  --md-list-item-one-line-container-height: 3.2rem;
 }
 
-.sortable-item button[class^="move-"] {
-  border-radius: 4px;
-  width: 0;
-  height: 20px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.other-options md-list-item {
+  background-color: var(--md-sys-color-surface-container);
+  --md-list-item-label-text-size: 1rem;
+  --md-list-item-label-text-line-height: 1.5rem;
+  --md-list-item-one-line-container-height: 2.7rem;
+}
+
+md-slider {
+  margin: 0 -10px;
+  min-width: 190px;
 }

@@ -11,16 +11,8 @@ function init() {
 init();
 
 function getRandom(min, max, threshold = 0) {
-  if (min >= max) {
-    throw new Error('最小值必须小于最大值。');
-  }
-  if (threshold < 0) {
-    throw new Error('阈值必须为非负数。');
-  }
-  if (threshold >= max) {
-    throw new Error('阈值必须小于最大值。');
-  }
-
+  if (threshold >= Math.max(Math.abs(max), Math.abs(min)))
+    threshold = Math.max(Math.abs(max), Math.abs(min)) - 1;
   let randomNum;
 
   do {
@@ -139,23 +131,43 @@ g.draw();
 const count = document.querySelector('#count');
 const pointRadius = document.querySelector('#pointRadius');
 const maxLen = document.querySelector('#maxLen');
-const vxMin = document.querySelector('#vxMin');
-const vxMax = document.querySelector('#vxMax');
-const vyMin = document.querySelector('#vyMin');
-const vyMax = document.querySelector('#vyMax');
+const vxRange = document.querySelector('#vxRange');
+const vyRange = document.querySelector('#vyRange');
 const vxThreshold = document.querySelector('#vxThreshold');
 const vyThreshold = document.querySelector('#vyThreshold');
 const update = document.querySelector('#update');
 
+vxRange.addEventListener('input', () => {
+  vxThreshold.setAttribute('max',
+    Math.max(
+      Math.abs(vxRange.valueStart),
+      Math.abs(vxRange.valueEnd)
+    ) - 1
+  );
+});
+
+vyRange.addEventListener('input', () => {
+  vyThreshold.setAttribute('max',
+    thresholdYMax = Math.max(
+      Math.abs(vyRange.valueStart),
+      Math.abs(vyRange.valueEnd)
+    ) - 1
+  );
+});
+
 update.addEventListener('click', () => {
   g.stop();
-  g = new Graph(
-    [+vxMin.value, +vxMax.value, +vxThreshold.value],
-    [+vyMin.value, +vyMax.value, +vyThreshold.value],
-    +maxLen.value,
-    +count.value,
-    +pointRadius.value
-  );
+  try {
+    g = new Graph(
+      [vxRange.valueStart, vxRange.valueEnd, vxThreshold.value],
+      [vyRange.valueStart, vyRange.valueEnd, vyThreshold.value],
+      +maxLen.value,
+      +count.value,
+      +pointRadius.value
+    );
+  } catch (e) {
+    alert(e)
+  }
   g.draw();
 });
 

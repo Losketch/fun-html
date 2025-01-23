@@ -153,28 +153,6 @@ a:hover[class="BSC"] {
 #sk_header button:active {
   transform: translateY(1px);
 }
-#sk_header #input {
-  font-size: 2.5em;
-  padding: 2px;
-  height: 50px;
-  border-radius: 5px 5px 0 0;
-  border: 1px solid #666;
-  box-sizing: border-box;
-  color: var(--md-sys-color-on-surface);
-  resize: none;
-  overflow: hidden;
-  margin: 0;
-  box-shadow: 0 1px 0 var(--md-sys-color-outline);
-  transition: box-shadow 0.3s ease;
-}
-#sk_header #input:focus {
-  outline: none;
-  box-shadow:
-    0 1px 0 var(--md-sys-color-primary),
-    0 2px 0 var(--md-sys-color-primary),
-    0 3px 0 var(--md-sys-color-primary),
-    0 0 0 var(--md-sys-color-outline) inset;
-}
 #funcs {
   padding: 10px 10px 0 10px;
   border-top: 2px solid #ccc;

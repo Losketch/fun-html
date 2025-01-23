@@ -14,18 +14,18 @@ td {
 }
 
 th {
-  background-color: var(--md-sys-color-primary);
-  color: var(--md-sys-color-on-primary);
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
 }
 
 tr:nth-child(even) td {
-  background-color: var(--md-sys-color-background-text-dark);
-  color: var(--md-sys-color-shadow-sidebar);
+  background-color: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-on-surface-variant);
 }
 
 tr:nth-child(odd) td {
-  background-color: var(--md-sys-color-background-text);
-  color: var(--md-sys-color-shadow-sidebar);
+  background-color: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface-variant);
 }
 
 tbody > tr:first-child > th:first-child {

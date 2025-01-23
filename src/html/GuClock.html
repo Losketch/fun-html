@@ -9,10 +9,9 @@
 
     <link rel="stylesheet" href="../css/mainStyles.css" />
     <link rel="stylesheet" href="../css/refuse.css" />
-    <link rel="stylesheet" href="../css/rippleButton.css" />
     <link rel="stylesheet" href="../css/tools/GuClock.css" />
+    <script src="../../m3ui.js"></script>
     <script defer src="../js/changeHeader.js"></script>
-    <script defer src="../js/rippleButton.js"></script>
     <script defer src="../js/iframeColorSchemeSync.js"></script>
     <script defer src="../js/tools/GuClock.js"></script>
   </head>
@@ -34,9 +33,11 @@
       </svg>
     </div>
     <div>
-      <button onclick="timeEle.click()">修改时间</button>
-      <button id="set-as-current-time">设为当前时间</button>
-      <button id="togglePathButton">更换样式</button>
+      <md-filled-button onclick="timeEle.click()">修改时间</md-filled-button>
+      <md-filled-button id="set-as-current-time">设为当前时间</md-filled-button>
+      <md-filled-tonal-button id="togglePathButton">
+        更换样式
+      </md-filled-tonal-button>
       <input type="time" id="time" step="1" />
     </div>
   </body>

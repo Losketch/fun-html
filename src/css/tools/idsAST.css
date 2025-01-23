@@ -2,32 +2,30 @@
   display: grid;
   grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(8, 1fr);
-  gap: 16px 8px;
+  gap: 12px 8px;
+}
+
+#input {
+  width: 100%;
+  margin-top: 8px;
 }
 
 .idc-inputer,
 .curve-inputer {
-  all: unset;
-  font-size: 4.4vw;
-  overflow: visible;
   position: relative;
-  background-color: var(--md-sys-color-background-text);
-  border-radius: 4px;
-  padding: 0;
-  aspect-ratio: 1 / 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  transition:
-    outline-color 0.5s ease,
-    background-color 0.5s ease;
-  outline: solid 1px transparent;
+  --md-filled-tonal-icon-button-container-shape: 4px;
+  --md-filled-tonal-icon-button-icon-size: 4.4vwm;
+  --md-filled-tonal-icon-button-icon-color: var(--md-sys-color-on-surface-variant);
+  --md-filled-tonal-icon-button-container-color: var(--md-sys-color-surface-container-high);
 }
 
-:is(.idc-inputer, .curve-inputer):hover {
-  outline: solid 1px var(--md-sys-color-outline-inputer);
-  background-color: var(--md-sys-color-background-text-dark);
+:is(.idc-inputer, .curve-inputer) md-icon {
+  --md-icon-font: IDC, Plgo1, Noto-Color-Emoji, Plgo2, Noto, NotoSansSC,
+    NotoSansKR, Monu, Segoe, Microsoft, others, sans-serif, Last;
+}
+
+:is(.idc-inputer, .curve-inputer)::part(ripple) {
+  display: none;
 }
 
 :is(.idc-inputer, .curve-inputer):after {
@@ -35,7 +33,6 @@
   position: absolute;
   top: 100%;
   opacity: 0.5;
-  margin-top: 2px;
 }
 
 .idc-inputer:nth-child(1):after {
@@ -140,7 +137,7 @@ code {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: var(--md-sys-color-background-text);
+  background: var(--md-sys-color-surface-container-low);
   padding: 10px;
   border-radius: 10px;
   text-align: center;
@@ -155,8 +152,4 @@ code {
 
 #json-code {
   background-color: transparent;
-}
-
-#error {
-  line-height: 1.2rem;
 }

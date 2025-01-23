@@ -1,28 +1,9 @@
-main > div > div:nth-child(2) {
-  display: block;
+#count-slider {
+  width: 100%;
 }
 
-main > div > div {
-  margin-bottom: 16px;
-}
-
-#checkbox-section > label:not(.placeholder) {
-  margin-bottom: 8px;
-}
-
-#checkbox-section label:not(.placeholder) {
-  display: flex;
-  align-items: center;
-  font-size: 0.875rem;
-  width: fit-content;
-  overflow: visible;
-  color: var(--md-sys-color-on-surface-variant);
-}
-
-#checkbox-section {
-  display: flex;
-  align-items: unset;
-  flex-direction: column;
+#checkbox-section > md-list-item {
+  --md-list-item-one-line-container-height: 2rem;
 }
 
 #count-section {
@@ -33,58 +14,57 @@ main > div > div {
   gap: 5px;
 }
 
-input[type="checkbox"] {
-  margin-right: 8px !important;
+#select-blocks {
+  margin: 0;
+  margin-bottom: 8px;
 }
 
-input[class="uni"] {
-  width: 4.5rem;
-  padding: 4px;
-  margin: 0 4px;
-}
-
-button.nf {
-  font-size: 1rem;
+#custom-char {
+  margin-bottom: 8px;
 }
 
 #custom-interval-container,
 #custom-blocks-container {
-  background-color: var(--md-sys-color-background-text);
+  background-color: var(--md-sys-color-surface-container-low);
   padding: 10px;
   border-radius: 5px;
   display: none;
-  gap: 4px;
   max-height: 300px;
-  overflow: scroll !important;
+  overflow: scroll;
   width: 100%;
-  flex-wrap: wrap;
   box-sizing: border-box;
-  overflow: visible;
-}
-
-:is(#custom-interval-container, #custom-blocks-container) > div {
-  display: flex;
-  width: 100%;
-  overflow: visible;
-  align-items: center;
-}
-
-#custom-blocks-container > div {
-  justify-content: space-between;
-}
-
-#unicode-block-section,
-#checkbox-section {
-  overflow: visible;
-}
-
-#custom-interval-section,
-#unicode-block-section {
   margin-bottom: 8px;
 }
 
-#result-section {
-  margin: 0;
+#custom-interval-container {
+  padding-top: calc(10px - 0.4rem);
+}
+
+#custom-interval-container md-list-item {
+  --md-list-item-one-line-container-height: 40px;
+}
+
+#custom-interval-container md-filled-tonal-icon-button {
+  transform: translateY(0.2rem);
+}
+
+#custom-blocks-container {
+  padding-top: 18px;
+  padding-bottom: 0;
+}
+
+#custom-blocks-container md-list-item {
+  margin-top: -20px;
+}
+
+#custom-interval-container md-outlined-text-field {
+  width: 6rem;
+  --md-outlined-field-bottom-space: 2px;
+  --md-outlined-field-top-space: 2px;
+  --md-outlined-field-leading-space: 2px;
+  --md-outlined-field-trailing-space: 2px;
+  margin: 0 4px;
+  padding-top: 0.4rem;
 }
 
 #result-container {
@@ -98,6 +78,7 @@ button.nf {
 #result-ele {
   overflow: visible;
   word-break: break-all;
+  box-sizing: border-box;
 }
 
 #result-ele::before {

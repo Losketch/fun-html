@@ -10,7 +10,7 @@
   };
   let main = {
     mainContent: document.getElementById('main-content'),
-    darkModeToggle: document.getElementById('darkmode-toggle'),
+    darkModeToggle: document.getElementById('toggle-dark-button'),
     enableDarkMode() {
       document.documentElement.classList.add('dark');
       this.mainContent.contentWindow.postMessage(
@@ -33,7 +33,7 @@
     },
     toggleDarkMode() {
       this.darkModeToggle.addEventListener('change', () => {
-        if (this.darkModeToggle.checked) {
+        if (this.darkModeToggle.selected) {
           util.setValue('dark_mode', 'dark');
           this.enableDarkMode();
         } else {
@@ -53,10 +53,10 @@
       });
 
       if (util.getValue('dark_mode') === 'dark') {
-        this.darkModeToggle.checked = true;
+        this.darkModeToggle.selected = true;
         this.enableDarkMode();
       } else {
-        this.darkModeToggle.checked = false;
+        this.darkModeToggle.selected = false;
         this.disableDarkMode();
       }
     },
