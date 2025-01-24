@@ -66,7 +66,7 @@ button:hover,
 span.btn:hover {
   color: #c20c24;
 }
-a:hover[class="BSC"] {
+a:hover[class='BSC'] {
   color: #c20c24;
 }
 @font-face {
@@ -87,7 +87,7 @@ a:hover[class="BSC"] {
 }
 @font-face {
   font-family: ffallback;
-  src: url("../assets/fonts/display/Monu Hanp.woff2");
+  src: url('../assets/fonts/display/Monu Hanp.woff2');
 }
 @font-face {
   font-family: dela;
@@ -429,7 +429,7 @@ body {
 button {
   display: inline-block;
 }
-a[class="BSC"] {
+a[class='BSC'] {
   background: #eee;
   color: #000;
 }

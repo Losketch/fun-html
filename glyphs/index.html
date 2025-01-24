@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="zh">
-  <head
-    ><title>遠見齋｜字形檢索</title
-    ><meta charset="utf-8" />
+  <head>
+    <title>遠見齋｜字形檢索</title>
+    <meta charset="utf-8" />
     <script defer src="../src/js/changeHeader.js"></script>
     <link rel="stylesheet" href="../src/css/mainStyles.css" />
     <link rel="stylesheet" href="./styles.css" />
-    <script src="../m3ui.js" ></script>
+    <script src="../m3ui.js"></script>
     <script>
       var time;
       var popup;
@@ -14,10 +14,10 @@
       function pop(ch) {
         time = 0;
         var btnValue = document.getElementsByClassName(
-          "set-v2-popup-symbol",
+          'set-v2-popup-symbol'
         )[0];
         btnValue.innerHTML = ch;
-        popup = document.getElementsByClassName("set-v2-popup")[0];
+        popup = document.getElementsByClassName('set-v2-popup')[0];
         clearInterval(q);
         q = setInterval(function () {
           opa();
@@ -32,11 +32,11 @@
         } else {
           op = 1;
         }
-        popup.style = "display: block;opacity: " + op + ";";
+        popup.style = 'display: block;opacity: ' + op + ';';
         if (op < 0) {
           op = 0;
           time = -0.05;
-          popup.style = "display: none;";
+          popup.style = 'display: none;';
           clearInterval(q);
         }
         time += 0.05;
@@ -52,9 +52,7 @@
           <h3>可检索<span id="datasize"></span>字</h3>
         </div>
         <div id="sk_toolbar">
-          <md-outlined-text-field
-            id="input"
-            class="han">
+          <md-outlined-text-field id="input" class="han">
           </md-outlined-text-field>
           <button title="清除" id="buttClear">清</button>
           <button title="解构" id="buttDecompose">拆</button>
@@ -68,16 +66,12 @@
         <div>
           <div>
             包含异体
-            <md-switch
-              id="variant" 
-              onclick="UI.setMode(this, 'variant')">
+            <md-switch id="variant" onclick="UI.setMode(this, 'variant')">
             </md-switch>
           </div>
           <div>
             强行拆分
-            <md-switch
-              id="subdivide"
-              onclick="UI.setMode(this, 'subdivide')">
+            <md-switch id="subdivide" onclick="UI.setMode(this, 'subdivide')">
             </md-switch>
           </div>
           <div>
@@ -137,7 +131,7 @@
           >
           <span id="counter"></span>
         </div>
-        <div id="groups" class="han"> </div>
+        <div id="groups" class="han"></div>
         <div id="output" class="han"></div>
       </div>
       <div id="popview">
@@ -178,10 +172,10 @@
         // $UCD$ 表示汉字的10进制Unicode变量
         // $UCh$ 表示汉字的16进制小写Unicode变量
         // $UCH$ 表示汉字的16进制大写Unicode变量
-        url: "https://zi.tools/zi/$ENC$",
+        url: 'https://zi.tools/zi/$ENC$',
 
         // GlyphWiki网站的图片网址，默认输出uxxxxx.svg
-        glyphwiki: "https://seeki.vistudium.top/SVG/",
+        glyphwiki: 'https://seeki.vistudium.top/SVG/',
 
         // 指定哪个Range要采用图片显示 (true=图片显示，false=文本显示)
         // 1：基本；2：扩A。以此类推 5：D
@@ -200,14 +194,12 @@
           28: false,
           29: false,
           30: false,
-          31: false,
+          31: false
         },
         resultStep1: 299,
-        resultStep2: 1999,
+        resultStep2: 1999
       };
     </script>
-    <script
-      type="text/javascript"
-      src="js/seeker.js"
-      encoding="utf-8"></script> </body
-></html>
+    <script type="text/javascript" src="js/seeker.js" encoding="utf-8"></script>
+  </body>
+</html>

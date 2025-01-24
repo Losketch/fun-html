@@ -4,7 +4,7 @@
   position: relative;
   box-sizing: border-box;
   overflow: visible;
-  z-index: 1;
+  z-index: 10000;
 }
 
 .select {
@@ -26,7 +26,7 @@
 
 .opts-list {
   margin-top: 8px;
-  z-index: 1;
+  z-index: 10000;
   box-sizing: border-box;
   position: absolute;
   width: 100%;
