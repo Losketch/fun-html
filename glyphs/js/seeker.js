@@ -1575,7 +1575,7 @@ UI.showOutput = function () {
   $('#output').html(s);
 };
 
-UI.addEventListener('finished', founds => {
+UI.onFinished = founds => {
   Seeker.result = founds;
   var groups = {};
   for (var j in founds) {
@@ -1615,7 +1615,7 @@ UI.addEventListener('finished', founds => {
     );
   }
   if (str != '') $('#groups').html(str).slideDown();
-});
+};
 
 // 初始化
 UI.init = function () {

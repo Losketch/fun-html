@@ -55,6 +55,7 @@
   --md-sys-color-surface-container: #f2ecf4;
   --md-sys-color-surface-container-high: #ece6ee;
   --md-sys-color-surface-container-highest: #e6e0e9;
+  --md-sys-color-surface-container-highester: #e0dae3;
 
   --md-sys-color-media-controls-panel: #efe8ff;
   --md-sys-color-add-button: #90ff90;
@@ -118,6 +119,7 @@
   --md-sys-color-surface-container: #211f24;
   --md-sys-color-surface-container-high: #2b292f;
   --md-sys-color-surface-container-highest: #36343a;
+  --md-sys-color-surface-container-highester: #424046;
 
   --md-sys-color-media-controls-panel: #70668a;
   --md-sys-color-add-button: #70ee70;
@@ -181,7 +183,7 @@ md-filled-tonal-icon-button.copy-button {
     --md-sys-color-on-surface-variant
   );
   --md-filled-tonal-icon-button-container-color: var(
-    --md-sys-color-surface-container-highest
+    --md-sys-color-surface-container-highester
   );
   position: absolute;
   top: 10px;
@@ -244,7 +246,7 @@ md-outlined-text-field {
 }
 
 .code-container {
-  background: var(--md-sys-color-surface-container-low);
+  background: var(--md-sys-color-surface-container-high);
   padding: 10px;
   border-radius: 10px;
   overflow: auto;
