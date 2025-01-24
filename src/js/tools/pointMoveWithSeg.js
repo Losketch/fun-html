@@ -12,7 +12,7 @@ init();
 
 function getRandom(min, max, threshold = 0) {
   if (threshold >= Math.max(Math.abs(max), Math.abs(min)))
-    threshold = Math.max(Math.abs(max), Math.abs(min)) - 1;
+    threshold = Math.max(Math.max(Math.abs(max), Math.abs(min)) - 1, 0);
   let randomNum;
 
   do {
@@ -138,20 +138,16 @@ const vyThreshold = document.querySelector('#vyThreshold');
 const update = document.querySelector('#update');
 
 vxRange.addEventListener('input', () => {
-  vxThreshold.setAttribute('max',
-    Math.max(
-      Math.abs(vxRange.valueStart),
-      Math.abs(vxRange.valueEnd)
-    ) - 1
+  vxThreshold.setAttribute(
+    'max',
+    Math.max(Math.abs(vxRange.valueStart), Math.abs(vxRange.valueEnd)) - 1
   );
 });
 
 vyRange.addEventListener('input', () => {
-  vyThreshold.setAttribute('max',
-    thresholdYMax = Math.max(
-      Math.abs(vyRange.valueStart),
-      Math.abs(vyRange.valueEnd)
-    ) - 1
+  vyThreshold.setAttribute(
+    'max',
+    Math.max(Math.abs(vyRange.valueStart), Math.abs(vyRange.valueEnd)) - 1
   );
 });
 
@@ -166,7 +162,7 @@ update.addEventListener('click', () => {
       +pointRadius.value
     );
   } catch (e) {
-    alert(e)
+    alert(e);
   }
   g.draw();
 });

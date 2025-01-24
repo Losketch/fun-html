@@ -1,13 +1,7 @@
-const windowWidth = window.innerWidth;
-const windowHeight = window.innerHeight;
-
 const input = document.getElementById('text');
-const counter =
-  input
-    .shadowRoot
-    .querySelector('md-filled-field')
-    .shadowRoot
-    .querySelector('.counter');
+const counter = input.shadowRoot
+  .querySelector('md-filled-field')
+  .shadowRoot.querySelector('.counter');
 const textarea = input.shadowRoot.querySelector('textarea');
 const clear = document.getElementById('clear');
 
@@ -81,7 +75,7 @@ fontSizeSlider.addEventListener('input', () => {
   );
   input.style.setProperty(
     '--md-filled-text-field-input-text-line-height',
-    (+fontSizeSlider.value) * 1.65 + 'rem'
+    +fontSizeSlider.value * 1.65 + 'rem'
   );
 
   const fontSizeSliderTop = fontSizeSlider.getBoundingClientRect().top;
@@ -135,8 +129,10 @@ function remove(ele) {
 }
 
 function addFontFeatureSetting(name, availability) {
-  if (addedFontFeatureSettingsName.has(name) ||
-        !validFontFeatureSettings.has(name))
+  if (
+    addedFontFeatureSettingsName.has(name) ||
+    !validFontFeatureSettings.has(name)
+  )
     return false;
 
   const fontFeatureSetting = { name, availability };
@@ -159,11 +155,14 @@ function addFontFeatureSetting(name, availability) {
   const fontFeatureSettingAvailabilityEle =
     fontFeatureSettingEle.querySelector('md-switch');
   fontFeatureSettingAvailabilityEle.addEventListener('change', () => {
-    fontFeatureSetting.availability = fontFeatureSettingAvailabilityEle.selected;
+    fontFeatureSetting.availability =
+      fontFeatureSettingAvailabilityEle.selected;
     updateEleFontFeatureSettings();
   });
 
-  const remButton = fontFeatureSettingEle.querySelector('md-filled-tonal-icon-button');
+  const remButton = fontFeatureSettingEle.querySelector(
+    'md-filled-tonal-icon-button'
+  );
   remButton.addEventListener('click', () => {
     addedFontFeatureSettings.delete(fontFeatureSetting);
     addedFontFeatureSettingsName.delete(fontFeatureSetting.name);
@@ -198,9 +197,11 @@ function isFontFile(file) {
 
 function checkFontFeatureSettingsName() {
   const name = addFontFeatureSettingsName.value;
-  if (!name ||
-        addedFontFeatureSettingsName.has(name) ||
-        !validFontFeatureSettings.has(name)) {
+  if (
+    !name ||
+    addedFontFeatureSettingsName.has(name) ||
+    !validFontFeatureSettings.has(name)
+  ) {
     if (!addFontFeatureSettingsName.children.length) {
       const errorIcon = document.createElement('md-icon');
       errorIcon.setAttribute('slot', 'trailing-icon');
@@ -208,9 +209,11 @@ function checkFontFeatureSettingsName() {
       addFontFeatureSettingsName.appendChild(errorIcon);
     }
     addFontFeatureSettingsName.error = true;
-    addFontFeatureSettingsName.errorText = !name ? '字体特性设置名称不能为空。' :
-      addedFontFeatureSettingsName.has(name) ? '该字体特征设置已添加过了，不可再次添加。' :
-      '该字体特征设置无效，请参见 https://learn.microsoft.com/zh-cn/typography/opentype/spec/featurelist 中定义的有效字体特征设置。'
+    addFontFeatureSettingsName.errorText = !name
+      ? '字体特性设置名称不能为空。'
+      : addedFontFeatureSettingsName.has(name)
+        ? '该字体特征设置已添加过了，不可再次添加。'
+        : '该字体特征设置无效，请参见 https://learn.microsoft.com/zh-cn/typography/opentype/spec/featurelist 中定义的有效字体特征设置。';
   } else {
     if (addFontFeatureSettingsName.children.length)
       addFontFeatureSettingsName.children[0].remove();
@@ -222,7 +225,10 @@ addFontFeatureSettingsClose.addEventListener('click', () => {
   addFontFeatureSettingsDialog.close();
 });
 
-addFontFeatureSettingsName.addEventListener('input', checkFontFeatureSettingsName);
+addFontFeatureSettingsName.addEventListener(
+  'input',
+  checkFontFeatureSettingsName
+);
 
 addFontFeatureSettingsButton.addEventListener('click', () => {
   function preventScroll(event) {
@@ -352,7 +358,7 @@ function insertItem(text, index, fontObjectURL) {
 
   const deleteIcon = document.createElement('md-icon');
   deleteIcon.className = 'nf nf-fa-times';
-  
+
   deleteButton.appendChild(deleteIcon);
   newItem.appendChild(deleteButton);
 
@@ -414,7 +420,10 @@ function updateInputFont() {
   const fontFamilyList = items
     .map(item => `'${item.querySelector('span').textContent}'`)
     .join(', ');
-  input.style.setProperty('--md-filled-text-field-input-text-font', fontFamilyList);
+  input.style.setProperty(
+    '--md-filled-text-field-input-text-font',
+    fontFamilyList
+  );
 }
 
 function flipAnimation(item, targetItem, direction) {
