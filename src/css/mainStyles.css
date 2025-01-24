@@ -177,8 +177,12 @@ md-filled-tonal-icon-button.copy-button {
   --md-filled-tonal-icon-button-container-width: 1.75rem;
   --md-filled-tonal-icon-button-container-height: 1.75rem;
   --md-filled-tonal-icon-button-container-shape: 8px;
-  --md-filled-tonal-icon-button-icon-color: var(--md-sys-color-on-surface-variant);
-  --md-filled-tonal-icon-button-container-color: var(--md-sys-color-surface-container-highest);
+  --md-filled-tonal-icon-button-icon-color: var(
+    --md-sys-color-on-surface-variant
+  );
+  --md-filled-tonal-icon-button-container-color: var(
+    --md-sys-color-surface-container-highest
+  );
   position: absolute;
   top: 10px;
   right: 10px;
@@ -188,7 +192,9 @@ md-filled-tonal-icon-button {
   min-width: 1.5rem;
   --md-filled-tonal-icon-button-container-width: 1.5rem;
   --md-filled-tonal-icon-button-container-height: 1.5rem;
-  --md-filled-tonal-icon-button-disabled-container-color: var(--md-sys-color-on-background);
+  --md-filled-tonal-icon-button-disabled-container-color: var(
+    --md-sys-color-on-background
+  );
   --md-filled-tonal-icon-button-icon-size: 1rem;
   --md-filled-tonal-icon-button-disabled-container-opacity: 0.16;
 }
@@ -273,7 +279,7 @@ a.a:hover {
 }
 
 a.a::after {
-  content: "";
+  content: '';
   display: inline-block;
   width: 12px;
   height: 16px;
@@ -289,7 +295,7 @@ a.a::after {
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   background-color: var(--md-sys-color-background);
   color: var(--md-sys-color-on-background);
   margin: 0;
