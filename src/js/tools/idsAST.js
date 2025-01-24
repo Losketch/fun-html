@@ -588,19 +588,19 @@ function idsToObj(string) {
     }
   }
 
-  if (!Object.keys(res).length) throw new IdsError(`IDS为空。`, 0, 0);
-  if (inAbstractStructure) throw new IdsError(`抽象构形未闭合。`, 0);
+  if (!Object.keys(res).length) throw new IdsError('IDS为空。', 0, 0);
+  if (inAbstractStructure) throw new IdsError('抽象构形未闭合。', 0);
   if (inSurroundTag)
-    throw new IdsError(`包围标记未闭合。`, lastSurroundTagIndex);
+    throw new IdsError('包围标记未闭合。', lastSurroundTagIndex);
   if (inSubtractionTag)
-    throw new IdsError(`删减标记未闭合。`, lastSubtractionTagIndex);
+    throw new IdsError('删减标记未闭合。', lastSubtractionTagIndex);
   if (inReplacementTag)
-    throw new IdsError(`替换标记未闭合。`, lastReplacementTagIndex);
-  if (inOverlapTag) throw new IdsError(`重叠标记未闭合。`, lastOverlapTagIndex);
+    throw new IdsError('替换标记未闭合。', lastReplacementTagIndex);
+  if (inOverlapTag) throw new IdsError('重叠标记未闭合。', lastOverlapTagIndex);
   if (inStrokeSequence)
-    throw new IdsError(`笔画序列未闭合。`, lastStrokeSequenceIndex, 2);
+    throw new IdsError('笔画序列未闭合。', lastStrokeSequenceIndex, 2);
   if (inGlyphFormSelector)
-    throw new IdsError(`字形样式选择器未闭合。`, lastGlyphFormSelectorIndex);
+    throw new IdsError('字形样式选择器未闭合。', lastGlyphFormSelectorIndex);
   checkObj(null, res);
 
   return moveStructureToEnd(res);
@@ -612,7 +612,7 @@ function strokeSequenceToObj(strokeSequence, index = 0) {
   };
   strokeSequence = strokeSequence.toArray();
   strokeSequence = strokeSequence.slice(2, -1);
-  if (!strokeSequence.length) throw new IdsError(`笔画序列为空。`, index, 3);
+  if (!strokeSequence.length) throw new IdsError('笔画序列为空。', index, 3);
 
   if (strokeSequence[strokeSequence.length - 1] === 'z') {
     res.endToEnd = true;
@@ -648,7 +648,7 @@ function strokeSequenceToObj(strokeSequence, index = 0) {
         if ('crossing' in curUnit) {
           if (!curUnit.crossing)
             throw new IdsError(
-              `笔画交叉标记未指定交叉索引。`,
+              '笔画交叉标记未指定交叉索引。',
               index + charIndex + 1
             );
           curUnit.crossing = parseInt(curUnit.crossing, 10);
@@ -676,24 +676,24 @@ function strokeSequenceToObj(strokeSequence, index = 0) {
     } else if (char === 'x') {
       if (curUnit === null)
         throw new IdsError(
-          `笔画交叉标记未指定交叉主笔画。`,
+          '笔画交叉标记未指定交叉主笔画。',
           index + charIndex + 2
         );
       if (inCrossingTag)
-        throw new IdsError(`笔画交叉标记重复使用。`, index + charIndex + 2);
+        throw new IdsError('笔画交叉标记重复使用。', index + charIndex + 2);
       inCrossingTag = true;
       curUnit.crossing = '';
       curUnit.endIndex++;
     } else if (char === 'b') {
       if (curUnit === null)
-        throw new IdsError(`笔画撕开标记未指定目标。`, index + charIndex + 2);
+        throw new IdsError('笔画撕开标记未指定目标。', index + charIndex + 2);
       if (curUnit.break)
-        throw new IdsError(`笔画撕开标记重复使用。`, index + charIndex + 2);
+        throw new IdsError('笔画撕开标记重复使用。', index + charIndex + 2);
       curUnit.break = true;
       curUnit.endIndex++;
     } else if (char === '-') {
       if (nextIsReverseStroke)
-        throw new IdsError(`逆运笔标记重复使用。`, index + charIndex + 2);
+        throw new IdsError('逆运笔标记重复使用。', index + charIndex + 2);
       nextIsReverseStroke = true;
     } else {
       throw new IdsError(`非法笔画序列字符“${char}”。`, index + charIndex + 2);
@@ -703,7 +703,7 @@ function strokeSequenceToObj(strokeSequence, index = 0) {
     if ('crossing' in curUnit) {
       if (!curUnit.crossing)
         throw new IdsError(
-          `笔画交叉标记未指定交叉索引。`,
+          '笔画交叉标记未指定交叉索引。',
           index + strokeSequence.length + 1
         );
       curUnit.crossing = parseInt(curUnit.crossing, 10);
@@ -714,12 +714,12 @@ function strokeSequenceToObj(strokeSequence, index = 0) {
 
   if (nextIsReverseStroke)
     throw new IdsError(
-      `逆运笔标记未指定目标笔画。`,
+      '逆运笔标记未指定目标笔画。',
       index + strokeSequence.length + 1
     );
   if (inCurve)
     throw new IdsError(
-      `<ruby>曲<rp>（</rp><rt>qū</rt><rp>）</rp></ruby>线未指定方向。`,
+      '<ruby>曲<rp>（</rp><rt>qū</rt><rp>）</rp></ruby>线未指定方向。',
       index + strokeSequence.length + 1
     );
 

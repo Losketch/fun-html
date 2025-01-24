@@ -258,7 +258,9 @@ selectBlocks.addEventListener('select', e => {
 });
 
 addCustomInterval.addEventListener('click', () => {
-  const customIntervalEle = add(customIntervalContainer, `
+  const customIntervalEle = add(
+    customIntervalContainer,
+    `
     <md-outlined-text-field
       label="起始码位"
       prefix-text="U+">
@@ -272,17 +274,20 @@ addCustomInterval.addEventListener('click', () => {
       slot="end">
       <md-icon class="nf nf-fa-times"></md-icon>
     </md-filled-tonal-icon-button>
-  `);
-  customIntervalEle.querySelectorAll('md-outlined-text-field').forEach(inputEle => {
-    let lastValidValue = '';
-    inputEle.addEventListener('input', () => {
-      if (!validCode.test(inputEle.value)) {
-        inputEle.value = lastValidValue;
-      } else {
-        lastValidValue = inputEle.value;
-      }
+  `
+  );
+  customIntervalEle
+    .querySelectorAll('md-outlined-text-field')
+    .forEach(inputEle => {
+      let lastValidValue = '';
+      inputEle.addEventListener('input', () => {
+        if (!validCode.test(inputEle.value)) {
+          inputEle.value = lastValidValue;
+        } else {
+          lastValidValue = inputEle.value;
+        }
+      });
     });
-  });
 
   customIntervalEle
     .querySelector('md-filled-tonal-icon-button')
