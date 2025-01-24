@@ -23,7 +23,7 @@ function loadContent(url) {
   mainContent.src = `${url}?t=${timestamp}`;
 }
 
-tabs.addEventListener('change', (event) => {
+tabs.addEventListener('change', () => {
   const index = tabs.activeTabIndex;
   animateContent();
   setTimeout(() => {
@@ -53,7 +53,7 @@ toolButtons.forEach(button => {
       tabs.activeTabIndex = 0;
       mainContent.style.display = 'block';
       toolbox.style.display = 'none';
-    }, 100);
+    }, 50);
   });
 });
 

@@ -176,7 +176,7 @@
       setTimeout(() => {
         optionsList.style.transition = `height ${duration}ms ease`;
         optionsList.style.height = height + 'px';
-      }, 0)
+      }, 0);
     }
 
     filter.addEventListener('input', () => {
