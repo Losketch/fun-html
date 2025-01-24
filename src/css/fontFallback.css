@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "Ctrl-Ctrl";
-  src: url("../../assets/fonts/display/Ctrl Ctrl.woff2") format("woff2");
+  font-family: 'Ctrl-Ctrl';
+  src: url('../../assets/fonts/display/Ctrl Ctrl.woff2') format('woff2');
   font-display: swap;
   unicode-range: U+0000-0020, U+0028-002C, U+007F-00A0, U+00AD, U+00D7, U+034F,
     U+061C, U+0890-0891, U+180B-180F, U+2000-200F, U+2011, U+2022, U+2028-202F,
@@ -14,8 +14,8 @@
 }
 
 @font-face {
-  font-family: "Noto-Color-Emoji";
-  src: url("../../assets/fonts/display/Noto Color Emoji.ttf") format("truetype");
+  font-family: 'Noto-Color-Emoji';
+  src: url('../../assets/fonts/display/Noto Color Emoji.ttf') format('truetype');
   font-display: swap;
   unicode-range: U+0000, U+000D, U+0020, U+0023, U+002A, U+0030-0039, U+00A9,
     U+00AE, U+200D, U+203C, U+2049, U+20E3, U+2122, U+2139, U+2194-2199,
@@ -46,8 +46,8 @@
 }
 
 @font-face {
-  font-family: "Plgo1";
-  src: url("../../assets/fonts/display/Plgo1.woff2") format("woff2");
+  font-family: 'Plgo1';
+  src: url('../../assets/fonts/display/Plgo1.woff2') format('woff2');
   font-display: swap;
   unicode-range: U+0000-0007, U+000A-000C, U+000E-00FF, U+0128, U+012A, U+012C,
     U+012E, U+0130, U+0132, U+0197, U+01CF, U+0208, U+020A, U+038A, U+0399,
@@ -374,8 +374,8 @@
 }
 
 @font-face {
-  font-family: "Plgo2";
-  src: url("../../assets/fonts/display/Plgo2.woff2") format("woff2");
+  font-family: 'Plgo2';
+  src: url('../../assets/fonts/display/Plgo2.woff2') format('woff2');
   font-display: swap;
   unicode-range: U+0000-0007, U+000A-000C, U+000E-00FF, U+0128, U+012A, U+012C,
     U+012E, U+0130, U+0132, U+0197, U+01CF, U+0208, U+020A, U+0295, U+02B2,
@@ -491,8 +491,8 @@
 }
 
 @font-face {
-  font-family: "Noto";
-  src: url("../../assets/fonts/display/NotoUnicode.woff2") format("woff2");
+  font-family: 'Noto';
+  src: url('../../assets/fonts/display/NotoUnicode.woff2') format('woff2');
   font-display: swap;
   unicode-range: U+0000-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1,
     U+03A3-052F, U+0531-0556, U+0559-058A, U+058D-058F, U+0591-05C7,
@@ -597,8 +597,8 @@
 }
 
 @font-face {
-  font-family: "NotoSansSC";
-  src: url("../../assets/fonts/display/NotoSansSC.woff2") format("woff2");
+  font-family: 'NotoSansSC';
+  src: url('../../assets/fonts/display/NotoSansSC.woff2') format('woff2');
   font-display: swap;
   unicode-range: U+0020-007E, U+00A0-0103, U+0110-0113, U+011A-011B,
     U+0128-012B, U+0143-0144, U+0147-0148, U+014C-014F, U+0152-0153,
@@ -670,8 +670,8 @@
 }
 
 @font-face {
-  font-family: "NotoSansKR";
-  src: url("../../assets/fonts/display/NotoSansKR.woff2") format("woff2");
+  font-family: 'NotoSansKR';
+  src: url('../../assets/fonts/display/NotoSansKR.woff2') format('woff2');
   font-display: swap;
   unicode-range: U+0000-007E, U+00A0-00BF, U+1100-11FF, U+2010-2016,
     U+2018-201A, U+201C-201E, U+2020-2022, U+2025-2027, U+2030, U+2032-2033,
@@ -690,8 +690,8 @@
 }
 
 @font-face {
-  font-family: "Monu";
-  src: url("../../assets/fonts/display/Monu Temp.woff2") format("woff2");
+  font-family: 'Monu';
+  src: url('../../assets/fonts/display/Monu Temp.woff2') format('woff2');
   font-display: swap;
   unicode-range: U+0000-0007, U+000A-000C, U+000E-0020, U+007F, U+0307, U+0323,
     U+0970, U+2400-2429, U+25CC, U+105C0-105F3, U+10C47, U+10D40-10D65,
@@ -704,118 +704,118 @@
 }
 
 @font-face {
-  font-family: "Monu";
-  src: url("../../assets/fonts/display/Monu Hanp.woff2") format("woff2");
+  font-family: 'Monu';
+  src: url('../../assets/fonts/display/Monu Hanp.woff2') format('woff2');
   font-display: swap;
   unicode-range: U+2F00-2FD5, U+3007, U+3021-3029, U+20000-2A6DF;
 }
 
 @font-face {
-  font-family: "Segoe";
-  src: url("../../assets/fonts/display/Segoe UI Historic-edt.woff2")
-    format("woff2");
+  font-family: 'Segoe';
+  src: url('../../assets/fonts/display/Segoe UI Historic-edt.woff2')
+    format('woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Segoe";
-  src: url("../../assets/fonts/display/Segoe UI Symbol-edt.woff2")
-    format("woff2");
+  font-family: 'Segoe';
+  src: url('../../assets/fonts/display/Segoe UI Symbol-edt.woff2')
+    format('woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Segoe";
-  src: url("../../assets/fonts/display/Segoe UI-edt.woff2") format("woff2");
+  font-family: 'Segoe';
+  src: url('../../assets/fonts/display/Segoe UI-edt.woff2') format('woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Microsoft";
-  src: url("../../assets/fonts/display/Microsoft Tai Le-edt.woff2")
-    format("woff2");
+  font-family: 'Microsoft';
+  src: url('../../assets/fonts/display/Microsoft Tai Le-edt.woff2')
+    format('woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Microsoft";
-  src: url("../../assets/fonts/display/Microsoft New Tai Lue-edt.woff2")
-    format("woff2");
+  font-family: 'Microsoft';
+  src: url('../../assets/fonts/display/Microsoft New Tai Lue-edt.woff2')
+    format('woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Microsoft";
-  src: url("../../assets/fonts/display/Microsoft Yi Baiti-edt.woff2")
-    format("woff2");
+  font-family: 'Microsoft';
+  src: url('../../assets/fonts/display/Microsoft Yi Baiti-edt.woff2')
+    format('woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Microsoft";
-  src: url("../../assets/fonts/display/Microsoft PhagsPa-edt.woff2")
-    format("woff2");
+  font-family: 'Microsoft';
+  src: url('../../assets/fonts/display/Microsoft PhagsPa-edt.woff2')
+    format('woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "others";
-  src: url("../../assets/fonts/display/MV Boli-edt.woff2") format("woff2");
+  font-family: 'others';
+  src: url('../../assets/fonts/display/MV Boli-edt.woff2') format('woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "others";
-  src: url("../../assets/fonts/display/Ebrima-edt.woff2") format("woff2");
+  font-family: 'others';
+  src: url('../../assets/fonts/display/Ebrima-edt.woff2') format('woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "others";
-  src: url("../../assets/fonts/display/Nirmala UI-edt.woff2") format("woff2");
+  font-family: 'others';
+  src: url('../../assets/fonts/display/Nirmala UI-edt.woff2') format('woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "others";
-  src: url("../../assets/fonts/display/Leelawadee UI-edt.woff2") format("woff2");
+  font-family: 'others';
+  src: url('../../assets/fonts/display/Leelawadee UI-edt.woff2') format('woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "others";
-  src: url("../../assets/fonts/display/Myanmar Text-edt.woff2") format("woff2");
+  font-family: 'others';
+  src: url('../../assets/fonts/display/Myanmar Text-edt.woff2') format('woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "others";
-  src: url("../../assets/fonts/display/Calibri-edt.woff2") format("woff2");
+  font-family: 'others';
+  src: url('../../assets/fonts/display/Calibri-edt.woff2') format('woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "others";
-  src: url("../../assets/fonts/display/Gadugi-edt.woff2") format("woff2");
+  font-family: 'others';
+  src: url('../../assets/fonts/display/Gadugi-edt.woff2') format('woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "others";
-  src: url("../../assets/fonts/display/Javanese Text-edt.woff2") format("woff2");
+  font-family: 'others';
+  src: url('../../assets/fonts/display/Javanese Text-edt.woff2') format('woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Last";
-  src: url("../../assets/fonts/display/Last Resort.woff2") format("woff2");
+  font-family: 'Last';
+  src: url('../../assets/fonts/display/Last Resort.woff2') format('woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "IDC";
-  src: url("../../assets/fonts/display/Ideographic-Description-Character.woff2")
-    format("woff2");
+  font-family: 'IDC';
+  src: url('../../assets/fonts/display/Ideographic-Description-Character.woff2')
+    format('woff2');
   font-display: swap;
 }
 
@@ -830,8 +830,8 @@
 }
 
 .font-without-ctrlctrl {
-  --font: Plgo1, Noto-Color-Emoji, Plgo2, Noto, NotoSansSC, NotoSansKR,
-    Monu, Segoe, Microsoft, others, sans-serif, Last;
+  --font: Plgo1, Noto-Color-Emoji, Plgo2, Noto, NotoSansSC, NotoSansKR, Monu,
+    Segoe, Microsoft, others, sans-serif, Last;
   font-family: var(--font);
   --md-filled-text-field-input-text-font: var(--font);
   --md-outlined-text-field-input-text-font: var(--font);
@@ -840,8 +840,8 @@
 }
 
 .font-idc {
-  --font: IDC, Plgo1, Noto-Color-Emoji, Plgo2, Noto, NotoSansSC,
-    NotoSansKR, Monu, Segoe, Microsoft, others, sans-serif, Last;
+  --font: IDC, Plgo1, Noto-Color-Emoji, Plgo2, Noto, NotoSansSC, NotoSansKR,
+    Monu, Segoe, Microsoft, others, sans-serif, Last;
   font-family: var(--font);
   --md-filled-text-field-input-text-font: var(--font);
   --md-outlined-text-field-input-text-font: var(--font);

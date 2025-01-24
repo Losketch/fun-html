@@ -28,6 +28,7 @@
       optionsList.classList.add('active');
       const backdrop = document.createElement('div');
       backdrop.className = 'backdrop';
+      backdrop.style.zIndex = '9999';
       backdrop.addEventListener('click', () => {
         optionsList.close();
         backdrop.remove();
