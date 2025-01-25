@@ -161,6 +161,12 @@ module.exports = {
       chunks: ['DouCompass']
     }),
     new HtmlWebpackPlugin({
+      title: '“户”加速度计',
+      template: './src/html/HuAccelerometer.html',
+      filename: 'tools/HuAccelerometer.html',
+      chunks: ['HuAccelerometer']
+    }),
+    new HtmlWebpackPlugin({
       title: '生命游戏',
       template: './src/html/lifeGame.html',
       filename: 'tools/lifeGame.html',
