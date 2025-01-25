@@ -4,19 +4,7 @@
     <meta
       charset="UTF-8"
       content="user-scalable=yes, width=device-width, initial-scale=1.0, maximum-scale=10.0" />
-    <title>随机字符生成器</title>
-
-    <link rel="stylesheet" href="../css/mainStyles.css" />
-    <link rel="stylesheet" href="../css/fontFallback.css" />
-    <link rel="stylesheet" href="../css/nerd-fonts-generated.min.css" />
-    <link rel="stylesheet" href="../css/select.css" />
-    <link rel="stylesheet" href="../css/tools/randStr.css" />
-    <script src="../../dist/m3ui.js"></script>
-    <script src="../js/iframeColorSchemeSync.js"></script>
-    <script src="../../assets/DefinedCharacterList.js"></script>
-    <script defer src="../js/changeHeader.js"></script>
-    <script defer src="../js/select.js"></script>
-    <script defer src="../js/tools/randStr.js"></script>
+    <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
     <div>
@@ -27,10 +15,12 @@
               type="number"
               label="数量"
               value="100"
-              id="count-input">
-            </md-outlined-text-field>
-            <md-slider min="1" max="1000" value="100" id="count-slider">
-            </md-slider>
+              id="count-input"></md-outlined-text-field>
+            <md-slider
+              min="1"
+              max="1000"
+              value="100"
+              id="count-slider"></md-slider>
           </div>
           <md-list id="checkbox-section">
             <md-list-item>
@@ -171,8 +161,7 @@
             <md-outlined-text-field
               id="custom-char"
               label="自定义字符"
-              supporting-text="如果同一个字符出现了多次，则其出现次数代表着这个字符的权重，比如填写“aabbbc”则表示 a、b、c 的权重分别为 2、3、1，即生成 a、b、c 的概率分别为六分之二、六分之三和六分之一。">
-            </md-outlined-text-field>
+              supporting-text="如果同一个字符出现了多次，则其出现次数代表着这个字符的权重，比如填写“aabbbc”则表示 a、b、c 的权重分别为 2、3、1，即生成 a、b、c 的概率分别为六分之二、六分之三和六分之一。"></md-outlined-text-field>
             <md-divider></md-divider>
             <md-list-item>
               包含自定义区间
@@ -199,13 +188,14 @@
             <div class="select-container multi" id="select-blocks">
               <div class="select">
                 <div class="select-content">
-                  <span class="cur-select" data-default-text="选择区段"
-                    >选择区段</span
-                  >
+                  <span class="cur-select" data-default-text="选择区段">
+                    选择区段
+                  </span>
                   <span class="nf nf-fa-angle_down"></span>
                 </div>
-                <md-outlined-text-field class="filter" label="筛选">
-                </md-outlined-text-field>
+                <md-outlined-text-field
+                  class="filter"
+                  label="筛选"></md-outlined-text-field>
               </div>
               <!-- ((?:[0-9a-fA-F]|10)?[0-9a-fA-F]{0,4})\.\.((?:[0-9a-fA-F]|10)?[0-9a-fA-F]{0,4})\|(?:[0-9a-fA-F]|10)?[0-9a-fA-F]{0,4}\|(.+?)\|.* -->
               <!--                 <div data-select="$1,$2" class="opt">$3</div> -->
@@ -619,15 +609,22 @@
 
           <div id="action-buttons">
             <md-filled-button id="gen">生成随机字符</md-filled-button>
-            <md-filled-tonal-button id="clear-text"
-              >清空</md-filled-tonal-button
-            >
+            <md-filled-tonal-button id="clear-text">
+              清空
+            </md-filled-tonal-button>
           </div>
 
           <div id="result-section">
             <div>
               <div>
-                生成<ruby>结<rp>（</rp><rt>jié</rt><rp>）</rp></ruby>果
+                生成
+                <ruby>
+                  结
+                  <rp>（</rp>
+                  <rt>jié</rt>
+                  <rp>）</rp>
+                </ruby>
+                果
               </div>
               <pre class="code-container" id="result-container">
                 <md-filled-tonal-icon-button class="copy-button" id="copy-button">

@@ -1,3 +1,12 @@
+import '../../css/mainStyles.css';
+import '../../css/refuse.css';
+import '../../css/fontFallback.css';
+import '../../css/tools/DouCompass.css';
+
+import '../m3ui.js';
+import '../changeHeader.js';
+import '../iframeColorSchemeSync.js';
+
 const hand = document.getElementById('hand');
 const framePath = document.getElementById('framePath');
 const handPath = document.getElementById('handPath');

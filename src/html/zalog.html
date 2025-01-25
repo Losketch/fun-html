@@ -5,15 +5,7 @@
       charset="UTF-8"
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <title>zalog 文本生成器</title>
-
-    <link rel="stylesheet" href="../css/mainStyles.css" />
-    <link rel="stylesheet" href="../css/nerd-fonts-generated.min.css" />
-    <link rel="stylesheet" href="../css/tools/zalog.css" />
-    <script src="../../dist/m3ui.js"></script>
-    <script defer src="../js/changeHeader.js"></script>
-    <script defer src="../js/iframeColorSchemeSync.js"></script>
-    <script defer src="../js/tools/zalog.js"></script>
+    <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
     <div>
@@ -22,14 +14,12 @@
           <md-outlined-text-field
             label="待转换的字符"
             id="input"
-            class="font-without-ctrlctrl">
-          </md-outlined-text-field>
+            class="font-without-ctrlctrl"></md-outlined-text-field>
           <md-outlined-text-field
             label="生成结（jié）果"
             id="output"
             class="font-without-ctrlctrl"
-            readonly>
-          </md-outlined-text-field>
+            readonly></md-outlined-text-field>
           <div class="opts">
             重叠字符数范围：
             <md-slider
@@ -40,8 +30,7 @@
               value-start="5"
               value-end="10"
               step="1"
-              id="count-range">
-            </md-slider>
+              id="count-range"></md-slider>
             <div class="btns">
               <md-filled-button id="gen-button" class="primary-button">
                 生成

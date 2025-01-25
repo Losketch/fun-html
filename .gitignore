@@ -1,5 +1,5 @@
 .eslintrc.json
-package.json
+.babelrc
 package-lock.json
 node_modules
 eslint.config.mjs

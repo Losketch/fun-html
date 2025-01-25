@@ -1,5 +1,13 @@
+import '../../css/mainStyles.css';
+import '../../css/tools/audioFFT.css';
+
+import '../m3ui.js';
+import '../changeHeader.js';
+import '../iframeColorSchemeSync.js';
+
 const audioEle = document.querySelector('audio');
 const seleEle = document.querySelector('#sele');
+const uploadBtn = document.querySelector('#upload');
 const cvs = document.querySelector('#cvs');
 const ctx = cvs.getContext('2d');
 const spaceWidth = 1;
@@ -79,3 +87,5 @@ function draw() {
   }
 }
 draw();
+
+uploadBtn.addEventListener('click', () => seleEle.click());

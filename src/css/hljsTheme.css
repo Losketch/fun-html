@@ -1,0 +1,131 @@
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0 0.4em;
+}
+code.hljs {
+  padding: 3px 5px;
+}
+:root:not(.dark) .hljs {
+  background: #f3f3f3;
+  color: #444;
+}
+:root:not(.dark) .hljs-comment {
+  color: #697070;
+}
+:root:not(.dark) :is(.hljs-punctuation, .hljs-tag) {
+  color: #444a;
+}
+:root:not(.dark) :is(.hljs-tag .hljs-attr, .hljs-tag .hljs-name) {
+  color: #444;
+}
+:root:not(.dark)
+  :is(
+    .hljs-attribute,
+    .hljs-doctag,
+    .hljs-keyword,
+    .hljs-meta .hljs-keyword,
+    .hljs-name,
+    .hljs-selector-tag
+  ) {
+  font-weight: 700;
+}
+:root:not(.dark)
+  :is(
+    .hljs-deletion,
+    .hljs-number,
+    .hljs-quote,
+    .hljs-selector-class,
+    .hljs-selector-id,
+    .hljs-string,
+    .hljs-template-tag,
+    .hljs-type
+  ) {
+  color: #800;
+}
+:root:not(.dark) :is(.hljs-section, .hljs-title) {
+  color: #800;
+  font-weight: 700;
+}
+:root:not(.dark)
+  :is(
+    .hljs-link,
+    .hljs-operator,
+    .hljs-regexp,
+    .hljs-selector-attr,
+    .hljs-selector-pseudo,
+    .hljs-symbol,
+    .hljs-template-variable,
+    .hljs-variable
+  ) {
+  color: #ab5656;
+}
+:root:not(.dark) .hljs-literal {
+  color: #695;
+}
+:root:not(.dark) :is(.hljs-addition, .hljs-built_in, .hljs-bullet, .hljs-code) {
+  color: #397300;
+}
+:root:not(.dark) .hljs-meta {
+  color: #1f7199;
+}
+:root:not(.dark) .hljs-meta .hljs-string {
+  color: #38a;
+}
+:root:not(.dark) .hljs-emphasis {
+  font-style: italic;
+}
+:root:not(.dark) .hljs-strong {
+  font-weight: 700;
+}
+:root.dark .hljs {
+  color: #ddd;
+  background: #303030;
+}
+:root.dark
+  :is(
+    .hljs-keyword,
+    .hljs-link,
+    .hljs-literal,
+    .hljs-section,
+    .hljs-selector-tag
+  ) {
+  color: #fff;
+}
+:root.dark
+  :is(
+    .hljs-addition,
+    .hljs-attribute,
+    .hljs-built_in,
+    .hljs-bullet,
+    .hljs-name,
+    .hljs-string,
+    .hljs-symbol,
+    .hljs-template-tag,
+    .hljs-template-variable,
+    .hljs-title,
+    .hljs-type,
+    .hljs-variable
+  ) {
+  color: #d88;
+}
+:root.dark :is(.hljs-comment, .hljs-deletion, .hljs-meta, .hljs-quote) {
+  color: #979797;
+}
+:root.dark
+  :is(
+    .hljs-doctag,
+    .hljs-keyword,
+    .hljs-literal,
+    .hljs-name,
+    .hljs-section,
+    .hljs-selector-tag,
+    .hljs-strong,
+    .hljs-title,
+    .hljs-type
+  ) {
+  font-weight: 700;
+}
+:root.dark .hljs-emphasis {
+  font-style: italic;
+}
