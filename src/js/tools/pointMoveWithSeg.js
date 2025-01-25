@@ -1,3 +1,10 @@
+import '../../css/mainStyles.css';
+import '../../css/tools/pointMoveWithSeg.css';
+
+import '../m3ui.js';
+import '../changeHeader.js';
+import '../iframeColorSchemeSync.js';
+
 const cvs = document.querySelector('#canvas');
 const ctx = cvs.getContext('2d');
 

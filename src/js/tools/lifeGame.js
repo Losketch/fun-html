@@ -1,3 +1,12 @@
+import '../../css/mainStyles.css';
+import '../../css/nerd-fonts-generated.min.css';
+import '../../css/tools/lifeGame.css';
+
+import '../m3ui.js';
+import '../dialogs.js';
+import '../changeHeader.js';
+import '../iframeColorSchemeSync.js';
+
 let birth = [3];
 let star = [2, 3];
 let typeCount = 2;
@@ -6,6 +15,7 @@ const container = document.getElementById('container');
 const [
   exportBtn,
   importInp,
+  importBtn,
   generationsInp,
   jumpBtn,
   ruleSpan,
@@ -24,7 +34,7 @@ const [
   resetBtn,
   setRuleBtn
 ] =
-  'export import generations jump rule state stateShow gridSize gridSizeShow gap gapShow start pause prev next save clear-generations reset set-rule'
+  'export import importBtn generations jump rule state stateShow gridSize gridSizeShow gap gapShow start pause prev next save clear-generations reset set-rule'
     .split(' ')
     .map(n => document.getElementById(n));
 let size = 20;
@@ -502,6 +512,10 @@ window.addEventListener('message', event => {
 });
 
 container.addEventListener('click', toggle);
+importBtn.addEventListener('click', () => {
+  importInp.click();
+});
+
 resetGrid(size);
 resetStyle(typeCount);
 updateRule();

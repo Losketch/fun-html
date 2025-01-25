@@ -5,17 +5,17 @@
       charset="UTF-8"
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>字符显示器</title>
+    <title><%= htmlWebpackPlugin.options.title %></title>
 
-    <link rel="stylesheet" href="../css/mainStyles.css" />
-    <link rel="stylesheet" href="../css/fontFallback.css" />
-    <link rel="stylesheet" href="../css/nerd-fonts-generated.min.css" />
-    <link rel="stylesheet" href="../css/tools/charDisplay.css" />
-    <script src="../../dist/m3ui.js"></script>
-    <script src="../js/dialogs.js"></script>
-    <script defer src="../js/changeHeader.js"></script>
-    <script defer src="../js/iframeColorSchemeSync.js"></script>
-    <script defer src="../js/tools/charDisplay.js"></script>
+    <!-- <link rel="stylesheet" href="../css/mainStyles.css" /> -->
+    <!-- <link rel="stylesheet" href="../css/fontFallback.css" /> -->
+    <!-- <link rel="stylesheet" href="../css/nerd-fonts-generated.min.css" /> -->
+    <!-- <link rel="stylesheet" href="../css/tools/charDisplay.css" /> -->
+    <!-- <script src="../../dist/m3ui.js"></script> -->
+    <!-- <script src="../js/dialogs.js"></script> -->
+    <!-- <script defer src="../js/changeHeader.js"></script> -->
+    <!-- <script defer src="../js/iframeColorSchemeSync.js"></script> -->
+    <!-- <script defer src="../js/tools/charDisplay.js"></script> -->
   </head>
   <body>
     <div>
@@ -28,8 +28,7 @@
               id="text"
               rows="7"
               maxlength="100"
-              class="font">
-            </md-filled-text-field>
+              class="font"></md-filled-text-field>
           </div>
 
           <div class="flex-end">
@@ -39,7 +38,7 @@
           </div>
 
           <md-list class="other-options">
-            <md-list-item> 其他设置 </md-list-item>
+            <md-list-item>其他设置</md-list-item>
             <md-divider></md-divider>
             <md-list-item>
               斜体
@@ -54,8 +53,7 @@
                 min="100"
                 max="1000"
                 value="400"
-                step="1">
-              </md-slider>
+                step="1"></md-slider>
             </md-list-item>
             <md-list-item>
               字号
@@ -66,8 +64,7 @@
                 min="0.05"
                 max="5"
                 value="1"
-                step="0.01">
-              </md-slider>
+                step="0.01"></md-slider>
             </md-list-item>
           </md-list>
 
@@ -84,7 +81,8 @@
 
             <div id="act-opts" slot="actions">
               <div id="availability">
-                启用<md-switch id="availability-switch"></md-switch>
+                启用
+                <md-switch id="availability-switch"></md-switch>
               </div>
               <md-filled-button id="close">关闭</md-filled-button>
               <md-filled-button id="submit">提交</md-filled-button>
@@ -94,9 +92,9 @@
 
           <div id="file-upload-container">
             <input type="file" id="font-upload" accept="font/**,.eot" />
-            <md-filled-tonal-button id="upload-button"
-              >上传字体文件</md-filled-tonal-button
-            >
+            <md-filled-tonal-button id="upload-button">
+              上传字体文件
+            </md-filled-tonal-button>
           </div>
           <div id="sortable-list-container"></div>
         </div>
@@ -109,23 +107,29 @@
           <ul>
             <li style="word-break: break-all">
               关于全部的字体特征设置，请参见
-              <a href="" class="a"
-                >https://learn.microsoft.com/zh-cn/typography/opentype/spec/featurelist</a
-              >。
+              <a href="" class="a">
+                https://learn.microsoft.com/zh-cn/typography/opentype/spec/featurelist
+              </a>
+              。
             </li>
             <li style="word-break: break-all">
               若要查看某个字体支持的字体特征设置，请使用
-              <a href="" class="a">https://wakamaifondue.com</a>，选择文件后查看
-              Layout features。
+              <a href="" class="a">https://wakamaifondue.com</a>
+              ，选择文件后查看 Layout features。
             </li>
             <li>
               woff2、ttf 等字体支持的字体特征设置一般很少，推荐使用自己上传的
               oft 字体。
             </li>
             <li>
-              如果字符未编码，它将显示为方<ruby
-                >框<rp>（</rp><rt>kuàng</rt><rp>）</rp></ruby
-              >围着的字符。
+              如果字符未编码，它将显示为方
+              <ruby>
+                框
+                <rp>（</rp>
+                <rt>kuàng</rt>
+                <rp>）</rp>
+              </ruby>
+              围着的字符。
             </li>
             <li>
               从第 4 平面到第 13

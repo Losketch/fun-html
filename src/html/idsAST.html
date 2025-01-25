@@ -3,21 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IDS 抽象语法树</title>
-
-    <link
-      id="highlight-js-style"
-      rel="stylesheet"
-      href="../highlight.js/default.min.css" />
-    <link rel="stylesheet" href="../css/mainStyles.css" />
-    <link rel="stylesheet" href="../css/fontFallback.css" />
-    <link rel="stylesheet" href="../css/nerd-fonts-generated.min.css" />
-    <link rel="stylesheet" href="../css/tools/idsAST.css" />
-    <script src="../../dist/m3ui.js"></script>
-    <script defer src="../highlight.js/highlight.min.js"></script>
-    <script defer src="../js/changeHeader.js"></script>
-    <script defer src="../js/iframeColorSchemeSync.js"></script>
-    <script defer src="../js/tools/idsAST.js"></script>
+    <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
     <div>
@@ -25,76 +11,78 @@
         <div>
           <div id="inputer-container" class="font-idc inner-div">
             <md-filled-tonal-icon-button class="idc-inputer">
-              <md-icon> ⿰ </md-icon>
+              <md-icon>⿰</md-icon>
             </md-filled-tonal-icon-button>
             <md-filled-tonal-icon-button class="idc-inputer">
-              <md-icon> ⿱ </md-icon>
+              <md-icon>⿱</md-icon>
             </md-filled-tonal-icon-button>
             <md-filled-tonal-icon-button class="idc-inputer">
-              <md-icon> ⿲ </md-icon>
+              <md-icon>⿲</md-icon>
             </md-filled-tonal-icon-button>
             <md-filled-tonal-icon-button class="idc-inputer">
-              <md-icon> ⿳ </md-icon>
+              <md-icon>⿳</md-icon>
             </md-filled-tonal-icon-button>
             <md-filled-tonal-icon-button class="idc-inputer">
-              <md-icon> ⿴ </md-icon>
+              <md-icon>⿴</md-icon>
             </md-filled-tonal-icon-button>
             <md-filled-tonal-icon-button class="idc-inputer">
-              <md-icon> ⿵ </md-icon>
+              <md-icon>⿵</md-icon>
             </md-filled-tonal-icon-button>
             <md-filled-tonal-icon-button class="idc-inputer">
-              <md-icon> ⿶ </md-icon>
+              <md-icon>⿶</md-icon>
             </md-filled-tonal-icon-button>
             <md-filled-tonal-icon-button class="idc-inputer">
-              <md-icon> ⿷ </md-icon>
+              <md-icon>⿷</md-icon>
             </md-filled-tonal-icon-button>
             <md-filled-tonal-icon-button class="idc-inputer">
-              <md-icon> ⿼ </md-icon>
+              <md-icon>⿼</md-icon>
             </md-filled-tonal-icon-button>
             <md-filled-tonal-icon-button class="idc-inputer">
-              <md-icon> ⿸ </md-icon>
+              <md-icon>⿸</md-icon>
             </md-filled-tonal-icon-button>
             <md-filled-tonal-icon-button class="idc-inputer">
-              <md-icon> ⿹ </md-icon>
+              <md-icon>⿹</md-icon>
             </md-filled-tonal-icon-button>
             <md-filled-tonal-icon-button class="idc-inputer">
-              <md-icon> ⿺ </md-icon>
+              <md-icon>⿺</md-icon>
             </md-filled-tonal-icon-button>
             <md-filled-tonal-icon-button class="idc-inputer">
-              <md-icon> ⿽ </md-icon>
+              <md-icon>⿽</md-icon>
             </md-filled-tonal-icon-button>
             <md-filled-tonal-icon-button class="idc-inputer">
-              <md-icon> ⿻ </md-icon>
+              <md-icon>⿻</md-icon>
             </md-filled-tonal-icon-button>
             <md-filled-tonal-icon-button class="idc-inputer">
-              <md-icon> ⿾ </md-icon>
+              <md-icon>⿾</md-icon>
             </md-filled-tonal-icon-button>
             <md-filled-tonal-icon-button class="idc-inputer">
-              <md-icon> ⿿ </md-icon>
+              <md-icon>⿿</md-icon>
             </md-filled-tonal-icon-button>
             <md-filled-tonal-icon-button class="idc-inputer">
-              <md-icon> ㇯ </md-icon>
+              <md-icon>㇯</md-icon>
             </md-filled-tonal-icon-button>
             <span></span>
             <md-filled-tonal-icon-button class="curve-inputer">
-              <md-icon> ◜ </md-icon>
+              <md-icon>◜</md-icon>
             </md-filled-tonal-icon-button>
             <md-filled-tonal-icon-button class="curve-inputer">
-              <md-icon> ◝ </md-icon>
+              <md-icon>◝</md-icon>
             </md-filled-tonal-icon-button>
             <md-filled-tonal-icon-button class="curve-inputer">
-              <md-icon> ◞ </md-icon>
+              <md-icon>◞</md-icon>
             </md-filled-tonal-icon-button>
             <md-filled-tonal-icon-button class="curve-inputer">
-              <md-icon> ◟ </md-icon>
+              <md-icon>◟</md-icon>
             </md-filled-tonal-icon-button>
             <span></span>
             <md-filled-tonal-icon-button class="idc-inputer">
-              <md-icon> 🔄 </md-icon>
+              <md-icon>🔄</md-icon>
             </md-filled-tonal-icon-button>
           </div>
-          <md-outlined-text-field id="input" label="IDS" class="font-idc">
-          </md-outlined-text-field>
+          <md-outlined-text-field
+            id="input"
+            label="IDS"
+            class="font-idc"></md-outlined-text-field>
           <div class="flex-end">
             <md-filled-button id="parse" class="shadow-button">
               解析

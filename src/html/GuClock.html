@@ -5,15 +5,7 @@
       charset="UTF-8"
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <title>“骨”钟</title>
-
-    <link rel="stylesheet" href="../css/mainStyles.css" />
-    <link rel="stylesheet" href="../css/refuse.css" />
-    <link rel="stylesheet" href="../css/tools/GuClock.css" />
-    <script src="../../dist/m3ui.js"></script>
-    <script defer src="../js/changeHeader.js"></script>
-    <script defer src="../js/iframeColorSchemeSync.js"></script>
-    <script defer src="../js/tools/GuClock.js"></script>
+    <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
     <div>
@@ -33,7 +25,7 @@
       </svg>
     </div>
     <div>
-      <md-filled-button onclick="timeEle.click()">修改时间</md-filled-button>
+      <md-filled-button id="edit">修改时间</md-filled-button>
       <md-filled-button id="set-as-current-time">设为当前时间</md-filled-button>
       <md-filled-tonal-button id="togglePathButton">
         更换样式

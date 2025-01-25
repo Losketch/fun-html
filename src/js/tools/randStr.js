@@ -1,3 +1,16 @@
+import '../../css/mainStyles.css';
+import '../../css/fontFallback.css';
+import '../../css/nerd-fonts-generated.min.css';
+import '../../css/select.css';
+import '../../css/tools/randStr.css';
+
+import '../m3ui.js';
+import '../iframeColorSchemeSync.js';
+import '../changeHeader.js';
+import '../select.js';
+
+import { definedCharacterList } from '../../data/DefinedCharacterList.js';
+
 String.prototype.toArray = function () {
   var arr = [];
   for (let i = 0; i < this.length; ) {
@@ -175,7 +188,7 @@ function generateRandomCharacters() {
   }
 
   if (options.containsNoUndefinedCharacters) {
-    characters = characters.filter(i => window.definedCharacterList.has(i));
+    characters = characters.filter(i => definedCharacterList.has(i));
   }
 
   let result = '';

@@ -6,16 +6,7 @@
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
-    <title>生命游戏</title>
-
-    <link rel="stylesheet" href="../css/mainStyles.css" />
-    <link rel="stylesheet" href="../css/nerd-fonts-generated.min.css" />
-    <link rel="stylesheet" href="../css/tools/lifeGame.css" />
-    <script src="../../dist/m3ui.js"></script>
-    <script src="../js/dialogs.js"></script>
-    <script defer src="../js/changeHeader.js"></script>
-    <script defer src="../js/iframeColorSchemeSync.js"></script>
-    <script defer src="../js/tools/lifeGame.js"></script>
+    <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
     <div>
@@ -25,47 +16,52 @@
           <div class="inner-div">
             <md-filled-button id="prev">
               上一代
-              <md-icon slot="icon" class="nf nf-fa-step_backward"> </md-icon>
+              <md-icon slot="icon" class="nf nf-fa-step_backward"></md-icon>
             </md-filled-button>
             <md-filled-button id="next">
               下一代
-              <md-icon slot="icon" class="nf nf-fa-step_forward"> </md-icon>
+              <md-icon slot="icon" class="nf nf-fa-step_forward"></md-icon>
             </md-filled-button>
             <md-filled-button id="start">
               开始
-              <md-icon slot="icon" class="nf nf-fa-play"> </md-icon>
+              <md-icon slot="icon" class="nf nf-fa-play"></md-icon>
             </md-filled-button>
             <md-filled-button id="pause">
               暂停
-              <md-icon slot="icon" class="nf nf-fa-pause"> </md-icon>
+              <md-icon slot="icon" class="nf nf-fa-pause"></md-icon>
             </md-filled-button>
             <md-filled-tonal-button id="save">
               保存为一代
-              <md-icon slot="icon" class="nf nf-md-content_save"> </md-icon>
+              <md-icon slot="icon" class="nf nf-md-content_save"></md-icon>
             </md-filled-tonal-button>
             <md-filled-tonal-button id="reset" class="nf">
               重置
-              <md-icon slot="icon" class="nf nf-fa-arrow_rotate_right">
-              </md-icon>
+              <md-icon
+                slot="icon"
+                class="nf nf-fa-arrow_rotate_right"></md-icon>
             </md-filled-tonal-button>
           </div>
 
           <div class="inner-div">
-            <md-slider labeled min="0" max="0" value="0" id="generations">
-            </md-slider>
+            <md-slider
+              labeled
+              min="0"
+              max="0"
+              value="0"
+              id="generations"></md-slider>
             <md-filled-button id="jump">
               跳转代
-              <md-icon slot="icon" class="nf nf-md-redo"> </md-icon>
+              <md-icon slot="icon" class="nf nf-md-redo"></md-icon>
             </md-filled-button>
             <md-filled-tonal-button id="clear-generations">
               清空代
-              <md-icon slot="icon" class="nf nf-md-delete_forever"> </md-icon>
+              <md-icon slot="icon" class="nf nf-md-delete_forever"></md-icon>
             </md-filled-tonal-button>
           </div>
           <div class="inner-div">
             <md-filled-button id="set-rule">
               设置规则
-              <md-icon slot="icon" class="nf nf-seti-config"> </md-icon>
+              <md-icon slot="icon" class="nf nf-seti-config"></md-icon>
             </md-filled-button>
             <span id="rule" class="nf nf-md-format_list_numbered"></span>
           </div>
@@ -73,11 +69,11 @@
           <div class="inner-div">
             <md-filled-button id="export">
               导出当前代
-              <md-icon slot="icon" class="nf nf-fa-file_export"> </md-icon>
+              <md-icon slot="icon" class="nf nf-fa-file_export"></md-icon>
             </md-filled-button>
-            <md-filled-button onclick="importInp.click()">
+            <md-filled-button id="importBtn">
               导入
-              <md-icon slot="icon" class="nf nf-fa-file_import"> </md-icon>
+              <md-icon slot="icon" class="nf nf-fa-file_import"></md-icon>
             </md-filled-button>
             <input id="import" type="file" style="display: none" />
           </div>
@@ -85,7 +81,7 @@
           <div class="inner-div">
             <md-filled-button id="state">
               设置填充状态
-              <md-icon slot="icon" class="nf nf-md-format_paint"> </md-icon>
+              <md-icon slot="icon" class="nf nf-md-format_paint"></md-icon>
             </md-filled-button>
             <span id="stateShow"></span>
           </div>
@@ -93,7 +89,7 @@
           <div class="inner-div">
             <md-filled-button id="gridSize">
               设置网格大小
-              <md-icon slot="icon" class="nf nf-md-arrow_expand_all"> </md-icon>
+              <md-icon slot="icon" class="nf nf-md-arrow_expand_all"></md-icon>
             </md-filled-button>
             <span id="gridSizeShow"></span>
           </div>
@@ -101,8 +97,9 @@
           <div class="inner-div">
             <md-filled-button id="gap">
               设置迭代间隔
-              <md-icon slot="icon" class="nf nf-md-clock_edit_outline">
-              </md-icon>
+              <md-icon
+                slot="icon"
+                class="nf nf-md-clock_edit_outline"></md-icon>
             </md-filled-button>
             <span id="gapShow"></span>
           </div>

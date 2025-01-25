@@ -5,13 +5,7 @@
       charset="UTF-8"
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <title>随机草人器</title>
-    <link rel="stylesheet" href="../css/mainStyles.css" />
-    <link rel="stylesheet" href="../css/tools/randFuck.css" />
-    <script src="../../dist/m3ui.js"></script>
-    <script defer src="../js/changeHeader.js"></script>
-    <script defer src="../js/iframeColorSchemeSync.js"></script>
-    <script defer src="../js/tools/randFuck.js"></script>
+    <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
     <div>
@@ -28,8 +22,7 @@
                 value="10"
                 min="1"
                 max="10000"
-                slot="end">
-              </md-outlined-text-field>
+                slot="end"></md-outlined-text-field>
             </md-list-item>
             <md-list-item>
               待草的人
@@ -37,8 +30,7 @@
                 value="a;b;c"
                 id="target"
                 supporting-text="每个人名之间用半角分号（“;”）分隔。如果同一个人名出现了多次，则其出现次数代表着这个人被草的权重，比如填写“a;a;b;b;b;c”则表示 a、b、c 的被草的权重分别为 2、3、1，即 a、b、c 被草的概率分别为六分之二、六分之三和六分之一。"
-                slot="end">
-              </md-outlined-text-field>
+                slot="end"></md-outlined-text-field>
             </md-list-item>
           </md-list>
           <div class="start-container">

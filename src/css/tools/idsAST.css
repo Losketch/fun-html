@@ -28,10 +28,6 @@
     NotoSansKR, Monu, Segoe, Microsoft, others, sans-serif, Last;
 }
 
-:is(.idc-inputer, .curve-inputer)::part(ripple) {
-  display: none;
-}
-
 :is(.idc-inputer, .curve-inputer):after {
   font-size: 8px;
   position: absolute;
