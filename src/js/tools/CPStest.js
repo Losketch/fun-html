@@ -1,3 +1,10 @@
+import '../../css/mainStyles.css';
+import '../../css/tools/CPStest.css';
+
+import '../m3ui.js';
+import '../changeHeader.js';
+import '../iframeColorSchemeSync.js';
+
 let countdown = 30;
 let timer;
 let startTime;

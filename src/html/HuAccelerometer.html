@@ -5,15 +5,7 @@
       charset="UTF-8"
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <title>“户”加速度计</title>
-
-    <link rel="stylesheet" href="../css/mainStyles.css" />
-    <link rel="stylesheet" href="../css/refuse.css" />
-    <link rel="stylesheet" href="../css/tools/HuAccelerometer.css" />
-    <script src="../../dist/m3ui.js"></script>
-    <script defer src="../js/changeHeader.js"></script>
-    <script defer src="../js/iframeColorSchemeSync.js"></script>
-    <script defer src="../js/tools/HuAccelerometer.js"></script>
+    <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
     <svg id="frame" viewBox="0 0 113 115">
@@ -37,8 +29,7 @@
           min="0.0001"
           max="10"
           step="0.0001"
-          value="8.00005">
-        </md-slider>
+          value="8.00005"></md-slider>
       </div>
     </div>
   </body>

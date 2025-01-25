@@ -1,3 +1,14 @@
+import '../../css/mainStyles.css'
+import '../../css/mainStyles.css'
+import '../../css/tools/seeker.css'
+
+import '../changeHeader.js'
+import '../m3ui.js'
+
+import {dt, vt} from '../../data/handata_uni.js'
+
+import $ from 'jquery';
+
 var Seeker = {
   dataIndex: null,
   seg: 1000,
@@ -1271,7 +1282,7 @@ UI.setMode = function (chk, key) {
 // 鍵盤開關改變
 UI.updatePad = function () {
   UI.keypadMode = $('#showkeypad:selected').length > 0;
-  UI.setCookie('keypad', UI.keypadMode ? '1' : '0');
+  UI.setCookie('keypad', $('#showkeypad').selected ? '1' : '0');
   if (UI.keypadMode) {
     UI.initKeyboard(UI.strokeKeyboard);
     $('#keypad').show();
@@ -1629,7 +1640,8 @@ UI.init = function () {
   // Status
   $('#variant').prop('selected', UI.getCookie('variant', '1') == '1');
   $('#subdivide').prop('selected', UI.getCookie('subdivide', '0') == '1');
-  $('#showkeypad').prop('selected', UI.getCookie('keypad', '0') == '1');
+  $('#showkeypad')
+  .prop('selected', UI.getCookie('keypad', '0') == '1');
   UI.addShortcut();
 
   // Events

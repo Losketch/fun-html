@@ -1,3 +1,20 @@
+import '../../../assets/favicon/site.webmanifest';
+import '../../../assets/favicon/favicon-16x16.png';
+import '../../../assets/favicon/favicon-32x32.png';
+import '../../../assets/favicon/android-chrome-192x192.png';
+import '../../../assets/favicon/android-chrome-512x512.png';
+import '../../../assets/favicon/apple-touch-icon.png';
+import '../../../assets/favicon/favicon.ico';
+
+import '../../css/nerd-fonts-generated.min.css';
+import '../../css/fontFallback.css';
+import '../../css/mainStyles.css';
+import '../../css/index/styles.css';
+
+import '../m3ui.js';
+import '../dialogs.js';
+import '../dark.js';
+
 const content = document.getElementById('content');
 const mainContent = document.getElementById('main-content');
 const toolbox = document.getElementById('toolbox');

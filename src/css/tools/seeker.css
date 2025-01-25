@@ -71,31 +71,33 @@ a:hover[class='BSC'] {
 }
 @font-face {
   font-family: PUAExt;
-  src: url(fonts/PUAExt-Regular.woff2);
+  src: url(../../../assets/fonts/display/PUAExt-Regular.woff2);
 }
 @font-face {
   font-family: plgo1;
-  src: url(../assets/fonts/display/Plgo1.woff2);
+  src: url(../../../assets/fonts/display/Plgo1.woff2);
 }
 @font-face {
   font-family: plgo2;
-  src: url(../assets/fonts/display/Plgo2.woff2);
+  src: url(../../../assets/fonts/display/Plgo2.woff2);
 }
 @font-face {
   font-family: Source;
-  src: url(../assets/fonts/display/NotoSansSC.woff2);
+  src: url(../../../assets/fonts/display/NotoSansSC.woff2);
 }
 @font-face {
   font-family: ffallback;
-  src: url('../assets/fonts/display/Monu Hanp.woff2');
+  src: url('../../../assets/fonts/display/Monu Hanp.woff2');
 }
 @font-face {
   font-family: dela;
-  src: url(fonts/dela.woff2);
+  src: url(../../../assets/fonts/display/dela.woff2);
 }
 #result #output a,
 .han {
   font-family: PUAExt, plgo1, plgo2, Source, ffallback;
+  --md-outlined-text-field-input-text-font: PUAExt, plgo1, plgo2, Source,
+    ffallback;
 }
 #result #output a.img {
   background-size: 0.95em 0.95em !important;

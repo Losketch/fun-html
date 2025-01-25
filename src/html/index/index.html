@@ -5,116 +5,101 @@
       charset="UTF-8"
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <title>字符显示器</title>
-
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
-    <link rel="manifest" href="site.webmanifest" />
-    <link rel="stylesheet" href="src/css/nerd-fonts-generated.min.css" />
-    <link rel="stylesheet" href="src/css/fontFallback.css" />
-    <link rel="stylesheet" href="src/css/mainStyles.css" />
-    <link rel="stylesheet" href="styles.css" />
-    <script src="dist/m3ui.js"></script>
-    <script src="src/js/dialogs.js"></script>
-    <script defer src="script.js"></script>
-    <script defer src="src/js/dark.js"></script>
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/favicon/apple-touch-icon.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/favicon/favicon-32x32.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="assets/favicon/site.webmanifest" />
   </head>
   <body>
     <header>
       <h1 id="title-h1"></h1>
     </header>
     <div id="content">
-      <iframe id="main-content" src="src/html/charDisplay.html"></iframe>
+      <iframe id="main-content" src="tools/charDisplay.html"></iframe>
       <div id="toolbox">
         <h2>字符工具</h2>
         <hr />
         <div class="grid-tool-buttons">
           <md-outlined-button
             class="tool-button"
-            data-url="src/html/charDisplay.html">
+            data-url="tools/charDisplay.html">
             字符显示器
           </md-outlined-button>
-          <md-outlined-button
-            class="tool-button"
-            data-url="src/html/randStr.html">
+          <md-outlined-button class="tool-button" data-url="tools/randStr.html">
             随机字符生成器
           </md-outlined-button>
-          <md-outlined-button
-            class="tool-button"
-            data-url="src/html/strokes.html">
+          <md-outlined-button class="tool-button" data-url="tools/strokes.html">
             84-30 画的汉字
           </md-outlined-button>
           <md-outlined-button
             class="tool-button"
-            data-url="src/html/styleLetter.html">
+            data-url="tools/styleLetter.html">
             字母样式生成器
           </md-outlined-button>
-          <md-outlined-button
-            class="tool-button"
-            data-url="src/html/zalog.html">
+          <md-outlined-button class="tool-button" data-url="tools/zalog.html">
             zalog 文本生成器
           </md-outlined-button>
-          <md-outlined-button
-            class="tool-button"
-            data-url="src/html/idsAST.html">
+          <md-outlined-button class="tool-button" data-url="tools/idsAST.html">
             IDS 抽象语法树
           </md-outlined-button>
-          <md-outlined-button class="tool-button" data-url="glyphs/index.html">
+          <md-outlined-button class="tool-button" data-url="tools/seeker.html">
             离线字形检索
           </md-outlined-button>
         </div>
 
         <h2>其他工具</h2>
         <hr />
-        <md-outlined-button
-          class="tool-button"
-          data-url="src/html/CPStest.html">
+        <md-outlined-button class="tool-button" data-url="tools/CPStest.html">
           CPS 测试器
         </md-outlined-button>
-        <md-outlined-button
-          class="tool-button"
-          data-url="src/html/SIprefix.html">
+        <md-outlined-button class="tool-button" data-url="tools/SIprefix.html">
           SI 词头
         </md-outlined-button>
-        <md-outlined-button
-          class="tool-button"
-          data-url="src/html/audioFFT.html">
+        <md-outlined-button class="tool-button" data-url="tools/audioFFT.html">
           音频 FFT
         </md-outlined-button>
 
         <h2>娱乐</h2>
         <hr />
         <div class="grid-tool-buttons">
-          <md-outlined-button
-            class="tool-button"
-            data-url="src/html/GuClock.html">
+          <md-outlined-button class="tool-button" data-url="tools/GuClock.html">
             “骨”钟
           </md-outlined-button>
           <md-outlined-button
             class="tool-button"
-            data-url="src/html/DouCompass.html">
+            data-url="tools/DouCompass.html">
             <span class="font-idc">“&#xE100;”指南针</span>
           </md-outlined-button>
           <md-outlined-button
             class="tool-button"
-            data-url="src/html/HuAccelerometer.html">
+            data-url="tools/HuAccelerometer.html">
             “户”加速度计
           </md-outlined-button>
           <md-outlined-button
             class="tool-button"
-            data-url="src/html/lifeGame.html">
+            data-url="tools/lifeGame.html">
             生命游戏
           </md-outlined-button>
           <md-outlined-button
             class="tool-button"
-            data-url="src/html/pointMoveWithSeg.html">
+            data-url="tools/pointMoveWithSeg.html">
             点在移动时的连线
           </md-outlined-button>
           <md-outlined-button
             class="tool-button"
-            data-url="src/html/randFuck.html">
+            data-url="tools/randFuck.html">
             随机草人器
           </md-outlined-button>
           <md-outlined-button class="tool-button" data-url="index.html">
@@ -205,18 +190,21 @@
         <footer>
           <p>
             codes are written by
-            <a href="https://github.com/1-PT-AxH-RV-0" class="a">-PT_AxH_RV-</a
-            >, <a href="https://github.com/Losketch" class="a">Losketch</a>,
-            etc.
+            <a href="https://github.com/1-PT-AxH-RV-0" class="a">-PT_AxH_RV-</a>
+            ,
+            <a href="https://github.com/Losketch" class="a">Losketch</a>
+            , etc.
           </p>
           <p>
             fonts are created by
-            <a href="https://github.com/MY1L" class="a">MY1L</a>,
+            <a href="https://github.com/MY1L" class="a">MY1L</a>
+            ,
             <a
               href="https://github.com/Fitzgerald-Porthmouth-Koenigsegg"
-              class="a"
-              >Fitzgerald P.K.</a
-            >, etc.
+              class="a">
+              Fitzgerald P.K.
+            </a>
+            , etc.
           </p>
         </footer>
       </div>

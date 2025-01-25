@@ -1,3 +1,10 @@
+import '../../css/mainStyles.css';
+import '../../css/tools/randFuck.css';
+
+import '../m3ui.js';
+import '../changeHeader.js';
+import '../iframeColorSchemeSync.js';
+
 const startBtn = document.getElementById('start');
 const countInput = document.getElementById('count');
 const targetInput = document.getElementById('target');

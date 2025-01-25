@@ -1,12 +1,8 @@
 <!doctype html>
 <html lang="zh">
   <head>
-    <title>遠見齋｜字形檢索</title>
+    <title><%= htmlWebpackPlugin.options.title %></title>
     <meta charset="utf-8" />
-    <script defer src="../src/js/changeHeader.js"></script>
-    <link rel="stylesheet" href="../src/css/mainStyles.css" />
-    <link rel="stylesheet" href="./styles.css" />
-    <script src="../dist/m3ui.js"></script>
     <script>
       var time;
       var popup;
@@ -49,11 +45,16 @@
       <div id="sk_header">
         <div id="sk_logo">
           <h1>遍黑查形</h1>
-          <h3>可检索<span id="datasize"></span>字</h3>
+          <h3>
+            可检索
+            <span id="datasize"></span>
+            字
+          </h3>
         </div>
         <div id="sk_toolbar">
-          <md-outlined-text-field id="input" class="han">
-          </md-outlined-text-field>
+          <md-outlined-text-field
+            id="input"
+            class="han"></md-outlined-text-field>
           <button title="清除" id="buttClear">清</button>
           <button title="解构" id="buttDecompose">拆</button>
           <!--button title="独体" onclick="UI.clearFind();UI.key('#')"><b>#</b></button-->
@@ -66,13 +67,15 @@
         <div>
           <div>
             包含异体
-            <md-switch id="variant" onclick="UI.setMode(this, 'variant')">
-            </md-switch>
+            <md-switch
+              id="variant"
+              onclick="UI.setMode(this, 'variant')"></md-switch>
           </div>
           <div>
             强行拆分
-            <md-switch id="subdivide" onclick="UI.setMode(this, 'subdivide')">
-            </md-switch>
+            <md-switch
+              id="subdivide"
+              onclick="UI.setMode(this, 'subdivide')"></md-switch>
           </div>
           <div>
             部件键盘
@@ -90,45 +93,58 @@
         <div id="legend">
           <!--<span class="sizebtn btn" onclick="UI.updatePad()">＋</span>
 		<span class="sizebtn btn" onclick="UI.updatePad()">－</span>　　　-->
-          <span class="zone"
-            ><button class="BSC" onclick="UI.key('#')">基</button>基本</span
-          >
-          <span class="zone"
-            ><button class="ExA" onclick="UI.key('A')">A</button>A区</span
-          >
-          <span class="zone"
-            ><button class="ExB" onclick="UI.key('B')">B</button>B区</span
-          >
-          <span class="zone"
-            ><button class="ExC" onclick="UI.key('C')">C</button>C区</span
-          >
-          <span class="zone"
-            ><button class="ExD" onclick="UI.key('D')">D</button>D区</span
-          >
-          <span class="zone"
-            ><button class="ExE" onclick="UI.key('E')">E</button>E区</span
-          >
-          <span class="zone"
-            ><button class="ExF" onclick="UI.key('F')">F</button>F区</span
-          >
-          <span class="zone"
-            ><button class="ExG" onclick="UI.key('G')">G</button>G区</span
-          >
-          <span class="zone"
-            ><button class="ExH" onclick="UI.key('H')">H</button>H区</span
-          >
-          <span class="zone"
-            ><button class="ExI" onclick="UI.key('I')">I</button>I区</span
-          >
-          <span class="zone"
-            ><button class="CMP" onclick="UI.key('X')">兼</button>兼容</span
-          >
-          <span class="zone"
-            ><button class="SUP" onclick="UI.key('Y')">私</button>私用</span
-          >
-          <span class="zone"
-            ><button class="OTH" onclick="UI.key('Z')">它</button>其它</span
-          >
+          <span class="zone">
+            <button class="BSC" onclick="UI.key('#')">基</button>
+            基本
+          </span>
+          <span class="zone">
+            <button class="ExA" onclick="UI.key('A')">A</button>
+            A区
+          </span>
+          <span class="zone">
+            <button class="ExB" onclick="UI.key('B')">B</button>
+            B区
+          </span>
+          <span class="zone">
+            <button class="ExC" onclick="UI.key('C')">C</button>
+            C区
+          </span>
+          <span class="zone">
+            <button class="ExD" onclick="UI.key('D')">D</button>
+            D区
+          </span>
+          <span class="zone">
+            <button class="ExE" onclick="UI.key('E')">E</button>
+            E区
+          </span>
+          <span class="zone">
+            <button class="ExF" onclick="UI.key('F')">F</button>
+            F区
+          </span>
+          <span class="zone">
+            <button class="ExG" onclick="UI.key('G')">G</button>
+            G区
+          </span>
+          <span class="zone">
+            <button class="ExH" onclick="UI.key('H')">H</button>
+            H区
+          </span>
+          <span class="zone">
+            <button class="ExI" onclick="UI.key('I')">I</button>
+            I区
+          </span>
+          <span class="zone">
+            <button class="CMP" onclick="UI.key('X')">兼</button>
+            兼容
+          </span>
+          <span class="zone">
+            <button class="SUP" onclick="UI.key('Y')">私</button>
+            私用
+          </span>
+          <span class="zone">
+            <button class="OTH" onclick="UI.key('Z')">它</button>
+            其它
+          </span>
           <span id="counter"></span>
         </div>
         <div id="groups" class="han"></div>
@@ -157,14 +173,6 @@
         </div>
       </div>
     </div>
-    <script
-      type="text/javascript"
-      src="js/jquery-3.6.0.min.js"
-      encoding="utf-8"></script>
-    <script
-      type="text/javascript"
-      src="../assets/handata_uni.js"
-      encoding="utf-8"></script>
     <script type="text/javascript">
       var Config = {
         // $CHR$ 表示未经编码的汉字变量
@@ -200,6 +208,5 @@
         resultStep2: 1999
       };
     </script>
-    <script type="text/javascript" src="js/seeker.js" encoding="utf-8"></script>
   </body>
 </html>

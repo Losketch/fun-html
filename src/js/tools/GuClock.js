@@ -1,7 +1,21 @@
+import '../../css/mainStyles.css';
+import '../../css/refuse.css';
+import '../../css/tools/GuClock.css';
+
+import '../m3ui.js';
+import '../changeHeader.js';
+import '../iframeColorSchemeSync.js';
+
 let time = [0, 0, 0];
 let prevTime = Date.now();
 let isStop = false;
+const editBtn = document.getElementById('edit');
 const setAsCurrentTimeBtn = document.getElementById('set-as-current-time');
+const timeEle = document.getElementById('time');
+
+editBtn.addEventListener('click', () => {
+  timeEle.click();
+});
 
 const setTime = (hour, min, sec) => {
   time = [hour, min, sec];
@@ -54,7 +68,6 @@ const start = () => {
 
 start();
 
-const timeEle = document.getElementById('time');
 timeEle.addEventListener('change', () => {
   isStop = true;
   setTime(...timeEle.value.split(':').map(e => +e));

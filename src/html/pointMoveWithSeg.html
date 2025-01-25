@@ -5,14 +5,7 @@
       charset="UTF-8"
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <title>点在移动时的连线</title>
-
-    <link rel="stylesheet" href="../css/mainStyles.css" />
-    <link rel="stylesheet" href="../css/tools/pointMoveWithSeg.css" />
-    <script src="../../dist/m3ui.js"></script>
-    <script defer src="../js/changeHeader.js"></script>
-    <script defer src="../js/iframeColorSchemeSync.js"></script>
-    <script defer src="../js/tools/pointMoveWithSeg.js"></script>
+    <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
     <div>
@@ -27,8 +20,7 @@
                 value="100"
                 min="10"
                 max="300"
-                slot="end">
-              </md-slider>
+                slot="end"></md-slider>
             </md-list-item>
             <md-list-item>
               点半径
@@ -38,8 +30,7 @@
                 value="6"
                 min="1"
                 max="20"
-                slot="end">
-              </md-slider>
+                slot="end"></md-slider>
             </md-list-item>
             <md-list-item>
               <div slot="headline">连线最大长度</div>
@@ -54,8 +45,7 @@
                 value="300"
                 min="100"
                 max="500"
-                slot="end">
-              </md-slider>
+                slot="end"></md-slider>
             </md-list-item>
             <md-list-item>
               水平速度
@@ -67,8 +57,7 @@
                 value-end="50"
                 min="-200"
                 max="200"
-                slot="end">
-              </md-slider>
+                slot="end"></md-slider>
             </md-list-item>
             <md-list-item>
               垂直速度
@@ -80,17 +69,28 @@
                 value-end="50"
                 min="-200"
                 max="200"
-                slot="end">
-              </md-slider>
+                slot="end"></md-slider>
             </md-list-item>
             <md-list-item>
               <div slot="headline">
-                水平速度<ruby>阈<rp>（</rp><rt>yù</rt><rp>）</rp></ruby>值
+                水平速度
+                <ruby>
+                  阈
+                  <rp>（</rp>
+                  <rt>yù</rt>
+                  <rp>）</rp>
+                </ruby>
+                值
               </div>
               <div slot="supporting-text">
-                水平速度的绝对值将不会低于该值， 垂直速度<ruby
-                  >阈<rp>（</rp><rt>yù</rt><rp>）</rp></ruby
-                >值同理。
+                水平速度的绝对值将不会低于该值， 垂直速度
+                <ruby>
+                  阈
+                  <rp>（</rp>
+                  <rt>yù</rt>
+                  <rp>）</rp>
+                </ruby>
+                值同理。
               </div>
               <md-slider
                 labeled
@@ -98,19 +98,24 @@
                 value="6"
                 min="0"
                 max="49"
-                slot="end">
-              </md-slider>
+                slot="end"></md-slider>
             </md-list-item>
             <md-list-item>
-              垂直速度<ruby>阈<rp>（</rp><rt>yù</rt><rp>）</rp></ruby>值
+              垂直速度
+              <ruby>
+                阈
+                <rp>（</rp>
+                <rt>yù</rt>
+                <rp>）</rp>
+              </ruby>
+              值
               <md-slider
                 labeled
                 id="vyThreshold"
                 value="6"
                 min="0"
                 max="49"
-                slot="end">
-              </md-slider>
+                slot="end"></md-slider>
             </md-list-item>
           </md-list>
           <div>

@@ -5,18 +5,7 @@
       charset="UTF-8"
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <title>字母样式生成器</title>
-
-    <link rel="stylesheet" href="../css/mainStyles.css" />
-    <link rel="stylesheet" href="../css/fontFallback.css" />
-    <link rel="stylesheet" href="../css/select.css" />
-    <link rel="stylesheet" href="../css/nerd-fonts-generated.min.css" />
-    <link rel="stylesheet" href="../css/tools/styleLetter.css" />
-    <script src="../../dist/m3ui.js"></script>
-    <script defer src="../js/changeHeader.js"></script>
-    <script defer src="../js/iframeColorSchemeSync.js"></script>
-    <script defer src="../js/select.js"></script>
-    <script defer src="../js/tools/styleLetter.js"></script>
+    <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
     <div>
@@ -25,14 +14,12 @@
           <md-outlined-text-field
             label="待转换的字符"
             id="input"
-            class="font-without-ctrlctrl">
-          </md-outlined-text-field>
+            class="font-without-ctrlctrl"></md-outlined-text-field>
           <md-outlined-text-field
             label="转换结（jié）果"
             id="output"
             class="font-without-ctrlctrl"
-            readonly>
-          </md-outlined-text-field>
+            readonly></md-outlined-text-field>
           <div class="act-ele">
             <div class="select-container" id="select-font">
               <div class="select">
@@ -40,8 +27,9 @@
                   <span class="cur-select">选择字体</span>
                   <span class="nf nf-fa-angle_down"></span>
                 </div>
-                <md-outlined-text-field class="filter" label="筛选">
-                </md-outlined-text-field>
+                <md-outlined-text-field
+                  class="filter"
+                  label="筛选"></md-outlined-text-field>
               </div>
               <div class="opts-list">
                 <div data-select="bold" class="opt">粗体</div>

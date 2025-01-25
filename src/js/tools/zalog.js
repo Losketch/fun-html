@@ -1,3 +1,12 @@
+import '../../css/mainStyles.css';
+import '../../css/nerd-fonts-generated.min.css';
+import '../../css/tools/zalog.css';
+
+import '../m3ui.js';
+import '../changeHeader.js';
+import '../iframeColorSchemeSync.js';
+import '../iframeColorSchemeSync.js';
+
 const countRange = document.getElementById('count-range');
 const input = document.getElementById('input');
 const output = document.getElementById('output');

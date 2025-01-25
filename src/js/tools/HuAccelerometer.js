@@ -1,3 +1,11 @@
+import '../../css/mainStyles.css';
+import '../../css/refuse.css';
+import '../../css/tools/HuAccelerometer.css';
+
+import '../m3ui.js';
+import '../changeHeader.js';
+import '../iframeColorSchemeSync.js';
+
 const hand = document.getElementById('hand');
 const framePath = document.getElementById('framePath');
 const handPath = document.getElementById('handPath');
