@@ -15,38 +15,25 @@ function _(id) {
 }
 const $_ = _('input');
 
-let time;
-let popup;
-let q;
-
+let animation;
 function pop(ch) {
-  time = 0;
+  animation?.cancel();
   const btnValue = document.querySelector('.set-v2-popup-symbol');
   btnValue.innerHTML = ch;
-  popup = document.getElementsByClassName('set-v2-popup')[0];
-  clearInterval(q);
-  q = setInterval(() => {
-    opa();
-  }, 50);
-}
-
-function opa() {
-  let op;
-  if (time < 0.5) {
-    op = -4 * time * time + 4 * time;
-  } else if (time > 1) {
-    op = -4 * time * time + 8 * time - 3;
-  } else {
-    op = 1;
-  }
-  popup.style = 'display: block;opacity: ' + op + ';';
-  if (op < 0) {
-    op = 0;
-    time = -0.05;
-    popup.style = 'display: none;';
-    clearInterval(q);
-  }
-  time += 0.05;
+  const popup = document.querySelector('.set-v2-popup');
+  animation = popup.animate(
+    [
+      { opacity: '0' },
+      { opacity: '1', offset: 0.2},
+      { opacity: '1', offset: 0.8},
+      { opacity: '0' }
+    ],
+    { duration: 1200, easing: 'ease' }
+  );
+  setTimeout(() => popup.style.display = 'block', 16);
+  animation.addEventListener('finish', () => {
+    popup.style.display = 'none';
+  });
 }
 
 const Config = {
