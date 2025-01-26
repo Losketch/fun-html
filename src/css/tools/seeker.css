@@ -510,39 +510,51 @@ button {
 }
 .ExA {
   background: #00d2d2;
+  color: #fff !important;
 }
 .ExB {
   background: #0099ff;
+  color: #fff !important;
 }
 .ExC {
   background: #0000ff;
+  color: #fff !important;
 }
 .ExD {
   background: #3333cc;
+  color: #fff !important;
 }
 .ExE {
   background: #6000ef;
+  color: #fff !important;
 }
 .ExF {
   background: #9900ff;
+  color: #fff !important;
 }
 .ExG {
   background: #cc00ff;
+  color: #fff !important;
 }
 .ExH {
   background: #ff33cc;
+  color: #fff !important;
 }
 .ExI {
   background: #ff327d;
+  color: #fff !important;
 }
 .CMP {
   background: #ff3c00;
+  color: #fff !important;
 }
 .SUP {
   background: #ff0000;
+  color: #fff !important;
 }
 .OTH {
   background: #aaa;
+  color: #fff !important;
 }
 
 .exact {
