@@ -20,26 +20,28 @@
           <md-outlined-text-field
             id="input"
             class="han"></md-outlined-text-field>
-          <button title="清除" id="buttClear">清</button>
-          <button title="解构" id="buttDecompose">拆</button>
-          <button title="查找" id="buttGo">查</button>
+          <md-filled-tonal-button title="清除" id="buttClear" value=""
+            >清</md-filled-tonal-button
+          >
+          <md-filled-tonal-button title="解构" id="buttDecompose" value=""
+            >拆</md-filled-tonal-button
+          >
+          <md-filled-tonal-button title="查找" id="buttGo" value=""
+            >查</md-filled-tonal-button
+          >
         </div>
       </div>
 
       <div id="funcs">
-        <span>・遍黑体扩展 B 区尚有许多字未完成，将会使用典迹汉暂字体显示。</span>
+        <span
+          >・遍黑体扩展 B 区尚有许多字未完成，将会使用典迹汉暂字体显示。</span
+        >
         <div>
-          <div>
-            包含异体<md-switch id="variant"></md-switch>
-          </div>
-          <div>
-            强行拆分<md-switch id="subdivide"></md-switch>
-          </div>
-          <div>
-            部件键盘<md-switch id="showkeypad"></md-switch>
-          </div>
+          <div> 包含异体<md-switch id="variant"></md-switch> </div>
+          <div> 强行拆分<md-switch id="subdivide"></md-switch> </div>
+          <div> 部件键盘<md-switch id="showkeypad"></md-switch> </div>
         </div>
-        <span id="scKey" class="grp">快捷栏：</span>
+        <span id="scKey" class="grp">收藏栏：</span>
       </div>
 
       <div id="keyboard">
@@ -104,6 +106,19 @@
         </div>
         <div id="groups" class="han"></div>
         <div id="output" class="han"></div>
+        <div id="outputBSC" class="han"></div>
+        <div id="outputA" class="han"></div>
+        <div id="outputB" class="han"></div>
+        <div id="outputC" class="han"></div>
+        <div id="outputD" class="han"></div>
+        <div id="outputE" class="han"></div>
+        <div id="outputF" class="han"></div>
+        <div id="outputG" class="han"></div>
+        <div id="outputH" class="han"></div>
+        <div id="outputI" class="han"></div>
+        <div id="outputCMP" class="han"></div>
+        <div id="outputSUP" class="han"></div>
+        <div id="outputOTH" class="han"></div>
       </div>
       <div id="popview">
         <span id="bigchar" class="han"></span>
@@ -114,8 +129,8 @@
         <span id="menu_copy" class="func">复制此字</span>
         <span id="menu_skip" class="func">排除此字</span>
         <span class="els">
-          <span id="menu_add" class="func">加入快捷栏</span>
-          <span id="menu_del" class="func">移出快捷栏</span>
+          <span id="menu_add" class="func">加入收藏栏</span>
+          <span id="menu_del" class="func">移出收藏栏</span>
         </span>
       </div>
 

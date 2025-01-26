@@ -1,6 +1,7 @@
 * {
   overflow: unset;
 }
+
 .set-v2-popup {
   position: fixed;
   z-index: 500000;
@@ -10,17 +11,23 @@
   width: 0;
   height: 0;
 }
+
+#buttDecompose {
+  margin: 0 8px;
+}
+
 .set-v2-popup-container {
   position: relative;
   top: -75px;
   left: -100px;
-  display: flex; /* 合并 display 属性 */
-  align-items: center; /* 合并对齐属性 */
-  justify-content: center; /* 合并对齐属性 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 200px;
   height: 150px;
   text-align: center;
 }
+
 .set-v2-popup-block {
   position: relative;
   display: inline-block;
@@ -32,12 +39,14 @@
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.8);
 }
+
 .set-v2-popup-symbol {
   height: 38px;
   font-size: 32px;
   font-family: PUAExt, plgo1, plgo2, Source, ffallback;
   line-height: 38px;
 }
+
 .set-v2-popup-text {
   position: absolute;
   right: 0;
@@ -50,6 +59,7 @@
   font-family: PUAExt, plgo1, plgo2, Source, ffallback;
   line-height: 1;
 }
+
 /* 定制修改区起始 */
 @media screen and (min-width: 1450px) {
   #main {
@@ -57,22 +67,27 @@
     margin: 10px auto;
   }
 }
+
 a {
   text-decoration: none;
   color: rgb(242, 242, 242);
 }
+
 a:hover,
 button:hover,
 span.btn:hover {
   color: #c20c24;
 }
-a:hover[class='BSC'] {
+
+a.BSC:hover {
   color: #c20c24;
 }
+
 @font-face {
   font-family: PUAExt;
   src: url(../../../assets/fonts/display/PUAExt-Regular.woff2);
 }
+
 @font-face {
   font-family: plgo1;
   src: url(../../../assets/fonts/display/Plgo1.woff2);
@@ -93,73 +108,91 @@ a:hover[class='BSC'] {
   font-family: dela;
   src: url(../../../assets/fonts/display/dela.woff2);
 }
-#result #output a,
+
+#result [id^='output'] a,
 .han {
   font-family: PUAExt, plgo1, plgo2, Source, ffallback;
   --md-outlined-text-field-input-text-font: PUAExt, plgo1, plgo2, Source,
     ffallback;
 }
-#result #output a.img {
+
+h1,
+#sk_header md-filled-tonal-button {
+  font-family: dela;
+}
+
+#result [id^='output'] a.img {
   background-size: 0.95em 0.95em !important;
   background-position: center center;
 }
+
 #popview .func:hover {
   border-radius: 7px;
 }
+
 #popview #bigchar.img {
   background-size: 0.95em 0.95em !important;
 }
+
 #result #groups a.img {
   background-repeat: no-repeat;
   background-size: 83% !important;
   background-position: top 0.1em center !important;
 }
+
 #sk_header {
   margin-bottom: 10px;
 }
+
 #sk_header #sk_logo {
   float: left;
   width: 200px;
   text-align: center;
   cursor: default;
 }
+
 #sk_header #sk_logo h1 {
   margin: -10px 0;
   font-size: 2.4em;
   font-weight: normal;
 }
+
 #sk_header #sk_logo h3 {
   margin: 5px 0 0 0;
   font-weight: bold;
   font-size: 1em;
   font-family: Arial, Helvetica, sans-serif;
 }
+
 #sk_header #sk_logo #datasize {
   color: #a13887;
 }
-#sk_header button {
-  cursor: pointer;
+
+#sk_header md-filled-tonal-button {
   font-size: 2.5em;
   line-height: 1;
   padding: 2px;
   min-width: 30px;
-  height: 50px;
-  box-sizing: content-box;
   vertical-align: top;
   transition: all 0.2s ease;
+  border: 1px solid #66666666;
+  border-radius: 8px;
 }
-#sk_header button:hover {
+
+#sk_header md-filled-tonal-button:hover {
   transform: translateY(-1px);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
-#sk_header button:active {
+#sk_header md-filled-tonal-button:active {
   transform: translateY(1px);
 }
+
 #funcs {
   padding: 10px 10px 0 10px;
   border-top: 2px solid #ccc;
   clear: both;
 }
+
 #funcs > div,
 #funcs > div > div {
   display: flex;
@@ -168,27 +201,33 @@ a:hover[class='BSC'] {
   gap: 8px;
   margin-bottom: 2px;
 }
+
 #funcs label {
   margin-right: 10px;
 }
+
 #funcs label,
 #funcs #scKey {
   white-space: nowrap;
 }
+
 #scKey button.img {
   background-repeat: no-repeat;
   background-size: 18px 18px;
   background-position: center;
 }
+
 #keyboard {
   padding: 5px 10px 10px 10px;
   border-bottom: 2px solid #ccc;
   clear: both;
 }
+
 #keyboard table {
   width: 100%;
   border-collapse: collapse;
 }
+
 tbody > tr:first-child > th:first-child {
   border-top-left-radius: 10px;
 }
@@ -201,6 +240,7 @@ tbody > tr:last-child > th:first-child {
 tbody > tr:last-child > td:last-child {
   border-bottom-right-radius: 10px;
 }
+
 #keyboard table th,
 #keyboard table td {
   margin: 1px 0px;
@@ -208,35 +248,42 @@ tbody > tr:last-child > td:last-child {
   border-top: 1px solid #fff;
   border-right: 1px solid #fff;
 }
+
 #keyboard table th {
   background-color: var(--md-sys-color-primary);
   color: var(--md-sys-color-surface);
   white-space: nowrap;
 }
+
 #keyboard table.strokeKB th {
   width: 4em;
 }
+
 #keyboard table td {
   background-color: var(--md-sys-color-surface-variant);
   vertical-align: top;
 }
+
 #keyboard table tr:last-child > td {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
 }
+
 #keyboard table td .sub {
   white-space: nowrap;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
 }
+
 #keyboard table td .sub .tag {
   font-size: 85%;
   vertical-align: middle;
   margin-left: 5px;
 }
+
 #keyboard button,
 #scKey button {
   width: 17pt;
@@ -253,29 +300,35 @@ tbody > tr:last-child > td:last-child {
   line-height: 0;
   transition: all 0.2s ease;
 }
+
 #keyboard button:hover,
 #scKey button:hover {
   filter: invert(0.2);
   transform: translateY(-1px);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
+
 #keyboard button:active,
 #scKey button:active {
   transform: translateY(1px);
 }
+
 #result {
   padding: 10px 12px;
 }
+
 #result #legend {
   line-height: 145%;
   vertical-align: bottom;
   padding-bottom: 10px;
 }
+
 #result #legend .zone {
   display: inline-block;
   white-space: nowrap;
   margin-right: 6px;
 }
+
 #result #legend button {
   width: 24px;
   height: 24px;
@@ -288,11 +341,13 @@ tbody > tr:last-child > td:last-child {
   line-height: 1;
   border-radius: 8px;
 }
+
 #result #legend #counter {
   font-weight: bold;
   color: #00f;
   white-space: nowrap;
 }
+
 #result #groups {
   display: none;
   min-height: 55px;
@@ -302,6 +357,7 @@ tbody > tr:last-child > td:last-child {
   background-color: #f4f4f4;
   border-top: 1px dashed #aaa;
 }
+
 #result #groups a {
   border: 1px solid #aaa;
   color: #333 !important;
@@ -313,11 +369,13 @@ tbody > tr:last-child > td:last-child {
   display: inline-block;
   overflow: hidden;
 }
+
 #result #groups a.img {
   background-repeat: no-repeat;
   background-size: 27px 27px;
   background-position: top center;
 }
+
 #result #groups a:after {
   content: attr(data-count);
   display: block;
@@ -327,10 +385,11 @@ tbody > tr:last-child > td:last-child {
     Helvetica,
     sans-serif;
 }
+
 #result #groups a.on {
   background-color: #eaa;
 }
-#result #output {
+#result [id^='output'] {
   min-height: 100px;
   font-size: 2.5em;
   line-height: 1;
@@ -338,7 +397,8 @@ tbody > tr:last-child > td:last-child {
   clear: both;
   border-top: 1px dashed #aaa;
 }
-#result #output a {
+
+#result [id^='output'] a {
   border: 1px solid #aaa;
   padding: 1px;
   margin: 2px;
@@ -349,44 +409,50 @@ tbody > tr:last-child > td:last-child {
   border-color: #00000017;
   box-shadow: 0px 0px 6px #00000047;
 }
-#result #output a.img {
+
+#result [id^='output'] a.img {
   background-repeat: no-repeat;
   background-size: 1em 1em;
   color: transparent !important;
 }
-#result #output > span {
+
+#result [id^='output'] > span {
   margin: 3px 0;
   padding: 4px 8px;
   display: block;
 }
-#result #output > span .line {
+
+#result [id^='output'] > span .line {
   display: inline-block;
   margin-bottom: 2px;
   padding-bottom: 1px;
 }
-#result #output > span .line.hover {
+
+#result [id^='output'] > span .line.hover {
   border-bottom: 2px solid #e08 !important;
   color: #e08;
 }
-#result #output > span .sub {
+
+#result [id^='output'] > span .sub {
   font-size: 95%;
 }
-#result #output > span .line {
+#result [id^='output'] > span .line {
   border-bottom: 2px solid #666;
 }
-#result #output > span .line .line {
+#result [id^='output'] > span .line .line {
   border-bottom: 2px solid #888;
 }
-#result #output > span .line .line .line {
+#result [id^='output'] > span .line .line .line {
   border-bottom: 2px solid #aaa;
 }
-#result #output > span .line .line .line .line {
+#result [id^='output'] > span .line .line .line .line {
   border-bottom: 2px solid #ccc;
 }
-#result #output > span .line .line .line .line .line {
+#result [id^='output'] > span .line .line .line .line .line {
   border-bottom: 2px solid #ddd;
 }
-#result #output h3 {
+
+#result [id^='output'] h3 {
   margin: 0 10px 0 0;
   padding: 0;
   display: inline-block;
@@ -396,11 +462,13 @@ tbody > tr:last-child > td:last-child {
   vertical-align: top;
   user-select: none;
 }
-#result #output h3.img {
+
+#result [id^='output'] h3.img {
   background-repeat: no-repeat;
   background-size: 27px 27px;
   color: transparent !important;
 }
+
 #sk_foot {
   clear: both;
   font-size: 0.85em;
@@ -408,10 +476,12 @@ tbody > tr:last-child > td:last-child {
   padding-top: 20px;
   height: 100px;
 }
+
 #sk_foot > span {
   padding: 3px 10px;
   white-space: nowrap;
 }
+
 .K1 {
   color: #0000aa !important;
 }
@@ -424,17 +494,16 @@ tbody > tr:last-child > td:last-child {
 .K4 {
   color: #ac3333 !important;
 }
+
 body {
   background: #fffbfe;
   margin: 8px;
 }
+
 button {
   display: inline-block;
 }
-a[class='BSC'] {
-  background: #eee;
-  color: #000;
-}
+
 .BSC {
   background: #eee;
   color: #000;
@@ -475,15 +544,12 @@ a[class='BSC'] {
 .OTH {
   background: #aaa;
 }
+
 .exact {
   outline: 1px solid #c43400;
   border-color: #c43400 !important;
 }
-#sk_header button {
-  border: 1px solid #66666666;
-  border-radius: 8px;
-  background: #f5f5f5;
-}
+
 #popview {
   position: absolute;
   display: none;
@@ -498,10 +564,12 @@ a[class='BSC'] {
   z-index: 10;
   overflow: hidden;
 }
+
 #popview span,
 #popview a {
   overflow: hidden;
 }
+
 #popview #bigchar {
   position: absolute;
   display: block;
@@ -514,12 +582,14 @@ a[class='BSC'] {
   line-height: 100px;
   cursor: default;
 }
+
 #popview #bigchar.img {
   color: transparent;
   background-repeat: no-repeat;
   background-size: 90px 90px;
   background-position: center;
 }
+
 #popview #codetag {
   position: absolute;
   display: block;
@@ -532,20 +602,24 @@ a[class='BSC'] {
   font-family: Arial, Helvetica, sans-serif;
   cursor: default;
 }
+
 #popview .func {
   display: block;
   cursor: pointer;
   padding: 2px 5px;
   color: #333;
 }
+
 #popview .func:hover {
   background: #ff5b84;
   color: #fff;
 }
+
 @media screen and (max-width: 890px) {
   #sk_header {
     text-align: center;
   }
+
   #sk_header #sk_logo {
     float: none;
     clear: both;
@@ -553,55 +627,68 @@ a[class='BSC'] {
     width: 100%;
     margin-bottom: 5px;
   }
+
   #sk_header #sk_logo h1 {
     font-size: 2em;
   }
+
   #sk_header #sk_logo h1,
   #sk_header #sk_logo h3 {
     margin: 0;
     display: inline-block;
   }
+
   #sk_header #input {
     width: 220px;
     font-size: 1.8em;
     height: 35px;
   }
-  #sk_header button {
+
+  #sk_header md-filled-tonal-button {
     font-size: 1.8em;
     height: 35px;
   }
+
   #keyboard table th {
     width: 2.2em;
   }
+
   #keyboard table td .sub {
     white-space: normal;
   }
+
   #result #legend .zone {
     width: 28px;
     overflow: hidden;
     margin-right: 2px;
     color: #000;
   }
+
   #result #legend button {
     color: #000;
   }
+
   #sk_foot > span {
     display: block;
   }
+
   #funcs > div,
   #funcs > div > div {
     gap: 4px;
   }
 }
+
 @media screen and (max-width: 495px) {
   #funcs > span {
     text-align: center;
   }
+
   #funcs > div {
     display: flex;
     flex-direction: column;
     align-content: flex-start;
   }
+
   #funcs > div,
   #funcs > div > div {
     gap: 2px;
@@ -612,6 +699,7 @@ a[class='BSC'] {
   #funcs > div > div {
     gap: 1px;
   }
+
   #sk_header #sk_logo {
     display: flex;
     flex-direction: column;
@@ -619,15 +707,13 @@ a[class='BSC'] {
     align-items: center;
     align-content: center;
   }
+
   #sk_header #input {
     min-width: 90vw;
   }
-  #sk_header button {
+
+  #sk_header md-filled-tonal-button {
     margin-top: 5px;
     width: 20vw;
   }
-}
-h1,
-#sk_header button {
-  font-family: dela;
 }
