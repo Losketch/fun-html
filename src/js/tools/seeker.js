@@ -21,7 +21,7 @@ let q;
 
 function pop(ch) {
   time = 0;
-  const btnValue = document.querySelecter('.set-v2-popup-symbol');
+  const btnValue = document.querySelector('.set-v2-popup-symbol');
   btnValue.innerHTML = ch;
   popup = document.getElementsByClassName('set-v2-popup')[0];
   clearInterval(q);
@@ -93,34 +93,34 @@ const Seeker = {
   result: null,
   groups: null,
   blockFlagMap: {
-    '#': 0x0001,
-    A: 0x0002,
-    B: 0x0004,
-    C: 0x0008,
-    D: 0x0010,
-    E: 0x0020,
-    F: 0x0040,
-    G: 0x0080,
-    H: 0x0090,
-    I: 0x0100,
-    X: 0x2000,
-    Y: 0x4000,
-    Z: 0x8000
+    '%': 1 << 30,
+    '$': 1 << 29,
+    '&': 1 << 28,
+    '#': 1 <<  0,
+    A:   1 <<  1,
+    B:   1 <<  2,
+    C:   1 <<  3,
+    D:   1 <<  4,
+    E:   1 <<  5,
+    F:   1 <<  6,
+    G:   1 <<  7,
+    H:   1 <<  8,
+    I:   1 <<  9
   },
   blockMap: {
-    1: 0x0001,
-    2: 0x0002,
-    3: 0x0004,
-    4: 0x0008,
-    5: 0x0010,
-    6: 0x0020,
-    7: 0x0040,
-    8: 0x0080,
-    9: 0x0090,
-    10: 0x0100,
-    28: 0x2000,
-    29: 0x2000,
-    30: 0x4000
+    '-2': 1 << 30,
+    '-1': 1 << 29,
+    0:    1 << 28,
+    1:    1 <<  0,
+    2:    1 <<  1,
+    3:    1 <<  2,
+    4:    1 <<  3,
+    5:    1 <<  4,
+    6:    1 <<  5,
+    7:    1 <<  6,
+    8:    1 <<  7,
+    9:    1 <<  8,
+    10:   1 <<  9
   },
   parts,
   getVersion() {
@@ -139,28 +139,27 @@ const Seeker = {
       } else {
         if (w.length == 1) {
           const c = w.charCodeAt(0);
-          if (c >= 0x2ff0 && c <= 0x2ffb) break; // CJK description
+          if (c >= 0x2ff0 && c <= 0x2fff) break; // CJK description
         }
         a.push(Seeker.variant(w, v));
       }
     }
-    if (blockFlag == 0) blockFlag = 0xffff;
-    return blockFlag;
+    return blockFlag || Seeker.blockFlagAll;
   },
   getCJKBlock(c) {
-    if (c >= 0x4e00 && c <= 0x9ffc) return 1;
+    if (c >= 0x4e00 && c <= 0x9fff) return 1;
     if (c >= 0x3400 && c <= 0x4dbf) return 2;
-    if (c >= 0x20000 && c <= 0x2a6dd) return 3;
-    if (c >= 0x2a700 && c <= 0x2b734) return 4;
+    if (c >= 0x20000 && c <= 0x2a6df) return 3;
+    if (c >= 0x2a700 && c <= 0x2b739) return 4;
     if (c >= 0x2b740 && c <= 0x2b81d) return 5;
     if (c >= 0x2b820 && c <= 0x2cea1) return 6;
     if (c >= 0x2ceb0 && c <= 0x2ebe0) return 7;
     if (c >= 0x30000 && c <= 0x3134a) return 8;
     if (c >= 0x31350 && c <= 0x323af) return 9;
     if (c >= 0x2ebf0 && c <= 0x2ee5d) return 10;
-    if (c >= 0xf900 && c <= 0xfad9) return 28;
-    if (c >= 0x2f800 && c <= 0x2fa1d) return 29;
-    if (c >= 0xf0270 && c <= 0xfae7a) return 30;
+    if (c >= 0xf900 && c <= 0xfad9) return -1;
+    if (c >= 0x2f800 && c <= 0x2fa1d) return -1;
+    if (c >= 0xf0270 && c <= 0xfae7a) return -2;
     return 0;
   },
   getData(c) {
@@ -243,7 +242,7 @@ const Seeker = {
 
         if (blockFlag) {
           // 篩選要包含的Unicode分區
-          const f = Seeker.blockMap[block] || 0x8000;
+          const f = Seeker.blockMap[block];
           if (!(blockFlag & f)) continue;
         }
 
@@ -345,6 +344,8 @@ const Seeker = {
   }
 };
 
+Seeker.blockFlagAll = Object.values(Seeker.blockFlagMap).reduce((acc, curr) => acc | curr, 0);
+
 const UI = {
   shortcuts: [],
   keypadMode: null,
@@ -380,6 +381,9 @@ const UI = {
     }
   },
   blockClasses: {
+    '-2': 'SUP',
+    '-1': 'CMP',
+    0: 'OTH',
     1: 'BSC',
     2: 'ExA',
     3: 'ExB',
@@ -390,11 +394,6 @@ const UI = {
     8: 'ExG',
     9: 'ExH',
     10: 'ExI',
-    27: 'CMP',
-    28: 'CMP',
-    29: 'CMP',
-    30: 'SUP',
-    31: 'SUP'
   },
   isMobile() {
     if (navigator.userAgentData) {
@@ -776,26 +775,11 @@ const UI = {
           '.svg)">' +
           (hideChar ? '&nbsp;' : c)
         : '" data-char="' + c + '">' + c;
-    return (
-      '<' +
-      tag +
-      ' ' +
-      (extra || '') +
-      ' onclick=' +
-      ' UI.setClipboard("' +
-      c +
-      '") ' +
-      ' class="' +
-      (cls || '') +
-      tagBody +
-      '</' +
-      tag +
-      '>'
-    );
+    return `<${tag} ${extra || ''} class="${cls || ''}"${tagBody}</${tag}>`
   },
   addCell(entry, running) {
     const block = Seeker.getCJKBlock(entry.unicode);
-    const cls = UI.blockClasses[block] || 'OTH';
+    const cls = UI.blockClasses[block];
 
     const url = Config.url
       .replace('$CHR$', entry.char)
@@ -820,10 +804,9 @@ const UI = {
   setResult(founds, i, force) {
     Seeker.result = founds;
     const msg =
-      (force ? '' : '<span style="color:red">(基本区)</span> ') +
-      (!force
-        ? `找到 ${founds.length} 字`
-        : `找到 ${founds.length} 字 ${Math.floor((i * 100) / dt.length)}%`);
+      force ?
+        `找到 ${founds.length} 字 ${Math.floor((i * 100) / dt.length)}%` :
+        `<span style="color:red">（基本区）</span>找到 ${founds.length} 字`;
     $('#counter').html(msg);
     UI.showOutput();
   },
@@ -862,6 +845,9 @@ const UI = {
       first = false;
     }
     $('#output').html(s);
+    for (let a of _('output').querySelectorAll('a')) {
+      a.addEventListener('click', () => UI.setClipboard(a.dataset.char));
+    }
   },
   finished(founds) {
     Seeker.result = founds;
@@ -926,9 +912,9 @@ const UI = {
     UI.updatePad();
 
     document.querySelector('.BSC').addEventListener('click', () => UI.key('#'));
-    document.querySelector('.CMP').addEventListener('click', () => UI.key('X'));
-    document.querySelector('.SUP').addEventListener('click', () => UI.key('Y'));
-    document.querySelector('.OTH').addEventListener('click', () => UI.key('Z'));
+    document.querySelector('.CMP').addEventListener('click', () => UI.key('$'));
+    document.querySelector('.SUP').addEventListener('click', () => UI.key('%'));
+    document.querySelector('.OTH').addEventListener('click', () => UI.key('&'));
 
     const extKeyBtns = document.querySelectorAll('[class^="Ex"]');
     for (let extKeyBtn of extKeyBtns) {
