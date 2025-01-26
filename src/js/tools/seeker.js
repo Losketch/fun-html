@@ -61,8 +61,10 @@ const Config = {
   glyphwiki: 'https://seeki.vistudium.top/SVG/',
 
   // 指定哪个Range要采用图片显示 (true=图片显示，false=文本显示)
-  // 1：基本；2：扩A。以此类推 5：D
   useImage: {
+    '-2': false,
+    '-1': false,
+    0: false,
     1: false,
     2: false,
     3: false,
@@ -72,12 +74,7 @@ const Config = {
     7: false,
     8: false,
     9: false,
-    10: false,
-    27: false,
-    28: false,
-    29: false,
-    30: false,
-    31: false
+    10: false
   },
   resultStep1: 299,
   resultStep2: 1999
@@ -94,33 +91,33 @@ const Seeker = {
   groups: null,
   blockFlagMap: {
     '%': 1 << 30,
-    '$': 1 << 29,
+    $: 1 << 29,
     '&': 1 << 28,
-    '#': 1 <<  0,
-    A:   1 <<  1,
-    B:   1 <<  2,
-    C:   1 <<  3,
-    D:   1 <<  4,
-    E:   1 <<  5,
-    F:   1 <<  6,
-    G:   1 <<  7,
-    H:   1 <<  8,
-    I:   1 <<  9
+    '#': 1 << 0,
+    A: 1 << 1,
+    B: 1 << 2,
+    C: 1 << 3,
+    D: 1 << 4,
+    E: 1 << 5,
+    F: 1 << 6,
+    G: 1 << 7,
+    H: 1 << 8,
+    I: 1 << 9
   },
   blockMap: {
     '-2': 1 << 30,
     '-1': 1 << 29,
-    0:    1 << 28,
-    1:    1 <<  0,
-    2:    1 <<  1,
-    3:    1 <<  2,
-    4:    1 <<  3,
-    5:    1 <<  4,
-    6:    1 <<  5,
-    7:    1 <<  6,
-    8:    1 <<  7,
-    9:    1 <<  8,
-    10:   1 <<  9
+    0: 1 << 28,
+    1: 1 << 0,
+    2: 1 << 1,
+    3: 1 << 2,
+    4: 1 << 3,
+    5: 1 << 4,
+    6: 1 << 5,
+    7: 1 << 6,
+    8: 1 << 7,
+    9: 1 << 8,
+    10: 1 << 9
   },
   parts,
   getVersion() {
@@ -210,7 +207,7 @@ const Seeker = {
   stopMatch() {
     clearTimeout(Seeker.worker);
   },
-  getMatch(s, ignore, variant, divide, force, urlSrc) {
+  getMatch(s, ignore, variant, divide, force) {
     // string, variant?, divide?, max, href
     clearTimeout(Seeker.worker);
 
@@ -259,13 +256,6 @@ const Seeker = {
           if (query.length) continue; // 沒命中
           groups.unshift(w);
         }
-
-        const url = urlSrc
-          .replace('$CHR$', w)
-          .replace('$ENC$', encodeURI(w))
-          .replace('$UCD$', c.toString())
-          .replace('$UCh$', c.toString(16))
-          .replace('$UCH$', c.toString(16).toUpperCase());
 
         const hitData = {
           char: w,
@@ -344,7 +334,10 @@ const Seeker = {
   }
 };
 
-Seeker.blockFlagAll = Object.values(Seeker.blockFlagMap).reduce((acc, curr) => acc | curr, 0);
+Seeker.blockFlagAll = Object.values(Seeker.blockFlagMap).reduce(
+  (acc, curr) => acc | curr,
+  0
+);
 
 const UI = {
   shortcuts: [],
@@ -393,7 +386,7 @@ const UI = {
     7: 'ExF',
     8: 'ExG',
     9: 'ExH',
-    10: 'ExI',
+    10: 'ExI'
   },
   isMobile() {
     if (navigator.userAgentData) {
@@ -548,12 +541,12 @@ const UI = {
     Seeker.stopMatch();
     if (!s) {
       $('#counter').text('');
-      $('#output').text('');
+      $('[id^="output"]').text('');
     } else {
       const divide = _('subdivide').selected;
       const variant = _('variant').selected;
       if (s.charAt(0) == ':') {
-        $('#output').html(Seeker.getTree(s.slice(1), divide));
+        $('[id^="output"]').html(Seeker.getTree(s.slice(1), divide));
       } else {
         let ignore = null;
         const tmp = s.split('-');
@@ -561,8 +554,7 @@ const UI = {
           s = tmp[0];
           ignore = tmp[1];
         }
-        const url = 'href="' + Config.url + '"';
-        Seeker.getMatch(s, ignore, variant, divide, force, url);
+        Seeker.getMatch(s, ignore, variant, divide, force);
       }
     }
   },
@@ -715,7 +707,7 @@ const UI = {
     $('#groups')
       .on('mouseover', 'a', UI.showPop)
       .on('mouseout', 'a', UI.hidePop);
-    $('#output')
+    $('[id^="output"]')
       .on('mouseover', 'a', UI.showPop)
       .on('mouseout', 'a', UI.hidePop);
     //_('output').addEventListener('click', function(e) { if (e.target.tagName == 'A') e.preventDefault() }, false);
@@ -729,15 +721,15 @@ const UI = {
       $(this).toggleClass('on');
       UI.showOutput();
     });
-    $('#output').on('click', 'a', e => {
+    $('[id^="output"]').on('click', 'a', e => {
       e.preventDefault();
     });
 
-    $('#output').on('mouseover', '> span .line', function (e) {
+    $('[id^="output"]').on('mouseover', '> span .line', function (e) {
       $(this).attr('class', 'line hover');
       e.stopPropagation();
     });
-    $('#output').on('mouseout', '> span .line', () => {
+    $('[id^="output"]').on('mouseout', '> span .line', () => {
       $(this).attr('class', 'line');
     });
 
@@ -775,7 +767,7 @@ const UI = {
           '.svg)">' +
           (hideChar ? '&nbsp;' : c)
         : '" data-char="' + c + '">' + c;
-    return `<${tag} ${extra || ''} class="${cls || ''}"${tagBody}</${tag}>`
+    return `<${tag} ${extra || ''} class="${cls || ''}"${tagBody}</${tag}>`;
   },
   addCell(entry, running) {
     const block = Seeker.getCJKBlock(entry.unicode);
@@ -803,51 +795,78 @@ const UI = {
   },
   setResult(founds, i, force) {
     Seeker.result = founds;
-    const msg =
-      force ?
-        `找到 ${founds.length} 字 ${Math.floor((i * 100) / dt.length)}%` :
-        `<span style="color:red">（基本区）</span>找到 ${founds.length} 字`;
+    const msg = force
+      ? `找到 ${founds.length} 字 ${Math.floor((i * 100) / dt.length)}%`
+      : `<span style="color:red">（基本区）</span>找到 ${founds.length} 字`;
     $('#counter').html(msg);
     UI.showOutput();
   },
   showOutput() {
-    let s = '',
-      first = true,
-      gstr,
-      blk,
-      lastBlock;
+    let sBSC = '',
+      sA = '',
+      sB = '',
+      sC = '',
+      sD = '',
+      sE = '',
+      sF = '',
+      sG = '',
+      sH = '',
+      sI = '',
+      sCMP = '',
+      sSUP = '',
+      sOTH = '',
+      blk;
     for (let j in Seeker.result) Seeker.result[j].gflag = false;
 
     const glist = $('#groups a.on');
     $(glist.get().reverse()).each((i, gx) => {
       const g = $(gx).data('char');
-      gstr = UI.createTag(g, 'h3', '', '', false);
       for (let j in Seeker.result) {
         if (Seeker.result[j].gflag) continue;
         for (let gi in Seeker.result[j].groups) {
           if (Seeker.result[j].groups[gi] == g) {
-            gstr += UI.addCell(Seeker.result[j], Seeker.groups == null);
             Seeker.result[j].gflag = true;
             break;
           }
         }
       }
-      s = gstr + '<br>\n' + s;
     });
 
     for (let j in Seeker.result) {
       if (Seeker.result[j].gflag) continue;
       blk = Seeker.getCJKBlock(Seeker.result[j].unicode);
-      if (blk != lastBlock && !first) s += '<br>';
-      lastBlock = blk;
 
-      s += UI.addCell(Seeker.result[j], Seeker.groups == null);
-      first = false;
+      const willAddStr = UI.addCell(Seeker.result[j], Seeker.groups == null);
+      if (blk === 1) sBSC += willAddStr;
+      if (blk === 2) sA += willAddStr;
+      if (blk === 3) sB += willAddStr;
+      if (blk === 4) sC += willAddStr;
+      if (blk === 5) sD += willAddStr;
+      if (blk === 6) sE += willAddStr;
+      if (blk === 7) sF += willAddStr;
+      if (blk === 8) sG += willAddStr;
+      if (blk === 9) sH += willAddStr;
+      if (blk === 10) sI += willAddStr;
+      if (blk === -1) sCMP += willAddStr;
+      if (blk === -2) sSUP += willAddStr;
+      if (blk === 0) sOTH += willAddStr;
     }
-    $('#output').html(s);
-    for (let a of _('output').querySelectorAll('a')) {
-      a.addEventListener('click', () => UI.setClipboard(a.dataset.char));
-    }
+    $('#outputBSC').html(sBSC);
+    $('#outputA').html(sA);
+    $('#outputB').html(sB);
+    $('#outputC').html(sC);
+    $('#outputD').html(sD);
+    $('#outputE').html(sE);
+    $('#outputF').html(sF);
+    $('#outputG').html(sG);
+    $('#outputH').html(sH);
+    $('#outputI').html(sI);
+    $('#outputCMP').html(sCMP);
+    $('#outputSUP').html(sSUP);
+    $('#outputOTH').html(sOTH);
+    $('[id^="output"] a').on('click', function () {
+      UI.setClipboard($(this).data('char'));
+    });
   },
   finished(founds) {
     Seeker.result = founds;
@@ -894,12 +913,34 @@ const UI = {
     return v !== null ? v : defaultValue;
   },
   init() {
-    // UI
+    $(document).ready(() => {
+      $('[id^="output"]').each(function () {
+        if ($(this).text().trim() === '') {
+          $(this).hide();
+        }
+      });
+
+      $('[id^="output"]').each(function () {
+        const observer = new MutationObserver(mutations => {
+          mutations.forEach(mutation => {
+            const target = $(mutation.target);
+            if (target.text().trim() !== '') {
+              target.show();
+            } else {
+              target.hide();
+            }
+          });
+        });
+
+        const config = { childList: true, subtree: true, characterData: true };
+        observer.observe(this, config);
+      });
+    });
+
     $('#version').html(Seeker.getVersion());
 
-    let cnt = 0;
-    for (let i in dt) if (dt[i].substring(dt[i].length - 1) != '╳') cnt++;
-    $('#datasize').text(cnt);
+    const validCharacterCount = dt.filter(entry => !entry.endsWith('╳')).length;
+    $('#datasize').text(validCharacterCount);
 
     // Status
     $('#variant').prop('selected', UI.getItem('variant') == '1');
