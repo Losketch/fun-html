@@ -10,29 +10,42 @@ import { parts } from '../../data/parts.js';
 
 import $ from 'jquery';
 
-function _(id) {
-  return document.getElementById(id);
-}
-const $_ = _('input');
+const inputEle = document.getElementById('input');
+const subdivideSwitch = document.getElementById('subdivide');
+const variantSwitch = document.getElementById('variant');
+const keypadSwitch = document.getElementById('showkeypad');
+const popupSym = document.querySelector('.set-v2-popup-symbol');
+const popupEle = document.querySelector('.set-v2-popup');
+const outputBSCEle = document.getElementById('outputBSC');
+const outputAEle = document.getElementById('outputA');
+const outputBEle = document.getElementById('outputB');
+const outputCEle = document.getElementById('outputC');
+const outputDEle = document.getElementById('outputD');
+const outputEEle = document.getElementById('outputE');
+const outputFEle = document.getElementById('outputF');
+const outputGEle = document.getElementById('outputG');
+const outputHEle = document.getElementById('outputH');
+const outputIEle = document.getElementById('outputI');
+const outputCMPEle = document.getElementById('outputCMP');
+const outputSUPEle = document.getElementById('outputSUP');
+const outputOTHEle = document.getElementById('outputOTH');
 
 let animation;
-function pop(ch) {
+function popCopyMsg(char) {
   animation?.cancel();
-  const btnValue = document.querySelector('.set-v2-popup-symbol');
-  btnValue.innerHTML = ch;
-  const popup = document.querySelector('.set-v2-popup');
-  animation = popup.animate(
+  popupSym.innerHTML = char;
+  animation = popupEle.animate(
     [
       { opacity: '0' },
-      { opacity: '1', offset: 0.2},
-      { opacity: '1', offset: 0.8},
+      { opacity: '0.8', offset: 0.1 },
+      { opacity: '0.8', offset: 0.9 },
       { opacity: '0' }
     ],
     { duration: 1200, easing: 'ease' }
   );
-  setTimeout(() => popup.style.display = 'block', 16);
+  setTimeout(() => (popupEle.style.display = 'block'), 16);
   animation.addEventListener('finish', () => {
-    popup.style.display = 'none';
+    popupEle.style.display = 'none';
   });
 }
 
@@ -107,6 +120,12 @@ const Seeker = {
     10: 1 << 9
   },
   parts,
+  get blockFlagAll() {
+    return Object.values(Seeker.blockFlagMap).reduce(
+      (acc, curr) => acc | curr,
+      0
+    );
+  },
   getVersion() {
     return '1.1.0.0   (2021年11月)';
   },
@@ -157,7 +176,7 @@ const Seeker = {
     }
     return Seeker.dataIndex[c];
   },
-  eliminate(query, str, groups, ignore, divide, variant) {
+  eliminate(query, str, ignore, divide, variant) {
     // query: 搜尋字串的陣列(已排序)
     // str: 正要媒合的樹枝
     // divide: 硬拆
@@ -235,7 +254,6 @@ const Seeker = {
           Seeker.eliminate(
             query,
             dt[i].slice(w.length),
-            groups,
             ignore,
             divide,
             variant
@@ -293,7 +311,7 @@ const Seeker = {
     return res;
   },
   getTree(str, divide) {
-    let html = '';
+    const Eles = [];
     if (str.length) {
       const w = str.charPointAt(0);
       const c = w.codePointAt(0);
@@ -305,32 +323,29 @@ const Seeker = {
         .replace(/\)/g, '</span>)</span>');
 
       if (p == '') {
-        html += UI.addCell({ char: w, unicode: c, text: '(无法再分解)' });
+        Eles.push(UI.addCell({ char: w, unicode: c, text: '(无法再分解)' }));
       } else {
         const strs = p.split('‖');
         for (let i in strs) {
-          html += UI.addCell({
-            char: w,
-            unicode: c,
-            text: strs[i].length ? strs[i] : '(无法再分解)'
-          });
+          Eles.push(
+            UI.addCell({
+              char: w,
+              unicode: c,
+              text: strs[i].length ? strs[i] : '(无法再分解)'
+            })
+          );
         }
       }
     }
-    return html;
+    return Eles;
   }
 };
-
-Seeker.blockFlagAll = Object.values(Seeker.blockFlagMap).reduce(
-  (acc, curr) => acc | curr,
-  0
-);
 
 const UI = {
   shortcuts: [],
   keypadMode: null,
+  demonstratedChars: new Set(),
   strokeKeyboard: {
-    vertical: true,
     className: 'strokeKB',
     groups: {
       '01畫': '一丨丶丿乙亅乚㇄㇁㇂𠄌𠃊𠃋𡿨乛㇇𠃍㇏乀⺄𠃌㇆㇉𠃑㇊㇒㇣㇀',
@@ -391,114 +406,130 @@ const UI = {
     return mobileKeywords.some(keyword => userAgent.includes(keyword));
   },
   initKeyboard(kbType) {
-    let html = '<table class="' + kbType.className + '">';
-    if (!kbType.vertical) {
-      html += '<tr>';
-      for (let g in kbType.groups) html += '<th>' + g + '</th>';
-      html += '</tr><tr>';
-    }
+    const table = document.createElement('table');
+    table.className = kbType.className;
+
+    const tbody = document.createElement('tbody');
+    table.appendChild(tbody);
+
     for (let g in kbType.groups) {
-      if (kbType.vertical) html += '<tr><th>' + g + '</th>';
-      html += '<td>';
-      if (typeof kbType.groups[g] == 'string') {
-        for (let i = 0; i < kbType.groups[g].length; i++) {
-          const w = kbType.groups[g].charPointAt(i);
-          if (w.length > 1) i++;
-          if (w == ',') {
-            html += '<br>';
+      const row = document.createElement('tr');
+
+      const th = document.createElement('th');
+      th.textContent = g;
+      row.appendChild(th);
+
+      const cell = document.createElement('td');
+      row.appendChild(cell);
+
+      if (typeof kbType.groups[g] === 'string') {
+        const text = kbType.groups[g].toCharArray();
+        for (let w of text) {
+          if (w === ',') {
+            const br = document.createElement('br');
+            cell.appendChild(br);
             continue;
           }
+
           const z = Seeker.parts[w];
-          if (z)
-            html +=
-              '<button class="han K' +
-              z +
-              '" data-char="' +
-              w +
-              '">' +
-              w +
-              '</button>';
+          if (z) {
+            const button = document.createElement('button');
+            button.className = `han K${z}`;
+            button.dataset.char = w;
+            button.textContent = w;
+            cell.appendChild(button);
+          }
         }
       } else {
         for (let gg in kbType.groups[g]) {
-          html += '<span class="sub"><span class="tag">' + gg + '</span>';
-          for (let i = 0; i < kbType.groups[g][gg].length; i++) {
-            const w = kbType.groups[g][gg].charPointAt(i);
-            if (w.length > 1) i++;
-            if (w == ',') {
-              html += '<br>';
+          const subSpan = document.createElement('span');
+          subSpan.className = 'sub';
+
+          const tagSpan = document.createElement('span');
+          tagSpan.className = 'tag';
+          tagSpan.textContent = gg;
+          subSpan.appendChild(tagSpan);
+
+          const subText = kbType.groups[g][gg].toCharArray();
+          for (let w of subText) {
+            if (w === ',') {
+              const br = document.createElement('br');
+              subSpan.appendChild(br);
               continue;
             }
+
             const z = Seeker.parts[w];
-            if (z)
-              html +=
-                '<button class="han K' +
-                z +
-                '" data-char="' +
-                w +
-                '">' +
-                w +
-                '</button>';
+            if (z) {
+              const button = document.createElement('button');
+              button.className = `han K${z}`;
+              button.dataset.char = w;
+              button.textContent = w;
+              subSpan.appendChild(button);
+            }
           }
-          html += '</span> ';
+
+          cell.appendChild(subSpan);
         }
       }
-      html += '</td>';
-      if (kbType.vertical) html += '</tr>';
+
+      tbody.appendChild(row);
     }
-    html += '</table>';
-    $('#keypad').html(html);
+
+    const keypad = document.getElementById('keypad');
+    keypad.appendChild(table);
   },
-  setClipboard(s) {
-    s = decodeURI(s);
-    if (window.clipboardData) {
-      window.clipboardData.clearData();
-      window.clipboardData.setData('Text', s);
+  copy(text) {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text);
     } else {
-      const t = document.createElement('textarea');
-      t.textContent = s;
-      document.body.appendChild(t);
-      t.select();
+      const input = document.createElement('input');
+      input.value = text;
+      document.body.appendChild(input);
+      input.select();
       document.execCommand('copy');
-      document.body.removeChild(t);
-      pop(s);
+      document.body.removeChild(input);
     }
+    popCopyMsg(text);
   },
   getPos() {
-    $_.focus();
-    return $_.selectionStart;
+    inputEle.focus();
+    return inputEle.selectionStart;
   },
   setPos(n) {
-    $_.setSelectionRange(n, n);
+    inputEle.setSelectionRange(n, n);
   },
   getSel() {
-    return $_.value.substring($_.selectionStart, $_.selectionEnd);
+    return inputEle.value.substring(
+      inputEle.selectionStart,
+      inputEle.selectionEnd
+    );
   },
   delSel() {
-    const m = $_.selectionStart;
-    const n = $_.selectionEnd;
+    const m = inputEle.selectionStart;
+    const n = inputEle.selectionEnd;
     if (m != n) {
-      $_.value = $_.value.substring(0, m) + $_.value.substring(n);
-      $_.setSelectionRange(m, m);
+      inputEle.value =
+        inputEle.value.substring(0, m) + inputEle.value.substring(n);
+      inputEle.setSelectionRange(m, m);
     }
   },
   key(w) {
     UI.delSel();
     const n = UI.getPos();
-    const s = $_.value;
-    $_.value = s.slice(0, n) + w + s.slice(n);
+    const s = inputEle.value;
+    inputEle.value = s.slice(0, n) + w + s.slice(n);
     UI.setPos(w.length > 1 ? n + 2 : n + 1);
     UI.go();
   },
   clearFind() {
-    $_.value = '';
-    $_.focus();
+    inputEle.value = '';
+    inputEle.focus();
     UI.go(true);
   },
   decompose() {
     const n = UI.getPos();
     if (n > 0) {
-      const s = $_.value;
+      const s = inputEle.value;
       let m = n - 1;
       let w = s.charPointAt(m);
       if (w == '\\') {
@@ -507,33 +538,51 @@ const UI = {
       }
       if (w.length > 1) m--;
 
-      const d = _('subdivide').selected;
+      const d = subdivideSwitch.selected;
       const t = Seeker.exhaust(w, d, false);
       if (t.length) {
-        $_.value = s.slice(0, m) + t + s.slice(n).replace(/\\/g, '');
+        inputEle.value = s.slice(0, m) + t + s.slice(n).replace(/\\/g, '');
         UI.setPos(m + t.length);
         UI.go();
       }
     }
   },
   go(force) {
+    outputBSCEle.innerHTML = '';
+    outputAEle.innerHTML = '';
+    outputBEle.innerHTML = '';
+    outputCEle.innerHTML = '';
+    outputDEle.innerHTML = '';
+    outputEEle.innerHTML = '';
+    outputFEle.innerHTML = '';
+    outputGEle.innerHTML = '';
+    outputHEle.innerHTML = '';
+    outputIEle.innerHTML = '';
+    outputCMPEle.innerHTML = '';
+    outputSUPEle.innerHTML = '';
+    outputOTHEle.innerHTML = '';
+    UI.demonstratedChars.clear();
+
     if (UI.ime) return;
-    $_.focus();
+    inputEle.focus();
     //if (!force && !_('onthefly').checked) return;
     UI.hidePop(true);
     Seeker.groups = null;
-    $('#groups').html('').hide();
     Seeker.result = null;
-    let s = (UI.getSel() || $_.value).replace(/\s/g, '');
+    let s = (UI.getSel() || inputEle.value).replace(/\s/g, '');
     Seeker.stopMatch();
     if (!s) {
       $('#counter').text('');
       $('[id^="output"]').text('');
     } else {
-      const divide = _('subdivide').selected;
-      const variant = _('variant').selected;
+      const divide = subdivideSwitch.selected;
+      const variant = variantSwitch.selected;
       if (s.charAt(0) == ':') {
-        $('[id^="output"]').html(Seeker.getTree(s.slice(1), divide));
+        for (let Ele of Seeker.getTree(s.slice(1), divide)) {
+          for (let outputEle of document.querySelectorAll('[id^="output"]')) {
+            outputEle.appendChild(Ele);
+          }
+        }
       } else {
         let ignore = null;
         const tmp = s.split('-');
@@ -557,16 +606,15 @@ const UI = {
       UI.keypadMode = showkeypad;
       localStorage.setItem('keypad', UI.keypadMode ? '1' : '0');
       if (UI.keypadMode) {
-        UI.initKeyboard(UI.strokeKeyboard);
         $('#keypad').show();
       } else {
         $('#keypad').hide();
       }
-      $_.focus();
+      inputEle.focus();
     }, 0);
   },
   replaceFind(s) {
-    if (!UI.getSel()) $_.value = '';
+    if (!UI.getSel()) inputEle.value = '';
     UI.key(s);
   },
   addShortcut(w, d) {
@@ -587,10 +635,13 @@ const UI = {
       const s = UI.getItem('shortcuts');
       if (s) UI.shortcuts = s.split(/ /);
     }
-    let html = '快捷栏：';
+    const scKey = document.getElementById('scKey');
+    scKey.innerHTML = '快捷栏：';
+
     for (let i in UI.shortcuts)
-      html += UI.createTag(UI.shortcuts[i], 'button', 'han', null, true);
-    $('#scKey').html(html);
+      scKey.appendChild(
+        UI.createTag(UI.shortcuts[i], 'button', 'han', null, true)
+      );
   },
   showPop(e) {
     const c = e.target;
@@ -638,33 +689,33 @@ const UI = {
     }, 100);
   },
   setSkipChar(chr) {
-    if ($_.value.indexOf('-') < 0) $_.value += '-';
-    $_.value += chr;
+    if (inputEle.value.indexOf('-') < 0) inputEle.value += '-';
+    inputEle.value += chr;
     UI.go();
   },
   eventMoniter() {
-    $_.addEventListener('keydown', e => {
+    inputEle.addEventListener('keydown', e => {
       if (e.isComposing) return;
-      if (e.code == 'Enter' || e.keyCode == 13) UI.go(true);
-      if (e.code == 'Escape' || e.keyCode == 27) UI.clearFind();
+      if (e.code == 'Enter') UI.go(true);
+      if (e.code == 'Escape') UI.clearFind();
     });
 
-    $_.addEventListener('keyup', e => {
+    inputEle.addEventListener('keyup', e => {
       if (e.isComposing) return;
-      if (e.code == 'Backslash' || e.keyCode == 0x5c) UI.decompose();
+      if (e.code == 'Backslash') UI.decompose();
     });
 
-    $_.addEventListener('compositionstart', () => {
+    inputEle.addEventListener('compositionstart', () => {
       UI.ime = true;
     });
-    $_.addEventListener('compositionend', () => {
+    inputEle.addEventListener('compositionend', () => {
       setTimeout(() => {
         UI.ime = false;
         UI.go();
       }, 1);
     });
 
-    $($_).on('input', () => {
+    $(inputEle).on('input', () => {
       UI.go(false);
     });
     $('#buttClear').click(UI.clearFind);
@@ -691,9 +742,6 @@ const UI = {
     $('#scKey')
       .on('mouseover', 'button', UI.showPop)
       .on('mouseout', 'button', UI.hidePop);
-    $('#groups')
-      .on('mouseover', 'a', UI.showPop)
-      .on('mouseout', 'a', UI.hidePop);
     $('[id^="output"]')
       .on('mouseover', 'a', UI.showPop)
       .on('mouseout', 'a', UI.hidePop);
@@ -703,10 +751,6 @@ const UI = {
     $('#scKey, #keypad').on('click', 'button', e => {
       UI.key(e.target.innerText);
       e.preventDefault();
-    });
-    $('#groups').on('click', 'a.grp', function () {
-      $(this).toggleClass('on');
-      UI.showOutput();
     });
     $('[id^="output"]').on('click', 'a', e => {
       e.preventDefault();
@@ -727,7 +771,7 @@ const UI = {
       UI.key($(UI.popTrigger).data('char'));
     });
     $('#menu_copy').click(() => {
-      UI.setClipboard($(UI.popTrigger).data('char'));
+      UI.copy($(UI.popTrigger).data('char'));
     });
     $('#menu_query').click(() => {
       UI.replaceFind($(UI.popTrigger).data('char'));
@@ -742,19 +786,25 @@ const UI = {
       UI.addShortcut($(UI.popTrigger).data('char'), true);
     });
   },
-  createTag(c, tag, cls, extra, hideChar, running) {
+  createTag(c, tagName, cls, extraOpts, hideChar, running) {
     const code = c.codePointAt(0);
-    const tagBody =
-      Config.useImage[Seeker.getCJKBlock(code)] && !running
-        ? ' img" data-char="' +
-          c +
-          '" style="background-image: url(' +
-          Config.glyphwiki +
-          code.toString(16) +
-          '.svg)">' +
-          (hideChar ? '&nbsp;' : c)
-        : '" data-char="' + c + '">' + c;
-    return `<${tag} ${extra || ''} class="${cls || ''}"${tagBody}</${tag}>`;
+    const tag = document.createElement(tagName);
+    tag.className = cls || '';
+    if (extraOpts) {
+      for (let extraOpt in extraOpts) {
+        tag.setAttribute(extraOpt, extraOpts[extraOpt]);
+      }
+    }
+
+    tag.dataset.char = c;
+    if (Config.useImage[Seeker.getCJKBlock(code)] && !running) {
+      tag.style.backgroundImage = `url(${Config.glyphwiki}${code.toString(16)}.svg)`;
+      tag.innerHTML = hideChar ? '&nbsp;' : c;
+      tag.setAttribute('img', 'img');
+    } else {
+      tag.innerHTML = c;
+    }
+    return tag;
   },
   addCell(entry, running) {
     const block = Seeker.getCJKBlock(entry.unicode);
@@ -768,13 +818,19 @@ const UI = {
       .replace('$UCH$', entry.unicode.toString(16).toUpperCase());
 
     if (entry.text) {
-      return '<span class="' + cls + '">' + entry.text + '</span>';
+      const res = document.createElement('span');
+      res.className = cls;
+      res.innerHTML = entry.text;
+      return res;
     } else {
       return UI.createTag(
         entry.char,
         'a',
         cls,
-        'target="_blank" href="' + url + '"',
+        {
+          target: '_blank',
+          href: url
+        },
         false,
         running
       );
@@ -789,70 +845,28 @@ const UI = {
     UI.showOutput();
   },
   showOutput() {
-    let sBSC = '',
-      sA = '',
-      sB = '',
-      sC = '',
-      sD = '',
-      sE = '',
-      sF = '',
-      sG = '',
-      sH = '',
-      sI = '',
-      sCMP = '',
-      sSUP = '',
-      sOTH = '',
-      blk;
-    for (let j in Seeker.result) Seeker.result[j].gflag = false;
-
-    const glist = $('#groups a.on');
-    $(glist.get().reverse()).each((i, gx) => {
-      const g = $(gx).data('char');
-      for (let j in Seeker.result) {
-        if (Seeker.result[j].gflag) continue;
-        for (let gi in Seeker.result[j].groups) {
-          if (Seeker.result[j].groups[gi] == g) {
-            Seeker.result[j].gflag = true;
-            break;
-          }
-        }
-      }
-    });
-
     for (let j in Seeker.result) {
-      if (Seeker.result[j].gflag) continue;
-      blk = Seeker.getCJKBlock(Seeker.result[j].unicode);
+      if (UI.demonstratedChars.has(Seeker.result[j].char)) continue;
+      UI.demonstratedChars.add(Seeker.result[j].char);
+      const blk = Seeker.getCJKBlock(Seeker.result[j].unicode);
 
-      const willAddStr = UI.addCell(Seeker.result[j], Seeker.groups == null);
-      if (blk === 1) sBSC += willAddStr;
-      if (blk === 2) sA += willAddStr;
-      if (blk === 3) sB += willAddStr;
-      if (blk === 4) sC += willAddStr;
-      if (blk === 5) sD += willAddStr;
-      if (blk === 6) sE += willAddStr;
-      if (blk === 7) sF += willAddStr;
-      if (blk === 8) sG += willAddStr;
-      if (blk === 9) sH += willAddStr;
-      if (blk === 10) sI += willAddStr;
-      if (blk === -1) sCMP += willAddStr;
-      if (blk === -2) sSUP += willAddStr;
-      if (blk === 0) sOTH += willAddStr;
+      const willAddEle = UI.addCell(Seeker.result[j], Seeker.groups == null);
+      if (blk === 1) outputBSCEle.appendChild(willAddEle);
+      if (blk === 2) outputAEle.appendChild(willAddEle);
+      if (blk === 3) outputBEle.appendChild(willAddEle);
+      if (blk === 4) outputCEle.appendChild(willAddEle);
+      if (blk === 5) outputDEle.appendChild(willAddEle);
+      if (blk === 6) outputEEle.appendChild(willAddEle);
+      if (blk === 7) outputFEle.appendChild(willAddEle);
+      if (blk === 8) outputGEle.appendChild(willAddEle);
+      if (blk === 9) outputHEle.appendChild(willAddEle);
+      if (blk === 10) outputIEle.appendChild(willAddEle);
+      if (blk === -1) outputCMPEle.appendChild(willAddEle);
+      if (blk === -2) outputSUPEle.appendChild(willAddEle);
+      if (blk === 0) outputOTHEle.appendChild(willAddEle);
     }
-    $('#outputBSC').html(sBSC);
-    $('#outputA').html(sA);
-    $('#outputB').html(sB);
-    $('#outputC').html(sC);
-    $('#outputD').html(sD);
-    $('#outputE').html(sE);
-    $('#outputF').html(sF);
-    $('#outputG').html(sG);
-    $('#outputH').html(sH);
-    $('#outputI').html(sI);
-    $('#outputCMP').html(sCMP);
-    $('#outputSUP').html(sSUP);
-    $('#outputOTH').html(sOTH);
     $('[id^="output"] a').on('click', function () {
-      UI.setClipboard($(this).data('char'));
+      UI.copy($(this).data('char'));
     });
   },
   finished(founds) {
@@ -881,25 +895,30 @@ const UI = {
     });
     UI.showOutput();
 
-    let str = '',
-      g;
+    const groupsEle = document.getElementById('groups');
+    groupsEle.innerHTML = '';
     for (let i in Seeker.groups) {
-      g = Seeker.groups[i];
-      str += UI.createTag(
-        g.char,
-        'a',
-        'grp',
-        'href="javascript:void(0)" data-count="' + g.count + '"',
-        true
+      const g = Seeker.groups[i];
+      groupsEle.appendChild(
+        UI.createTag(
+          g.char,
+          'a',
+          'grp',
+          {
+            href: 'javascript:void 0',
+            'data-count': g.count
+          },
+          true
+        )
       );
     }
-    if (str != '') $('#groups').html(str).slideDown();
   },
   getItem(k, defaultValue = '0') {
     const v = localStorage.getItem(k);
     return v !== null ? v : defaultValue;
   },
   init() {
+    UI.initKeyboard(UI.strokeKeyboard);
     $(document).ready(() => {
       $('[id^="output"]').each(function () {
         if ($(this).text().trim() === '') {
@@ -949,14 +968,14 @@ const UI = {
       extKeyBtn.addEventListener('click', () => UI.key(extKeyBtn.className[2]));
     }
 
-    _('variant').addEventListener('click', () =>
-      UI.setMode(_('variant'), 'variant')
+    variantSwitch.addEventListener('click', () =>
+      UI.setMode(variantSwitch, 'variant')
     );
-    _('subdivide').addEventListener('click', () =>
-      UI.setMode(_('subdivide'), 'subdivide')
+    subdivideSwitch.addEventListener('click', () =>
+      UI.setMode(subdivideSwitch, 'subdivide')
     );
-    _('showkeypad').addEventListener('click', () => {
-      UI.setMode(_('showkeypad'), 'showkeypad');
+    keypadSwitch.addEventListener('click', () => {
+      UI.setMode(keypadSwitch, 'showkeypad');
       UI.updatePad();
     });
   }
@@ -990,6 +1009,16 @@ String.prototype.charPointAt = function (i) {
   if (c >= 0xd800 && c <= 0xdbff) return this.charAt(i) + this.charAt(i + 1);
   if (c >= 0xdc00 && c <= 0xdfff) return this.charAt(i - 1) + this.charAt(i);
   return this.charAt(i);
+};
+
+String.prototype.toCharArray = function () {
+  const arr = [];
+  for (let i = 0; i < this.length; ) {
+    const codePoint = this.codePointAt(i);
+    i += codePoint > 0xffff ? 2 : 1;
+    arr.push(codePoint);
+  }
+  return arr.map(i => String.fromCodePoint(i));
 };
 
 window.addEventListener('load', UI.init);
