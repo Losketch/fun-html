@@ -76,11 +76,7 @@ a {
 a:hover,
 button:hover,
 span.btn:hover {
-  color: #c20c24;
-}
-
-a.BSC:hover {
-  color: #c20c24;
+  color: #c20c24 !important;
 }
 
 @font-face {
@@ -114,6 +110,11 @@ a.BSC:hover {
   font-family: PUAExt, plgo1, plgo2, Source, ffallback;
   --md-outlined-text-field-input-text-font: PUAExt, plgo1, plgo2, Source,
     ffallback;
+}
+
+#input {
+  margin-right: 8px;
+  min-height: 50px;
 }
 
 h1,
@@ -390,7 +391,6 @@ tbody > tr:last-child > td:last-child {
   background-color: #eaa;
 }
 #result [id^='output'] {
-  min-height: 100px;
   font-size: 2.5em;
   line-height: 1;
   padding: 10px 0;
@@ -506,7 +506,7 @@ button {
 
 .BSC {
   background: #eee;
-  color: #000;
+  color: #000 !important;
 }
 .ExA {
   background: #00d2d2;
@@ -544,12 +544,16 @@ button {
   background: #ff327d;
   color: #fff !important;
 }
+.ExJ {
+  background: #d4e024;
+  color: #fff !important;
+}
 .CMP {
-  background: #ff3c00;
+  background: #916808;
   color: #fff !important;
 }
 .SUP {
-  background: #ff0000;
+  background: #131313;
   color: #fff !important;
 }
 .OTH {
@@ -654,6 +658,7 @@ button {
     width: 220px;
     font-size: 1.8em;
     height: 35px;
+    min-height: unset;
   }
 
   #sk_header md-filled-tonal-button {
@@ -722,10 +727,12 @@ button {
 
   #sk_header #input {
     min-width: 90vw;
+    margin-right: unset;
   }
 
   #sk_header md-filled-tonal-button {
     margin-top: 5px;
     width: 20vw;
+    border-radius: revert-layer;
   }
 }
