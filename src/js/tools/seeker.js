@@ -16,6 +16,8 @@ const variantSwitch = document.getElementById('variant');
 const keypadSwitch = document.getElementById('showkeypad');
 const popupSym = document.querySelector('.set-v2-popup-symbol');
 const popupEle = document.querySelector('.set-v2-popup');
+
+const outputEles = document.querySelectorAll('[id^="output"]')
 const outputBSCEle = document.getElementById('outputBSC');
 const outputAEle = document.getElementById('outputA');
 const outputBEle = document.getElementById('outputB');
@@ -26,6 +28,7 @@ const outputFEle = document.getElementById('outputF');
 const outputGEle = document.getElementById('outputG');
 const outputHEle = document.getElementById('outputH');
 const outputIEle = document.getElementById('outputI');
+const outputJEle = document.getElementById('outputJ');
 const outputCMPEle = document.getElementById('outputCMP');
 const outputSUPEle = document.getElementById('outputSUP');
 const outputOTHEle = document.getElementById('outputOTH');
@@ -74,7 +77,8 @@ const Config = {
     7: false,
     8: false,
     9: false,
-    10: false
+    10: false,
+    11: false
   },
   resultStep1: 299,
   resultStep2: 1999
@@ -102,7 +106,8 @@ const Seeker = {
     F: 1 << 6,
     G: 1 << 7,
     H: 1 << 8,
-    I: 1 << 9
+    I: 1 << 9,
+    J: 1 << 10
   },
   blockMap: {
     '-2': 1 << 30,
@@ -117,7 +122,8 @@ const Seeker = {
     7: 1 << 6,
     8: 1 << 7,
     9: 1 << 8,
-    10: 1 << 9
+    10: 1 << 9,
+    11: 1 << 10
   },
   parts,
   get blockFlagAll() {
@@ -160,6 +166,7 @@ const Seeker = {
     if (c >= 0x30000 && c <= 0x3134a) return 8;
     if (c >= 0x31350 && c <= 0x323af) return 9;
     if (c >= 0x2ebf0 && c <= 0x2ee5d) return 10;
+    if (c >= 0x323B0 && c <= 0x3347B) return 11;
     if (c >= 0xf900 && c <= 0xfad9) return -1;
     if (c >= 0x2f800 && c <= 0x2fa1d) return -1;
     if (c >= 0xf0270 && c <= 0xfae7a) return -2;
@@ -388,7 +395,8 @@ const UI = {
     7: 'ExF',
     8: 'ExG',
     9: 'ExH',
-    10: 'ExI'
+    10: 'ExI',
+    11: 'ExJ'
   },
   isMobile() {
     if (navigator.userAgentData) {
@@ -548,19 +556,7 @@ const UI = {
     }
   },
   go(force) {
-    outputBSCEle.innerHTML = '';
-    outputAEle.innerHTML = '';
-    outputBEle.innerHTML = '';
-    outputCEle.innerHTML = '';
-    outputDEle.innerHTML = '';
-    outputEEle.innerHTML = '';
-    outputFEle.innerHTML = '';
-    outputGEle.innerHTML = '';
-    outputHEle.innerHTML = '';
-    outputIEle.innerHTML = '';
-    outputCMPEle.innerHTML = '';
-    outputSUPEle.innerHTML = '';
-    outputOTHEle.innerHTML = '';
+    outputEles.forEach(e => e.innerHTML = '');
     UI.demonstratedChars.clear();
 
     if (UI.ime) return;
@@ -579,7 +575,7 @@ const UI = {
       const variant = variantSwitch.selected;
       if (s.charAt(0) == ':') {
         for (let Ele of Seeker.getTree(s.slice(1), divide)) {
-          for (let outputEle of document.querySelectorAll('[id^="output"]')) {
+          for (let outputEle of outputEles) {
             outputEle.appendChild(Ele);
           }
         }
@@ -636,7 +632,7 @@ const UI = {
       if (s) UI.shortcuts = s.split(/ /);
     }
     const scKey = document.getElementById('scKey');
-    scKey.innerHTML = '快捷栏：';
+    scKey.innerHTML = '收藏栏：';
 
     for (let i in UI.shortcuts)
       scKey.appendChild(
@@ -861,6 +857,7 @@ const UI = {
       if (blk === 8) outputGEle.appendChild(willAddEle);
       if (blk === 9) outputHEle.appendChild(willAddEle);
       if (blk === 10) outputIEle.appendChild(willAddEle);
+      if (blk === 11) outputJEle.appendChild(willAddEle);
       if (blk === -1) outputCMPEle.appendChild(willAddEle);
       if (blk === -2) outputSUPEle.appendChild(willAddEle);
       if (blk === 0) outputOTHEle.appendChild(willAddEle);
