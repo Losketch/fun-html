@@ -23,7 +23,6 @@
   },
   "dependencies": {
     "@material/web": "^2.2.0",
-    "highlight.js": "^11.11.1",
-    "jquery": "^3.7.1"
+    "highlight.js": "^11.11.1"
   }
 }
