@@ -142,7 +142,7 @@ function getNextState(state, roundCellsCount) {
 }
 
 function nextGeneration() {
-  if (generations.length == 0) saveGeneration();
+  if (generations.length === 0) saveGeneration();
   generationsCount++;
   updateCount();
   maxGenerationsCount = generationsCount;
@@ -207,7 +207,7 @@ function uint8ArrayToHexString(uint8Array) {
   return Array.from(uint8Array)
     .map(i => {
       let hex = i.toString(16);
-      hex = (hex.length == 2 ? '' : '0') + hex;
+      hex = (hex.length === 2 ? '' : '0') + hex;
       return hex;
     })
     .join('');
