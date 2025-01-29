@@ -1,5 +1,4 @@
 import '../../css/mainStyles.css';
-import '../../css/mainStyles.css';
 import '../../css/tools/seeker.css';
 
 import '../changeHeader.js';
