@@ -111,7 +111,7 @@
         ]);
 
         options.forEach(option => {
-          if (option.dataset.select == targetSelect)
+          if (option.dataset.select === targetSelect)
             option.classList.remove('selected');
         });
 

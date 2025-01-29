@@ -1,13 +1,13 @@
 (function () {
-  var id = 1,
-    store = {},
-    isIframe = window === window.parent || window.opener ? false : true;
+  let id = 1;
+  const store = {};
+  const isIframe = window === window.parent || window.opener ? false : true;
 
-  var sendMessage = function (windowToSend, data) {
+  function sendMessage(windowToSend, data) {
     windowToSend.postMessage(JSON.stringify(data), '*');
-  };
+  }
 
-  var processInteractiveDialog = function (data, callback) {
+  function processInteractiveDialog(data, callback) {
     sendMessage(parent, data);
 
     if (callback) store[data.id] = callback;
@@ -15,16 +15,16 @@
       return new Promise(resolve => {
         store[data.id] = resolve;
       });
-  };
+  }
 
   if (isIframe) {
     window.alert = function (message) {
-      var data = { event: 'dialog', type: 'alert', message: message };
+      const data = { event: 'dialog', type: 'alert', message: message };
       sendMessage(parent, data);
     };
 
     window.confirm = function (message, callback) {
-      var data = {
+      const data = {
         event: 'dialog',
         type: 'confirm',
         id: id++,
@@ -34,7 +34,7 @@
     };
 
     window.prompt = function (message, value, callback) {
-      var data = {
+      const data = {
         event: 'dialog',
         type: 'prompt',
         id: id++,
@@ -48,19 +48,20 @@
   window.addEventListener(
     'message',
     event => {
+      let data;
       try {
-        var data = JSON.parse(event.data);
+        data = JSON.parse(event.data);
       } catch {
         return;
       }
 
-      if (!data || typeof data != 'object') return;
+      if (!data || typeof data !== 'object') return;
 
-      if (data.event != 'dialog' || !data.type) return;
+      if (data.event !== 'dialog' || !data.type) return;
 
       if (!isIframe) {
-        if (data.type == 'alert') alert(data.message);
-        else if (data.type == 'confirm') {
+        if (data.type === 'alert') alert(data.message);
+        else if (data.type === 'confirm') {
           data = {
             event: 'dialog',
             type: 'confirm',
@@ -68,7 +69,7 @@
             result: confirm(data.message)
           };
           sendMessage(event.source, data);
-        } else if (data.type == 'prompt') {
+        } else if (data.type === 'prompt') {
           data = {
             event: 'dialog',
             type: 'prompt',
@@ -78,10 +79,10 @@
           sendMessage(event.source, data);
         }
       } else {
-        if (data.type == 'confirm') {
+        if (data.type === 'confirm') {
           store[data.id](data.result);
           delete store[data.id];
-        } else if (data.type == 'prompt') {
+        } else if (data.type === 'prompt') {
           store[data.id](data.result);
           delete store[data.id];
         }

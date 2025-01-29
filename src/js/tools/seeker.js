@@ -8,14 +8,21 @@ import '../m3ui.js';
 import { dt, vt } from '../../data/handata_uni.js';
 import { parts } from '../../data/parts.js';
 
-import $ from 'jquery';
-
 const inputEle = document.getElementById('input');
 const subdivideSwitch = document.getElementById('subdivide');
 const variantSwitch = document.getElementById('variant');
 const keypadSwitch = document.getElementById('showkeypad');
 const popupSym = document.querySelector('.set-v2-popup-symbol');
 const popupEle = document.querySelector('.set-v2-popup');
+const counter = document.getElementById('counter');
+const versionEle = document.getElementById('version');
+const datasizeEle = document.getElementById('datasize');
+const keypad = document.getElementById('keypad');
+const scKey = document.getElementById('scKey');
+
+const buttClear = document.getElementById('buttClear');
+const buttDecompose = document.getElementById('buttDecompose');
+const buttGo = document.getElementById('buttGo');
 
 const outputElements = {
   BSC: document.getElementById('outputBSC'),
@@ -147,7 +154,7 @@ const Seeker = {
     );
   },
   getVersion() {
-    return '1.1.0.0   (2021年11月)';
+    return '版本：2.0.0.0   (2025年1月)';
   },
   variant(w, v) {
     return v && vt[w] ? vt[w] : w;
@@ -183,7 +190,7 @@ const Seeker = {
     return 0;
   },
   getData(c) {
-    if (Seeker.dataIndex == null) {
+    if (Seeker.dataIndex === null) {
       Seeker.dataIndex = {};
       for (let d of dt) {
         const code = d.codePointAt(0);
@@ -197,7 +204,7 @@ const Seeker = {
     // str: 正要媒合的樹枝
     // divide: 硬拆
     // variant: 包容異體
-    if (str == '@') return null; // 如果此字已無法再分解
+    if (str === '@') return null; // 如果此字已無法再分解
 
     const backup = query.concat(); // b: 備份搜尋陣列a
     let res = false;
@@ -206,8 +213,8 @@ const Seeker = {
         continue;
       }
 
-      if (w == '!' && !divide) break;
-      if (w == '@' || w == '!') {
+      if (w === '!' && !divide) break;
+      if (w === '@' || w === '!') {
         if (!query.length) break;
         query.length = 0;
         for (let j of backup) query.push(j);
@@ -233,7 +240,7 @@ const Seeker = {
     const blockFlag = Seeker.arraylize(s, variant, x);
     x.sort();
     s = x.join('');
-    if (s == '') return;
+    if (s === '') return;
 
     const found = [];
     function work(j) {
@@ -262,7 +269,7 @@ const Seeker = {
         }
 
         const groups = [];
-        if (Seeker.variant(w, variant) != s) {
+        if (Seeker.variant(w, variant) !== s) {
           Seeker.eliminate(
             query,
             dt[i].slice(w.length),
@@ -280,12 +287,7 @@ const Seeker = {
           groups: groups,
           order: found.length
         };
-        if (force || block == 1) found.push(hitData);
-        if (!force && block != 1) {
-          clearTimeout(Seeker.worker);
-          UI.finished(found);
-          break; // 新增超過m+1時break掉，雖然可能因此喪失精確命中結果，但可以明顯加速運算
-        }
+        if (force || block === 1) found.push(hitData);
       }
       UI.setResult(found, i, force);
       Seeker.totalmsec += new Date() - st;
@@ -305,9 +307,9 @@ const Seeker = {
       const def = Seeker.getData(c); //.substring(w.length);
       let k = 0;
       for (let w of def.toCharArray()) {
-        if (w == '!' && !divide) break;
-        if (w == '@' || w == '!') {
-          if (k) res += recursive == -1 ? '┇' : '‖';
+        if (w === '!' && !divide) break;
+        if (w === '@' || w === '!') {
+          if (k) res += recursive === -1 ? '┇' : '‖';
           k++;
         } else {
           res += w;
@@ -332,16 +334,16 @@ const Seeker = {
         )
         .replace(/\)/g, '</span>)</span>');
 
-      if (p == '') {
+      if (p === '') {
         Eles.push(UI.addCell({ char: w, unicode: c, text: '(无法再分解)' }));
       } else {
         const strs = p.split('‖');
-        for (let i in strs) {
+        for (let s of strs) {
           Eles.push(
             UI.addCell({
               char: w,
               unicode: c,
-              text: strs[i].length ? strs[i] : '(无法再分解)'
+              text: s.length ? s : '(无法再分解)'
             })
           );
         }
@@ -503,8 +505,15 @@ const UI = {
     popCopyMsg(text);
   },
   getPos() {
+    const prevScrollY = window.scrollY;
     inputEle.focus();
-    return inputEle.selectionStart;
+    const selectionStart = inputEle.selectionStart;
+    inputEle.blur();
+    window.scrollTo({
+      top: prevScrollY,
+      behavior: 'instant'
+    });
+    return selectionStart;
   },
   setPos(n) {
     inputEle.setSelectionRange(n, n);
@@ -518,23 +527,22 @@ const UI = {
   delSel() {
     const m = inputEle.selectionStart;
     const n = inputEle.selectionEnd;
-    if (m != n) {
+    if (m !== n) {
       inputEle.value =
         inputEle.value.substring(0, m) + inputEle.value.substring(n);
       inputEle.setSelectionRange(m, m);
     }
   },
-  key(w) {
+  key(w, hidePop = false) {
     UI.delSel();
     const n = UI.getPos();
     const s = inputEle.value;
     inputEle.value = s.slice(0, n) + w + s.slice(n);
     UI.setPos(w.length > 1 ? n + 2 : n + 1);
-    UI.go();
+    UI.go(false, hidePop);
   },
   clearFind() {
     inputEle.value = '';
-    inputEle.focus();
     UI.go(true);
   },
   decompose() {
@@ -543,7 +551,7 @@ const UI = {
       const s = inputEle.value;
       let m = n - 1;
       let w = s.charPointAt(m);
-      if (w == '\\') {
+      if (w === '\\') {
         m--;
         w = s.charPointAt(m);
       }
@@ -558,25 +566,24 @@ const UI = {
       }
     }
   },
-  go(force) {
+  go(force, hidePop = true) {
     Object.values(outputElements).forEach(e => (e.innerHTML = ''));
     UI.demonstratedChars.clear();
 
     if (UI.ime) return;
-    inputEle.focus();
     //if (!force && !_('onthefly').checked) return;
-    UI.hidePop(true);
+    if (hidePop) UI.hidePop();
     Seeker.groups = null;
     Seeker.result = null;
     let s = (UI.getSel() || inputEle.value).replace(/\s/g, '');
     Seeker.stopMatch();
     if (!s) {
-      $('#counter').text('');
+      counter.innerHTML = '';
       Object.values(outputElements).forEach(e => (e.innerHTML = ''));
     } else {
       const divide = subdivideSwitch.selected;
       const variant = variantSwitch.selected;
-      if (s.charAt(0) == ':') {
+      if (s.charAt(0) === ':') {
         for (let Ele of Seeker.getTree(s.slice(1), divide)) {
           for (let outputEle of Object.values(outputElements)) {
             outputEle.appendChild(Ele);
@@ -585,7 +592,7 @@ const UI = {
       } else {
         let ignore = null;
         const tmp = s.split('-');
-        if (tmp.length == 2) {
+        if (tmp.length === 2) {
           s = tmp[0];
           ignore = tmp[1];
         }
@@ -605,11 +612,10 @@ const UI = {
       UI.keypadMode = showkeypad;
       localStorage.setItem('keypad', UI.keypadMode ? '1' : '0');
       if (UI.keypadMode) {
-        $('#keypad').show();
+        keypad.style.display = 'block';
       } else {
-        $('#keypad').hide();
+        keypad.style.display = null;
       }
-      inputEle.focus();
     }, 0);
   },
   replaceFind(s) {
@@ -620,7 +626,7 @@ const UI = {
     if (w) {
       let ex = false;
       for (let i in UI.shortcuts) {
-        if (UI.shortcuts[i] == w) {
+        if (UI.shortcuts[i] === w) {
           ex = true;
           if (d) UI.shortcuts.splice(i, 1);
         }
@@ -629,87 +635,111 @@ const UI = {
         if (UI.shortcuts.length >= 20) UI.shortcuts.splice(0, 1);
         UI.shortcuts.push(w);
       }
-      localStorage.setItem('shortcuts', UI.shortcuts.join(' '));
+      if (UI.shortcuts.length) {
+        localStorage.setItem('shortcuts', UI.shortcuts.join(' '));
+      } else {
+        localStorage.removeItem('shortcuts');
+      }
     } else {
-      const s = UI.getItem('shortcuts');
-      if (s) UI.shortcuts = s.split(/ /);
+      const s = UI.getItem('shortcuts', '');
+      if (s) UI.shortcuts = s.split(' ');
     }
-    const scKey = document.getElementById('scKey');
-    scKey.innerHTML = '收藏栏：';
+    scKey.innerHTML = UI.shortcuts.length ? '收藏栏：' : '';
 
-    for (let i in UI.shortcuts)
-      scKey.appendChild(
-        UI.createTag(UI.shortcuts[i], 'button', 'han', null, true)
-      );
+    for (let shortcut of UI.shortcuts)
+      scKey.appendChild(UI.createTag(shortcut, 'button', 'han', null, true));
+  },
+  showPopTest() {
+    popviewElements.popview.style.display = 'block';
+
+    popviewElements.codetag.textContent = 'U+0000';
+    popviewElements.bigchar.textContent = '0';
+
+    popviewElements.menuKey.style.display = 'block';
+    popviewElements.menuGo.style.display = 'none';
+
+    popviewElements.menuAdd.style.display = 'block';
+    popviewElements.menuDel.style.display = 'none';
   },
   showPop(event) {
     const targetElement = event.target;
 
-    if (
-      targetElement.tagName.toUpperCase() !== 'BUTTON' &&
-      targetElement.tagName.toUpperCase() !== 'A'
-    ) {
+    if (targetElement.tagName !== 'BUTTON' && targetElement.tagName !== 'A')
       return;
-    }
 
-    function change() {
-      const maxX = document.body.scrollWidth - 70;
-      const rect = targetElement.getBoundingClientRect();
-      const x =
-        rect.left < 150
-          ? 10
-          : Math.floor(rect.left < maxX ? rect.left - 140 : maxX - 140);
+    const maxX = document.body.scrollWidth - 10;
+    const maxY = document.body.scrollHeight - 10;
+    const rect = targetElement.getBoundingClientRect();
+    const x =
+      window.scrollX + rect.left + UI.popviewRect.width < maxX
+        ? window.scrollX + rect.left
+        : maxX - UI.popviewRect.width;
+    const y =
+      window.scrollY + rect.bottom + UI.popviewRect.height + 5 < maxY
+        ? window.scrollY + rect.bottom + 5
+        : window.scrollY + rect.top - UI.popviewRect.height - 5;
 
-      UI.popviewAnimation?.cancel();
-      popviewElements.popview.style.left = `${x}px`;
-      popviewElements.popview.style.top = `${window.scrollY + rect.bottom - 2}px`;
+    UI.popviewAnimation?.cancel();
+    if (UI.popTrigger) {
+      UI.popviewMoveAnimation = popviewElements.popview.animate(
+        [
+          { left: `${UI.prevX}px`, top: `${UI.prevY}px` },
+          {
+            left: `${x}px`,
+            top: `${y}px`
+          }
+        ],
+        { duration: 300, easing: 'ease', fill: 'forwards' }
+      );
+    } else {
+      UI.popviewMoveAnimation?.cancel();
       UI.popviewAnimation = popviewElements.popview.animate(
         [{ opacity: '0' }, { opacity: '0.9' }],
         { duration: 300, easing: 'ease' }
       );
-      setTimeout(() => (popviewElements.popview.style.display = 'block'), 0);
+      popviewElements.popview.style.left = `${x}px`;
+      popviewElements.popview.style.top = `${y}px`;
+    }
+    UI.prevX = x;
+    UI.prevY = y;
+    setTimeout(() => (popviewElements.popview.style.display = 'block'), 0);
 
-      const character =
-        targetElement.getAttribute('data-char') || targetElement.innerText;
-      const codePoint = character.codePointAt(0);
-      const cjkBlock = Seeker.getCJKBlock(codePoint);
+    const character = targetElement.dataset.char ?? targetElement.innerText;
+    const codePoint = character.codePointAt(0);
+    const cjkBlock = Seeker.getCJKBlock(codePoint);
 
-      popviewElements.codetag.textContent = `U+${codePoint.toString(16).toUpperCase()}`;
-      popviewElements.bigchar.textContent = character;
-      popviewElements.bigchar.className = 'han';
-      popviewElements.bigchar.style = '';
+    popviewElements.codetag.textContent = `U+${codePoint.toString(16).toUpperCase()}`;
+    popviewElements.bigchar.textContent = character;
+    popviewElements.bigchar.className = 'han';
+    popviewElements.bigchar.style = '';
 
-      if (Config.useImage[cjkBlock]) {
-        popviewElements.bigchar.classList.add('img');
-        popviewElements.bigchar.style.backgroundImage = `url(${Config.glyphwiki}${codePoint.toString(16)}.svg)`;
-      }
-
-      UI.popTrigger = targetElement;
-
-      popviewElements.menuKey.style.display =
-        targetElement.tagName.toUpperCase() === 'BUTTON' ? 'block' : 'none';
-      popviewElements.menuGo.style.display =
-        targetElement.tagName.toUpperCase() === 'A' ? 'block' : 'none';
-
-      if (targetElement.tagName.toUpperCase() === 'A') {
-        popviewElements.menuGo.href = targetElement.href;
-      }
-
-      const isInScKey =
-        targetElement.parentElement &&
-        targetElement.parentElement.id === 'scKey';
-      popviewElements.menuAdd.style.display = isInScKey ? 'none' : 'block';
-      popviewElements.menuDel.style.display = isInScKey ? 'block' : 'none';
+    if (Config.useImage[cjkBlock]) {
+      popviewElements.bigchar.classList.add('img');
+      popviewElements.bigchar.style.backgroundImage = `url(${Config.glyphwiki}${codePoint.toString(16)}.svg)`;
     }
 
-    UI.popTimer = setTimeout(change, UI.popTrigger === null ? 0 : 100);
+    popviewElements.menuKey.style.display =
+      targetElement.tagName === 'BUTTON' ? 'block' : 'none';
+    popviewElements.menuGo.style.display =
+      targetElement.tagName === 'A' ? 'block' : 'none';
+
+    if (targetElement.tagName.toUpperCase() === 'A') {
+      popviewElements.menuGo.href = targetElement.href;
+    }
+
+    const isInScKey =
+      targetElement.parentElement && targetElement.parentElement.id === 'scKey';
+    popviewElements.menuAdd.style.display = isInScKey ? 'none' : 'block';
+    popviewElements.menuDel.style.display = isInScKey ? 'block' : 'none';
+
+    UI.popTrigger = targetElement;
   },
-  hidePop(event) {
+  hidePop(event = true) {
     if (event !== true && event.target !== UI.popTrigger) {
       return;
     }
 
-    UI.popTimer = setTimeout(() => {
+    setTimeout(() => {
       UI.popviewAnimation?.cancel();
       UI.popviewAnimation = popviewElements.popview.animate(
         [{ opacity: '0.9' }, { opacity: '0' }],
@@ -720,7 +750,7 @@ const UI = {
         () => (popviewElements.popview.style.display = 'none')
       );
       UI.popTrigger = null;
-    }, 100);
+    }, 0);
   },
   setSkipChar(chr) {
     if (inputEle.value.indexOf('-') < 0) inputEle.value += '-';
@@ -728,14 +758,6 @@ const UI = {
     UI.go();
   },
   eventMoniter() {
-    // 获取元素
-    const buttClear = document.getElementById('buttClear');
-    const buttDecompose = document.getElementById('buttDecompose');
-    const buttGo = document.getElementById('buttGo');
-    const keypad = document.getElementById('keypad');
-    const scKey = document.getElementById('scKey');
-
-    // 事件监听
     inputEle.addEventListener('keydown', e => {
       if (e.isComposing) return;
       if (e.code === 'Enter') UI.go(true);
@@ -769,7 +791,6 @@ const UI = {
     });
 
     popviewElements.popview.addEventListener('mouseenter', e => {
-      clearTimeout(UI.popTimer);
       e.stopPropagation();
     });
 
@@ -779,13 +800,13 @@ const UI = {
       UI.popTrigger = null;
     });
 
-    // mouse in/out
     keypad.addEventListener('mouseover', e => {
       if (e.target.tagName === 'BUTTON') UI.showPop(e);
     });
 
     keypad.addEventListener('mouseout', e => {
-      if (e.target.tagName === 'BUTTON') UI.hidePop(e);
+      if (e.target.tagName === 'BUTTON')
+        UI.hidePopTimer = setTimeout(() => UI.hidePop(e), 16);
     });
 
     scKey.addEventListener('mouseover', e => {
@@ -793,7 +814,8 @@ const UI = {
     });
 
     scKey.addEventListener('mouseout', e => {
-      if (e.target.tagName === 'BUTTON') UI.hidePop(e);
+      if (e.target.tagName === 'BUTTON')
+        UI.hidePopTimer = setTimeout(() => UI.hidePop(e), 16);
     });
 
     Object.values(outputElements).forEach(output => {
@@ -802,21 +824,23 @@ const UI = {
       });
 
       output.addEventListener('mouseout', e => {
-        if (e.target.tagName === 'A') UI.hidePop(e);
+        if (e.target.tagName === 'A')
+          UI.hidePopTimer = setTimeout(() => UI.hidePop(e), 16);
       });
     });
 
-    // click events
     keypad.addEventListener('click', e => {
       if (e.target.tagName === 'BUTTON') {
-        UI.key(e.target.innerText);
+        if (UI.hidePopTimer) clearTimeout(UI.hidePopTimer);
+        UI.key(e.target.innerText, false);
         e.preventDefault();
       }
     });
 
     scKey.addEventListener('click', e => {
       if (e.target.tagName === 'BUTTON') {
-        UI.key(e.target.innerText);
+        if (UI.hidePopTimer) clearTimeout(UI.hidePopTimer);
+        UI.key(e.target.innerText, false);
         e.preventDefault();
       }
     });
@@ -824,6 +848,7 @@ const UI = {
     Object.values(outputElements).forEach(output => {
       output.addEventListener('click', e => {
         if (e.target.tagName === 'A') {
+          if (UI.hidePopTimer) clearTimeout(UI.hidePopTimer);
           e.preventDefault();
         }
       });
@@ -854,22 +879,27 @@ const UI = {
 
     popviewElements.menuCopy.addEventListener('click', () => {
       UI.copy(UI.popTrigger.dataset.char);
+      UI.hidePop();
     });
 
     popviewElements.menuQuery.addEventListener('click', () => {
       UI.replaceFind(UI.popTrigger.dataset.char);
+      UI.hidePop();
     });
 
     popviewElements.menuSkip.addEventListener('click', () => {
       UI.setSkipChar(UI.popTrigger.dataset.char);
+      UI.hidePop();
     });
 
     popviewElements.menuAdd.addEventListener('click', () => {
       UI.addShortcut(UI.popTrigger.dataset.char);
+      UI.hidePop();
     });
 
     popviewElements.menuDel.addEventListener('click', () => {
       UI.addShortcut(UI.popTrigger.dataset.char, true);
+      UI.hidePop();
     });
   },
   createTag(c, tagName, cls, extraOpts, hideChar, running) {
@@ -927,7 +957,7 @@ const UI = {
     const msg = force
       ? `找到 ${founds.length} 字 ${Math.floor((i * 100) / dt.length)}%`
       : `<span style="color:red">（基本区）</span>找到 ${founds.length} 字`;
-    $('#counter').html(msg);
+    counter.innerHTML = msg;
     UI.showOutput();
   },
   showOutput() {
@@ -946,13 +976,11 @@ const UI = {
   finished(founds) {
     Seeker.result = founds;
     const groups = {};
-    for (let j in founds) {
-      if (founds[j].groups) {
-        //if (!founds[j].groups.length) continue;
-        for (let gi in founds[j].groups) {
-          const g = founds[j].groups[gi];
-          if (!groups[g]) groups[g] = 0;
-          groups[g]++;
+    for (let found of founds) {
+      if (found.groups) {
+        for (let group in found.groups) {
+          if (!groups[group]) groups[group] = 0;
+          groups[group]++;
         }
       }
     }
@@ -970,9 +998,13 @@ const UI = {
     UI.showOutput();
   },
   getItem(k, defaultValue = '0') {
-    return localStorage.getItem(k) || defaultValue;
+    return localStorage.getItem(k) ?? defaultValue;
   },
   init() {
+    UI.showPopTest();
+    UI.popviewRect = popviewElements.popview.getBoundingClientRect();
+    popviewElements.popview.style.display = 'none';
+
     UI.initKeyboard(UI.strokeKeyboard);
 
     Object.values(outputElements).forEach(element => {
@@ -995,18 +1027,17 @@ const UI = {
       observer.observe(element, config);
     });
 
-    $('#version').html(Seeker.getVersion());
+    versionEle.innerHTML = Seeker.getVersion();
 
     const validCharacterCount = dt.filter(entry => !entry.endsWith('╳')).length;
-    $('#datasize').text(validCharacterCount);
+    datasizeEle.innerHTML = validCharacterCount;
 
-    // Status
-    $('#variant').prop('selected', UI.getItem('variant') == '1');
-    $('#subdivide').prop('selected', UI.getItem('subdivide') == '1');
-    $('#showkeypad').prop('selected', UI.getItem('showkeypad') == '1');
+    variantSwitch.selected = UI.getItem('variant') === '1';
+    subdivideSwitch.selected = UI.getItem('subdivide') === '1';
+    keypadSwitch.selected = UI.getItem('showkeypad') === '1';
+
     UI.addShortcut();
 
-    // Events
     UI.eventMoniter();
     UI.updatePad();
 
@@ -1047,4 +1078,4 @@ String.prototype.toCharArray = function () {
   return arr.map(i => String.fromCodePoint(i));
 };
 
-window.addEventListener('load', UI.init);
+UI.init();
