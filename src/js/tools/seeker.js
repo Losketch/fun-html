@@ -17,7 +17,6 @@ const keypadSwitch = document.getElementById('showkeypad');
 const popupSym = document.querySelector('.set-v2-popup-symbol');
 const popupEle = document.querySelector('.set-v2-popup');
 
-const outputEles = document.querySelectorAll('[id^="output"]')
 const outputElements = {
   BSC: document.getElementById('outputBSC'),
   ExA: document.getElementById('outputExA'),
@@ -37,10 +36,13 @@ const outputElements = {
 
 const popviewElements = {
   popview: document.getElementById('popview'),
-  codetag: document.getElementById('codetag'),
   bigchar: document.getElementById('bigchar'),
+  codetag: document.getElementById('codetag'),
   menuKey: document.getElementById('menu_key'),
   menuGo: document.getElementById('menu_go'),
+  menuQuery: document.getElementById('menu_query'),
+  menuCopy: document.getElementById('menu_copy'),
+  menuSkip: document.getElementById('menu_skip'),
   menuAdd: document.getElementById('menu_add'),
   menuDel: document.getElementById('menu_del')
 };
@@ -720,96 +722,148 @@ const UI = {
     UI.go();
   },
   eventMoniter() {
+      // 获取元素
+    const buttClear = document.getElementById('buttClear');
+    const buttDecompose = document.getElementById('buttDecompose');
+    const buttGo = document.getElementById('buttGo');
+    const keypad = document.getElementById('keypad');
+    const scKey = document.getElementById('scKey');
+    
+    // 事件监听
     inputEle.addEventListener('keydown', e => {
       if (e.isComposing) return;
-      if (e.code == 'Enter') UI.go(true);
-      if (e.code == 'Escape') UI.clearFind();
+      if (e.code === 'Enter') UI.go(true);
+      if (e.code === 'Escape') UI.clearFind();
     });
-
+    
     inputEle.addEventListener('keyup', e => {
       if (e.isComposing) return;
-      if (e.code == 'Backslash') UI.decompose();
+      if (e.code === 'Backslash') UI.decompose();
     });
-
+    
     inputEle.addEventListener('compositionstart', () => {
       UI.ime = true;
     });
+    
     inputEle.addEventListener('compositionend', () => {
       setTimeout(() => {
         UI.ime = false;
         UI.go();
       }, 0);
     });
-
-    $(inputEle).on('input', () => {
+    
+    inputEle.addEventListener('input', () => {
       UI.go(false);
     });
-    $('#buttClear').click(UI.clearFind);
-    $('#buttDecompose').click(UI.decompose);
-    $('#buttGo').click(() => {
+    
+    buttClear.addEventListener('click', UI.clearFind);
+    buttDecompose.addEventListener('click', UI.decompose);
+    buttGo.addEventListener('click', () => {
       UI.go(true);
     });
-
-    $('#popview').on('mouseenter', e => {
+    
+    popviewElements.popview.addEventListener('mouseenter', e => {
       clearTimeout(UI.popTimer);
       e.stopPropagation();
     });
-
-    $('#popview').on('mouseleave', e => {
+    
+    popviewElements.popview.addEventListener('mouseleave', e => {
       e.stopPropagation();
-      $('#popview').hide();
+      popviewElements.popview.style.display = 'none';
       UI.popTrigger = null;
     });
-
+    
     // mouse in/out
-    $('#keypad')
-      .on('mouseover', 'button', UI.showPop)
-      .on('mouseout', 'button', UI.hidePop);
-    $('#scKey')
-      .on('mouseover', 'button', UI.showPop)
-      .on('mouseout', 'button', UI.hidePop);
-    $('[id^="output"]')
-      .on('mouseover', 'a', UI.showPop)
-      .on('mouseout', 'a', UI.hidePop);
-    //_('output').addEventListener('click', function(e) { if (e.target.tagName == 'A') e.preventDefault() }, false);
-
+    keypad.addEventListener('mouseover', e => {
+      if (e.target.tagName === 'BUTTON') UI.showPop(e);
+    });
+    
+    keypad.addEventListener('mouseout', e => {
+      if (e.target.tagName === 'BUTTON') UI.hidePop(e);
+    });
+    
+    scKey.addEventListener('mouseover', e => {
+      if (e.target.tagName === 'BUTTON') UI.showPop(e);
+    });
+    
+    scKey.addEventListener('mouseout', e => {
+      if (e.target.tagName === 'BUTTON') UI.hidePop(e);
+    });
+    
+    Object.values(outputElements).forEach(output => {
+      output.addEventListener('mouseover', e => {
+        if (e.target.tagName === 'A') UI.showPop(e);
+      });
+    
+      output.addEventListener('mouseout', e => {
+        if (e.target.tagName === 'A') UI.hidePop(e);
+      });
+    });
+    
     // click events
-    $('#scKey, #keypad').on('click', 'button', e => {
-      UI.key(e.target.innerText);
-      e.preventDefault();
+    keypad.addEventListener('click', e => {
+      if (e.target.tagName === 'BUTTON') {
+        UI.key(e.target.innerText);
+        e.preventDefault();
+      }
     });
-    $('[id^="output"]').on('click', 'a', e => {
-      e.preventDefault();
+    
+    scKey.addEventListener('click', e => {
+      if (e.target.tagName === 'BUTTON') {
+        UI.key(e.target.innerText);
+        e.preventDefault();
+      }
     });
-
-    $('[id^="output"]').on('mouseover', '> span .line', function (e) {
-      $(this).attr('class', 'line hover');
-      e.stopPropagation();
+    
+    Object.values(outputElements).forEach(output => {
+      output.addEventListener('click', e => {
+        if (e.target.tagName === 'A') {
+          e.preventDefault();
+        }
+      });
     });
-    $('[id^="output"]').on('mouseout', '> span .line', () => {
-      $(this).attr('class', 'line');
+    
+    Object.values(outputElements).forEach(output => {
+      output.addEventListener('mouseover', e => {
+        if (e.target.classList.contains('line')) {
+          e.target.classList.add('hover');
+          e.stopPropagation();
+        }
+      });
+    
+      output.addEventListener('mouseout', e => {
+        if (e.target.classList.contains('line')) {
+          e.target.classList.remove('hover');
+        }
+      });
     });
-
-    $('#menu_go').click(() => {
+    
+    popviewElements.menuGo.addEventListener('click', () => {
       UI.popTrigger.click();
     });
-    $('#menu_key').click(() => {
-      UI.key($(UI.popTrigger).data('char'));
+    
+    popviewElements.menuKey.addEventListener('click', () => {
+      UI.key(UI.popTrigger.dataset.char);
     });
-    $('#menu_copy').click(() => {
-      UI.copy($(UI.popTrigger).data('char'));
+    
+    popviewElements.menuCopy.addEventListener('click', () => {
+      UI.copy(UI.popTrigger.dataset.char);
     });
-    $('#menu_query').click(() => {
-      UI.replaceFind($(UI.popTrigger).data('char'));
+    
+    popviewElements.menuQuery.addEventListener('click', () => {
+      UI.replaceFind(UI.popTrigger.dataset.char);
     });
-    $('#menu_skip').click(() => {
-      UI.setSkipChar($(UI.popTrigger).data('char'));
+    
+    popviewElements.menuSkip.addEventListener('click', () => {
+      UI.setSkipChar(UI.popTrigger.dataset.char);
     });
-    $('#menu_add').click(() => {
-      UI.addShortcut($(UI.popTrigger).data('char'));
+    
+    popviewElements.menuAdd.addEventListener('click', () => {
+      UI.addShortcut(UI.popTrigger.dataset.char);
     });
-    $('#menu_del').click(() => {
-      UI.addShortcut($(UI.popTrigger).data('char'), true);
+    
+    popviewElements.menuDel.addEventListener('click', () => {
+      UI.addShortcut(UI.popTrigger.dataset.char, true);
     });
   },
   createTag(c, tagName, cls, extraOpts, hideChar, running) {
