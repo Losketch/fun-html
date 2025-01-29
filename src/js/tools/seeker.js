@@ -176,7 +176,7 @@ const Seeker = {
     if (c >= 0x30000 && c <= 0x3134a) return 8;
     if (c >= 0x31350 && c <= 0x323af) return 9;
     if (c >= 0x2ebf0 && c <= 0x2ee5d) return 10;
-    if (c >= 0x323B0 && c <= 0x3347B) return 11;
+    if (c >= 0x323b0 && c <= 0x3347b) return 11;
     if (c >= 0xf900 && c <= 0xfad9) return -1;
     if (c >= 0x2f800 && c <= 0x2fa1d) return -1;
     if (c >= 0xf0270 && c <= 0xfae7a) return -2;
@@ -187,7 +187,7 @@ const Seeker = {
       Seeker.dataIndex = {};
       for (let d of dt) {
         const code = d.codePointAt(0);
-        Seeker.dataIndex[code] = d.substring(chr > 0xffff ? 2 : 1);
+        Seeker.dataIndex[code] = d.substring(code > 0xffff ? 2 : 1);
       }
     }
     return Seeker.dataIndex[c];
@@ -559,7 +559,7 @@ const UI = {
     }
   },
   go(force) {
-    Object.values(outputElements).forEach(e => e.innerHTML = '');
+    Object.values(outputElements).forEach(e => (e.innerHTML = ''));
     UI.demonstratedChars.clear();
 
     if (UI.ime) return;
@@ -572,13 +572,13 @@ const UI = {
     Seeker.stopMatch();
     if (!s) {
       $('#counter').text('');
-      Object.values(outputElements).forEach(e => e.innerHTML = '');
+      Object.values(outputElements).forEach(e => (e.innerHTML = ''));
     } else {
       const divide = subdivideSwitch.selected;
       const variant = variantSwitch.selected;
       if (s.charAt(0) == ':') {
         for (let Ele of Seeker.getTree(s.slice(1), divide)) {
-          for (let outputEle of outputEles) {
+          for (let outputEle of Object.values(outputElements)) {
             outputEle.appendChild(Ele);
           }
         }
@@ -644,74 +644,80 @@ const UI = {
   },
   showPop(event) {
     const targetElement = event.target;
-  
-    if (targetElement.tagName.toUpperCase() !== 'BUTTON' && targetElement.tagName.toUpperCase() !== 'A') {
+
+    if (
+      targetElement.tagName.toUpperCase() !== 'BUTTON' &&
+      targetElement.tagName.toUpperCase() !== 'A'
+    ) {
       return;
     }
-  
+
     function change() {
       const maxX = document.body.scrollWidth - 70;
       const rect = targetElement.getBoundingClientRect();
-      const x = rect.left < 150 ? 10 : Math.floor(rect.left < maxX ? rect.left - 140 : maxX - 140);
-  
+      const x =
+        rect.left < 150
+          ? 10
+          : Math.floor(rect.left < maxX ? rect.left - 140 : maxX - 140);
+
       UI.popviewAnimation?.cancel();
       popviewElements.popview.style.left = `${x}px`;
       popviewElements.popview.style.top = `${window.scrollY + rect.bottom - 2}px`;
       UI.popviewAnimation = popviewElements.popview.animate(
-        [
-          { opacity: '0' },
-          { opacity: '0.9' },
-        ],
+        [{ opacity: '0' }, { opacity: '0.9' }],
         { duration: 300, easing: 'ease' }
       );
       setTimeout(() => (popviewElements.popview.style.display = 'block'), 0);
-  
-      const character = targetElement.getAttribute('data-char') || targetElement.innerText;
+
+      const character =
+        targetElement.getAttribute('data-char') || targetElement.innerText;
       const codePoint = character.codePointAt(0);
       const cjkBlock = Seeker.getCJKBlock(codePoint);
-  
+
       popviewElements.codetag.textContent = `U+${codePoint.toString(16).toUpperCase()}`;
       popviewElements.bigchar.textContent = character;
       popviewElements.bigchar.className = 'han';
       popviewElements.bigchar.style = '';
-  
+
       if (Config.useImage[cjkBlock]) {
         popviewElements.bigchar.classList.add('img');
         popviewElements.bigchar.style.backgroundImage = `url(${Config.glyphwiki}${codePoint.toString(16)}.svg)`;
       }
-  
+
       UI.popTrigger = targetElement;
-  
-      popviewElements.menuKey.style.display = targetElement.tagName.toUpperCase() === 'BUTTON' ? 'block' : 'none';
-      popviewElements.menuGo.style.display = targetElement.tagName.toUpperCase() === 'A' ? 'block' : 'none';
-  
+
+      popviewElements.menuKey.style.display =
+        targetElement.tagName.toUpperCase() === 'BUTTON' ? 'block' : 'none';
+      popviewElements.menuGo.style.display =
+        targetElement.tagName.toUpperCase() === 'A' ? 'block' : 'none';
+
       if (targetElement.tagName.toUpperCase() === 'A') {
         popviewElements.menuGo.href = targetElement.href;
       }
-  
-      const isInScKey = targetElement.parentElement && targetElement.parentElement.id === 'scKey';
+
+      const isInScKey =
+        targetElement.parentElement &&
+        targetElement.parentElement.id === 'scKey';
       popviewElements.menuAdd.style.display = isInScKey ? 'none' : 'block';
       popviewElements.menuDel.style.display = isInScKey ? 'block' : 'none';
     }
-  
+
     UI.popTimer = setTimeout(change, UI.popTrigger === null ? 0 : 100);
   },
   hidePop(event) {
     if (event !== true && event.target !== UI.popTrigger) {
       return;
     }
-  
+
     UI.popTimer = setTimeout(() => {
       UI.popviewAnimation?.cancel();
       UI.popviewAnimation = popviewElements.popview.animate(
-        [
-          { opacity: '0.9' },
-          { opacity: '0' },
-        ],
+        [{ opacity: '0.9' }, { opacity: '0' }],
         { duration: 300, easing: 'ease', fill: 'forwards' }
       );
-      UI.popviewAnimation.addEventListener('finish', () => 
-        popviewElements.popview.style.display = 'none'
+      UI.popviewAnimation.addEventListener(
+        'finish',
+        () => (popviewElements.popview.style.display = 'none')
       );
       UI.popTrigger = null;
     }, 100);
@@ -722,84 +728,84 @@ const UI = {
     UI.go();
   },
   eventMoniter() {
-      // 获取元素
+    // 获取元素
     const buttClear = document.getElementById('buttClear');
     const buttDecompose = document.getElementById('buttDecompose');
     const buttGo = document.getElementById('buttGo');
     const keypad = document.getElementById('keypad');
     const scKey = document.getElementById('scKey');
-    
+
     // 事件监听
     inputEle.addEventListener('keydown', e => {
       if (e.isComposing) return;
       if (e.code === 'Enter') UI.go(true);
       if (e.code === 'Escape') UI.clearFind();
     });
-    
+
     inputEle.addEventListener('keyup', e => {
       if (e.isComposing) return;
       if (e.code === 'Backslash') UI.decompose();
     });
-    
+
     inputEle.addEventListener('compositionstart', () => {
       UI.ime = true;
     });
-    
+
     inputEle.addEventListener('compositionend', () => {
       setTimeout(() => {
         UI.ime = false;
         UI.go();
       }, 0);
     });
-    
+
     inputEle.addEventListener('input', () => {
       UI.go(false);
     });
-    
+
     buttClear.addEventListener('click', UI.clearFind);
     buttDecompose.addEventListener('click', UI.decompose);
     buttGo.addEventListener('click', () => {
       UI.go(true);
     });
-    
+
     popviewElements.popview.addEventListener('mouseenter', e => {
       clearTimeout(UI.popTimer);
       e.stopPropagation();
     });
-    
+
     popviewElements.popview.addEventListener('mouseleave', e => {
       e.stopPropagation();
       popviewElements.popview.style.display = 'none';
       UI.popTrigger = null;
     });
-    
+
     // mouse in/out
     keypad.addEventListener('mouseover', e => {
       if (e.target.tagName === 'BUTTON') UI.showPop(e);
     });
-    
+
     keypad.addEventListener('mouseout', e => {
       if (e.target.tagName === 'BUTTON') UI.hidePop(e);
     });
-    
+
     scKey.addEventListener('mouseover', e => {
       if (e.target.tagName === 'BUTTON') UI.showPop(e);
     });
-    
+
     scKey.addEventListener('mouseout', e => {
       if (e.target.tagName === 'BUTTON') UI.hidePop(e);
     });
-    
+
     Object.values(outputElements).forEach(output => {
       output.addEventListener('mouseover', e => {
         if (e.target.tagName === 'A') UI.showPop(e);
       });
-    
+
       output.addEventListener('mouseout', e => {
         if (e.target.tagName === 'A') UI.hidePop(e);
       });
     });
-    
+
     // click events
     keypad.addEventListener('click', e => {
       if (e.target.tagName === 'BUTTON') {
@@ -807,14 +813,14 @@ const UI = {
         e.preventDefault();
       }
     });
-    
+
     scKey.addEventListener('click', e => {
       if (e.target.tagName === 'BUTTON') {
         UI.key(e.target.innerText);
         e.preventDefault();
       }
     });
-    
+
     Object.values(outputElements).forEach(output => {
       output.addEventListener('click', e => {
         if (e.target.tagName === 'A') {
@@ -822,7 +828,7 @@ const UI = {
         }
       });
     });
-    
+
     Object.values(outputElements).forEach(output => {
       output.addEventListener('mouseover', e => {
         if (e.target.classList.contains('line')) {
@@ -830,38 +836,38 @@ const UI = {
           e.stopPropagation();
         }
       });
-    
+
       output.addEventListener('mouseout', e => {
         if (e.target.classList.contains('line')) {
           e.target.classList.remove('hover');
         }
       });
     });
-    
+
     popviewElements.menuGo.addEventListener('click', () => {
       UI.popTrigger.click();
     });
-    
+
     popviewElements.menuKey.addEventListener('click', () => {
       UI.key(UI.popTrigger.dataset.char);
     });
-    
+
     popviewElements.menuCopy.addEventListener('click', () => {
       UI.copy(UI.popTrigger.dataset.char);
     });
-    
+
     popviewElements.menuQuery.addEventListener('click', () => {
       UI.replaceFind(UI.popTrigger.dataset.char);
     });
-    
+
     popviewElements.menuSkip.addEventListener('click', () => {
       UI.setSkipChar(UI.popTrigger.dataset.char);
     });
-    
+
     popviewElements.menuAdd.addEventListener('click', () => {
       UI.addShortcut(UI.popTrigger.dataset.char);
     });
-    
+
     popviewElements.menuDel.addEventListener('click', () => {
       UI.addShortcut(UI.popTrigger.dataset.char, true);
     });
@@ -932,7 +938,9 @@ const UI = {
 
       const willAddEle = UI.addCell(Seeker.result[j], Seeker.groups === null);
       outputElements[UI.blockClasses[cjkBlock]].appendChild(willAddEle);
-      willAddEle.onclick = () => UI.copy(willAddEle.dataset.char);
+      willAddEle.addEventListener('click', () =>
+        UI.copy(willAddEle.dataset.char)
+      );
     }
   },
   finished(founds) {
@@ -966,12 +974,12 @@ const UI = {
   },
   init() {
     UI.initKeyboard(UI.strokeKeyboard);
-  
+
     Object.values(outputElements).forEach(element => {
       if (element.innerText === '') {
         element.style.display = 'none';
       }
-  
+
       const observer = new MutationObserver(mutations => {
         mutations.forEach(mutation => {
           const target = mutation.target;
@@ -982,7 +990,7 @@ const UI = {
           }
         });
       });
-  
+
       const config = { childList: true, subtree: true, characterData: true };
       observer.observe(element, config);
     });
