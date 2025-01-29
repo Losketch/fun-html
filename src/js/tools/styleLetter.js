@@ -372,7 +372,7 @@ const toStyleLetter = (str, style) => {
       if (0x61 <= char && char <= 0x7a) {
         return String.fromCodePoint(char + 0x246f);
       }
-      return char == 0x30 ? '⓪' : String.fromCodePoint(char);
+      return char === 0x30 ? '⓪' : String.fromCodePoint(char);
     },
     negativeCircle: char => {
       if (0x31 <= char && char <= 0x39) {
@@ -381,7 +381,7 @@ const toStyleLetter = (str, style) => {
       if (0x41 <= char && char <= 0x5a) {
         return String.fromCodePoint(char + 0x1f10f);
       }
-      return char == 0x30 ? '⓿' : String.fromCodePoint(char);
+      return char === 0x30 ? '⓿' : String.fromCodePoint(char);
     },
     parenthesized: char => {
       if (0x31 <= char && char <= 0x39) {
@@ -409,15 +409,15 @@ const toStyleLetter = (str, style) => {
       if (0x61 <= char && char <= 0x7a) {
         return 'ᵃᵇᶜᵈᵉᶠᶢʰⁱʲᵏˡᵐⁿᵒᵖ𐞥ʳˢᵗᵘᵛʷˣʸᶻ'.toCharArray()[char - 0x61];
       }
-      return char == 0x2b
+      return char === 0x2b
         ? '⁺'
-        : char == 0x2d
+        : char === 0x2d
           ? '⁻'
-          : char == 0x3d
+          : char === 0x3d
             ? '⁼'
-            : char == 0x28
+            : char === 0x28
               ? '⁽'
-              : char == 0x29
+              : char === 0x29
                 ? '⁾'
                 : String.fromCodePoint(char);
     },
@@ -428,15 +428,15 @@ const toStyleLetter = (str, style) => {
       if (0x61 <= char && char <= 0x7a) {
         return 'ₐbcdₑfgₕᵢⱼₖₗₘₙₒₚqᵣₛₜᵤᵥw᙮yz'[char - 0x61];
       }
-      return char == 0x2b
+      return char === 0x2b
         ? '₊'
-        : char == 0x2d
+        : char === 0x2d
           ? '₋'
-          : char == 0x3d
+          : char === 0x3d
             ? '₌'
-            : char == 0x28
+            : char === 0x28
               ? '₍'
-              : char == 0x29
+              : char === 0x29
                 ? '₎'
                 : String.fromCodePoint(char);
     }

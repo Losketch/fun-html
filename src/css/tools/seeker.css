@@ -2,6 +2,10 @@
   overflow: unset;
 }
 
+#keypad {
+  display: none;
+}
+
 .set-v2-popup {
   position: fixed;
   z-index: 500000;
@@ -583,7 +587,6 @@ button {
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 2px 2px #aaa;
   z-index: 10;
-  overflow: hidden;
   opacity: 0.9;
 }
 

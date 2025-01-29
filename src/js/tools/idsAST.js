@@ -346,7 +346,7 @@ function idsToObj(string) {
     if (inGlyphFormSelector) {
       res.glyphFormSelector += char;
       if (char === ')') {
-        if (charIndex != string.length - 1)
+        if (charIndex !== string.length - 1)
           throw new IdsError(
             '字形样式选择器出现在非结尾。',
             lastGlyphFormSelectorIndex,
@@ -467,7 +467,7 @@ function idsToObj(string) {
         }
       }
     } else if (char === '{') {
-      if (charIndex != 0)
+      if (charIndex !== 0)
         throw new IdsError('抽象构形出现在非开头。', charIndex);
       inAbstractStructure = true;
       res.abstractStructure = '{';
