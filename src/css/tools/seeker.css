@@ -10,6 +10,11 @@
   display: none;
   width: 0;
   height: 0;
+  pointer-events: none;
+}
+
+.set-v2-popup * {
+  pointer-events: none;
 }
 
 #buttDecompose {
@@ -579,6 +584,7 @@ button {
   box-shadow: 2px 2px #aaa;
   z-index: 10;
   overflow: hidden;
+  opacity: 0.9;
 }
 
 #popview span,

@@ -18,20 +18,32 @@ const popupSym = document.querySelector('.set-v2-popup-symbol');
 const popupEle = document.querySelector('.set-v2-popup');
 
 const outputEles = document.querySelectorAll('[id^="output"]')
-const outputBSCEle = document.getElementById('outputBSC');
-const outputAEle = document.getElementById('outputA');
-const outputBEle = document.getElementById('outputB');
-const outputCEle = document.getElementById('outputC');
-const outputDEle = document.getElementById('outputD');
-const outputEEle = document.getElementById('outputE');
-const outputFEle = document.getElementById('outputF');
-const outputGEle = document.getElementById('outputG');
-const outputHEle = document.getElementById('outputH');
-const outputIEle = document.getElementById('outputI');
-const outputJEle = document.getElementById('outputJ');
-const outputCMPEle = document.getElementById('outputCMP');
-const outputSUPEle = document.getElementById('outputSUP');
-const outputOTHEle = document.getElementById('outputOTH');
+const outputElements = {
+  BSC: document.getElementById('outputBSC'),
+  ExA: document.getElementById('outputExA'),
+  ExB: document.getElementById('outputExB'),
+  ExC: document.getElementById('outputExC'),
+  ExD: document.getElementById('outputExD'),
+  ExE: document.getElementById('outputExE'),
+  ExF: document.getElementById('outputExF'),
+  ExG: document.getElementById('outputExG'),
+  ExH: document.getElementById('outputExH'),
+  ExI: document.getElementById('outputExI'),
+  ExJ: document.getElementById('outputExJ'),
+  CMP: document.getElementById('outputCMP'),
+  SUP: document.getElementById('outputSUP'),
+  OTH: document.getElementById('outputOTH')
+};
+
+const popviewElements = {
+  popview: document.getElementById('popview'),
+  codetag: document.getElementById('codetag'),
+  bigchar: document.getElementById('bigchar'),
+  menuKey: document.getElementById('menu_key'),
+  menuGo: document.getElementById('menu_go'),
+  menuAdd: document.getElementById('menu_add'),
+  menuDel: document.getElementById('menu_del')
+};
 
 let animation;
 function popCopyMsg(char) {
@@ -140,16 +152,12 @@ const Seeker = {
   },
   arraylize(s, v, a) {
     let blockFlag = 0;
-    for (let i = 0; i < s.length; i++) {
-      const w = s.charPointAt(i);
-      if (w.length > 1) i++;
+    for (let w of s.toCharArray()) {
       if (Seeker.blockFlagMap[w]) {
         blockFlag |= Seeker.blockFlagMap[w];
       } else {
-        if (w.length == 1) {
-          const c = w.charCodeAt(0);
-          if (c >= 0x2ff0 && c <= 0x2fff) break; // CJK description
-        }
+        const c = w.charCodeAt(0);
+        if (c >= 0x2ff0 && c <= 0x2fff) break; // CJK description
         a.push(Seeker.variant(w, v));
       }
     }
@@ -175,10 +183,9 @@ const Seeker = {
   getData(c) {
     if (Seeker.dataIndex == null) {
       Seeker.dataIndex = {};
-      for (let i in dt) {
-        const chr = dt[i].codePointAt(0);
-        if (typeof chr != 'number') continue;
-        Seeker.dataIndex[chr] = dt[i].substring(chr > 0xffff ? 2 : 1);
+      for (let d of dt) {
+        const code = d.codePointAt(0);
+        Seeker.dataIndex[code] = d.substring(chr > 0xffff ? 2 : 1);
       }
     }
     return Seeker.dataIndex[c];
@@ -192,20 +199,16 @@ const Seeker = {
 
     const backup = query.concat(); // b: 備份搜尋陣列a
     let res = false;
-    for (let i = 0; i < str.length; i++) {
-      // 針對拆分序列中的每個字
-      const w = str.charPointAt(i);
-      if (w.length > 1) i++;
+    for (let w of str.toCharArray()) {
       if (ignore && ignore.indexOf(w) >= 0) {
         continue;
       }
 
-      if (w == '!' && !divide) break; // 若此字是無理拆分且非無理拆分模式
+      if (w == '!' && !divide) break;
       if (w == '@' || w == '!') {
-        // 某種拆分方式的起始
         if (!query.length) break;
-        query.length = 0; // 從備份重建搜尋陣列
-        for (let j = 0; j < backup.length; j++) query.push(backup[j]);
+        query.length = 0;
+        for (let j of backup) query.push(j);
       } else if (query.length) {
         // 搜尋陣列還有值
         const pos = query.indexOf(Seeker.variant(w, variant)); // 在搜尋陣列中尋找這個字的位置
@@ -299,9 +302,7 @@ const Seeker = {
       const c = w.codePointAt(0);
       const def = Seeker.getData(c); //.substring(w.length);
       let k = 0;
-      for (let i = 0; i < def.length; i++) {
-        w = def.charPointAt(i);
-        if (w.length > 1) i++;
+      for (let w of def.toCharArray()) {
         if (w == '!' && !divide) break;
         if (w == '@' || w == '!') {
           if (k) res += recursive == -1 ? '┇' : '‖';
@@ -556,7 +557,7 @@ const UI = {
     }
   },
   go(force) {
-    outputEles.forEach(e => e.innerHTML = '');
+    Object.values(outputElements).forEach(e => e.innerHTML = '');
     UI.demonstratedChars.clear();
 
     if (UI.ime) return;
@@ -569,7 +570,7 @@ const UI = {
     Seeker.stopMatch();
     if (!s) {
       $('#counter').text('');
-      $('[id^="output"]').text('');
+      Object.values(outputElements).forEach(e => e.innerHTML = '');
     } else {
       const divide = subdivideSwitch.selected;
       const variant = variantSwitch.selected;
@@ -639,48 +640,77 @@ const UI = {
         UI.createTag(UI.shortcuts[i], 'button', 'han', null, true)
       );
   },
-  showPop(e) {
-    const c = e.target;
-    if (c.tagName.toUpperCase() != 'BUTTON' && c.tagName.toUpperCase() != 'A')
+  showPop(event) {
+    const targetElement = event.target;
+  
+    if (targetElement.tagName.toUpperCase() !== 'BUTTON' && targetElement.tagName.toUpperCase() !== 'A') {
       return;
+    }
+  
     function change() {
       const maxX = document.body.scrollWidth - 70;
-      const rect = c.getBoundingClientRect();
-      const x =
-        rect.left < 150
-          ? 10
-          : Math.floor(rect.left < maxX ? rect.left - 140 : maxX - 140);
-      $('#popview')
-        .css({ left: x, top: Math.floor(window.scrollY + rect.bottom - 2) })
-        .show();
-      const chr = $(c).attr('data-char') || c.innerText;
-      const u = chr.codePointAt(0);
-      const k = Seeker.getCJKBlock(u);
-      $('#codetag').text('U+' + u.toString(16).toUpperCase());
-      $('#bigchar').text(chr).attr({ class: 'han', style: '' });
-      if (Config.useImage[k])
-        $('#bigchar')
-          .addClass('img')
-          .css({
-            'background-image':
-              'url(' + Config.glyphwiki + u.toString(16) + '.svg)'
-          });
-      UI.popTrigger = c;
-      $('#menu_key').toggle(c.tagName.toUpperCase() == 'BUTTON');
-      $('#menu_go')
-        .toggle(c.tagName.toUpperCase() == 'A')
-        .attr('href', c.href);
-      if (c.tagName.toUpperCase() == 'A') $('#menu_go').attr('href', c.href);
-      const inScKey = c.parentElement && c.parentElement.id == 'scKey'; // 因為動態呈現時，c.parentElement可能經常消失
-      $('#menu_add').toggle(!inScKey);
-      $('#menu_del').toggle(inScKey);
+      const rect = targetElement.getBoundingClientRect();
+      const x = rect.left < 150 ? 10 : Math.floor(rect.left < maxX ? rect.left - 140 : maxX - 140);
+  
+      UI.popviewAnimation?.cancel();
+      popviewElements.popview.style.left = `${x}px`;
+      popviewElements.popview.style.top = `${window.scrollY + rect.bottom - 2}px`;
+      UI.popviewAnimation = popviewElements.popview.animate(
+        [
+          { opacity: '0' },
+          { opacity: '0.9' },
+        ],
+        { duration: 300, easing: 'ease' }
+      );
+      setTimeout(() => (popviewElements.popview.style.display = 'block'), 0);
+  
+      const character = targetElement.getAttribute('data-char') || targetElement.innerText;
+      const codePoint = character.codePointAt(0);
+      const cjkBlock = Seeker.getCJKBlock(codePoint);
+  
+      popviewElements.codetag.textContent = `U+${codePoint.toString(16).toUpperCase()}`;
+      popviewElements.bigchar.textContent = character;
+      popviewElements.bigchar.className = 'han';
+      popviewElements.bigchar.style = '';
+  
+      if (Config.useImage[cjkBlock]) {
+        popviewElements.bigchar.classList.add('img');
+        popviewElements.bigchar.style.backgroundImage = `url(${Config.glyphwiki}${codePoint.toString(16)}.svg)`;
+      }
+  
+      UI.popTrigger = targetElement;
+  
+      popviewElements.menuKey.style.display = targetElement.tagName.toUpperCase() === 'BUTTON' ? 'block' : 'none';
+      popviewElements.menuGo.style.display = targetElement.tagName.toUpperCase() === 'A' ? 'block' : 'none';
+  
+      if (targetElement.tagName.toUpperCase() === 'A') {
+        popviewElements.menuGo.href = targetElement.href;
+      }
+  
+      const isInScKey = targetElement.parentElement && targetElement.parentElement.id === 'scKey';
+      popviewElements.menuAdd.style.display = isInScKey ? 'none' : 'block';
+      popviewElements.menuDel.style.display = isInScKey ? 'block' : 'none';
     }
-    UI.popTimer = setTimeout(change, UI.popTrigger == null ? 0 : 100);
+  
+    UI.popTimer = setTimeout(change, UI.popTrigger === null ? 0 : 100);
   },
-  hidePop(e) {
-    if (e !== true && e.target != UI.popTrigger) return;
+  hidePop(event) {
+    if (event !== true && event.target !== UI.popTrigger) {
+      return;
+    }
+  
     UI.popTimer = setTimeout(() => {
-      $('#popview').hide();
+      UI.popviewAnimation?.cancel();
+      UI.popviewAnimation = popviewElements.popview.animate(
+        [
+          { opacity: '0.9' },
+          { opacity: '0' },
+        ],
+        { duration: 300, easing: 'ease', fill: 'forwards' }
+      );
+      UI.popviewAnimation.addEventListener('finish', () => 
+        popviewElements.popview.style.display = 'none'
+      );
       UI.popTrigger = null;
     }, 100);
   },
@@ -708,7 +738,7 @@ const UI = {
       setTimeout(() => {
         UI.ime = false;
         UI.go();
-      }, 1);
+      }, 0);
     });
 
     $(inputEle).on('input', () => {
@@ -796,7 +826,7 @@ const UI = {
     if (Config.useImage[Seeker.getCJKBlock(code)] && !running) {
       tag.style.backgroundImage = `url(${Config.glyphwiki}${code.toString(16)}.svg)`;
       tag.innerHTML = hideChar ? '&nbsp;' : c;
-      tag.setAttribute('img', 'img');
+      tag.classList.add('img');
     } else {
       tag.innerHTML = c;
     }
@@ -844,27 +874,12 @@ const UI = {
     for (let j in Seeker.result) {
       if (UI.demonstratedChars.has(Seeker.result[j].char)) continue;
       UI.demonstratedChars.add(Seeker.result[j].char);
-      const blk = Seeker.getCJKBlock(Seeker.result[j].unicode);
+      const cjkBlock = Seeker.getCJKBlock(Seeker.result[j].unicode);
 
-      const willAddEle = UI.addCell(Seeker.result[j], Seeker.groups == null);
-      if (blk === 1) outputBSCEle.appendChild(willAddEle);
-      if (blk === 2) outputAEle.appendChild(willAddEle);
-      if (blk === 3) outputBEle.appendChild(willAddEle);
-      if (blk === 4) outputCEle.appendChild(willAddEle);
-      if (blk === 5) outputDEle.appendChild(willAddEle);
-      if (blk === 6) outputEEle.appendChild(willAddEle);
-      if (blk === 7) outputFEle.appendChild(willAddEle);
-      if (blk === 8) outputGEle.appendChild(willAddEle);
-      if (blk === 9) outputHEle.appendChild(willAddEle);
-      if (blk === 10) outputIEle.appendChild(willAddEle);
-      if (blk === 11) outputJEle.appendChild(willAddEle);
-      if (blk === -1) outputCMPEle.appendChild(willAddEle);
-      if (blk === -2) outputSUPEle.appendChild(willAddEle);
-      if (blk === 0) outputOTHEle.appendChild(willAddEle);
+      const willAddEle = UI.addCell(Seeker.result[j], Seeker.groups === null);
+      outputElements[UI.blockClasses[cjkBlock]].appendChild(willAddEle);
+      willAddEle.onclick = () => UI.copy(willAddEle.dataset.char);
     }
-    $('[id^="output"] a').on('click', function () {
-      UI.copy($(this).data('char'));
-    });
   },
   finished(founds) {
     Seeker.result = founds;
@@ -891,53 +906,31 @@ const UI = {
       return b.count - a.count;
     });
     UI.showOutput();
-
-    const groupsEle = document.getElementById('groups');
-    groupsEle.innerHTML = '';
-    for (let i in Seeker.groups) {
-      const g = Seeker.groups[i];
-      groupsEle.appendChild(
-        UI.createTag(
-          g.char,
-          'a',
-          'grp',
-          {
-            href: 'javascript:void 0',
-            'data-count': g.count
-          },
-          true
-        )
-      );
-    }
   },
   getItem(k, defaultValue = '0') {
-    const v = localStorage.getItem(k);
-    return v !== null ? v : defaultValue;
+    return localStorage.getItem(k) || defaultValue;
   },
   init() {
     UI.initKeyboard(UI.strokeKeyboard);
-    $(document).ready(() => {
-      $('[id^="output"]').each(function () {
-        if ($(this).text().trim() === '') {
-          $(this).hide();
-        }
-      });
-
-      $('[id^="output"]').each(function () {
-        const observer = new MutationObserver(mutations => {
-          mutations.forEach(mutation => {
-            const target = $(mutation.target);
-            if (target.text().trim() !== '') {
-              target.show();
-            } else {
-              target.hide();
-            }
-          });
+  
+    Object.values(outputElements).forEach(element => {
+      if (element.innerText === '') {
+        element.style.display = 'none';
+      }
+  
+      const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+          const target = mutation.target;
+          if (target.innerText !== '') {
+            target.style.display = '';
+          } else {
+            target.style.display = 'none';
+          }
         });
-
-        const config = { childList: true, subtree: true, characterData: true };
-        observer.observe(this, config);
       });
+  
+      const config = { childList: true, subtree: true, characterData: true };
+      observer.observe(element, config);
     });
 
     $('#version').html(Seeker.getVersion());
@@ -978,34 +971,8 @@ const UI = {
   }
 };
 
-if (!Array.prototype.indexOf) {
-  Array.prototype.indexOf = function (o, f) {
-    const l = this.length;
-    if (f == null) f = 0;
-    if (f < 0) f = Math.max(0, l + f);
-    for (let i = f; i < l; i++) {
-      if (this[i] === o) return i;
-    }
-    return -1;
-  };
-}
-
-if (!String.prototype.codePointAt) {
-  String.prototype.codePointAt = function (i) {
-    const c = this.charCodeAt(i);
-    if (c >= 0xd800 && c <= 0xdbff)
-      return (
-        (((c & 0x03ff) << 10) | (this.charCodeAt(i + 1) & 0x03ff)) + 0x10000
-      );
-    return c;
-  };
-}
-
 String.prototype.charPointAt = function (i) {
-  const c = this.charCodeAt(i);
-  if (c >= 0xd800 && c <= 0xdbff) return this.charAt(i) + this.charAt(i + 1);
-  if (c >= 0xdc00 && c <= 0xdfff) return this.charAt(i - 1) + this.charAt(i);
-  return this.charAt(i);
+  return String.fromCodePoint(this.codePointAt(i));
 };
 
 String.prototype.toCharArray = function () {
