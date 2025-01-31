@@ -680,27 +680,35 @@ const UI = {
 
     UI.popviewAnimation?.cancel();
     if (UI.popTrigger) {
+      const rect = popviewElements.popview.getBoundingClientRect();
+      UI.popviewMoveAnimation?.cancel();
+      UI.popviewAnimation?.cancel();
       UI.popviewMoveAnimation = popviewElements.popview.animate(
         [
-          { left: `${UI.prevX}px`, top: `${UI.prevY}px` },
+          { left: `${window.scrollX + rect.left}px`, top: `${window.scrollY + rect.top}px` },
           {
             left: `${x}px`,
             top: `${y}px`
           }
         ],
-        { duration: 300, easing: 'ease', fill: 'forwards' }
+        { duration: 300, easing: 'ease' }
       );
+      UI.popviewMoveAnimation.onfinish = () => {
+        popviewElements.popview.style.left = `${x}px`;
+        popviewElements.popview.style.top = `${y}px`;
+      }
     } else {
       UI.popviewMoveAnimation?.cancel();
       UI.popviewAnimation = popviewElements.popview.animate(
         [{ opacity: '0' }, { opacity: '0.9' }],
         { duration: 300, easing: 'ease' }
       );
+      UI.popviewAnimation.onfinish=() =>{
+        popviewElements.popview.style.opacity ="0.9"
+      }
       popviewElements.popview.style.left = `${x}px`;
       popviewElements.popview.style.top = `${y}px`;
     }
-    UI.prevX = x;
-    UI.prevY = y;
     setTimeout(() => (popviewElements.popview.style.display = 'block'), 0);
 
     const character = targetElement.dataset.char ?? targetElement.innerText;
@@ -739,10 +747,11 @@ const UI = {
     }
 
     setTimeout(() => {
+      const prevOpacity = getComputedStyle(popviewElements.popview).opacity;
       UI.popviewAnimation?.cancel();
       UI.popviewAnimation = popviewElements.popview.animate(
-        [{ opacity: '0.9' }, { opacity: '0' }],
-        { duration: 300, easing: 'ease', fill: 'forwards' }
+        [{ opacity: prevOpacity }, { opacity: '0' }],
+        { duration: 300, easing: 'ease' }
       );
       UI.popviewAnimation.addEventListener(
         'finish',
