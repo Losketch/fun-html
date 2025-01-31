@@ -685,7 +685,10 @@ const UI = {
       UI.popviewAnimation?.cancel();
       UI.popviewMoveAnimation = popviewElements.popview.animate(
         [
-          { left: `${window.scrollX + rect.left}px`, top: `${window.scrollY + rect.top}px` },
+          {
+            left: `${window.scrollX + rect.left}px`,
+            top: `${window.scrollY + rect.top}px`
+          },
           {
             left: `${x}px`,
             top: `${y}px`
@@ -693,19 +696,19 @@ const UI = {
         ],
         { duration: 300, easing: 'ease' }
       );
-      UI.popviewMoveAnimation.onfinish = () => {
+      UI.popviewMoveAnimation.addEventListener('finish', () => {
         popviewElements.popview.style.left = `${x}px`;
         popviewElements.popview.style.top = `${y}px`;
-      }
+      });
     } else {
       UI.popviewMoveAnimation?.cancel();
       UI.popviewAnimation = popviewElements.popview.animate(
         [{ opacity: '0' }, { opacity: '0.9' }],
         { duration: 300, easing: 'ease' }
       );
-      UI.popviewAnimation.onfinish=() =>{
-        popviewElements.popview.style.opacity ="0.9"
-      }
+      UI.popviewAnimation.addEventListener('finish', () => {
+        popviewElements.popview.style.opacity = '0.9';
+      });
       popviewElements.popview.style.left = `${x}px`;
       popviewElements.popview.style.top = `${y}px`;
     }
