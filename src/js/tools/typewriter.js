@@ -16,21 +16,19 @@ String.prototype.toCharArray = function () {
   return arr;
 };
 
-const typewriter = document.getElementById("typewriter");
-const contentDiv = document.getElementById("content");
-const cursor = document.getElementById("cursor");
-const cursorPlaceholder = document.getElementById("cursorPlaceholder");
-const showButton = document.getElementById("showButton");
-const textInput = document.getElementById("text");
-const timingFunctionInput = document.getElementById("timingFunction");
-const durationInput = document.getElementById("duration");
-const pauseButton = document.getElementById("pauseButton");
-const resetButton = document.getElementById("resetButton");
+const typewriter = document.getElementById('typewriter');
+const contentDiv = document.getElementById('content');
+const cursor = document.getElementById('cursor');
+const cursorPlaceholder = document.getElementById('cursorPlaceholder');
+const showButton = document.getElementById('showButton');
+const textInput = document.getElementById('text');
+const timingFunctionInput = document.getElementById('timingFunction');
+const durationInput = document.getElementById('duration');
+const pauseButton = document.getElementById('pauseButton');
+const resetButton = document.getElementById('resetButton');
 
-const defaultTimingFunction = (t) => {
-  return t < 0.5
-    ? 2 * t * t
-    : 1 - Math.pow(-2 * (t - 1), 2) / 2;
+const defaultTimingFunction = t => {
+  return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * (t - 1), 2) / 2;
 };
 
 let animationFrameId = null;
@@ -46,7 +44,8 @@ function animate(currentTime) {
     return;
   }
 
-  const elapsedTime = (pauseTime !== null ? pauseTime : currentTime) - startTime;
+  const elapsedTime =
+    (pauseTime !== null ? pauseTime : currentTime) - startTime;
   const progress = Math.min(elapsedTime / totalTime, 1);
 
   let p;
@@ -57,14 +56,14 @@ function animate(currentTime) {
     }
     p = Math.max(0, Math.min(1, result));
   } catch (e) {
-    alert("时间函数执行出错，使用默认函数。\n错误信息：" + e.message);
+    alert('时间函数执行出错，使用默认函数。\n错误信息：' + e.message);
     timingFunction = defaultTimingFunction;
     p = Math.max(0, Math.min(1, timingFunction(progress)));
   }
 
   const currentLength = Math.floor(p * textArray.length);
 
-  contentDiv.textContent = textArray.slice(0, currentLength).join("");
+  contentDiv.textContent = textArray.slice(0, currentLength).join('');
   typewriter.style.display = typewriter.textContent ? 'block' : null;
 
   updateCursorPosition();
@@ -87,19 +86,22 @@ function updateCursorPosition() {
   cursor.style.width = rect.height / 2 + 'px';
 }
 
-showButton.addEventListener("click", () => {
+showButton.addEventListener('click', () => {
   if (animationFrameId !== null) {
     cancelAnimationFrame(animationFrameId);
     animationFrameId = null;
   }
-  
-  const text = textInput.value || "你好，世界 🌏！这是一个打字机效果 😊🎉🚀。"
+
+  const text = textInput.value || '你好，世界 🌏！这是一个打字机效果 😊🎉🚀。';
 
   let userTimingFunction;
   try {
-    userTimingFunction = new Function("t", `return (${timingFunctionInput.value})(t);`);
+    userTimingFunction = new Function(
+      't',
+      `return (${timingFunctionInput.value})(t);`
+    );
   } catch (e) {
-    alert("自定义时间函数无效，使用默认函数。\n错误信息：" + e.message);
+    alert('自定义时间函数无效，使用默认函数。\n错误信息：' + e.message);
     userTimingFunction = defaultTimingFunction;
   }
 
@@ -116,7 +118,7 @@ showButton.addEventListener("click", () => {
   animationFrameId = requestAnimationFrame(animate);
 });
 
-pauseButton.addEventListener("click", () => {
+pauseButton.addEventListener('click', () => {
   if (animationFrameId !== null) {
     if (isPaused) {
       isPaused = false;
@@ -130,7 +132,7 @@ pauseButton.addEventListener("click", () => {
   }
 });
 
-resetButton.addEventListener("click", () => {
+resetButton.addEventListener('click', () => {
   if (animationFrameId !== null) {
     cancelAnimationFrame(animationFrameId);
     animationFrameId = null;
@@ -140,6 +142,6 @@ resetButton.addEventListener("click", () => {
   startTime = null;
   pauseTime = null;
 
-  contentDiv.textContent = "";
+  contentDiv.textContent = '';
   cursor.style.display = null;
 });
