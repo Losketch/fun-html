@@ -20,7 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const italic = document.getElementById('italic');
   let italicOn = false;
   const fontSizeSlider = document.getElementById('font-size-slider');
-  let pressedFontSizeSliderTop = 0;
+  let pressedSliderTop = 0;
+  const lineHeightSlider = document.getElementById('line-height-slider');
 
   const addFontFeatureSettingsButton = document.getElementById(
     'add-font-feature-settings-button'
@@ -80,35 +81,56 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   fontSizeSlider.addEventListener('input', () => {
+    const lineHeight = +fontSizeSlider.value * 1.65;
     input.style.setProperty(
       '--md-filled-text-field-input-text-size',
       fontSizeSlider.value + 'rem'
     );
     input.style.setProperty(
       '--md-filled-text-field-input-text-line-height',
-      +fontSizeSlider.value * 1.65 + 'rem'
+      lineHeight + 'rem'
     );
 
-    const fontSizeSliderTop = fontSizeSlider.getBoundingClientRect().top;
+    lineHeightSlider.value = lineHeight;
+
+    const sliderTop = fontSizeSlider.getBoundingClientRect().top;
     window.scrollTo({
-      top: window.scrollY + fontSizeSliderTop - pressedFontSizeSliderTop,
+      top: window.scrollY + sliderTop - pressedSliderTop,
       behavior: 'instant'
     });
   });
 
-  function onFontSizeSliderDragStart() {
-    pressedFontSizeSliderTop = fontSizeSlider.getBoundingClientRect().top;
+  lineHeightSlider.addEventListener('input', () => {
+    input.style.setProperty(
+      '--md-filled-text-field-input-text-line-height',
+      lineHeightSlider.value + 'rem'
+    );
+
+    const sliderTop = fontSizeSlider.getBoundingClientRect().top;
+    window.scrollTo({
+      top: window.scrollY + sliderTop - pressedSliderTop,
+      behavior: 'instant'
+    });
+  });
+
+  function onChangeHeightSliderDragStart() {
+    pressedSliderTop = fontSizeSlider.getBoundingClientRect().top;
     setTimeout(() => {
-      const fontSizeSliderTop = fontSizeSlider.getBoundingClientRect().top;
+      const sliderTop = fontSizeSlider.getBoundingClientRect().top;
       window.scrollTo({
-        top: window.scrollY + fontSizeSliderTop - pressedFontSizeSliderTop,
+        top: window.scrollY + sliderTop - pressedSliderTop,
         behavior: 'instant'
       });
     }, 0);
   }
 
-  fontSizeSlider.addEventListener('mousedown', onFontSizeSliderDragStart);
-  fontSizeSlider.addEventListener('touchstart', onFontSizeSliderDragStart);
+  fontSizeSlider.addEventListener('mousedown', onChangeHeightSliderDragStart);
+  fontSizeSlider.addEventListener('touchstart', onChangeHeightSliderDragStart);
+  lineHeightSlider.addEventListener('mousedown', onChangeHeightSliderDragStart);
+  lineHeightSlider.addEventListener(
+    'touchstart',
+    onChangeHeightSliderDragStart
+  );
 
   clear.addEventListener('click', () => {
     input.value = '';

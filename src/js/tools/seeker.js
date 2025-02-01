@@ -815,7 +815,7 @@ const UI = {
       if (UI.hidePopTimer) clearTimeout(UI.hidePopTimer);
     });
 
-    popviewElements.popview.addEventListener('mouseleave', (e) => {
+    popviewElements.popview.addEventListener('mouseleave', e => {
       UI.hidePopTimer = setTimeout(() => UI.hidePop(e), 16);
     });
 
