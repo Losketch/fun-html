@@ -811,9 +811,25 @@ const UI = {
       UI.popTrigger = null;
     });
 
+    popviewElements.popview.addEventListener('mouseenter', () => {
+      if (UI.hidePopTimer) clearTimeout(UI.hidePopTimer);
+    });
+
+    popviewElements.popview.addEventListener('mouseleave', (e) => {
+      UI.hidePopTimer = setTimeout(() => UI.hidePop(e), 16);
+    });
+
+    keypad.addEventListener('mouseover', e => {
+      if (e.target.tagName === 'BUTTON') UI.showPop(e);
+    });
+
     keypad.addEventListener('mouseout', e => {
       if (e.target.tagName === 'BUTTON')
         UI.hidePopTimer = setTimeout(() => UI.hidePop(e), 16);
+    });
+
+    scKey.addEventListener('mouseover', e => {
+      if (e.target.tagName === 'BUTTON') UI.showPop(e);
     });
 
     scKey.addEventListener('mouseout', e => {
@@ -822,6 +838,10 @@ const UI = {
     });
 
     Object.values(outputElements).forEach(output => {
+      output.addEventListener('mouseover', e => {
+        if (e.target.tagName === 'A') UI.showPop(e);
+      });
+
       output.addEventListener('mouseout', e => {
         if (e.target.tagName === 'A')
           UI.hidePopTimer = setTimeout(() => UI.hidePop(e), 16);
@@ -831,7 +851,6 @@ const UI = {
     keypad.addEventListener('click', e => {
       if (e.target.tagName === 'BUTTON') {
         if (UI.hidePopTimer) clearTimeout(UI.hidePopTimer);
-        UI.showPop(e);
         UI.key(e.target.innerText, false);
         e.preventDefault();
       }
@@ -840,7 +859,6 @@ const UI = {
     scKey.addEventListener('click', e => {
       if (e.target.tagName === 'BUTTON') {
         if (UI.hidePopTimer) clearTimeout(UI.hidePopTimer);
-        UI.showPop(e);
         UI.key(e.target.innerText, false);
         e.preventDefault();
       }
@@ -850,7 +868,6 @@ const UI = {
       output.addEventListener('click', e => {
         if (e.target.tagName === 'A') {
           if (UI.hidePopTimer) clearTimeout(UI.hidePopTimer);
-          UI.showPop(e);
           e.preventDefault();
         }
       });
