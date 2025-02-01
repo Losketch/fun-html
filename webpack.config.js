@@ -20,7 +20,8 @@ module.exports = {
     HuAccelerometer: './src/js/tools/HuAccelerometer.js',
     lifeGame: './src/js/tools/lifeGame.js',
     pointMoveWithSeg: './src/js/tools/pointMoveWithSeg.js',
-    randFuck: './src/js/tools/randFuck.js'
+    randFuck: './src/js/tools/randFuck.js',
+    typewriter: './src/js/tools/typewriter.js'
   },
   output: {
     filename: 'js/[name].js',
@@ -183,6 +184,12 @@ module.exports = {
       template: './src/html/randFuck.html',
       filename: 'tools/randFuck.html',
       chunks: ['randFuck']
+    }),
+    new HtmlWebpackPlugin({
+      title: '打字机',
+      template: './src/html/typewriter.html',
+      filename: 'tools/typewriter.html',
+      chunks: ['typewriter']
     })
   ],
   mode: 'production'
