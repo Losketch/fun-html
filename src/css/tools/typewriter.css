@@ -51,7 +51,8 @@ md-slider {
 }
 
 @keyframes blinkCursor {
-  from, to {
+  from,
+  to {
     opacity: 0;
   }
   50% {
