@@ -80,6 +80,25 @@
   --md-sys-color-shadow-sidebar: #00000080;
   --md-sys-color-extra: #ffaa33;
   --md-sys-color-on-extra: #653f14;
+  
+  --md-sys-color-seeker-K1: #4b4bff;
+  --md-sys-color-seeker-K2: #0b7e44;
+  --md-sys-color-seeker-K3: #9e3cc7;
+  --md-sys-color-seeker-K4: #ac3333;
+  --md-sys-color-seeker-BSC: #eeeeee;
+  --md-sys-color-seeker-ExA: #00d2d2;
+  --md-sys-color-seeker-ExB: #0099ff;
+  --md-sys-color-seeker-ExC: #0000ff;
+  --md-sys-color-seeker-ExD: #3333cc;
+  --md-sys-color-seeker-ExE: #6000ef;
+  --md-sys-color-seeker-ExF: #9900ff;
+  --md-sys-color-seeker-ExG: #cc00ff;
+  --md-sys-color-seeker-ExH: #ff33cc;
+  --md-sys-color-seeker-ExI: #ff327d;
+  --md-sys-color-seeker-ExJ: #d4e024;
+  --md-sys-color-seeker-CMP: #916808;
+  --md-sys-color-seeker-SUP: #131313;
+  --md-sys-color-seeker-OTH: #aaaaaa;
 }
 
 :root.dark {
@@ -144,6 +163,20 @@
   --md-sys-color-shadow-sidebar: #ffffff85;
   --md-sys-color-extra: #ffbe73;
   --md-sys-color-on-extra: #472d12;
+
+  --md-sys-color-seeker-BSC: #111111;
+  --md-sys-color-seeker-ExA: #008686;
+  --md-sys-color-seeker-ExB: #0098fe;
+  --md-sys-color-seeker-ExC: #dadaff;
+  --md-sys-color-seeker-ExD: #b6b6ff;
+  --md-sys-color-seeker-ExE: #ffb4ff;
+  --md-sys-color-seeker-ExF: #ff99ff;
+  --md-sys-color-seeker-ExG: #ff83ff;
+  --md-sys-color-seeker-ExH: #ff5ff8;
+  --md-sys-color-seeker-ExI: #ff6bb6;
+  --md-sys-color-seeker-CMP: #bc9333;
+  --md-sys-color-seeker-SUP: #ececec;
+  --md-sys-color-seeker-OTH: #555555;
 }
 
 * {

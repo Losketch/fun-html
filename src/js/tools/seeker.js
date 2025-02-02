@@ -1,6 +1,7 @@
 import '../../css/mainStyles.css';
 import '../../css/tools/seeker.css';
 
+import '../iframeColorSchemeSync.js';
 import '../changeHeader.js';
 import '../m3ui.js';
 

@@ -46,7 +46,8 @@
   padding-top: 19px;
   color: white;
   border-radius: 8px;
-  background: rgba(0, 0, 0, 0.8);
+  background: var(--md-sys-color-inverse-surface);
+  color: var(--md-sys-color-inverse-on-surface);
 }
 
 .set-v2-popup-symbol {
@@ -63,7 +64,6 @@
   left: 0;
   width: 100%;
   vertical-align: bottom;
-  color: rgba(255, 255, 255, 0.65);
   font-size: 14px;
   font-family: PUAExt, plgo1, plgo2, Source, ffallback;
   line-height: 1;
@@ -79,13 +79,13 @@
 
 a {
   text-decoration: none;
-  color: rgb(242, 242, 242);
+  color: var(--md-sys-color-on-background);
 }
 
 a:hover,
 button:hover,
 span.btn:hover {
-  color: #c20c24 !important;
+  color: var(--md-sys-color-error) !important;
 }
 
 @font-face {
@@ -174,8 +174,11 @@ h1,
   font-family: Arial, Helvetica, sans-serif;
 }
 
-#sk_header #sk_logo #datasize {
-  color: #a13887;
+#sk_header #sk_logo #datasize,
+#result #legend #counter {
+  font-weight: bold;
+  color: var(--md-sys-color-primary);
+  white-space: nowrap;
 }
 
 #sk_header md-filled-tonal-button {
@@ -185,13 +188,13 @@ h1,
   min-width: 30px;
   vertical-align: top;
   transition: all 0.2s ease;
-  border: 1px solid #66666666;
+  border: 1px solid var(--md-sys-color-outline);
   border-radius: 8px;
 }
 
 #sk_header md-filled-tonal-button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px var(--md-sys-color-shadow-alpha-1a);
 }
 #sk_header md-filled-tonal-button:active {
   transform: translateY(1px);
@@ -199,7 +202,7 @@ h1,
 
 #funcs {
   padding: 10px 10px 0 10px;
-  border-top: 2px solid #ccc;
+  border-top: 2px solid var(--md-sys-color-outline-variant);
   clear: both;
 }
 
@@ -229,7 +232,7 @@ h1,
 
 #keyboard {
   padding: 5px 10px 10px 10px;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 2px solid var(--md-sys-color-outline-variant);
   clear: both;
 }
 
@@ -255,13 +258,13 @@ tbody > tr:last-child > td:last-child {
 #keyboard table td {
   margin: 1px 0px;
   padding: 2px 4px;
-  border-top: 1px solid #fff;
-  border-right: 1px solid #fff;
+  border-top: 1px solid var(--md-sys-color-on-primary);
+  border-right: 1px solid var(--md-sys-color-on-primary);
 }
 
 #keyboard table th {
-  background-color: var(--md-sys-color-primary);
-  color: var(--md-sys-color-surface);
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
   white-space: nowrap;
 }
 
@@ -299,9 +302,9 @@ tbody > tr:last-child > td:last-child {
   width: 17pt;
   height: 17pt;
   font-size: 12pt;
-  color: #4a90e2;
-  background: #f5f5f5;
-  border: 1px solid #e0e0e0;
+  color: var(--md-sys-color-primary);
+  background: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-outline-variant);
   border-radius: 3px;
   padding: 1px 2px;
   margin: 0;
@@ -315,7 +318,7 @@ tbody > tr:last-child > td:last-child {
 #scKey button:hover {
   filter: invert(0.2);
   transform: translateY(-1px);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px var(--md-sys-color-shadow-alpha-1a);
 }
 
 #keyboard button:active,
@@ -343,7 +346,7 @@ tbody > tr:last-child > td:last-child {
   width: 24px;
   height: 24px;
   padding: 2px;
-  border: 1px solid #bbb;
+  border: 1px solid var(--md-sys-color-outline-variant);
   cursor: pointer;
   color: transparent;
   margin-right: 4px;
@@ -352,27 +355,21 @@ tbody > tr:last-child > td:last-child {
   border-radius: 8px;
 }
 
-#result #legend #counter {
-  font-weight: bold;
-  color: #00f;
-  white-space: nowrap;
-}
-
 #result #groups {
   display: none;
   min-height: 55px;
   font-size: 1.6em;
   line-height: 1;
   padding: 5px 10px;
-  background-color: #f4f4f4;
-  border-top: 1px dashed #aaa;
+  background-color: var(--md-sys-color-surface-container-low);
+  border-top: 1px dashed var(--md-sys-color-outline);
 }
 
 #result #groups a {
-  border: 1px solid #aaa;
-  color: #333 !important;
+  border: 1px solid var(--md-sys-color-outline);
+  color: var(--md-sys-color-on-surface) !important;
   border-radius: 3px;
-  background-color: #fff;
+  background-color: var(--md-sys-color-surface);
   padding: 1px;
   margin: 2px;
   width: 1em;
@@ -397,26 +394,30 @@ tbody > tr:last-child > td:last-child {
 }
 
 #result #groups a.on {
-  background-color: #eaa;
+  background-color: var(--md-sys-color-tertiary-container);
 }
 #result [id^='output'] {
   font-size: 2.5em;
   line-height: 1;
   padding: 10px 0;
   clear: both;
-  border-top: 1px dashed #aaa;
+  border-top: 1px dashed var(--md-sys-color-outline);
 }
 
 #result [id^='output'] a {
-  border: 1px solid #aaa;
-  padding: 1px;
+  border: 1px solid var(--md-sys-color-outline);
+  padding: 2px;
   margin: 2px;
   width: 1em;
   display: inline-block;
   border-radius: 8px;
   overflow: hidden;
-  border-color: #00000017;
-  box-shadow: 0px 0px 6px #00000047;
+  border-color: var(--md-sys-color-outline-variant);
+  box-shadow: 0 0 6px var(--md-sys-color-outline-variant);
+}
+
+.zi {
+  transform: translateY(2px);
 }
 
 #result [id^='output'] a.img {
@@ -438,27 +439,12 @@ tbody > tr:last-child > td:last-child {
 }
 
 #result [id^='output'] > span .line.hover {
-  border-bottom: 2px solid #e08 !important;
-  color: #e08;
+  border-bottom: 2px solid var(--md-sys-color-error) !important;
+  color: var(--md-sys-color-error);
 }
 
 #result [id^='output'] > span .sub {
   font-size: 95%;
-}
-#result [id^='output'] > span .line {
-  border-bottom: 2px solid #666;
-}
-#result [id^='output'] > span .line .line {
-  border-bottom: 2px solid #888;
-}
-#result [id^='output'] > span .line .line .line {
-  border-bottom: 2px solid #aaa;
-}
-#result [id^='output'] > span .line .line .line .line {
-  border-bottom: 2px solid #ccc;
-}
-#result [id^='output'] > span .line .line .line .line .line {
-  border-bottom: 2px solid #ddd;
 }
 
 #result [id^='output'] h3 {
@@ -492,20 +478,21 @@ tbody > tr:last-child > td:last-child {
 }
 
 .K1 {
-  color: #0000aa !important;
+  color: var(--md-sys-color-seeker-K1) !important;
 }
 .K2 {
-  color: #004d26 !important;
+  color: var(--md-sys-color-seeker-K2) !important;
 }
 .K3 {
-  color: #752796 !important;
+  color: var(--md-sys-color-seeker-K3) !important;
 }
 .K4 {
-  color: #ac3333 !important;
+  color: var(--md-sys-color-seeker-K4) !important;
 }
 
 body {
-  background: #fffbfe;
+  background: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-background);
   margin: 8px;
 }
 
@@ -514,65 +501,60 @@ button {
 }
 
 .BSC {
-  background: #eee;
-  color: #000 !important;
+  background: var(--md-sys-color-seeker-BSC);
+  color: var(--md-sys-color-on-surface) !important;
 }
 .ExA {
-  background: #00d2d2;
-  color: #fff !important;
+  background: var(--md-sys-color-seeker-ExA);
+  color: var(--md-sys-color-on-primary) !important;
 }
 .ExB {
-  background: #0099ff;
-  color: #fff !important;
+  background: var(--md-sys-color-seeker-ExB);
+  color: var(--md-sys-color-on-primary) !important;
 }
 .ExC {
-  background: #0000ff;
-  color: #fff !important;
+  background: var(--md-sys-color-seeker-ExC);
+  color: var(--md-sys-color-on-primary) !important;
 }
 .ExD {
-  background: #3333cc;
-  color: #fff !important;
+  background: var(--md-sys-color-seeker-ExD);
+  color: var(--md-sys-color-on-primary) !important;
 }
 .ExE {
-  background: #6000ef;
-  color: #fff !important;
+  background: var(--md-sys-color-seeker-ExE);
+  color: var(--md-sys-color-on-primary) !important;
 }
 .ExF {
-  background: #9900ff;
-  color: #fff !important;
+  background: var(--md-sys-color-seeker-ExF);
+  color: var(--md-sys-color-on-primary) !important;
 }
 .ExG {
-  background: #cc00ff;
-  color: #fff !important;
+  background: var(--md-sys-color-seeker-ExG);
+  color: var(--md-sys-color-on-primary) !important;
 }
 .ExH {
-  background: #ff33cc;
-  color: #fff !important;
+  background: var(--md-sys-color-seeker-ExH);
+  color: var(--md-sys-color-on-primary) !important;
 }
 .ExI {
-  background: #ff327d;
-  color: #fff !important;
+  background: var(--md-sys-color-seeker-ExI);
+  color: var(--md-sys-color-on-primary) !important;
 }
 .ExJ {
-  background: #d4e024;
-  color: #fff !important;
+  background: var(--md-sys-color-seeker-ExJ);
+  color: var(--md-sys-color-on-primary) !important;
 }
 .CMP {
-  background: #916808;
-  color: #fff !important;
+  background: var(--md-sys-color-seeker-CMP);
+  color: var(--md-sys-color-on-primary) !important;
 }
 .SUP {
-  background: #131313;
-  color: #fff !important;
+  background: var(--md-sys-color-seeker-SUP);
+  color: var(--md-sys-color-on-primary) !important;
 }
 .OTH {
-  background: #aaa;
-  color: #fff !important;
-}
-
-.exact {
-  outline: 1px solid #c43400;
-  border-color: #c43400 !important;
+  background: var(--md-sys-color-seeker-OTH);
+  color: var(--md-sys-color-on-background) !important;
 }
 
 #popview {
@@ -582,12 +564,12 @@ button {
   width: 100px;
   min-height: 125px;
   padding-left: 100px;
-  border: 1px solid #666;
+  border: 1px solid var(--md-sys-color-secondary);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 2px 2px #aaa;
+  background: var(--md-sys-color-surface-container-lowest);
+  box-shadow: 2px 2px var(--md-sys-color-outline);
   z-index: 10;
-  opacity: 0;
+  opacity: 0.9;
 }
 
 #popview span,
@@ -622,7 +604,7 @@ button {
   top: 100px;
   width: 100px;
   font-size: 15px;
-  color: #074a67;
+  color: var(--md-sys-color-primary);
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
   cursor: default;
@@ -632,12 +614,11 @@ button {
   display: block;
   cursor: pointer;
   padding: 2px 5px;
-  color: #333;
 }
 
 #popview .func:hover {
-  background: #ff5b84;
-  color: #fff;
+  background: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
 }
 
 @media screen and (max-width: 890px) {
@@ -687,11 +668,11 @@ button {
     width: 28px;
     overflow: hidden;
     margin-right: 2px;
-    color: #000;
+    color: var(--md-sys-color-on-surface);
   }
 
   #result #legend button {
-    color: #000;
+    color: var(--md-sys-color-on-surface);
   }
 
   #sk_foot > span {
