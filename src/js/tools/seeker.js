@@ -79,14 +79,14 @@ function popCopyMsg(char) {
 
 function observeElementVisibility(element) {
   const visibilityState = {
-    isVisible: false,
+    isVisible: false
   };
 
   const options = {
-    threshold: 0.01,
+    threshold: 0.01
   };
 
-  const callback = (entries) => {
+  const callback = entries => {
     entries.forEach(entry => {
       visibilityState.isVisible = entry.isIntersecting;
     });

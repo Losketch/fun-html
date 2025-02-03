@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const fontSizeSlider = document.getElementById('font-size-slider');
   let pressedSliderTop = 0;
   const lineHeightSlider = document.getElementById('line-height-slider');
+  const rowsSlider = document.getElementById('rows-slider');
 
   const addFontFeatureSettingsButton = document.getElementById(
     'add-font-feature-settings-button'
@@ -113,6 +114,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  rowsSlider.addEventListener('input', () => {
+    input.rows = rowsSlider.value;
+
+    const sliderTop = fontSizeSlider.getBoundingClientRect().top;
+    window.scrollTo({
+      top: window.scrollY + sliderTop - pressedSliderTop,
+      behavior: 'instant'
+    });
+  });
+
   function onChangeHeightSliderDragStart() {
     pressedSliderTop = fontSizeSlider.getBoundingClientRect().top;
     setTimeout(() => {
@@ -131,6 +142,8 @@ document.addEventListener('DOMContentLoaded', () => {
     'touchstart',
     onChangeHeightSliderDragStart
   );
+  rowsSlider.addEventListener('mousedown', onChangeHeightSliderDragStart);
+  rowsSlider.addEventListener('touchstart', onChangeHeightSliderDragStart);
 
   clear.addEventListener('click', () => {
     input.value = '';
