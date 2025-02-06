@@ -14,7 +14,7 @@ const genButton = document.getElementById('gen-button');
 const copyButton = document.getElementById('copy-button');
 
 String.prototype.toArray = function () {
-  var arr = [];
+  const arr = [];
   for (let i = 0; i < this.length; ) {
     const codePoint = this.codePointAt(i);
     i += codePoint > 0xffff ? 2 : 1;
