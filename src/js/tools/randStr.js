@@ -9,7 +9,7 @@ import '../iframeColorSchemeSync.js';
 import '../changeHeader.js';
 import '../select.js';
 
-import { definedCharacterList } from '../../data/DefinedCharacterList.js';
+import { filterDefinedCharacters } from '../filterDefinedCharacters.js';
 
 String.prototype.toArray = function () {
   const arr = [];
@@ -20,20 +20,6 @@ String.prototype.toArray = function () {
   }
   return arr;
 };
-
-Object.defineProperty(String.prototype, 'codePointLength', {
-  get() {
-    let len = 0;
-    for (let i = 0; i < this.length; ) {
-      const codePoint = this.codePointAt(i);
-      i += codePoint > 0xffff ? 2 : 1;
-      len++;
-    }
-    return len;
-  },
-  enumerable: false,
-  configurable: false
-});
 
 Array.prototype.removeAll = function (value) {
   for (let i = 0; i < this.length; i++) {
@@ -152,8 +138,8 @@ function kebabToCamel(str) {
   return str.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
 }
 
-function generateRandomCharacters() {
-  let count = parseInt(countInput.value);
+async function generateRandomCharacters() {
+  let count = +countInput.value;
   if (count > 1000) count = 1000;
   const options = {};
 
@@ -163,7 +149,7 @@ function generateRandomCharacters() {
     }
   }
 
-  var characters = [];
+  let characters = [];
   characterSets.includeCustomChar = customCharEle.value.toArray();
   for (const option in options) {
     if (options[option] && characterSets[option]) {
@@ -188,7 +174,7 @@ function generateRandomCharacters() {
   }
 
   if (options.containsNoUndefinedCharacters) {
-    characters = characters.filter(i => definedCharacterList.has(i));
+    characters = await filterDefinedCharacters(characters, 4);
   }
 
   let result = '';
@@ -311,7 +297,7 @@ countInput.addEventListener('input', updateSliderValue);
 slider.addEventListener('input', updateInputValue);
 copyBtn.addEventListener('click', () => copy(resultEle.innerText));
 clearTextBtn.addEventListener('click', clearText);
-genBtn.addEventListener('click', () => {
-  resultEle.innerHTML = generateRandomCharacters();
+genBtn.addEventListener('click', async () => {
+  resultEle.innerHTML = await generateRandomCharacters();
   resultEle.dispatchEvent(new Event('input'));
 });

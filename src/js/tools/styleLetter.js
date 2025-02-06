@@ -10,7 +10,7 @@ import '../iframeColorSchemeSync.js';
 import '../select.js';
 
 String.prototype.toArray = function () {
-  var arr = [];
+  let arr = [];
   for (let i = 0; i < this.length; ) {
     const codePoint = this.codePointAt(i);
     i += codePoint > 0xffff ? 2 : 1;
@@ -20,7 +20,7 @@ String.prototype.toArray = function () {
 };
 
 String.prototype.toCharArray = function () {
-  var arr = [];
+  let arr = [];
   for (let i = 0; i < this.length; ) {
     const codePoint = this.codePointAt(i);
     i += codePoint > 0xffff ? 2 : 1;
