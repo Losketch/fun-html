@@ -178,7 +178,7 @@ const overlapTagReg =
 const numberTagReg = /\[[1-9]\d*\]/;
 
 String.prototype.toArray = function () {
-  var arr = [];
+  let arr = [];
   for (let i = 0; i < this.length; ) {
     const codePoint = this.codePointAt(i);
     i += codePoint > 0xffff ? 2 : 1;
