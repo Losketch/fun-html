@@ -76,6 +76,8 @@ body > div {
 
 #toolbox {
   padding: 20px;
+  margin: 0 auto;
+  max-width: 500px;
   display: none;
 }
 
