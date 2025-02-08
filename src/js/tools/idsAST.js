@@ -801,7 +801,7 @@ function isZi(char) {
     (0x4e00 <= code && code <= 0x9fff) ||
     (0x3400 <= code && code <= 0x4dbf) ||
     (0x20000 <= code && code <= 0x2a6df) ||
-    (0x2a700 <= code && code <= 0x2b73a) ||
+    (0x2a700 <= code && code <= 0x2b739) ||
     (0x2b740 <= code && code <= 0x2b81d) ||
     (0x2b820 <= code && code <= 0x2cea1) ||
     (0x2ceb0 <= code && code <= 0x2ebe0) ||

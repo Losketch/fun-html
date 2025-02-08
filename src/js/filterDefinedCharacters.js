@@ -1,4 +1,4 @@
-import { definedCharacterList } from '../data/DefinedCharacterList.js';
+import definedCharacterList from '../data/DefinedCharacterList.js';
 
 const workerScript = `
   self.onmessage = function(event) {
