@@ -21,7 +21,8 @@ module.exports = {
     lifeGame: './src/js/tools/lifeGame.js',
     pointMoveWithSeg: './src/js/tools/pointMoveWithSeg.js',
     randFuck: './src/js/tools/randFuck.js',
-    typewriter: './src/js/tools/typewriter.js'
+    typewriter: './src/js/tools/typewriter.js',
+    ziSrc: './src/js/tools/ziSrc.js'
   },
   output: {
     filename: 'js/[name].js',
@@ -56,9 +57,9 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader', // 使用 babel-loader
+          loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env'] // 使用 @babel/preset-env
+            presets: ['@babel/preset-env']
           }
         }
       },
@@ -79,8 +80,12 @@ module.exports = {
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader']
-      }
-    ]
+      },
+      {
+        test: /\.json\.txt$/,
+        use: 'raw-loader',
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -190,6 +195,12 @@ module.exports = {
       template: './src/html/typewriter.html',
       filename: 'tools/typewriter.html',
       chunks: ['typewriter']
+    }),
+    new HtmlWebpackPlugin({
+      title: '字源查找',
+      template: './src/html/ziSrc.html',
+      filename: 'tools/ziSrc.html',
+      chunks: ['ziSrc']
     })
   ],
   mode: 'production'
