@@ -7,8 +7,20 @@ import '../m3ui.js';
 import '../dialogs.js';
 import '../changeHeader.js';
 import '../iframeColorSchemeSync.js';
+import processLigaturesPromise from '../processLigatures.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  const { processLigatures } = await processLigaturesPromise;
+  String.prototype.toArray = function () {
+    const arr = [];
+    for (let i = 0; i < this.length; ) {
+      const codePoint = this.codePointAt(i);
+      i += codePoint > 0xffff ? 2 : 1;
+      arr.push(codePoint);
+    }
+    return arr;
+  };
+
   const input = document.getElementById('text');
   const counter = input.shadowRoot
     .querySelector('md-filled-field')
@@ -50,20 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let itemsOrder = [];
 
   counter.innerText = '0';
-
-  Object.defineProperty(String.prototype, 'codePointLength', {
-    get() {
-      let len = 0;
-      for (let i = 0; i < this.length; ) {
-        const codePoint = this.codePointAt(i);
-        i += codePoint > 0xffff ? 2 : 1;
-        len++;
-      }
-      return len;
-    },
-    enumerable: false,
-    configurable: false
-  });
 
   document.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => changeUrl(a.textContent));
@@ -152,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   input.addEventListener('input', () => {
     textarea.removeAttribute('maxlength');
-    counter.innerText = input.value.codePointLength;
+    counter.innerText = processLigatures(input.value.toArray()).length;
   });
 
   function changeUrl(url) {
