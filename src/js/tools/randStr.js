@@ -57,7 +57,7 @@ const characterSets = {
   includeBasicChinese: rangeArr(0x4e00, 0x9fff),
   includeExtendedAChinese: rangeArr(0x3400, 0x4dbf),
   includeExtendedBChinese: rangeArr(0x20000, 0x2a6df),
-  includeExtendedCChinese: rangeArr(0x2a700, 0x2b73a),
+  includeExtendedCChinese: rangeArr(0x2a700, 0x2b739),
   includeExtendedDChinese: rangeArr(0x2b740, 0x2b81d),
   includeExtendedEChinese: rangeArr(0x2b820, 0x2cea1),
   includeExtendedFChinese: rangeArr(0x2ceb0, 0x2ebe0),
