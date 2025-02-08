@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@material/web": "^2.2.0",
-    "highlight.js": "^11.11.1"
+    "highlight.js": "^11.11.1",
+    "regenerate-unicode-properties": "^10.2.0"
   }
 }

@@ -4,7 +4,7 @@ const workerScript = `
   self.onmessage = function(event) {
     const { characters, definedCharacterList } = event.data;
     const definedSet = definedCharacterList;
-    const filteredCharacters = characters.filter(i => definedSet.has(i));
+    const filteredCharacters = characters.filter(i => definedSet.has(i) || Array.isArray(i));
     self.postMessage(filteredCharacters);
   };
 `;
