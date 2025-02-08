@@ -1,0 +1,10 @@
+.Btns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+#input {
+  width: 100%;
+  box-sizing: border-box;
+}

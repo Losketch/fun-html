@@ -1119,9 +1119,9 @@ String.prototype.toCharArray = function () {
   for (let i = 0; i < this.length; ) {
     const codePoint = this.codePointAt(i);
     i += codePoint > 0xffff ? 2 : 1;
-    arr.push(codePoint);
+    arr.push(String.fromCodePoint(codePoint));
   }
-  return arr.map(i => String.fromCodePoint(i));
+  return arr;
 };
 
 UI.init();
