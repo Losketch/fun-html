@@ -9,7 +9,7 @@ import '../iframeColorSchemeSync.js';
 import '../changeHeader.js';
 import '../select.js';
 
-import { filterDefinedCharacters } from '../filterDefinedCharacters.js';
+import filterDefinedCharacters from '../filterDefinedCharacters.js';
 
 String.prototype.toArray = function () {
   const arr = [];
