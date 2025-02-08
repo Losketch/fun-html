@@ -3,7 +3,7 @@ import definedCharacterList from '../data/DefinedCharacterList.js';
 const workerScript = `
   self.onmessage = function(event) {
     const { characters, definedCharacterList } = event.data;
-    const definedSet = new Set(definedCharacterList);
+    const definedSet = definedCharacterList;
     const filteredCharacters = characters.filter(i => definedSet.has(i));
     self.postMessage(filteredCharacters);
   };
@@ -34,7 +34,7 @@ function runWorker(worker, data) {
   });
 }
 
-export async function filterDefinedCharacters(characters, numWorkers) {
+async function filterDefinedCharacters(characters, numWorkers) {
   const chunkSize = Math.ceil(characters.length / numWorkers);
   const chunks = chunkArray(characters, chunkSize);
 
@@ -64,3 +64,5 @@ export async function filterDefinedCharacters(characters, numWorkers) {
     workers.forEach(worker => worker.terminate());
   }
 }
+
+export default filterDefinedCharacters;
