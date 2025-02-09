@@ -1,6 +1,6 @@
 import properties from 'regenerate-unicode-properties';
 
-import decompositions from '../data/decompositions.json'
+import decompositions from '../data/decompositions.json';
 
 export default (async () => {
   String.prototype.toArray = function () {
@@ -13,7 +13,8 @@ export default (async () => {
     return arr;
   };
   const isEqual = (arr1, arr2) =>
-    arr1.length === arr2.length && arr1.every((val, index) => val === arr2[index]);
+    arr1.length === arr2.length &&
+    arr1.every((val, index) => val === arr2[index]);
 
   const ligatures = [];
   for (let i of properties.get('Property_of_Strings')) {
@@ -22,8 +23,8 @@ export default (async () => {
     );
     ligatures.push(...strings.map(s => s.toArray()));
   }
-  ligatures.push(...decompositions)
-  
+  ligatures.push(...decompositions);
+
   for (let i = 0; i < ligatures.length; i++) {
     for (let j = i + 1; j < ligatures.length; j++) {
       if (isEqual(ligatures[i], ligatures[j])) {
@@ -32,7 +33,7 @@ export default (async () => {
       }
     }
   }
-  
+
   ligatures.sort((a, b) => b.length - a.length);
   const ligatureStrings = ligatures.map(ligature =>
     ligature.map(code => String.fromCodePoint(code))
