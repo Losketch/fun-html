@@ -9,6 +9,10 @@ import '../changeHeader.js';
 import '../iframeColorSchemeSync.js';
 import processLigaturesPromise from '../processLigatures.js';
 
+import { characters as whiteSpace } from 'regenerate-unicode-properties/Binary_Property/White_Space.js';
+import { characters as variationSelector } from 'regenerate-unicode-properties/Binary_Property/Variation_Selector.js';
+import { characters as format } from 'regenerate-unicode-properties/General_Category/Format.js';
+
 document.addEventListener('DOMContentLoaded', async () => {
   const { processLigatures } = await processLigaturesPromise;
   String.prototype.toArray = function () {
@@ -21,12 +25,29 @@ document.addEventListener('DOMContentLoaded', async () => {
     return arr;
   };
 
+  const whiteSpaceCharacters = whiteSpace.valueOf();
+  const variationSelectorCharacters = variationSelector.valueOf();
+  const formatCharacters = format.valueOf();
+  function removeItemsFromArray(arr, itemsToRemove) {
+    return arr.filter(item => !itemsToRemove.includes(item));
+  }
+
   const input = document.getElementById('text');
   const counter = input.shadowRoot
     .querySelector('md-filled-field')
     .shadowRoot.querySelector('.counter');
   const textarea = input.shadowRoot.querySelector('textarea');
   const clear = document.getElementById('clear');
+
+  const ignoreWhiteSpaceWhenCountingSwitch = document.getElementById(
+    'ignore-white-space-when-counting'
+  );
+  const ignoreVariationSelectorWhenCountingSwitch = document.getElementById(
+    'ignore-variation-selector-when-counting'
+  );
+  const ignoreFormatWhenCountingSwitch = document.getElementById(
+    'ignore-format-when-counting'
+  );
 
   const fontWeightSlider = document.getElementById('font-weight-slider');
   const italic = document.getElementById('italic');
@@ -143,15 +164,28 @@ document.addEventListener('DOMContentLoaded', async () => {
   rowsSlider.addEventListener('mousedown', onChangeHeightSliderDragStart);
   rowsSlider.addEventListener('touchstart', onChangeHeightSliderDragStart);
 
+  function updateCount() {
+    textarea.removeAttribute('maxlength');
+    let charsArr = processLigatures(input.value.toArray());
+
+    if (ignoreWhiteSpaceWhenCountingSwitch.selected)
+      charsArr = removeItemsFromArray(charsArr, whiteSpaceCharacters);
+    if (ignoreVariationSelectorWhenCountingSwitch.selected)
+      charsArr = removeItemsFromArray(charsArr, variationSelectorCharacters);
+    if (ignoreFormatWhenCountingSwitch.selected)
+      charsArr = removeItemsFromArray(charsArr, formatCharacters);
+
+    counter.innerText = charsArr.length;
+  }
+
   clear.addEventListener('click', () => {
     input.value = '';
-    input.dispatchEvent(new Event('input'));
+    updateCount();
   });
 
-  input.addEventListener('input', () => {
-    textarea.removeAttribute('maxlength');
-    counter.innerText = processLigatures(input.value.toArray()).length;
-  });
+  input.addEventListener('input', updateCount);
+  for (const ele of document.querySelectorAll('[id^="ignore-"]'))
+    ele.addEventListener('change', updateCount);
 
   function changeUrl(url) {
     window.parent.postMessage({ type: 'changeUrl', url }, '*');
