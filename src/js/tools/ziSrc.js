@@ -6,7 +6,7 @@ import '../changeHeader.js';
 import '../iframeColorSchemeSync.js';
 import '../m3ui.js';
 
-import source from '../../data/source.json.txt';
+import source from 'raw-loader!../../data/source.json.txt';
 
 const { sourceDict, sourceComments } = JSON.parse(source);
 const reverseDict = buildReverse(sourceDict);
