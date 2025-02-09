@@ -81,10 +81,6 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader']
       },
-      {
-        test: /\.json\.txt$/,
-        use: 'raw-loader',
-      },
     ],
   },
   plugins: [

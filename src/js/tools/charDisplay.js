@@ -256,8 +256,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       addFontFeatureSettingsName.errorText = !name
         ? '字体特性设置名称不能为空。'
         : addedFontFeatureSettingsName.has(name)
-          ? '该字体特征设置已添加过了，不可再次添加。'
-          : '该字体特征设置无效，请参见 https://learn.microsoft.com/zh-cn/typography/opentype/spec/featurelist 中定义的有效字体特征设置。';
+          ? '该字体特性设置已添加过了，不可再次添加。'
+          : '该字体特性设置无效，请参见 https://learn.microsoft.com/zh-cn/typography/opentype/spec/featurelist 中定义的有效字体特性设置。';
     } else {
       if (addFontFeatureSettingsName.children.length)
         addFontFeatureSettingsName.children[0].remove();
