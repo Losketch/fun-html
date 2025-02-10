@@ -2,6 +2,7 @@ import properties from 'regenerate-unicode-properties';
 
 import decompositions from '../data/decompositions.json';
 import variations from '../data/variations.json';
+import namedSequences from '../data/named_sequences.json';
 
 export default (async () => {
   String.prototype.toArray = function () {
@@ -26,6 +27,7 @@ export default (async () => {
   }
   ligatures.push(...decompositions);
   ligatures.push(...variations);
+  ligatures.push(...namedSequences);
 
   for (let i = 0; i < ligatures.length; i++) {
     for (let j = i + 1; j < ligatures.length; j++) {
