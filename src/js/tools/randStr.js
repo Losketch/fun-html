@@ -164,7 +164,7 @@ import filterDefinedCharacters from '../filterDefinedCharacters.js';
     }
 
     let characters = [];
-    characterSets.includeCustomChar = processLigatures(
+    characterSets.includeCustomChar = await processLigatures(
       customCharEle.value.toArray()
     );
     for (const option in options) {
@@ -192,7 +192,7 @@ import filterDefinedCharacters from '../filterDefinedCharacters.js';
     }
 
     if (options.containsNoUndefinedCharacters) {
-      characters = await filterDefinedCharacters(characters, 4);
+      characters = await filterDefinedCharacters(characters);
     }
 
     let result = '';
