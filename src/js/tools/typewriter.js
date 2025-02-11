@@ -90,7 +90,7 @@ import processLigaturesPromise from '../processLigatures.js';
     cursor.style.width = rect.height / 2 + 'px';
   }
 
-  showButton.addEventListener('click', () => {
+  showButton.addEventListener('click', async () => {
     if (animationFrameId !== null) {
       cancelAnimationFrame(animationFrameId);
       animationFrameId = null;
@@ -114,7 +114,7 @@ import processLigaturesPromise from '../processLigatures.js';
     timingFunction = userTimingFunction;
 
     totalTime = durationInput.value;
-    textArray = processLigaturesString(text.toCharArray());
+    textArray = await processLigaturesString(text.toCharArray());
     startTime = performance.now();
     isPaused = false;
     pauseTime = null;

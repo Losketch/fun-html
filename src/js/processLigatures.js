@@ -1,90 +1,76 @@
 import properties from 'regenerate-unicode-properties';
 
-import decompositions from '../data/decompositions.json';
-import variations from '../data/variations.json';
-import namedSequences from '../data/named_sequences.json';
+import loadLigaturesDataWorker from './workers/loadLigaturesData.worker.js';
+import getLigaturesWorker from './workers/getLigatures.worker.js';
+import processLigaturesWorker from './workers/processLigatures.worker.js';
+
+const loadData = async () => {
+  return new Promise((resolve, reject) => {
+    const worker = new loadLigaturesDataWorker();
+
+    worker.postMessage('load');
+
+    worker.addEventListener('message', event => {
+      if (event.data.error) {
+        reject(new Error(event.data.error));
+      } else {
+        resolve(event.data);
+      }
+      worker.terminate();
+    });
+
+    worker.addEventListener('error', error => {
+      reject(error);
+      worker.terminate();
+    });
+  });
+};
+
+const getLigatures = async () => {
+  const data = await loadData();
+  return new Promise((resolve, reject) => {
+    const worker = new getLigaturesWorker();
+
+    worker.addEventListener('message', event => {
+      const { ligatures, ligatureStrings } = event.data;
+      resolve({ ligatures, ligatureStrings });
+      worker.terminate();
+    });
+
+    worker.addEventListener('error', error => {
+      reject(error);
+      worker.terminate();
+    });
+
+    worker.postMessage({ properties, data });
+  });
+};
 
 export default (async () => {
-  String.prototype.toArray = function () {
-    const arr = [];
-    for (let i = 0; i < this.length; ) {
-      const codePoint = this.codePointAt(i);
-      i += codePoint > 0xffff ? 2 : 1;
-      arr.push(codePoint);
-    }
-    return arr;
-  };
-  const isEqual = (arr1, arr2) =>
-    arr1.length === arr2.length &&
-    arr1.every((val, index) => val === arr2[index]);
+  const { ligatures, ligatureStrings } = await getLigatures();
 
-  const ligatures = [];
-  for (let i of properties.get('Property_of_Strings')) {
-    const { strings } = await import(
-      `regenerate-unicode-properties/Property_of_Strings/${i}.js`
-    );
-    ligatures.push(...strings.map(s => s.toArray()));
-  }
-  ligatures.push(...decompositions);
-  ligatures.push(...variations);
-  ligatures.push(...namedSequences);
+  const worker1 = new processLigaturesWorker();
+  const worker2 = new processLigaturesWorker();
 
-  for (let i = 0; i < ligatures.length; i++) {
-    for (let j = i + 1; j < ligatures.length; j++) {
-      if (isEqual(ligatures[i], ligatures[j])) {
-        ligatures.splice(j, 1);
-        j--;
-      }
-    }
+  worker1.postMessage({ type: 'init', data: { ligatures, ligatureStrings } });
+  worker2.postMessage({ type: 'init', data: { ligatures, ligatureStrings } });
+
+  async function processLigatures(codeArr) {
+    return new Promise(resolve => {
+      worker1.addEventListener('message', event => {
+        resolve(event.data);
+      });
+      worker1.postMessage({ type: 'processLigatures', data: codeArr });
+    });
   }
 
-  ligatures.sort((a, b) => b.length - a.length);
-  const ligatureStrings = ligatures.map(ligature =>
-    ligature.map(code => String.fromCodePoint(code))
-  );
-
-  function mergeSubArrays(mainArray, subArrays) {
-    if (subArrays.length === 0) return mainArray;
-
-    const result = [];
-    let i = 0;
-
-    while (i < mainArray.length) {
-      let matched = false;
-      for (const subArray of subArrays) {
-        let isMatch = true;
-        for (let j = 0; j < subArray.length; j++) {
-          if (mainArray[i + j] !== subArray[j]) {
-            isMatch = false;
-            break;
-          }
-        }
-
-        if (isMatch) {
-          result.push(subArray);
-          i += subArray.length;
-          matched = true;
-          break;
-        }
-      }
-
-      if (!matched) {
-        result.push(mainArray[i]);
-        i++;
-      }
-    }
-
-    return result;
-  }
-
-  function processLigatures(codeArr) {
-    return mergeSubArrays(codeArr, ligatures);
-  }
-
-  function processLigaturesString(charArr) {
-    return mergeSubArrays(charArr, ligatureStrings).map(i =>
-      Array.isArray(i) ? i.join('') : i
-    );
+  async function processLigaturesString(charArr) {
+    return new Promise(resolve => {
+      worker2.addEventListener('message', event => {
+        resolve(event.data);
+      });
+      worker2.postMessage({ type: 'processLigaturesString', data: charArr });
+    });
   }
 
   return { processLigatures, processLigaturesString };

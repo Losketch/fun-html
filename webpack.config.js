@@ -81,6 +81,10 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader']
       },
+      {
+        test: /\.worker\.js$/,
+        use: { loader: 'worker-loader' },
+      }
     ],
   },
   plugins: [
@@ -127,7 +131,7 @@ module.exports = {
       chunks: ['idsAST']
     }),
     new HtmlWebpackPlugin({
-      title: '遠見齋｜字形檢索',
+      title: '字形检索',
       template: './src/html/seeker.html',
       filename: 'tools/seeker.html',
       chunks: ['seeker']
