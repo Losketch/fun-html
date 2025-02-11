@@ -164,9 +164,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   rowsSlider.addEventListener('mousedown', onChangeHeightSliderDragStart);
   rowsSlider.addEventListener('touchstart', onChangeHeightSliderDragStart);
 
-  function updateCount() {
+  async function updateCount() {
     textarea.removeAttribute('maxlength');
-    let charsArr = processLigatures(input.value.toArray());
+    let charsArr = await processLigatures(input.value.toArray());
 
     if (ignoreWhiteSpaceWhenCountingSwitch.selected)
       charsArr = removeItemsFromArray(charsArr, whiteSpaceCharacters);
@@ -178,9 +178,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     counter.innerText = charsArr.length;
   }
 
-  clear.addEventListener('click', () => {
+  clear.addEventListener('click', async () => {
     input.value = '';
-    updateCount();
+    await updateCount();
   });
 
   input.addEventListener('input', updateCount);
