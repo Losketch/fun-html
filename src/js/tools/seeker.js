@@ -180,7 +180,7 @@ const Seeker = {
     );
   },
   getVersion() {
-    return '版本：2.0.0.0   (2025年1月)';
+    return '版本：2.0.1 (2025 年 2 月)';
   },
   variant(w, v) {
     return v && vt[w] ? vt[w] : w;
@@ -575,19 +575,16 @@ const UI = {
     const n = UI.getPos();
     if (n > 0) {
       const s = inputEle.value;
-      let m = n - 1;
+      const sArr = s.substring(0, n).toCharArray();
+      let m = sArr.length - 1;
       let w = s.charPointAt(m);
-      if (w === '\\') {
-        m--;
-        w = s.charPointAt(m);
-      }
-      if (w.length > 1) m--;
+      console.log(m, w, w.codePointAt(0))
 
       const d = subdivideSwitch.selected;
       const t = Seeker.exhaust(w, d, false);
       if (t.length) {
-        inputEle.value = s.slice(0, m) + t + s.slice(n).replace(/\\/g, '');
-        UI.setPos(m + t.length);
+        inputEle.value = sArr.slice(0, sArr.length - 1).join('') + t + s.slice(n).replace(/\\/g, '');
+        UI.setPos(n + t.length);
         UI.go();
       }
     }
