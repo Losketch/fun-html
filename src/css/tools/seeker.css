@@ -548,6 +548,10 @@ button {
   background: var(--md-sys-color-seeker-CMP);
   color: var(--md-sys-color-on-primary) !important;
 }
+.TAN {
+  background: var(--md-sys-color-seeker-TAN);
+  color: var(--md-sys-color-on-primary) !important;
+}
 .SUP {
   background: var(--md-sys-color-seeker-SUP);
   color: var(--md-sys-color-on-primary) !important;

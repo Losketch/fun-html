@@ -39,6 +39,7 @@ const outputElements = {
   ExI: document.getElementById('outputExI'),
   ExJ: document.getElementById('outputExJ'),
   CMP: document.getElementById('outputCMP'),
+  TAN: document.getElementById('outputTAN'),
   SUP: document.getElementById('outputSUP'),
   OTH: document.getElementById('outputOTH')
 };
@@ -106,12 +107,14 @@ const Config = {
   // $UCh$ 表示汉字的16进制小写Unicode变量
   // $UCH$ 表示汉字的16进制大写Unicode变量
   url: 'https://zi.tools/zi/$ENC$',
+  tangutUrl: 'http://ccamc.org/tangut.php?n4694=$ENC$',
 
   // GlyphWiki网站的图片网址，默认输出uxxxxx.svg
   glyphwiki: 'https://seeki.vistudium.top/SVG/',
 
   // 指定哪个Range要采用图片显示 (true=图片显示，false=文本显示)
   useImage: {
+    '-3': false,
     '-2': false,
     '-1': false,
     0: false,
@@ -141,6 +144,7 @@ const Seeker = {
   result: null,
   groups: null,
   blockFlagMap: {
+    '~': 1 << 31,
     '%': 1 << 30,
     $: 1 << 29,
     '&': 1 << 28,
@@ -157,6 +161,7 @@ const Seeker = {
     J: 1 << 10
   },
   blockMap: {
+    '-3': 1 << 31,
     '-2': 1 << 30,
     '-1': 1 << 29,
     0: 1 << 28,
@@ -202,7 +207,7 @@ const Seeker = {
     if (c >= 0x4e00 && c <= 0x9fff) return 1;
     if (c >= 0x3400 && c <= 0x4dbf) return 2;
     if (c >= 0x20000 && c <= 0x2a6df) return 3;
-    if (c >= 0x2a700 && c <= 0x2b739) return 4;
+    if (c >= 0x2a700 && c <= 0x2b73e) return 4;
     if (c >= 0x2b740 && c <= 0x2b81d) return 5;
     if (c >= 0x2b820 && c <= 0x2cea1) return 6;
     if (c >= 0x2ceb0 && c <= 0x2ebe0) return 7;
@@ -213,6 +218,8 @@ const Seeker = {
     if (c >= 0xf900 && c <= 0xfad9) return -1;
     if (c >= 0x2f800 && c <= 0x2fa1d) return -1;
     if (c >= 0xf0270 && c <= 0xfae7a) return -2;
+    if (c >= 0x17000 && c <= 0x18aff) return -3;
+    if (c >= 0x18d00 && c <= 0x18d7f) return -3;
     return 0;
   },
   getData(c) {
@@ -414,6 +421,7 @@ const UI = {
     }
   },
   blockClasses: {
+    '-3': 'TAN',
     '-2': 'SUP',
     '-1': 'CMP',
     0: 'OTH',
@@ -969,7 +977,12 @@ const UI = {
     const block = Seeker.getCJKBlock(entry.unicode);
     const cls = UI.blockClasses[block];
 
-    const url = Config.url
+    let urlTemplate = Config.url;
+    if (block === 'tangut') {
+      urlTemplate = Config.tangutUrl;
+    }
+
+    const url = urlTemplate
       .replace('$CHR$', entry.char)
       .replace('$ENC$', encodeURI(entry.char))
       .replace('$UCD$', entry.unicode.toString())
@@ -1086,6 +1099,7 @@ const UI = {
 
     document.querySelector('.BSC').addEventListener('click', () => UI.key('#'));
     document.querySelector('.CMP').addEventListener('click', () => UI.key('$'));
+    document.querySelector('.TAN').addEventListener('click', () => UI.key('~'));
     document.querySelector('.SUP').addEventListener('click', () => UI.key('%'));
     document.querySelector('.OTH').addEventListener('click', () => UI.key('&'));
 
