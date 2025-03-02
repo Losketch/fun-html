@@ -5,49 +5,35 @@ import '../m3ui.js';
 import '../changeHeader.js';
 import '../iframeColorSchemeSync.js';
 
-const countRange = document.getElementById('count-range');
 const input = document.getElementById('input');
 const output = document.getElementById('output');
 const genButton = document.getElementById('gen-button');
 const copyButton = document.getElementById('copy-button');
 
-String.prototype.toArray = function () {
+String.prototype.toCharArray = function () {
   const arr = [];
   for (let i = 0; i < this.length; ) {
     const codePoint = this.codePointAt(i);
     i += codePoint > 0xffff ? 2 : 1;
-    arr.push(codePoint);
+    arr.push(String.fromCodePoint(codePoint));
   }
   return arr;
 };
 
-const chars = Array.from({ length: 111 }, (_, i) =>
-  String.fromCodePoint(i + 0x300 < 0x34f ? i + 0x300 : i + 0x301)
-);
-
-function zalog(s, minimum = 5, maximum = 10) {
-  return s
-    .toArray()
-    .map(
-      c =>
-        String.fromCodePoint(c) +
-        Array.from(
-          {
-            length:
-              Math.floor(Math.random() * (maximum - minimum + 1)) + minimum
-          },
-          () => chars[Math.floor(Math.random() * chars.length)]
-        ).join('')
-    )
-    .join('');
+function zip(...arrays) {
+  const minLength = Math.min(...arrays.map(arr => arr.length));
+  return Array.from(
+    { length: minLength },
+    (_, i) => arrays.map(arr => arr[i])
+  );
 }
 
+const rot180DegMapping = Object.fromEntries(zip('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.toCharArray(), 'ɐqɔpǝɟᵷɥᴉ̣ſʞɿɯuodbɹsʇnʌʍxʎzⱯꓭƆꓷƎℲ⅁HIꓩꞰꞀꟽNOԀꝹꓤSꞱꓵΛMX⅄Z'.toCharArray()))
+
 genButton.addEventListener('click', () => {
-  output.value = zalog(
-    input.value,
-    +countRange.valueStart,
-    +countRange.valueEnd
-  );
+  const original = input.value;
+  const rotated = original.toCharArray().map(c => rot180DegMapping[c] ?? c).reverse()
+  output.value = rotated.join('');
 });
 
 copyButton.addEventListener('click', () => {
