@@ -22,7 +22,8 @@ module.exports = {
     pointMoveWithSeg: './src/js/tools/pointMoveWithSeg.js',
     randFuck: './src/js/tools/randFuck.js',
     typewriter: './src/js/tools/typewriter.js',
-    ziSrc: './src/js/tools/ziSrc.js'
+    ziSrc: './src/js/tools/ziSrc.js',
+    rot180deg: './src/js/tools/rot180deg.js'
   },
   output: {
     filename: 'js/[name].js',
@@ -201,6 +202,12 @@ module.exports = {
       template: './src/html/ziSrc.html',
       filename: 'tools/ziSrc.html',
       chunks: ['ziSrc']
+    }),
+    new HtmlWebpackPlugin({
+      title: '倒立字符生成器',
+      template: './src/html/rot180deg.html',
+      filename: 'tools/rot180deg.html',
+      chunks: ['rot180deg']
     })
   ],
   mode: 'production'

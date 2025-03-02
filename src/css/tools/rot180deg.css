@@ -1,0 +1,20 @@
+.opts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btns {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#input,
+#output {
+  width: 100%;
+}
+
+#output {
+  margin: 8px 0;
+}
