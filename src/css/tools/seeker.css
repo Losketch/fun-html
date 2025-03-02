@@ -489,6 +489,9 @@ tbody > tr:last-child > td:last-child {
 .K4 {
   color: var(--md-sys-color-seeker-K4) !important;
 }
+.K5 {
+  color: var(--md-sys-color-seeker-K5) !important;
+}
 
 body {
   background: var(--md-sys-color-background);
