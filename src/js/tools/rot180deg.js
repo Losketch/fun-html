@@ -1,5 +1,5 @@
 import '../../css/mainStyles.css';
-import '../../css/tools/zalog.css';
+import '../../css/tools/rot180deg.css';
 
 import '../m3ui.js';
 import '../changeHeader.js';
@@ -22,17 +22,22 @@ String.prototype.toCharArray = function () {
 
 function zip(...arrays) {
   const minLength = Math.min(...arrays.map(arr => arr.length));
-  return Array.from(
-    { length: minLength },
-    (_, i) => arrays.map(arr => arr[i])
-  );
+  return Array.from({ length: minLength }, (_, i) => arrays.map(arr => arr[i]));
 }
 
-const rot180DegMapping = Object.fromEntries(zip('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.toCharArray(), 'ɐqɔpǝɟᵷɥᴉ̣ſʞɿɯuodbɹsʇnʌʍxʎzⱯꓭƆꓷƎℲ⅁HIꓩꞰꞀꟽNOԀꝹꓤSꞱꓵΛMX⅄Z'.toCharArray()))
+const rot180DegMapping = Object.fromEntries(
+  zip(
+    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.toCharArray(),
+    'ɐqɔpǝɟᵷɥᴉ̣ſʞɿɯuodbɹsʇnʌʍxʎzⱯꓭƆꓷƎℲ⅁HIꓩꞰꞀꟽNOԀꝹꓤSꞱꓵΛMX⅄Z'.toCharArray()
+  )
+);
 
 genButton.addEventListener('click', () => {
   const original = input.value;
-  const rotated = original.toCharArray().map(c => rot180DegMapping[c] ?? c).reverse()
+  const rotated = original
+    .toCharArray()
+    .map(c => rot180DegMapping[c] ?? c)
+    .reverse();
   output.value = rotated.join('');
 });
 

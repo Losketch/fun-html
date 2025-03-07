@@ -23,7 +23,7 @@ module.exports = {
     randFuck: './src/js/tools/randFuck.js',
     typewriter: './src/js/tools/typewriter.js',
     ziSrc: './src/js/tools/ziSrc.js',
-    rot180deg: './src/js/tools/rot180deg.js'
+    rot180deg: './src/js/tools/rot180deg.js',
   },
   output: {
     filename: 'js/[name].js',
