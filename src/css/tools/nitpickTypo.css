@@ -1,0 +1,30 @@
+.typoal-texts {
+  border: 1px solid var(--md-sys-color-outline);
+  border-radius: 4px;
+  padding: 4px;
+  width: 100%;
+}
+
+.typo.found {
+  background-color: var(--md-sys-color-error);
+  color: var(--md-sys-color-on-error);
+  margin-left: 0.05rem;
+}
+
+.typo.correct {
+  background-color: var(--md-sys-color-correct);
+  color: var(--md-sys-color-on-correct);
+  margin-right: 0.05rem;
+}
+
+.remain {
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.contrals {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 8px;
+}

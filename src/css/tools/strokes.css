@@ -23,19 +23,6 @@ main > div > div {
   border-radius: 10px;
 }
 
-.no-glyph-in-plgo {
-  color: var(--md-sys-color-on-no-glyph-in-plgo);
-  box-shadow: 0 -2px var(--md-sys-color-shadow-gray) inset;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  font-size: unset;
-}
-
-.no-glyph-in-plgo:hover {
-  cursor: pointer;
-  box-shadow: 0px -1.8rem 0px var(--md-sys-color-shadow-gray-hover) inset;
-}
-
 hr {
   margin: 1px;
 }
