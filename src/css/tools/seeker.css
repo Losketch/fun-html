@@ -53,7 +53,7 @@
 .set-v2-popup-symbol {
   height: 38px;
   font-size: 32px;
-  font-family: PUAExt, plgo1, plgo2, Source, ffallback;
+  font-family: PUAExt, plgo1, plgo2, Source;
   line-height: 38px;
 }
 
@@ -65,7 +65,7 @@
   width: 100%;
   vertical-align: bottom;
   font-size: 14px;
-  font-family: PUAExt, plgo1, plgo2, Source, ffallback;
+  font-family: PUAExt, plgo1, plgo2, Source;
   line-height: 1;
 }
 
@@ -106,19 +106,14 @@ span.btn:hover {
   src: url(../../../assets/fonts/display/NotoSansSC.woff2);
 }
 @font-face {
-  font-family: ffallback;
-  src: url('../../../assets/fonts/display/Monu Hanp.woff2');
-}
-@font-face {
   font-family: dela;
   src: url(../../../assets/fonts/display/dela.woff2);
 }
 
 #result [id^='output'] a,
 .han {
-  font-family: PUAExt, plgo1, plgo2, Source, ffallback;
-  --md-outlined-text-field-input-text-font: PUAExt, plgo1, plgo2, Source,
-    ffallback;
+  font-family: PUAExt, plgo1, plgo2, Source;
+  --md-outlined-text-field-input-text-font: PUAExt, plgo1, plgo2, Source;
 }
 
 #input {

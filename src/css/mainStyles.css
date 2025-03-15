@@ -80,6 +80,8 @@
   --md-sys-color-shadow-sidebar: #00000080;
   --md-sys-color-extra: #ffaa33;
   --md-sys-color-on-extra: #653f14;
+  --md-sys-color-correct: #1aba1a;
+  --md-sys-color-on-correct: #ffffff;
 
   --md-sys-color-seeker-K1: #4b4bff;
   --md-sys-color-seeker-K2: #0b7e44;
@@ -165,6 +167,8 @@
   --md-sys-color-shadow-sidebar: #ffffff85;
   --md-sys-color-extra: #ffbe73;
   --md-sys-color-on-extra: #472d12;
+  --md-sys-color-correct: #b4ffab;
+  --md-sys-color-on-correct: #006905;
 
   --md-sys-color-seeker-BSC: #111111;
   --md-sys-color-seeker-ExA: #0078b7;

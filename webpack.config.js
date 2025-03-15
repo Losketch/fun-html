@@ -24,6 +24,7 @@ module.exports = {
     typewriter: './src/js/tools/typewriter.js',
     ziSrc: './src/js/tools/ziSrc.js',
     rot180deg: './src/js/tools/rot180deg.js',
+    nitpickTypo: './src/js/tools/nitpickTypo.js'
   },
   output: {
     filename: 'js/[name].js',
@@ -208,6 +209,12 @@ module.exports = {
       template: './src/html/rot180deg.html',
       filename: 'tools/rot180deg.html',
       chunks: ['rot180deg']
+    }),
+    new HtmlWebpackPlugin({
+      title: '错别字找茬',
+      template: './src/html/nitpickTypo.html',
+      filename: 'tools/nitpickTypo.html',
+      chunks: ['nitpickTypo']
     })
   ],
   mode: 'production'
