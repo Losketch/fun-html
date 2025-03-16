@@ -27,7 +27,7 @@
                 value="20"
                 step="1"
                 id="wpm-slider"></md-slider>
-              </md-list-item>
+            </md-list-item>
             <md-list-item>
               字符间隔长度
               <md-slider
@@ -38,7 +38,7 @@
                 value="3"
                 step="1"
                 id="wi-slider"></md-slider>
-              </md-list-item>
+            </md-list-item>
             <md-list-item>
               划点长度比
               <md-slider
@@ -49,7 +49,7 @@
                 value="3"
                 step="1"
                 id="ddr-slider"></md-slider>
-              </md-list-item>
+            </md-list-item>
             <md-list-item>
               频率
               <md-slider
@@ -60,23 +60,28 @@
                 value="790"
                 step="1"
                 id="freq-slider"></md-slider>
-              </md-list-item>
-            </md-list>
-            <div class="btns">
-              <md-filled-tonal-button id="encode-button">
-                编码并收听
-              </md-filled-tonal-button>
-              <md-filled-tonal-button id="stop-button">
-                停止
-              </md-filled-tonal-button>
-              <md-filled-tonal-button id="download-button">
-                收听并下载
-              </md-filled-tonal-button>
-            </div>
+            </md-list-item>
+          </md-list>
+          <div class="btns">
+            <md-filled-tonal-button id="encode-button">
+              编码并收听
+            </md-filled-tonal-button>
+            <md-filled-tonal-button id="stop-button">
+              停止
+            </md-filled-tonal-button>
+            <md-filled-tonal-button id="download-button">
+              收听并下载
+            </md-filled-tonal-button>
           </div>
           <div>
-            <p>注：这并不是传统意义上的莫尔斯电码，它的实现方式是：把字符转成 Unicode 码，然后再转成二进制，0 对应 ⋅，1对应 -。</p>
-            <p>例：「落」的 Unicode 码是 U+843D，转成二进制就是「1000010000111101」，所以「落」的莫尔斯电码是「-⋅⋅⋅⋅-⋅⋅⋅⋅----⋅-」。</p>
+            <p
+              >注：这并不是传统意义上的莫尔斯电码，它的实现方式是：把字符转成
+              Unicode 码，然后再转成二进制，0 对应 ⋅，1对应 -。</p
+            >
+            <p
+              >例：「落」的 Unicode 码是
+              U+843D，转成二进制就是「1000010000111101」，所以「落」的莫尔斯电码是「-⋅⋅⋅⋅-⋅⋅⋅⋅----⋅-」。</p
+            >
           </div>
         </div>
       </main>
