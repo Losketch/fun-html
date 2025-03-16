@@ -24,7 +24,8 @@ module.exports = {
     typewriter: './src/js/tools/typewriter.js',
     ziSrc: './src/js/tools/ziSrc.js',
     rot180deg: './src/js/tools/rot180deg.js',
-    nitpickTypo: './src/js/tools/nitpickTypo.js'
+    nitpickTypo: './src/js/tools/nitpickTypo.js',
+    morse: './src/js/tools/morse.js'
   },
   output: {
     filename: 'js/[name].js',
@@ -215,6 +216,12 @@ module.exports = {
       template: './src/html/nitpickTypo.html',
       filename: 'tools/nitpickTypo.html',
       chunks: ['nitpickTypo']
+    }),
+    new HtmlWebpackPlugin({
+      title: '莫尔斯电报机',
+      template: './src/html/morse.html',
+      filename: 'tools/morse.html',
+      chunks: ['morse']
     })
   ],
   mode: 'production'
