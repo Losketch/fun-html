@@ -25,7 +25,8 @@ module.exports = {
     ziSrc: './src/js/tools/ziSrc.js',
     rot180deg: './src/js/tools/rot180deg.js',
     nitpickTypo: './src/js/tools/nitpickTypo.js',
-    morse: './src/js/tools/morse.js'
+    morse: './src/js/tools/morse.js',
+    fuckToFly: './src/js/tools/fuckToFly.js'
   },
   output: {
     filename: 'js/[name].js',
@@ -74,10 +75,19 @@ module.exports = {
         }
       },
       {
-        test: /\.(png|jpe?g|gif|svg|ico|webmanifest)$/i,
+        test: /.(webmanifest|png|ico)$/,
+        include: path.resolve(__dirname, 'assets/favicon'),
         type: 'asset/resource',
         generator: {
           filename: 'assets/favicon/[name][ext]'
+        }
+      },
+      {
+        test: /.jpg/,
+        include: path.resolve(__dirname, 'assets/images'),
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/images/[name][ext]'
         }
       },
       {
@@ -222,6 +232,12 @@ module.exports = {
       template: './src/html/morse.html',
       filename: 'tools/morse.html',
       chunks: ['morse']
+    }),
+    new HtmlWebpackPlugin({
+      title: '全部草飞！',
+      template: './src/html/fuckToFly.html',
+      filename: 'tools/fuckToFly.html',
+      chunks: ['fuckToFly']
     })
   ],
   mode: 'production'
