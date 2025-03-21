@@ -1,40 +1,16 @@
 @font-face {
-  font-family: 'SarasaMonoSC';
+  font-family: 'SarasaMonoSC-Bold';
   src: url('../../../assets/fonts/fuckToFly/SarasaMonoSC-Bold.woff2')
     format('woff2');
 }
 
-.wrapper {
-  position: relative;
-  overflow: hidden;
+.canvas {
   width: 100%;
-  margin-bottom: 16px;
   aspect-ratio: 1 / calc(928 / 1080);
+  margin-bottom: 16px;
 }
 
-.bg {
-  width: 100%;
-  position: absolute;
-}
-
-.text,
-.text2 {
-  width: 100%;
-  box-sizing: border-box;
-  text-align: center;
-  top: 0.7em;
-  padding: 0 0.3em;
-  font-size: 5rem;
-  color: #5972ff;
-  transform: skew(-10deg, -12deg);
-  position: absolute;
-  font-family: 'SarasaMonoSC';
-}
-
-.text {
-  -webkit-text-stroke: 0.07em #6f87fe;
-  text-shadow:
-    -0.04em -0.04em 0.06em #00000055,
-    0.08em 0.08em 0.06em #00000088,
-    0.15em 0.15em 0.12em #00000077;
+.btn {
+  display: flex;
+  justify-content: center;
 }
