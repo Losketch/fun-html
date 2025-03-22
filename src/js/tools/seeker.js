@@ -254,7 +254,20 @@ const Seeker = {
       } else if (query.length) {
         // 搜尋陣列還有值
         const pos = query.indexOf(Seeker.variant(w, variant)); // 在搜尋陣列中尋找這個字的位置
-        if (pos >= 0) {
+        if (pos < 0) {
+          // 找不到的話，把拆分字串再拆开遞迴一層
+          /* 递归逻辑
+          const subData = Seeker.getData(w.codePointAt(0));
+          if (subData) {
+            const backup2 = query.concat();
+            if (Seeker.eliminate(query, subData, ignore, divide, variant)) {
+              res = true;
+            } else {
+              query.length = 0;
+              query.push(...backup2);
+            }
+          }*/
+        } else {
           query.splice(pos, 1); // 找到了：從搜尋陣列刪除這個字
           res |= true;
         }
