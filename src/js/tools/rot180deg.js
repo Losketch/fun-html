@@ -28,7 +28,7 @@ function zip(...arrays) {
 const rot180DegMapping = Object.fromEntries(
   zip(
     'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.toCharArray(),
-    'ɐqɔpǝɟᵷɥᴉ̣ſʞɿɯuodbɹsʇnʌʍxʎzⱯꓭƆꓷƎℲ⅁HIꓩꞰꞀꟽNOԀꝹꓤSꞱꓵΛMX⅄Z'.toCharArray()
+    'ɐqɔpǝɟᵷɥᴉſʞɿɯuodbɹsʇnʌʍxʎzⱯꓭƆꓷƎℲ⅁HIꓩꞰꞀꟽNOԀꝹꓤSꞱꓵΛMX⅄Z'.toCharArray()
   )
 );
 
