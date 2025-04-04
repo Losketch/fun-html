@@ -42,49 +42,13 @@
 
 @font-face {
   font-family: 'Segoe';
-  src: url('../../assets/fonts/display/Segoe UI Historic-edt.woff2')
-    format('woff2');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Segoe';
-  src: url('../../assets/fonts/display/Segoe UI Symbol-edt.woff2')
-    format('woff2');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Segoe';
-  src: url('../../assets/fonts/display/Segoe UI-edt.woff2') format('woff2');
+  src: url('../../assets/fonts/display/Segoe UI EHS-edt.woff2') format('woff2');
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Microsoft';
-  src: url('../../assets/fonts/display/Microsoft Tai Le-edt.woff2')
-    format('woff2');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Microsoft';
-  src: url('../../assets/fonts/display/Microsoft New Tai Lue-edt.woff2')
-    format('woff2');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Microsoft';
-  src: url('../../assets/fonts/display/Microsoft Yi Baiti-edt.woff2')
-    format('woff2');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Microsoft';
-  src: url('../../assets/fonts/display/Microsoft PhagsPa-edt.woff2')
-    format('woff2');
+  src: url('../../assets/fonts/display/Microsoft TNYP-edt.woff2') format('woff2');
   font-display: swap;
 }
 
@@ -96,43 +60,7 @@
 
 @font-face {
   font-family: 'others';
-  src: url('../../assets/fonts/display/Ebrima-edt.woff2') format('woff2');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'others';
-  src: url('../../assets/fonts/display/Nirmala UI-edt.woff2') format('woff2');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'others';
-  src: url('../../assets/fonts/display/Leelawadee UI-edt.woff2') format('woff2');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'others';
-  src: url('../../assets/fonts/display/Myanmar Text-edt.woff2') format('woff2');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'others';
-  src: url('../../assets/fonts/display/Calibri-edt.woff2') format('woff2');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'others';
-  src: url('../../assets/fonts/display/Gadugi-edt.woff2') format('woff2');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'others';
-  src: url('../../assets/fonts/display/Javanese Text-edt.woff2') format('woff2');
+  src: url('../../assets/fonts/display/ENLMCGJ Text-edt.woff2') format('woff2');
   font-display: swap;
 }
 
