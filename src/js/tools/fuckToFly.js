@@ -106,7 +106,7 @@ function saveCanvasToPNG(canvas, fileName) {
     link.download = fileName;
 
     link.click();
-    URL.revokeObjectURL(url);
+    setTimeout(() => URL.revokeObjectURL(url), 10000);
   }, 'image/png');
 }
 
