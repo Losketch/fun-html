@@ -49,7 +49,7 @@ let style = null;
 let cells = [];
 let gap = 50;
 
-let bitLen = BigInt(typeCount.toString(2).length);
+let bitLen = BigInt(Math.floor(Math.log2(typeCount - 1)) + 1);
 
 function toggle(e) {
   const cell = e.target;
@@ -181,15 +181,16 @@ function prevGeneration() {
   updateCount();
 }
 
-function bigintToArray(bigint) {
-  const result = [];
+function bigintToArray(bigInt) {
+  let bytes = [];
+  let temp = bigInt;
 
-  while (bigint > 0) {
-    result.push(Number(bigint & BigInt(0xff)));
-    bigint >>= BigInt(8);
+  while (temp > 0n) {
+    bytes.unshift(Number(temp & 0xffn));
+    temp = temp >> 8n;
   }
 
-  return result.reverse();
+  return bytes;
 }
 
 function intToArray(int) {
@@ -274,7 +275,7 @@ async function setRule() {
   if (await confirm('警告：这将会重置网格，是否设置规则？')) {
     reset();
     resetRule(rule);
-    bitLen = BigInt((typeCount - 1).toString(2).length);
+    bitLen = BigInt(Math.floor(Math.log2(typeCount - 1)) + 1);
     resetStyle(typeCount);
   }
 }
@@ -307,6 +308,10 @@ function updateCount() {
 }
 
 exportBtn.addEventListener('click', async () => {
+  if (generations.length === 0) {
+    alert('现在还没有代，无法导出，请点击「保存为一代」按钮后重试。');
+    return;
+  }
   const data = new Uint8Array([
     Math.ceil((+birth.join('')).toString(16).length / 2),
     ...intToArray(+birth.join('')),
@@ -325,7 +330,7 @@ exportBtn.addEventListener('click', async () => {
     '请输入文件名（无后缀名）（点击取消则使用默认文件名）'
   );
   a.href = url;
-  a.download = fileName === null ? 'data.bin' : fileName + '.bin';
+  a.download = fileName === null || fileName === '' ? 'data.bin' : fileName + '.bin';
   a.click();
 });
 
@@ -364,7 +369,7 @@ importInp.addEventListener('change', event => {
 
           resetRule(`B${mainInfo[0]}/S${mainInfo[1]}/C${mainInfo[2]}`);
           size = mainInfo[3];
-          bitLen = BigInt((typeCount - 1).toString(2).length);
+          bitLen = BigInt(Math.floor(Math.log2(typeCount - 1)) + 1);
           count = size ** 2;
           cells = [];
           resetGrid(size);
