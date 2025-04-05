@@ -4,6 +4,10 @@
     format('woff2');
 }
 
+.input {
+  width: 100%;
+}
+
 .canvas {
   width: 100%;
   aspect-ratio: 1 / calc(928 / 1080);
