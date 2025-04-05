@@ -374,8 +374,8 @@ importInp.addEventListener('change', event => {
           toGeneration(generation);
           event.target.value = '';
         }
-      } catch {
-        alert('选择的文件可能无效');
+      } catch (e) {
+        alert(`导入时发生错误：\n${e.stack}`);
         return;
       }
     });
