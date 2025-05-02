@@ -207,9 +207,9 @@ const Seeker = {
     if (c >= 0x4e00 && c <= 0x9fff) return 1;
     if (c >= 0x3400 && c <= 0x4dbf) return 2;
     if (c >= 0x20000 && c <= 0x2a6df) return 3;
-    if (c >= 0x2a700 && c <= 0x2b73e) return 4;
+    if (c >= 0x2a700 && c <= 0x2b73f) return 4;
     if (c >= 0x2b740 && c <= 0x2b81d) return 5;
-    if (c >= 0x2b820 && c <= 0x2cea1) return 6;
+    if (c >= 0x2b820 && c <= 0x2cead) return 6;
     if (c >= 0x2ceb0 && c <= 0x2ebe0) return 7;
     if (c >= 0x30000 && c <= 0x3134a) return 8;
     if (c >= 0x31350 && c <= 0x323af) return 9;

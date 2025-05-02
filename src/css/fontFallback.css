@@ -41,27 +41,8 @@
 }
 
 @font-face {
-  font-family: 'Segoe';
-  src: url('../../assets/fonts/display/Segoe UI EHS-edt.woff2') format('woff2');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Microsoft';
-  src: url('../../assets/fonts/display/Microsoft TNYP-edt.woff2')
-    format('woff2');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'others';
-  src: url('../../assets/fonts/display/MV Boli-edt.woff2') format('woff2');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'others';
-  src: url('../../assets/fonts/display/ENLMCGJ Text-edt.woff2') format('woff2');
+  font-family: 'NotoSansSuper';
+  src: url('../../assets/fonts/display/NotoSansSuper.woff2') format('woff2');
   font-display: swap;
 }
 
@@ -80,7 +61,7 @@
 
 .font {
   --font: Ctrl-Ctrl, Plgo1, Noto-Color-Emoji, Plgo2, Noto, NotoSansSC,
-    NotoSansKR, Monu, Segoe, Microsoft, others, sans-serif, Last;
+    NotoSansKR, Monu, NotoSansSuper, sans-serif, Last;
   font-family: var(--font);
   --md-filled-text-field-input-text-font: var(--font);
   --md-outlined-text-field-input-text-font: var(--font);
@@ -90,7 +71,7 @@
 
 .font-without-ctrlctrl {
   --font: Plgo1, Noto-Color-Emoji, Plgo2, Noto, NotoSansSC, NotoSansKR, Monu,
-    Segoe, Microsoft, others, sans-serif, Last;
+    NotoSansSuper, sans-serif, Last;
   font-family: var(--font);
   --md-filled-text-field-input-text-font: var(--font);
   --md-outlined-text-field-input-text-font: var(--font);
@@ -100,7 +81,7 @@
 
 .font-idc {
   --font: IDC, Plgo1, Noto-Color-Emoji, Plgo2, Noto, NotoSansSC, NotoSansKR,
-    Monu, Segoe, Microsoft, others, sans-serif, Last;
+    Monu, NotoSansSuper, sans-serif, Last;
   font-family: var(--font);
   --md-filled-text-field-input-text-font: var(--font);
   --md-outlined-text-field-input-text-font: var(--font);
