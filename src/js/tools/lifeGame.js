@@ -330,7 +330,8 @@ exportBtn.addEventListener('click', async () => {
     '请输入文件名（无后缀名）（点击取消则使用默认文件名）'
   );
   a.href = url;
-  a.download = fileName === null || fileName === '' ? 'data.bin' : fileName + '.bin';
+  a.download =
+    fileName === null || fileName === '' ? 'data.bin' : fileName + '.bin';
   a.click();
 });
 
