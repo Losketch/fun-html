@@ -35,6 +35,12 @@
 }
 
 @font-face {
+  font-family: 'NotoSansKR';
+  src: url('../../assets/fonts/display/NotoSansKR.woff2') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Monu';
   src: url('../../assets/fonts/display/Monu Temp.woff2') format('woff2');
   font-display: swap;
