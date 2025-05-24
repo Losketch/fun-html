@@ -1,11 +1,11 @@
-import '../../css/mainStyles.css';
-import '../../css/nerd-fonts-generated.min.css';
-import '../../css/tools/lifeGame.css';
+import '@css/mainStyles.css';
+import '@css/nerd-fonts-generated.min.css';
+import '@css/pages/lifeGame.css';
 
-import '../m3ui.js';
-import '../dialogs.js';
-import '../changeHeader.js';
-import '../iframeColorSchemeSync.js';
+import '@js/m3ui.js';
+import '@js/dialogs.js';
+import '@js/changeHeader.js';
+import '@js/iframeColorSchemeSync.js';
 
 let birth = [3];
 let star = [2, 3];

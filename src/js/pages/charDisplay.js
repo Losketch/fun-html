@@ -1,13 +1,13 @@
-import '../../css/mainStyles.css';
-import '../../css/fontFallback.css';
-import '../../css/nerd-fonts-generated.min.css';
-import '../../css/tools/charDisplay.css';
+import '@css/mainStyles.css';
+import '@css/fontFallback.css';
+import '@css/nerd-fonts-generated.min.css';
+import '@css/pages/charDisplay.css';
 
-import '../m3ui.js';
-import '../dialogs.js';
-import '../changeHeader.js';
-import '../iframeColorSchemeSync.js';
-import processLigaturesPromise from '../processLigatures.js';
+import '@js/m3ui.js';
+import '@js/dialogs.js';
+import '@js/changeHeader.js';
+import '@js/iframeColorSchemeSync.js';
+import processLigaturesPromise from '@js/processLigatures.js';
 
 import { characters as whiteSpace } from 'regenerate-unicode-properties/Binary_Property/White_Space.js';
 import { characters as variationSelector } from 'regenerate-unicode-properties/Binary_Property/Variation_Selector.js';

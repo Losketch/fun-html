@@ -1,9 +1,9 @@
-import '../../css/mainStyles.css';
-import '../../css/tools/rot180deg.css';
+import '@css/mainStyles.css';
+import '@css/pages/rot180deg.css';
 
-import '../m3ui.js';
-import '../changeHeader.js';
-import '../iframeColorSchemeSync.js';
+import '@js/m3ui.js';
+import '@js/changeHeader.js';
+import '@js/iframeColorSchemeSync.js';
 
 const input = document.getElementById('input');
 const output = document.getElementById('output');

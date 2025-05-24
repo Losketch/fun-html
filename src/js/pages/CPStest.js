@@ -1,9 +1,9 @@
-import '../../css/mainStyles.css';
-import '../../css/tools/CPStest.css';
+import '@css/mainStyles.css';
+import '@css/pages/CPStest.css';
 
-import '../m3ui.js';
-import '../changeHeader.js';
-import '../iframeColorSchemeSync.js';
+import '@js/m3ui.js';
+import '@js/changeHeader.js';
+import '@js/iframeColorSchemeSync.js';
 
 let countdown = 30;
 let timer;

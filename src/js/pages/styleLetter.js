@@ -1,13 +1,13 @@
-import '../../css/mainStyles.css';
-import '../../css/fontFallback.css';
-import '../../css/select.css';
-import '../../css/nerd-fonts-generated.min.css';
-import '../../css/tools/styleLetter.css';
+import '@css/mainStyles.css';
+import '@css/fontFallback.css';
+import '@css/select.css';
+import '@css/nerd-fonts-generated.min.css';
+import '@css/pages/styleLetter.css';
 
-import '../m3ui.js';
-import '../changeHeader.js';
-import '../iframeColorSchemeSync.js';
-import '../select.js';
+import '@js/m3ui.js';
+import '@js/changeHeader.js';
+import '@js/iframeColorSchemeSync.js';
+import '@js/select.js';
 
 String.prototype.toArray = function () {
   let arr = [];

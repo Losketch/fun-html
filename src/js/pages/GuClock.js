@@ -1,10 +1,10 @@
-import '../../css/mainStyles.css';
-import '../../css/refuse.css';
-import '../../css/tools/GuClock.css';
+import '@css/mainStyles.css';
+import '@css/refuse.css';
+import '@css/pages/GuClock.css';
 
-import '../m3ui.js';
-import '../changeHeader.js';
-import '../iframeColorSchemeSync.js';
+import '@js/m3ui.js';
+import '@js/changeHeader.js';
+import '@js/iframeColorSchemeSync.js';
 
 let time = [0, 0, 0];
 let prevTime = Date.now();

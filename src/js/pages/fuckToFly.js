@@ -1,12 +1,12 @@
-import '../../css/mainStyles.css';
-import '../../css/tools/fuckToFly.css';
+import '@css/mainStyles.css';
+import '@css/pages/fuckToFly.css';
 
-import '../m3ui.js';
-import '../changeHeader.js';
-import '../iframeColorSchemeSync.js';
+import '@js/m3ui.js';
+import '@js/changeHeader.js';
+import '@js/iframeColorSchemeSync.js';
 
-import fuckToFlyImg from '../../../assets/images/fuckToFly.jpg';
-import sarasaMonoSCBoldFont from '../../../assets/fonts/fuckToFly/SarasaMonoSC-Bold.woff2';
+import fuckToFlyImg from '@assets/images/fuckToFly.jpg';
+import sarasaMonoSCBoldFont from '@assets/fonts/fuckToFly/SarasaMonoSC-Bold.woff2';
 
 const dpr = window.devicePixelRatio ?? 1;
 
@@ -21,7 +21,6 @@ const saveBtn = document.getElementById('save');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-// 加载字体
 async function loadFont() {
   const font = new FontFace(
     'SarasaMonoSC-Bold',
@@ -35,7 +34,6 @@ async function loadFont() {
   return;
 }
 
-// 加载图片
 function loadImage(src) {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -50,19 +48,16 @@ function drawText(text, fontSize, skewX, skewY, x, y) {
   ctx.save();
   ctx.font = `${fontSize}px "SarasaMonoSC-Bold"`;
 
-  // 应用倾斜变换
   const skewXRadian = (skewX * Math.PI) / 180;
   const skewYRadian = (skewY * Math.PI) / 180;
   ctx.transform(1, Math.tan(skewYRadian), Math.tan(skewXRadian), 1, 0, 0);
 
-  // 设置样式
   const emToPx = em => em * fontSize;
 
   ctx.fillStyle = '#5972ff';
   ctx.strokeStyle = '#6f87fe';
   ctx.lineWidth = emToPx(0.07);
 
-  // 绘制描边和填充
   ctx.shadowOffsetX = emToPx(0.08);
   ctx.shadowOffsetY = emToPx(0.08);
   ctx.shadowColor = '#00000088';
@@ -85,15 +80,12 @@ function drawText(text, fontSize, skewX, skewY, x, y) {
   ctx.restore();
 }
 
-// 初始化 Canvas
 function initCanvas() {
   const computedStyle = getComputedStyle(canvas);
 
-  // 设置物理尺寸
   canvas.width = Math.floor(parseFloat(computedStyle.width) * dpr);
   canvas.height = Math.floor(parseFloat(computedStyle.height) * dpr);
 
-  // 缩放上下文
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.scale(dpr, dpr);
 }
