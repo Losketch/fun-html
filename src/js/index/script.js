@@ -1,19 +1,20 @@
-import '../../../assets/favicon/site.webmanifest';
-import '../../../assets/favicon/favicon-16x16.png';
-import '../../../assets/favicon/favicon-32x32.png';
-import '../../../assets/favicon/android-chrome-192x192.png';
-import '../../../assets/favicon/android-chrome-512x512.png';
-import '../../../assets/favicon/apple-touch-icon.png';
-import '../../../assets/favicon/favicon.ico';
+import '@assets/favicon/site.webmanifest';
+import '@assets/favicon/favicon-16x16.png';
+import '@assets/favicon/favicon-32x32.png';
+import '@assets/favicon/android-chrome-192x192.png';
+import '@assets/favicon/android-chrome-512x512.png';
+import '@assets/favicon/apple-touch-icon.png';
+import '@assets/favicon/favicon.ico';
 
-import '../../css/nerd-fonts-generated.min.css';
-import '../../css/fontFallback.css';
-import '../../css/mainStyles.css';
-import '../../css/index/styles.css';
+import '@css/nerd-fonts-generated.min.css';
+import '@css/fontFallback.css';
+import '@css/mainStyles.css';
+import '@css/index/styles.css';
 
-import '../m3ui.js';
-import '../dialogs.js';
-import '../dark.js';
+import '@js/m3ui.js';
+import '@js/dialogs.js';
+import '@js/dark.js';
+import { flatPages } from '@data/pages.js';
 
 const content = document.getElementById('content');
 const mainContent = document.getElementById('main-content');
@@ -35,9 +36,35 @@ function animateContent() {
   }, 50);
 }
 
+function updateURLParams(newParams) {
+  const url = new URL(window.location.href);
+
+  Object.entries(newParams).forEach(([key, value]) => {
+    if (value === null || value === undefined) {
+      url.searchParams.delete(key);
+    } else {
+      url.searchParams.set(key, value);
+    }
+  });
+
+  window.history.pushState({}, '', url.toString());
+}
+
 function loadContent(url) {
-  const timestamp = new Date().getTime();
-  mainContent.src = `${url}?t=${timestamp}`;
+  const regex = /\/pages\/([^/]+)\.html/;
+
+  if (regex.test(url)) {
+    const targetPage = url.match(regex)[1];
+    mainContent.src = url;
+    updateURLParams({ page: targetPage });
+  } else if (url.includes('index.html')) {
+    mainContent.src = url + window.location.search;
+  }
+}
+
+const targetPage = new URLSearchParams(window.location.search).get('page');
+if (Object.hasOwnProperty.call(flatPages, targetPage)) {
+  loadContent(`./pages/${targetPage}.html`);
 }
 
 tabs.addEventListener('change', () => {

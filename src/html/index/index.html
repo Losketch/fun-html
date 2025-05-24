@@ -27,108 +27,49 @@
       <h1 id="title-h1"></h1>
     </header>
     <div id="content">
-      <iframe id="main-content" src="tools/charDisplay.html"></iframe>
+      <iframe id="main-content" src="pages/charDisplay.html"></iframe>
       <div id="toolbox">
         <h2>字符工具</h2>
         <hr />
         <div class="grid-tool-buttons">
+          <% for (const fileName in
+          htmlWebpackPlugin.options.templateParameters.pages.charTools) { %>
           <md-outlined-button
             class="tool-button"
-            data-url="tools/charDisplay.html">
-            字符显示器
+            data-url="./pages/<%= fileName %>.html">
+            <%=
+            htmlWebpackPlugin.options.templateParameters.pages.charTools[fileName]
+            %>
           </md-outlined-button>
-          <md-outlined-button
-            class="tool-button"
-            data-url="tools/nitpickTypo.html">
-            错别字找茬
-          </md-outlined-button>
-          <md-outlined-button class="tool-button" data-url="tools/ziSrc.html">
-            字源查找
-          </md-outlined-button>
-          <md-outlined-button class="tool-button" data-url="tools/randStr.html">
-            随机字符生成器
-          </md-outlined-button>
-          <md-outlined-button class="tool-button" data-url="tools/strokes.html">
-            84-30 画的汉字
-          </md-outlined-button>
-          <md-outlined-button
-            class="tool-button"
-            data-url="tools/styleLetter.html">
-            字母样式生成器
-          </md-outlined-button>
-          <md-outlined-button class="tool-button" data-url="tools/zalog.html">
-            zalog 文本生成器
-          </md-outlined-button>
-          <md-outlined-button
-            class="tool-button"
-            data-url="tools/rot180deg.html">
-            倒立字符生成器
-          </md-outlined-button>
-          <md-outlined-button class="tool-button" data-url="tools/idsAST.html">
-            IDS 抽象语法树
-          </md-outlined-button>
-          <md-outlined-button class="tool-button" data-url="tools/seeker.html">
-            离线字形检索
-          </md-outlined-button>
+          <% } %>
         </div>
 
         <h2>其他工具</h2>
         <hr />
-        <md-outlined-button class="tool-button" data-url="tools/morse.html">
-          莫尔斯电报机
+        <% for (const fileName in
+        htmlWebpackPlugin.options.templateParameters.pages.otherTools) { %>
+        <md-outlined-button
+          class="tool-button"
+          data-url="./pages/<%= fileName %>.html">
+          <%=
+          htmlWebpackPlugin.options.templateParameters.pages.otherTools[fileName]
+          %>
         </md-outlined-button>
-        <md-outlined-button class="tool-button" data-url="tools/CPStest.html">
-          CPS 测试器
-        </md-outlined-button>
-        <md-outlined-button class="tool-button" data-url="tools/SIprefix.html">
-          SI 词头
-        </md-outlined-button>
-        <md-outlined-button class="tool-button" data-url="tools/audioFFT.html">
-          音频 FFT
-        </md-outlined-button>
+        <% } %>
 
         <h2>娱乐</h2>
         <hr />
         <div class="grid-tool-buttons">
+          <% for (const fileName in
+          htmlWebpackPlugin.options.templateParameters.pages.fun) { %>
           <md-outlined-button
             class="tool-button"
-            data-url="tools/fuckToFly.html">
-            全部草飞！
+            data-url="./pages/<%= fileName %>.html">
+            <%= htmlWebpackPlugin.options.templateParameters.pages.fun[fileName]
+            %>
           </md-outlined-button>
-          <md-outlined-button class="tool-button" data-url="tools/GuClock.html">
-            “骨”钟
-          </md-outlined-button>
-          <md-outlined-button
-            class="tool-button"
-            data-url="tools/DouCompass.html">
-            <span class="font-idc">“&#xE100;”指南针</span>
-          </md-outlined-button>
-          <md-outlined-button
-            class="tool-button"
-            data-url="tools/HuAccelerometer.html">
-            “户”加速度计
-          </md-outlined-button>
-          <md-outlined-button
-            class="tool-button"
-            data-url="tools/typewriter.html">
-            打字机
-          </md-outlined-button>
-          <md-outlined-button
-            class="tool-button"
-            data-url="tools/lifeGame.html">
-            生命游戏
-          </md-outlined-button>
-          <md-outlined-button
-            class="tool-button"
-            data-url="tools/pointMoveWithSeg.html">
-            点在移动时的连线
-          </md-outlined-button>
-          <md-outlined-button
-            class="tool-button"
-            data-url="tools/randFuck.html">
-            随机草人器
-          </md-outlined-button>
-          <md-outlined-button class="tool-button" data-url="index.html">
+          <% } %>
+          <md-outlined-button class="tool-button" data-url="./index.html">
             套娃
           </md-outlined-button>
         </div>

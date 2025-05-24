@@ -1,9 +1,9 @@
-import '../../css/mainStyles.css';
-import '../../css/tools/audioFFT.css';
+import '@css/mainStyles.css';
+import '@css/pages/audioFFT.css';
 
-import '../m3ui.js';
-import '../changeHeader.js';
-import '../iframeColorSchemeSync.js';
+import '@js/m3ui.js';
+import '@js/changeHeader.js';
+import '@js/iframeColorSchemeSync.js';
 
 const audioEle = document.querySelector('audio');
 const seleEle = document.querySelector('#sele');

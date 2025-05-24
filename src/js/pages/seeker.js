@@ -1,12 +1,12 @@
-import '../../css/mainStyles.css';
-import '../../css/tools/seeker.css';
+import '@css/mainStyles.css';
+import '@css/pages/seeker.css';
 
-import '../iframeColorSchemeSync.js';
-import '../changeHeader.js';
-import '../m3ui.js';
+import '@js/iframeColorSchemeSync.js';
+import '@js/changeHeader.js';
+import '@js/m3ui.js';
 
-import { dt, vt } from '../../data/handata_uni.js';
-import { parts } from '../../data/parts.js';
+import { dt, vt } from '@data/handata_uni.js';
+import { parts } from '@data/parts.js';
 
 const inputEle = document.getElementById('input');
 const counter = document.getElementById('counter');

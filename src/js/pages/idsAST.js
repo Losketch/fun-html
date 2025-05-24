@@ -1,12 +1,12 @@
-import '../../css/hljsTheme.css';
-import '../../css/mainStyles.css';
-import '../../css/fontFallback.css';
-import '../../css/nerd-fonts-generated.min.css';
-import '../../css/tools/idsAST.css';
+import '@css/hljsTheme.css';
+import '@css/mainStyles.css';
+import '@css/fontFallback.css';
+import '@css/nerd-fonts-generated.min.css';
+import '@css/pages/idsAST.css';
 
-import '../m3ui.js';
-import '../changeHeader.js';
-import '../iframeColorSchemeSync.js';
+import '@js/m3ui.js';
+import '@js/changeHeader.js';
+import '@js/iframeColorSchemeSync.js';
 
 import hljs from 'highlight.js';
 

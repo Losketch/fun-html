@@ -69,7 +69,6 @@
   line-height: 1;
 }
 
-/* 定制修改区起始 */
 @media screen and (min-width: 1450px) {
   #main {
     width: 1450px;

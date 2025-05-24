@@ -142,7 +142,6 @@ hr {
   will-change: auto;
 }
 
-/* 侧边栏 */
 .sidebar {
   z-index: 2;
   position: fixed;
@@ -197,7 +196,6 @@ hr {
   right: 0;
 }
 
-/* SVG动画样式 */
 .sidebar-toggle-label {
   position: fixed;
   right: 15px;

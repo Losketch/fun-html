@@ -1,12 +1,12 @@
-import '../../css/mainStyles.css';
-import '../../css/fontFallback.css';
-import '../../css/tools/typewriter.css';
+import '@css/mainStyles.css';
+import '@css/fontFallback.css';
+import '@css/pages/typewriter.css';
 
-import '../changeHeader.js';
-import '../iframeColorSchemeSync.js';
-import '../m3ui.js';
-import '../dialogs.js';
-import processLigaturesPromise from '../processLigatures.js';
+import '@js/changeHeader.js';
+import '@js/iframeColorSchemeSync.js';
+import '@js/m3ui.js';
+import '@js/dialogs.js';
+import processLigaturesPromise from '@js/processLigatures.js';
 
 (async () => {
   const { processLigaturesString } = await processLigaturesPromise;
