@@ -1,16 +1,15 @@
-import '../../css/mainStyles.css';
-import '../../css/fontFallback.css';
-import '../../css/nerd-fonts-generated.min.css';
-import '../../css/select.css';
-import '../../css/tools/randStr.css';
+import '@css/mainStyles.css';
+import '@css/fontFallback.css';
+import '@css/nerd-fonts-generated.min.css';
+import '@css/select.css';
+import '@css/pages/randStr.css';
 
-import '../m3ui.js';
-import '../iframeColorSchemeSync.js';
-import '../changeHeader.js';
-import '../select.js';
-import processLigaturesPromise from '../processLigatures.js';
-
-import filterDefinedCharacters from '../filterDefinedCharacters.js';
+import '@js/m3ui.js';
+import '@js/iframeColorSchemeSync.js';
+import '@js/changeHeader.js';
+import '@js/select.js';
+import processLigaturesPromise from '@js/processLigatures.js';
+import filterDefinedCharacters from '@js/filterDefinedCharacters.js';
 
 (async () => {
   const { processLigatures } = await processLigaturesPromise;

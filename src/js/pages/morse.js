@@ -1,11 +1,11 @@
-import '../../css/mainStyles.css';
-import '../../css/tools/morse.css';
+import '@css/mainStyles.css';
+import '@css/pages/morse.css';
 
-import '../m3ui.js';
-import '../changeHeader.js';
-import '../iframeColorSchemeSync.js';
+import '@js/m3ui.js';
+import '@js/changeHeader.js';
+import '@js/iframeColorSchemeSync.js';
 
-import AudioNodeRecorder from '../audioNodeRecorder.js';
+import AudioNodeRecorder from '@js/audioNodeRecorder.js';
 
 const wpmSlider = document.getElementById('wpm-slider');
 const wordIntervalSlider = document.getElementById('wi-slider');

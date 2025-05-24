@@ -1,12 +1,12 @@
-import '../../css/mainStyles.css';
-import '../../css/fontFallback.css';
-import '../../css/tools/ziSrc.css';
+import '@css/mainStyles.css';
+import '@css/fontFallback.css';
+import '@css/pages/ziSrc.css';
 
-import '../changeHeader.js';
-import '../iframeColorSchemeSync.js';
-import '../m3ui.js';
+import '@js/changeHeader.js';
+import '@js/iframeColorSchemeSync.js';
+import '@js/m3ui.js';
 
-import loadZiSrcWorker from '../workers/loadZiSrc.worker.js';
+import loadZiSrcWorker from '@js/workers/loadZiSrc.worker.js';
 
 function loadZiSrc() {
   return new Promise((resolve, reject) => {

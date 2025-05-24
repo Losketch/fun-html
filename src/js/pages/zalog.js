@@ -1,9 +1,9 @@
-import '../../css/mainStyles.css';
-import '../../css/tools/zalog.css';
+import '@css/mainStyles.css';
+import '@css/pages/zalog.css';
 
-import '../m3ui.js';
-import '../changeHeader.js';
-import '../iframeColorSchemeSync.js';
+import '@js/m3ui.js';
+import '@js/changeHeader.js';
+import '@js/iframeColorSchemeSync.js';
 
 const countRange = document.getElementById('count-range');
 const input = document.getElementById('input');
