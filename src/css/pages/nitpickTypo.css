@@ -5,13 +5,13 @@
   width: 100%;
 }
 
-.typo.found {
+.found {
   background-color: var(--md-sys-color-error);
   color: var(--md-sys-color-on-error);
   margin-left: 0.05rem;
 }
 
-.typo.correct {
+.correct {
   background-color: var(--md-sys-color-correct);
   color: var(--md-sys-color-on-correct);
   margin-right: 0.05rem;
