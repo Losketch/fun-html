@@ -1,12 +1,12 @@
-#count-slider {
+.count-slider {
   width: 100%;
 }
 
-#checkbox-section > md-list-item {
+.checkbox-section > md-list-item {
   --md-list-item-one-line-container-height: 2rem;
 }
 
-#count-section {
+.count-section {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -14,17 +14,17 @@
   gap: 5px;
 }
 
-#select-blocks {
+.select-blocks {
   margin: 0;
   margin-bottom: 8px;
 }
 
-#custom-char {
+.custom-char {
   margin-bottom: 8px;
 }
 
-#custom-interval-container,
-#custom-blocks-container {
+.custom-interval-container,
+.custom-blocks-container {
   background-color: var(--md-sys-color-surface-container-low);
   padding: 10px;
   border-radius: 5px;
@@ -36,28 +36,28 @@
   margin-bottom: 8px;
 }
 
-#custom-interval-container {
+.custom-interval-container {
   padding-top: calc(10px - 0.4rem);
 }
 
-#custom-interval-container md-list-item {
+.custom-interval-container md-list-item {
   --md-list-item-one-line-container-height: 40px;
 }
 
-#custom-interval-container md-filled-tonal-icon-button {
+.custom-interval-container md-filled-tonal-icon-button {
   transform: translateY(0.2rem);
 }
 
-#custom-blocks-container {
+.custom-blocks-container {
   padding-top: 18px;
   padding-bottom: 0;
 }
 
-#custom-blocks-container md-list-item {
+.custom-blocks-container md-list-item {
   margin-top: -20px;
 }
 
-#custom-interval-container md-outlined-text-field {
+.custom-interval-container md-outlined-text-field {
   width: 6rem;
   --md-outlined-field-bottom-space: 2px;
   --md-outlined-field-top-space: 2px;
@@ -67,7 +67,7 @@
   padding-top: 0.4rem;
 }
 
-#result-container {
+.result-container {
   margin: 0;
   width: 100%;
   min-height: 68px;
@@ -75,23 +75,23 @@
   white-space: unset;
 }
 
-#result-ele {
+.result-ele {
   overflow: visible;
   word-break: break-all;
   box-sizing: border-box;
 }
 
-#result-ele::before {
+.result-ele::before {
   content: '';
   width: 1.75rem;
   height: 1.75rem;
   float: right;
 }
 
-#action-buttons {
+.actions {
   margin-bottom: 4px;
 }
 
-#gen {
+.gen {
   margin-right: 8px;
 }

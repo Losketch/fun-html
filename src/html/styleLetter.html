@@ -14,15 +14,15 @@
           <md-outlined-text-field
             label="待转换的字符"
             id="input"
-            supporting-text="仅支持大小写拉丁字母、希腊字母和数字。"
-            class="font-without-ctrlctrl"></md-outlined-text-field>
+            class="input font-without-ctrlctrl"
+            supporting-text="仅支持大小写拉丁字母、希腊字母和数字。"></md-outlined-text-field>
           <md-outlined-text-field
             label="转换结（jié）果"
             id="output"
-            class="font-without-ctrlctrl"
+            class="output font-without-ctrlctrl"
             readonly></md-outlined-text-field>
-          <div class="act-ele">
-            <div class="select-container" id="select-font">
+          <div class="actions">
+            <div class="select-container" id="selectFont">
               <div class="select">
                 <div class="select-content">
                   <span class="cur-select">选择字体</span>
@@ -56,7 +56,7 @@
                 <div data-select="subscript" class="opt">下标</div>
               </div>
             </div>
-            <md-filled-tonal-button id="cnv-button" class="shadow-button">
+            <md-filled-tonal-button id="cnvButton" class="shadow-button">
               转换
             </md-filled-tonal-button>
           </div>

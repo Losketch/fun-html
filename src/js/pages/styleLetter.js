@@ -449,8 +449,8 @@ const toStyleLetter = (str, style) => {
 
 const input = document.getElementById('input');
 const output = document.getElementById('output');
-const selectFont = document.getElementById('select-font');
-const cnvButton = document.getElementById('cnv-button');
+const selectFont = document.getElementById('selectFont');
+const cnvButton = document.getElementById('cnvButton');
 let font;
 
 selectFont.addEventListener('select', e => {
