@@ -7,6 +7,7 @@ const pages = {
     strokes: '84-30 画的汉字',
     styleLetter: '字母样式生成器',
     zalog: 'zalog 文本生成器',
+    ogham: '欧甘文字转换器',
     rot180deg: '倒立字符生成器',
     idsAST: 'IDS 抽象语法树',
     seeker: '字形检索'
