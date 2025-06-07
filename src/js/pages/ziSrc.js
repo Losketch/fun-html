@@ -39,10 +39,10 @@ function loadZiSrc() {
   };
 
   const input = document.getElementById('input');
-  const searchBtn = document.getElementById('search-btn');
-  const peggingBtn = document.getElementById('pegging-btn');
+  const searchBtn = document.getElementById('searchBtn');
+  const peggingBtn = document.getElementById('peggingBtn');
   const resultEle = document.getElementById('result');
-  const sourceCommentsEle = document.getElementById('source-comments');
+  const sourceCommentsEle = document.getElementById('sourceComments');
 
   for (const [source, comment] of Object.entries(sourceComments)) {
     const li = document.createElement('li');

@@ -1,15 +1,15 @@
-.act-ele {
+.actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
   overflow: visible;
 }
 
-#input,
-#output {
+.input,
+.output {
   width: 100%;
 }
 
-#output {
+.output {
   margin-top: 8px;
 }

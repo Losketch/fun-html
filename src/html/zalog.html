@@ -14,11 +14,11 @@
           <md-outlined-text-field
             label="待转换的字符"
             id="input"
-            class="font-without-ctrlctrl"></md-outlined-text-field>
+            class="input font-without-ctrlctrl"></md-outlined-text-field>
           <md-outlined-text-field
             label="生成结（jié）果"
             id="output"
-            class="font-without-ctrlctrl"
+            class="output font-without-ctrlctrl"
             readonly></md-outlined-text-field>
           <div class="opts">
             重叠字符数范围：
@@ -30,12 +30,13 @@
               value-start="5"
               value-end="10"
               step="1"
-              id="count-range"></md-slider>
-            <div class="btns">
-              <md-filled-button id="gen-button" class="primary-button">
+              id="countRange"
+              class="count-range"></md-slider>
+            <div class="actions">
+              <md-filled-button id="genButton" class="primary-button">
                 生成
               </md-filled-button>
-              <md-filled-tonal-button id="copy-button" class="secondary-button">
+              <md-filled-tonal-button id="copyButton" class="secondary-button">
                 复制
               </md-filled-tonal-button>
             </div>

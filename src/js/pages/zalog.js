@@ -1,15 +1,16 @@
 import '@css/mainStyles.css';
+import '@css/fontFallback.css';
 import '@css/pages/zalog.css';
 
 import '@js/m3ui.js';
 import '@js/changeHeader.js';
 import '@js/iframeColorSchemeSync.js';
 
-const countRange = document.getElementById('count-range');
+const countRange = document.getElementById('countRange');
 const input = document.getElementById('input');
 const output = document.getElementById('output');
-const genButton = document.getElementById('gen-button');
-const copyButton = document.getElementById('copy-button');
+const genButton = document.getElementById('genButton');
+const copyButton = document.getElementById('copyButton');
 
 String.prototype.toArray = function () {
   const arr = [];

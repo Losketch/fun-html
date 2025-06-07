@@ -7,8 +7,8 @@ import '@js/iframeColorSchemeSync.js';
 
 const input = document.getElementById('input');
 const output = document.getElementById('output');
-const genButton = document.getElementById('gen-button');
-const copyButton = document.getElementById('copy-button');
+const genButton = document.getElementById('genButton');
+const copyButton = document.getElementById('copyButton');
 
 String.prototype.toCharArray = function () {
   const arr = [];
