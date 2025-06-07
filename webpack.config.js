@@ -30,7 +30,6 @@ module.exports = {
     clean: true
   },
   optimization: {
-    minimize: true,
     minimizer: [new TerserPlugin()],
     splitChunks: {
       chunks: 'all',
