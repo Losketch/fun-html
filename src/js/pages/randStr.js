@@ -45,21 +45,21 @@ import filterDefinedCharacters from '@js/filterDefinedCharacters.js';
   }
 
   const validCode = /^([0-9a-fA-F]|10)?[0-9a-fA-F]{0,4}$/;
-  const resultEle = document.getElementById('result-ele');
-  const customCharEle = document.getElementById('custom-char');
-  const slider = document.getElementById('count-slider');
-  const countInput = document.getElementById('count-input');
-  const copyBtn = document.getElementById('copy-button');
-  const clearTextBtn = document.getElementById('clear-text');
+  const resultEle = document.getElementById('resultEle');
+  const customCharEle = document.getElementById('customChar');
+  const slider = document.getElementById('countSlider');
+  const countInput = document.getElementById('countInput');
+  const copyBtn = document.getElementById('copyButton');
+  const clearTextBtn = document.getElementById('clearText');
   const genBtn = document.getElementById('gen');
-  const addCustomInterval = document.getElementById('add-custom-interval');
+  const addCustomInterval = document.getElementById('addCustomInterval');
   const customIntervalContainer = document.getElementById(
-    'custom-interval-container'
+    'customIntervalContainer'
   );
   const customBlocksContainer = document.getElementById(
-    'custom-blocks-container'
+    'customBlocksContainer'
   );
-  const selectBlocks = document.getElementById('select-blocks');
+  const selectBlocks = document.getElementById('selectBlocks');
   let selectedBlocks = [];
 
   const characterSets = {
@@ -67,47 +67,47 @@ import filterDefinedCharacters from '@js/filterDefinedCharacters.js';
     includeLowercase: 'abcdefghijklmnopqrstuvwxyz'.toArray(),
     includeUppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.toArray(),
     includeSpecialSymbols: "!'#$%&'()*+,-./:;<=>?@[]^_`{|}~".toArray(),
-    includeBasicChinese: rangeArr(0x4e00, 0x9fff),
-    includeExtendedAChinese: rangeArr(0x3400, 0x4dbf),
-    includeExtendedBChinese: rangeArr(0x20000, 0x2a6df),
-    includeExtendedCChinese: rangeArr(0x2a700, 0x2b739),
-    includeExtendedDChinese: rangeArr(0x2b740, 0x2b81d),
-    includeExtendedEChinese: rangeArr(0x2b820, 0x2cea1),
-    includeExtendedFChinese: rangeArr(0x2ceb0, 0x2ebe0),
-    includeExtendedGChinese: rangeArr(0x30000, 0x3134a),
-    includeExtendedHChinese: rangeArr(0x31350, 0x323af),
-    includeExtendedIChinese: rangeArr(0x2ebf0, 0x2ee5d),
-    includeExtendedJChinese: rangeArr(0x323b0, 0x3347b),
-    includeCompatibleChinese: [
+    includeBsc: rangeArr(0x4e00, 0x9fff),
+    includeExtA: rangeArr(0x3400, 0x4dbf),
+    includeExtB: rangeArr(0x20000, 0x2a6df),
+    includeExtC: rangeArr(0x2a700, 0x2b739),
+    includeExtD: rangeArr(0x2b740, 0x2b81d),
+    includeExtE: rangeArr(0x2b820, 0x2cea1),
+    includeExtF: rangeArr(0x2ceb0, 0x2ebe0),
+    includeExtG: rangeArr(0x30000, 0x3134a),
+    includeExtH: rangeArr(0x31350, 0x323af),
+    includeExtI: rangeArr(0x2ebf0, 0x2ee5d),
+    includeExtJ: rangeArr(0x323b0, 0x3347b),
+    includeCmp: [
       ...rangeArr(0xf900, 0xfa6d),
       ...rangeArr(0xfa70, 0xfad9)
     ],
-    includeCompatibleSupplementChinese: rangeArr(0x2f800, 0x2fa1d)
+    includeSupCmp: rangeArr(0x2f800, 0x2fa1d)
   };
   const dom = {};
 
   [
-    'include-digits',
-    'include-lowercase',
-    'include-uppercase',
-    'include-special-symbols',
-    'include-basic-chinese',
-    'include-extended-a-chinese',
-    'include-extended-b-chinese',
-    'include-extended-c-chinese',
-    'include-extended-d-chinese',
-    'include-extended-e-chinese',
-    'include-extended-f-chinese',
-    'include-extended-g-chinese',
-    'include-extended-h-chinese',
-    'include-extended-i-chinese',
-    'include-compatible-chinese',
-    'include-compatible-supplement-chinese',
-    'include-custom-char',
-    'include-custom-interval',
-    'include-custom-unicode-blocks',
-    'no-repeat',
-    'contains-no-undefined-characters'
+    'includeDigits',
+    'includeLowercase',
+    'includeUppercase',
+    'includeSpecialSymbols',
+    'includeBsc',
+    'includeExtA',
+    'includeExtB',
+    'includeExtC',
+    'includeExtD',
+    'includeExtE',
+    'includeExtF',
+    'includeExtG',
+    'includeExtH',
+    'includeExtI',
+    'includeCmp',
+    'includeSupCmp',
+    'includeCustomChar',
+    'includeCustomInterval',
+    'includeCustomUnicodeBlocks',
+    'noRepeat',
+    'containsNoUndefinedCharacters'
   ].forEach(name => (dom[name] = document.getElementById(name)));
 
   function add(ele, content) {
@@ -147,19 +147,13 @@ import filterDefinedCharacters from '@js/filterDefinedCharacters.js';
     );
   }
 
-  function kebabToCamel(str) {
-    return str.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
-  }
-
   async function generateRandomCharacters() {
     let count = +countInput.value;
     if (count > 1000) count = 1000;
     const options = {};
 
     for (const key in dom) {
-      if (Object.hasOwnProperty.call(dom, key)) {
-        options[kebabToCamel(key)] = dom[key].checked;
-      }
+      options[key] = dom[key].checked;
     }
 
     let characters = [];

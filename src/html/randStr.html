@@ -10,25 +10,26 @@
     <div>
       <main>
         <div>
-          <div id="count-section">
+          <div class="count-section">
             <md-outlined-text-field
               type="number"
               label="数量"
               value="100"
-              id="count-input"></md-outlined-text-field>
+              id="countInput"></md-outlined-text-field>
             <md-slider
               min="1"
               max="1000"
               value="100"
-              id="count-slider"></md-slider>
+              id="countSlider"
+              class="count-slider"></md-slider>
           </div>
-          <md-list id="checkbox-section">
+          <md-list class="checkbox-section">
             <md-list-item>
               包含数字
               <md-checkbox
                 touch-target="wrapper"
                 slot="end"
-                id="include-digits"></md-checkbox>
+                id="includeDigits"></md-checkbox>
             </md-list-item>
             <md-divider></md-divider>
             <md-list-item>
@@ -36,7 +37,7 @@
               <md-checkbox
                 touch-target="wrapper"
                 slot="end"
-                id="include-lowercase"></md-checkbox>
+                id="includeLowercase"></md-checkbox>
             </md-list-item>
             <md-divider></md-divider>
             <md-list-item>
@@ -44,7 +45,7 @@
               <md-checkbox
                 touch-target="wrapper"
                 slot="end"
-                id="include-uppercase"></md-checkbox>
+                id="includeUppercase"></md-checkbox>
             </md-list-item>
             <md-divider></md-divider>
             <md-list-item>
@@ -52,7 +53,7 @@
               <md-checkbox
                 touch-target="wrapper"
                 slot="end"
-                id="include-special-symbols"></md-checkbox>
+                id="includeSpecialSymbols"></md-checkbox>
             </md-list-item>
             <md-divider></md-divider>
             <md-list-item>
@@ -60,7 +61,7 @@
               <md-checkbox
                 touch-target="wrapper"
                 slot="end"
-                id="include-basic-chinese"></md-checkbox>
+                id="includeBsc"></md-checkbox>
             </md-list-item>
             <md-divider></md-divider>
             <md-list-item>
@@ -68,7 +69,7 @@
               <md-checkbox
                 touch-target="wrapper"
                 slot="end"
-                id="include-extended-a-chinese"></md-checkbox>
+                id="includeExtA"></md-checkbox>
             </md-list-item>
             <md-divider></md-divider>
             <md-list-item>
@@ -76,7 +77,7 @@
               <md-checkbox
                 touch-target="wrapper"
                 slot="end"
-                id="include-extended-b-chinese"></md-checkbox>
+                id="includeExtB"></md-checkbox>
             </md-list-item>
             <md-divider></md-divider>
             <md-list-item>
@@ -84,7 +85,7 @@
               <md-checkbox
                 touch-target="wrapper"
                 slot="end"
-                id="include-extended-c-chinese"></md-checkbox>
+                id="includeExtC"></md-checkbox>
             </md-list-item>
             <md-divider></md-divider>
             <md-list-item>
@@ -92,7 +93,7 @@
               <md-checkbox
                 touch-target="wrapper"
                 slot="end"
-                id="include-extended-d-chinese"></md-checkbox>
+                id="includeExtD"></md-checkbox>
             </md-list-item>
             <md-divider></md-divider>
             <md-list-item>
@@ -100,7 +101,7 @@
               <md-checkbox
                 touch-target="wrapper"
                 slot="end"
-                id="include-extended-e-chinese"></md-checkbox>
+                id="includeExtE"></md-checkbox>
             </md-list-item>
             <md-divider></md-divider>
             <md-list-item>
@@ -108,7 +109,7 @@
               <md-checkbox
                 touch-target="wrapper"
                 slot="end"
-                id="include-extended-f-chinese"></md-checkbox>
+                id="includeExtF"></md-checkbox>
             </md-list-item>
             <md-divider></md-divider>
             <md-list-item>
@@ -116,7 +117,7 @@
               <md-checkbox
                 touch-target="wrapper"
                 slot="end"
-                id="include-extended-g-chinese"></md-checkbox>
+                id="includeExtG"></md-checkbox>
             </md-list-item>
             <md-divider></md-divider>
             <md-list-item>
@@ -124,7 +125,7 @@
               <md-checkbox
                 touch-target="wrapper"
                 slot="end"
-                id="include-extended-h-chinese"></md-checkbox>
+                id="includeExtH"></md-checkbox>
             </md-list-item>
             <md-divider></md-divider>
             <md-list-item>
@@ -132,7 +133,7 @@
               <md-checkbox
                 touch-target="wrapper"
                 slot="end"
-                id="include-extended-i-chinese"></md-checkbox>
+                id="includeExtI"></md-checkbox>
             </md-list-item>
             <md-divider></md-divider>
             <md-list-item>
@@ -140,7 +141,7 @@
               <md-checkbox
                 touch-target="wrapper"
                 slot="end"
-                id="include-compatible-chinese"></md-checkbox>
+                id="includeCmp"></md-checkbox>
             </md-list-item>
             <md-divider></md-divider>
             <md-list-item>
@@ -148,7 +149,7 @@
               <md-checkbox
                 touch-target="wrapper"
                 slot="end"
-                id="include-compatible-supplement-chinese"></md-checkbox>
+                id="includeSupCmp"></md-checkbox>
             </md-list-item>
             <md-divider></md-divider>
             <md-list-item>
@@ -156,10 +157,11 @@
               <md-checkbox
                 touch-target="wrapper"
                 slot="end"
-                id="include-custom-char"></md-checkbox>
+                id="includeCustomChar"></md-checkbox>
             </md-list-item>
             <md-outlined-text-field
-              id="custom-char"
+              id="customChar"
+              class="custom-char"
               label="自定义字符"
               class="font"
               supporting-text="如果同一个字符出现了多次，则其出现次数代表着这个字符的权重，比如填写“aabbbc”则表示 a、b、c 的权重分别为 2、3、1，即生成 a、b、c 的概率分别为六分之二、六分之三和六分之一。"></md-outlined-text-field>
@@ -169,24 +171,24 @@
               <md-filled-tonal-icon-button
                 slot="start"
                 class="add-button"
-                id="add-custom-interval">
+                id="addCustomInterval">
                 <md-icon class="nf nf-fa-plus"></md-icon>
               </md-filled-tonal-icon-button>
               <md-checkbox
                 touch-target="wrapper"
                 slot="end"
-                id="include-custom-interval"></md-checkbox>
+                id="includeCustomInterval"></md-checkbox>
             </md-list-item>
-            <md-list id="custom-interval-container"></md-list>
+            <md-list id="customIntervalContainer" class="custom-interval-container"></md-list>
             <md-divider></md-divider>
             <md-list-item>
               包含自定义 Unicode 区段
               <md-checkbox
                 touch-target="wrapper"
                 slot="end"
-                id="include-custom-unicode-blocks"></md-checkbox>
+                id="includeCustomUnicodeBlocks"></md-checkbox>
             </md-list-item>
-            <div class="select-container multi" id="select-blocks">
+            <div class="select-container multi" id="selectBlocks" class="select-blocks">
               <div class="select">
                 <div class="select-content">
                   <span class="cur-select" data-default-text="选择区段">
@@ -589,14 +591,14 @@
                 <div data-select="100000,10FFFF" class="opt">增补私用区乙</div>
               </div>
             </div>
-            <md-list id="custom-blocks-container"></md-list>
+            <md-list id="customBlocksContainer" class="custom-blocks-container"></md-list>
             <md-divider></md-divider>
             <md-list-item>
               不重复
               <md-checkbox
                 touch-target="wrapper"
                 slot="end"
-                id="no-repeat"></md-checkbox>
+                id="noRepeat"></md-checkbox>
             </md-list-item>
             <md-divider></md-divider>
             <md-list-item>
@@ -604,28 +606,28 @@
               <md-checkbox
                 touch-target="wrapper"
                 slot="end"
-                id="contains-no-undefined-characters"></md-checkbox>
+                id="containsNoUndefinedCharacters"></md-checkbox>
             </md-list-item>
           </md-list>
 
-          <div id="action-buttons">
-            <md-filled-button id="gen">生成随机字符</md-filled-button>
-            <md-filled-tonal-button id="clear-text">
+          <div class="actions">
+            <md-filled-button id="gen" class="gen">生成随机字符</md-filled-button>
+            <md-filled-tonal-button id="clearText">
               清空
             </md-filled-tonal-button>
           </div>
 
-          <div id="result-section">
+          <div>
             <div>
               <div>
                 生成<ruby>结<rp>（</rp><rt>jié</rt><rp>）</rp></ruby
                 >果
               </div>
-              <pre class="code-container" id="result-container">
-                <md-filled-tonal-icon-button class="copy-button" id="copy-button">
+              <pre class="code-container result-container">
+                <md-filled-tonal-icon-button class="copy-button" id="copyButton">
                   <md-icon class="nf nf-fa-copy"></md-icon>
                 </md-filled-tonal-icon-button>
-                <div class="font" id="result-ele"></div>
+                <div class="font result-ele" id="resultEle"></div>
               </pre>
             </div>
           </div>
