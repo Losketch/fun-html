@@ -21,6 +21,7 @@ const oghamLettersMap = {
   'ᚘ': /\(io\)/ig,
   'ᚙ': /\(ae\)/ig,
   'ᚍ': /\(ng\)/ig,
+  'ᚚ': /p/ig,
   'ᚁ': /b/ig,
   'ᚂ': /l/ig,
   'ᚃ': /v|f/ig,
