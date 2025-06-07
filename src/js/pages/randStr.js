@@ -78,10 +78,7 @@ import filterDefinedCharacters from '@js/filterDefinedCharacters.js';
     includeExtH: rangeArr(0x31350, 0x323af),
     includeExtI: rangeArr(0x2ebf0, 0x2ee5d),
     includeExtJ: rangeArr(0x323b0, 0x3347b),
-    includeCmp: [
-      ...rangeArr(0xf900, 0xfa6d),
-      ...rangeArr(0xfa70, 0xfad9)
-    ],
+    includeCmp: [...rangeArr(0xf900, 0xfa6d), ...rangeArr(0xfa70, 0xfad9)],
     includeSupCmp: rangeArr(0x2f800, 0x2fa1d)
   };
   const dom = {};
