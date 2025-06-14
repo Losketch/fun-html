@@ -1,5 +1,5 @@
 import '@css/mainStyles.css';
-import '@css/pages/nitpickTypo.css';
+import '@css/pages/speakLikeBook.css';
 
 import '@js/changeHeader.js';
 import '@js/iframeColorSchemeSync.js';
