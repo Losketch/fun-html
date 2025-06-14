@@ -1,7 +1,6 @@
 const pages = {
   charTools: {
     charDisplay: '字符显示器',
-    nitpickTypo: '错别字找茬',
     ziSrc: '字源查找',
     randStr: '随机字符生成器',
     strokes: '84-30 画的汉字',
@@ -23,6 +22,7 @@ const pages = {
     DouCompass: '“<span class="font-idc">&#xE100;</span>”指南针',
     HuAccelerometer: '“户”加速度计',
     lifeGame: '生命游戏',
+    speakLikeBook: '咬文嚼字',
     fuckToFly: '全部草飞！',
     pointMoveWithSeg: '点在移动时的连线',
     typewriter: '打字机',
