@@ -1,12 +1,16 @@
+// vercel.json
 {
-  "builds": [
+  "rewrites": [
     {
-      "src": "/*",
-      "use": "@vercel/static"
+      "source": "/:path*",
+      "destination": "/:path*"
     }
   ],
-  "routes": [
-    { "src": "/fun-html/(.*)", "dest": "/fun-html/$1" },
-    { "src": "/(.*)",       "dest": "/fun-html/index.html" }
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/fun-html",
+      "permanent": true
+    }
   ]
 }
