@@ -1,0 +1,12 @@
+{
+  "builds": [
+    {
+      "src": "fun-html/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    { "src": "/fun-html/(.*)", "dest": "/fun-html/$1" },
+    { "src": "/(.*)",       "dest": "/fun-html/index.html" }
+  ]
+}
