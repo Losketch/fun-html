@@ -6,7 +6,7 @@
 
 @font-face {
   font-family: 'Noto-Color-Emoji';
-  src: url('../../assets/fonts/display/Noto Color Emoji.ttf') format('truetype');
+  src: url('../../assets/fonts/display/Noto-COLRv1.ttf') format('truetype');
   font-display: swap;
 }
 
@@ -54,7 +54,7 @@
 
 @font-face {
   font-family: 'Last';
-  src: url('../../assets/fonts/display/Last Resort.woff2') format('woff2');
+  src: url('../../assets/fonts/display/Last ResortHE.woff2') format('woff2');
   font-display: swap;
 }
 
