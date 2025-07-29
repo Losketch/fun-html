@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const WebpackBar = require('webpackbar');
 const { pages, flatPages } = require('./src/data/pages.js');
 
 const pageEntries = {};
@@ -100,6 +101,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new WebpackBar(),
     new HtmlWebpackPlugin({
       title: '索引',
       template: './src/html/index/index.html',

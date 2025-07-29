@@ -55,7 +55,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const fontSizeSlider = document.getElementById('font-size-slider');
   let pressedSliderTop = 0;
   const lineHeightSlider = document.getElementById('line-height-slider');
-  const rowsSlider = document.getElementById('rows-slider');
 
   const addFontFeatureSettingsButton = document.getElementById(
     'add-font-feature-settings-button'
@@ -82,6 +81,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const uploadButton = document.getElementById('upload-button');
   let itemsOrder = [];
 
+  textarea.style.fieldSizing = 'content';
   counter.innerText = '0';
 
   document.querySelectorAll('a').forEach(a => {
@@ -133,16 +133,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   });
 
-  rowsSlider.addEventListener('input', () => {
-    input.rows = rowsSlider.value;
-
-    const sliderTop = fontSizeSlider.getBoundingClientRect().top;
-    window.scrollTo({
-      top: window.scrollY + sliderTop - pressedSliderTop,
-      behavior: 'instant'
-    });
-  });
-
   function onChangeHeightSliderDragStart() {
     pressedSliderTop = fontSizeSlider.getBoundingClientRect().top;
     setTimeout(() => {
@@ -161,8 +151,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     'touchstart',
     onChangeHeightSliderDragStart
   );
-  rowsSlider.addEventListener('mousedown', onChangeHeightSliderDragStart);
-  rowsSlider.addEventListener('touchstart', onChangeHeightSliderDragStart);
 
   async function updateCount() {
     textarea.removeAttribute('maxlength');
