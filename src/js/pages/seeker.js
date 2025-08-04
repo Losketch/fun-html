@@ -5,7 +5,7 @@ import '@js/iframeColorSchemeSync.js';
 import '@js/changeHeader.js';
 import '@js/m3ui.js';
 
-import { dt, vt } from '@data/handata_uni.js';
+import { dt, vt, standardChars } from '@data/handata_uni.js';
 import { parts } from '@data/parts.js';
 
 const inputEle = document.getElementById('input');
@@ -19,6 +19,7 @@ const buttClear = document.getElementById('buttClear');
 const buttDecompose = document.getElementById('buttDecompose');
 const buttGo = document.getElementById('buttGo');
 
+const standardOnlySwitch = document.getElementById('standardOnly');
 const subdivideSwitch = document.getElementById('subdivide');
 const variantSwitch = document.getElementById('variant');
 const keypadSwitch = document.getElementById('showkeypad');
@@ -307,6 +308,9 @@ const Seeker = {
         const c = w.codePointAt(0); //            的unicode
         const block = Seeker.getCJKBlock(c);
         if (ignore && ignore.indexOf(w) >= 0) continue;
+
+        const standardOnly = standardOnlySwitch.selected;
+        if (standardOnly && !standardChars.has(w)) continue;
 
         if (blockFlag) {
           // 篩選要包含的Unicode分區
@@ -1108,6 +1112,7 @@ const UI = {
     const validCharacterCount = dt.filter(entry => !entry.endsWith('╳')).length;
     datasizeEle.innerHTML = validCharacterCount;
 
+    standardOnlySwitch.selected = UI.getItem('standardOnly') === '1';
     variantSwitch.selected = UI.getItem('variant') === '1';
     subdivideSwitch.selected = UI.getItem('subdivide') === '1';
     keypadSwitch.selected = UI.getItem('showkeypad') === '1';
@@ -1128,6 +1133,9 @@ const UI = {
       extKeyBtn.addEventListener('click', () => UI.key(extKeyBtn.className[2]));
     }
 
+    standardOnlySwitch.addEventListener('click', () =>
+      UI.setMode(standardOnlySwitch, 'standardOnly')
+    );
     variantSwitch.addEventListener('click', () =>
       UI.setMode(variantSwitch, 'variant')
     );

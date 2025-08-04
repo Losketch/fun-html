@@ -218,6 +218,14 @@ h1,
   white-space: nowrap;
 }
 
+#table {
+  border-top: 2px solid var(--md-sys-color-outline-variant);
+}
+
+#table div {
+  margin-top: 10px;
+}
+
 #scKey button.img {
   background-repeat: no-repeat;
   background-size: 18px 18px;
@@ -225,7 +233,7 @@ h1,
 }
 
 #keyboard {
-  padding: 5px 10px 10px 10px;
+  padding-top: 5px;
   border-bottom: 2px solid var(--md-sys-color-outline-variant);
   clear: both;
 }
