@@ -6,7 +6,13 @@
 
 @font-face {
   font-family: 'Noto-Color-Emoji';
-  src: url('../../assets/fonts/display/Noto-COLRv1.ttf') format('truetype');
+  src: url('../../assets/fonts/display/Noto-COLRv1.woff2') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'UFSEmoji';
+  src: url('../../assets/fonts/display/UFSEmoji-Ext.woff2') format('woff2');
   font-display: swap;
 }
 
@@ -23,6 +29,12 @@
 }
 
 @font-face {
+  font-family: 'NotoSansSuper';
+  src: url('../../assets/fonts/display/NotoSansSuper.woff2') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Noto';
   src: url('../../assets/fonts/display/NotoUnicode.woff2') format('woff2');
   font-display: swap;
@@ -35,20 +47,8 @@
 }
 
 @font-face {
-  font-family: 'NotoSansKR';
-  src: url('../../assets/fonts/display/NotoSansKR.woff2') format('woff2');
-  font-display: swap;
-}
-
-@font-face {
   font-family: 'Monu';
   src: url('../../assets/fonts/display/Monu Temp.woff2') format('woff2');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'NotoSansSuper';
-  src: url('../../assets/fonts/display/NotoSansSuper.woff2') format('woff2');
   font-display: swap;
 }
 
@@ -65,32 +65,42 @@
   font-display: swap;
 }
 
-.font {
-  --font: Ctrl-Ctrl, Plgo1, Noto-Color-Emoji, Plgo2, Noto, NotoSansSC,
-    NotoSansKR, Monu, NotoSansSuper, sans-serif, Last;
+@font-face {
+  font-family: 'Sesh';
+  src: url('../../assets/fonts/display/UnicodiaSesh.woff2') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NewGardiner';
+  src: url('../../assets/fonts/display/NewGardiner.woff2') format('woff2');
+  font-display: swap;
+}
+
+
+:root {
+  --base-fonts: Plgo1, Noto-Color-Emoji, UFSEmoji, Plgo2, NotoSansSuper,
+  Noto, NotoSansSC, Sesh, NewGardiner, Monu, sans-serif, Last;
+}
+
+.font,
+.font-without-ctrlctrl,
+.font-idc {
   font-family: var(--font);
   --md-filled-text-field-input-text-font: var(--font);
   --md-outlined-text-field-input-text-font: var(--font);
   font-style: normal;
   font-weight: 400;
+}
+
+.font {
+  --font: Ctrl-Ctrl, var(--base-fonts);
 }
 
 .font-without-ctrlctrl {
-  --font: Plgo1, Noto-Color-Emoji, Plgo2, Noto, NotoSansSC, NotoSansKR, Monu,
-    NotoSansSuper, sans-serif, Last;
-  font-family: var(--font);
-  --md-filled-text-field-input-text-font: var(--font);
-  --md-outlined-text-field-input-text-font: var(--font);
-  font-style: normal;
-  font-weight: 400;
+  --font: var(--base-fonts);
 }
 
 .font-idc {
-  --font: IDC, Plgo1, Noto-Color-Emoji, Plgo2, Noto, NotoSansSC, NotoSansKR,
-    Monu, NotoSansSuper, sans-serif, Last;
-  font-family: var(--font);
-  --md-filled-text-field-input-text-font: var(--font);
-  --md-outlined-text-field-input-text-font: var(--font);
-  font-style: normal;
-  font-weight: 400;
+  --font: IDC, var(--base-fonts);
 }
