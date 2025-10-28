@@ -9,7 +9,9 @@
     <div>
       <main>
         <div>
-          <div id="inputer-container" class="font-idc inner-div">
+          <div
+            id="inputerContainer"
+            class="inputer-container font-idc inner-div">
             <md-filled-tonal-icon-button class="idc-inputer">
               <md-icon>⿰</md-icon>
             </md-filled-tonal-icon-button>
@@ -82,21 +84,27 @@
           <md-outlined-text-field
             id="input"
             label="IDS"
-            class="font-idc"></md-outlined-text-field>
-          <div class="flex-end">
-            <md-filled-button id="parse" class="shadow-button">
-              解析
-            </md-filled-button>
+            class="input font-idc"></md-outlined-text-field>
+          <div class="actions">
+            <label
+              ><md-checkbox
+                touch-target="wrapper"
+                id="generateSvg"></md-checkbox
+              >生成 SVG</label
+            >
+            <md-filled-button id="parse" class="shadow-button"
+              >解析</md-filled-button
+            >
           </div>
         </div>
-        <div id="res-container">
+        <div class="res-container">
           <div id="error" class="error-container font-idc"></div>
-          <div id="ids-svg-container"></div>
+          <div id="idsSvgContainer" class="ids-svg-container"></div>
           <pre class="code-container">
-            <md-filled-tonal-icon-button class="copy-button" id="copy-button">
+            <md-filled-tonal-icon-button class="copy-button" id="copyButton">
               <md-icon class="nf nf-fa-copy"></md-icon>
             </md-filled-tonal-icon-button>
-            <code class="font-idc" id="json-code"></code>
+            <code class="json-code font-idc" id="jsonCode"></code>
           </pre>
         </div>
       </main>

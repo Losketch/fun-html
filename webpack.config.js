@@ -1,7 +1,11 @@
+const p = 1;
+
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const WebpackBar = require('webpackbar');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { pages, flatPages } = require('./src/data/pages.js');
 
 const pageEntries = {};
@@ -31,7 +35,7 @@ module.exports = {
     clean: true
   },
   optimization: {
-    minimizer: [new TerserPlugin()],
+    minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
     splitChunks: {
       chunks: 'all',
       minSize: 5000,
@@ -92,7 +96,10 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader']
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader'
+        ]
       },
       {
         test: /\.worker\.js$/,
@@ -102,6 +109,9 @@ module.exports = {
   },
   plugins: [
     new WebpackBar(),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css'
+    }),
     new HtmlWebpackPlugin({
       title: '索引',
       template: './src/html/index/index.html',
@@ -119,5 +129,5 @@ module.exports = {
       '@assets': path.resolve(__dirname, 'assets')
     },
   },
-  mode: 'production'
+  mode: p ? 'production' : 'development'
 };
