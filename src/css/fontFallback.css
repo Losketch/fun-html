@@ -77,10 +77,9 @@
   font-display: swap;
 }
 
-
 :root {
-  --base-fonts: Plgo1, Noto-Color-Emoji, UFSEmoji, Plgo2, NotoSansSuper,
-  Noto, NotoSansSC, Sesh, NewGardiner, Monu, sans-serif, Last;
+  --base-fonts: Plgo1, Noto-Color-Emoji, UFSEmoji, Plgo2, NotoSansSuper, Noto,
+    NotoSansSC, Sesh, NewGardiner, Monu, sans-serif, Last;
 }
 
 .font,
