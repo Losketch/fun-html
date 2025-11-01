@@ -1,7 +1,7 @@
-import source from 'raw-loader!../../data/source.json.txt';
+import source from '@data/mp.zlib/source.mp.zlib';
 
 self.addEventListener('message', () => {
-  const { sourceDict, sourceComments } = JSON.parse(source);
+  const { sourceDict, sourceComments } = source;
   const reverseDict = buildReverse(sourceDict);
 
   function buildReverse(sourceDict) {

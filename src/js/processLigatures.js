@@ -1,8 +1,8 @@
 import properties from 'regenerate-unicode-properties';
 
-import loadLigaturesDataWorker from './workers/loadLigaturesData.worker.js';
-import getLigaturesWorker from './workers/getLigatures.worker.js';
-import processLigaturesWorker from './workers/processLigatures.worker.js';
+import loadLigaturesDataWorker from '@js/workers/loadLigaturesData.worker.js';
+import getLigaturesWorker from '@js/workers/getLigatures.worker.js';
+import processLigaturesWorker from '@js/workers/processLigatures.worker.js';
 
 const loadData = async () => {
   return new Promise((resolve, reject) => {
