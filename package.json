@@ -28,6 +28,6 @@
     "@material/web": "^2.2.0",
     "highlight.js": "^11.11.1",
     "mini-css-extract-plugin": "^2.9.4",
-    "regenerate-unicode-properties": "^10.2.0"
+    "regenerate-unicode-properties": "^10.2.2"
   }
 }
