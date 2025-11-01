@@ -11,12 +11,6 @@
 }
 
 @font-face {
-  font-family: 'UFSEmoji';
-  src: url('../../assets/fonts/display/UFSEmoji-Ext.woff2') format('woff2');
-  font-display: swap;
-}
-
-@font-face {
   font-family: 'Plgo1';
   src: url('../../assets/fonts/display/Plgo1.woff2') format('woff2');
   font-display: swap;
@@ -41,7 +35,7 @@
 }
 
 @font-face {
-  font-family: 'NotoSansSC';
+  font-family: 'WenYuanSansSCVF';
   src: url('../../assets/fonts/display/NotoSansSC.woff2') format('woff2');
   font-display: swap;
 }
@@ -78,8 +72,8 @@
 }
 
 :root {
-  --base-fonts: Plgo1, Noto-Color-Emoji, UFSEmoji, Plgo2, NotoSansSuper, Noto,
-    NotoSansSC, Sesh, NewGardiner, Monu, sans-serif, Last;
+  --base-fonts: Plgo1, Noto-Color-Emoji, Plgo2, NotoSansSuper, Noto,
+    WenYuanSansSCVF, Sesh, NewGardiner, Monu, sans-serif, Last;
 }
 
 .font,
