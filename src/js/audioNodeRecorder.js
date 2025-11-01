@@ -1,4 +1,4 @@
-import mp3EncoderWorker from './workers/mp3Encoder.worker.js';
+import mp3EncoderWorker from '@js/workers/mp3Encoder.worker.js';
 
 class AudioNodeRecorder {
   constructor(audioNode, nextNode, options = {}) {

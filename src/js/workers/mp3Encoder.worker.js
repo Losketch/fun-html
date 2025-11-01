@@ -1,4 +1,4 @@
-import lamejs from '../lame.all.js';
+import lamejs from '@js/lame.all.js';
 
 let encoder,
   dataBuffers = [];

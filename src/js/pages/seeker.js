@@ -6,7 +6,7 @@ import '@js/changeHeader.js';
 import '@js/m3ui.js';
 
 import { dt, vt, standardChars } from '@data/handata_uni.js';
-import { parts } from '@data/parts.js';
+import parts from '@data/mp.zlib/parts.mp.zlib';
 
 const inputEle = document.getElementById('input');
 const counter = document.getElementById('counter');

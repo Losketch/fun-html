@@ -104,6 +104,14 @@ module.exports = {
       {
         test: /\.worker\.js$/,
         use: { loader: 'worker-loader' }
+      },
+      {
+        test: /\.mp\.zlib$/,
+        use: [
+          {
+            loader: path.resolve(__dirname, 'mpZlibLoader.js')
+          }
+        ]
       }
     ]
   },

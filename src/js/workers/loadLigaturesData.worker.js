@@ -1,9 +1,9 @@
 self.addEventListener('message', async () => {
   try {
     const [decompositions, variations, namedSequences] = await Promise.all([
-      import('../../data/decompositions.json'),
-      import('../../data/variations.json'),
-      import('../../data/named_sequences.json')
+      import('@data/mp.zlib/decompositions.mp.zlib'),
+      import('@data/mp.zlib/variations.mp.zlib'),
+      import('@data/mp.zlib/named_sequences.mp.zlib')
     ]);
 
     const result = [
