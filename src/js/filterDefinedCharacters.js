@@ -1,6 +1,7 @@
-import filterDefinedCharactersWorker from './workers/filterDefinedCharacters.worker.js';
-import definedCharacterList from '../data/DefinedCharacterList.js';
+import filterDefinedCharactersWorker from '@js/workers/filterDefinedCharacters.worker.js';
+import definedCharacterList_ from '@data/mp.zlib/DefinedCharacterList.mp.zlib';
 
+const definedCharacterList = new Set(definedCharacterList_);
 async function runWorker(worker, data) {
   return new Promise((resolve, reject) => {
     worker.addEventListener('message', event => {
