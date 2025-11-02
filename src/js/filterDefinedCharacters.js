@@ -1,7 +1,8 @@
+import decompress from '@js/mpZlibDecompresser.js';
 import filterDefinedCharactersWorker from '@js/workers/filterDefinedCharacters.worker.js';
-import definedCharacterList_ from '@data/mp.zlib/DefinedCharacterList.mp.zlib';
+import definedCharacterListData from '@data/mp.zlib/DefinedCharacterList.mp.zlib';
 
-const definedCharacterList = new Set(definedCharacterList_);
+const definedCharacterList = new Set(decompress(definedCharacterListData));
 async function runWorker(worker, data) {
   return new Promise((resolve, reject) => {
     worker.addEventListener('message', event => {

@@ -29,8 +29,8 @@ module.exports = {
     ...pageEntries
   },
   output: {
-    filename: 'js/[name].js',
-    chunkFilename: 'js/[name].chunk.js',
+    filename: 'js/[name].[chunkhash:8].js',
+    chunkFilename: 'js/[name].[chunkhash:8].chunk.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true
   },
@@ -75,7 +75,7 @@ module.exports = {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: 'asset/resource',
         generator: {
-          filename: 'assets/fonts/[name][ext]'
+          filename: 'assets/fonts/[name].[hash:8][ext]'
         }
       },
       {
@@ -83,7 +83,7 @@ module.exports = {
         include: path.resolve(__dirname, 'assets/favicon'),
         type: 'asset/resource',
         generator: {
-          filename: 'assets/favicon/[name][ext]'
+          filename: 'assets/favicon/[name].[hash:8][ext]'
         }
       },
       {
@@ -91,7 +91,7 @@ module.exports = {
         include: path.resolve(__dirname, 'assets/images'),
         type: 'asset/resource',
         generator: {
-          filename: 'assets/images/[name][ext]'
+          filename: 'assets/images/[name].[hash:8][ext]'
         }
       },
       {
@@ -109,7 +109,10 @@ module.exports = {
         test: /\.mp\.zlib$/,
         use: [
           {
-            loader: path.resolve(__dirname, 'mpZlibLoader.js')
+            loader: 'arraybuffer-loader',
+            options: {
+              limit: 1024 * 1024
+            }
           }
         ]
       }
@@ -118,7 +121,7 @@ module.exports = {
   plugins: [
     new WebpackBar(),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css'
+      filename: 'css/[name].[contenthash:8].css'
     }),
     new HtmlWebpackPlugin({
       title: '索引',
