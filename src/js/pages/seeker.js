@@ -5,8 +5,11 @@ import '@js/iframeColorSchemeSync.js';
 import '@js/changeHeader.js';
 import '@js/m3ui.js';
 
+import decompress from '@js/mpZlibDecompresser.js';
 import { dt, vt, standardChars } from '@data/handata_uni.js';
-import parts from '@data/mp.zlib/parts.mp.zlib';
+import partsData from '@data/mp.zlib/parts.mp.zlib';
+
+const parts = decompress(partsData);
 
 const inputEle = document.getElementById('input');
 const counter = document.getElementById('counter');

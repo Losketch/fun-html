@@ -1,33 +1,20 @@
 import properties from 'regenerate-unicode-properties';
 
-import loadLigaturesDataWorker from '@js/workers/loadLigaturesData.worker.js';
 import getLigaturesWorker from '@js/workers/getLigatures.worker.js';
 import processLigaturesWorker from '@js/workers/processLigatures.worker.js';
 
-const loadData = async () => {
-  return new Promise((resolve, reject) => {
-    const worker = new loadLigaturesDataWorker();
+import decompress from '@js/mpZlibDecompresser.js';
+import decompositionsData from '@data/mp.zlib/decompositions.mp.zlib'
+import variationsData from '@data/mp.zlib/variations.mp.zlib'
+import namedSequencesData from '@data/mp.zlib/named_sequences.mp.zlib'
 
-    worker.postMessage('load');
-
-    worker.addEventListener('message', event => {
-      if (event.data.error) {
-        reject(new Error(event.data.error));
-      } else {
-        resolve(event.data);
-      }
-      worker.terminate();
-    });
-
-    worker.addEventListener('error', error => {
-      reject(error);
-      worker.terminate();
-    });
-  });
-};
+const ligaturesData = [
+  ...decompress(decompositionsData),
+  ...decompress(variationsData),
+  ...decompress(namedSequencesData)
+];
 
 const getLigatures = async () => {
-  const data = await loadData();
   return new Promise((resolve, reject) => {
     const worker = new getLigaturesWorker();
 
@@ -42,7 +29,7 @@ const getLigatures = async () => {
       worker.terminate();
     });
 
-    worker.postMessage({ properties, data });
+    worker.postMessage({ properties, data: ligaturesData });
   });
 };
 
