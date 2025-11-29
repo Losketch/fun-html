@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta
+      charset="UTF-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <div>
+      <main>
+        <div class="opts">
+          <md-outlined-text-field id="text" label="文本" type="textarea"></md-outlined-text-field>
+          <md-outlined-text-field id="fontSize" label="字号" value="24" type="number" min="1" max="128" suffix-text="px"></md-outlined-text-field>
+          <md-outlined-text-field id="lineHeight" label="行高" value="28" type="number" min="0" max="512" suffix-text="px"></md-outlined-text-field>
+          <md-outlined-text-field id="padding" label="内边距" type="number" value="10" min="0" max="50" suffix-text="px"></md-outlined-text-field>
+          <md-filled-tonal-button id="downloadBtn">下载图片</md-filled-tonal-button>
+        </div>
+        <div class="custom-font">
+          <md-filled-tonal-button id="uploadFont">上传字体</md-filled-tonal-button>
+          <input id="fileInput" type="file" accept="font/ttf,.ttf,font/otf,.otf,font/woff,.woff,font/woff2,.woff2,.eot" style="display: none;">
+          <div id="sortableListContainer" class="sortable-list-container"></div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

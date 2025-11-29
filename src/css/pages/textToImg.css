@@ -1,0 +1,45 @@
+.opts,
+.custom-font {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+md-outlined-text-field {
+  width: 100%;
+}
+
+.sortable-list-container {
+  background-color: var(--md-sys-color-surface-container-low);
+  padding: 10px;
+  border-radius: 5px;
+  display: none;
+  flex-direction: column;
+  margin-top: 8px;
+  row-gap: 8px;
+  box-sizing: border-box;
+}
+
+.sortable-list-container {
+  display: flex;
+  overflow: visible;
+  align-items: center;
+  line-height: 1;
+}
+
+.sortable-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background-color: var(--md-sys-color-surface-dim);
+  border-radius: 4px;
+  box-shadow: 0 1px 3px var(--md-sys-color-shadow-alpha-1a);
+  column-gap: 8px;
+  width: 90%;
+}
+
+.sortable-item span {
+  word-break: break-all;
+  margin-right: auto;
+}
+
