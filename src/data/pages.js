@@ -3,12 +3,13 @@ const pages = {
     charDisplay: '字符显示器',
     ziSrc: '字源查找',
     randStr: '随机字符生成器',
+    idsAST: 'IDS 抽象语法树',
+    textToImg: '文字转图片',
     strokes: '84-30 画的汉字',
     styleLetter: '字母样式生成器',
     zalog: 'zalog 文本生成器',
     ogham: '欧甘文字转换器',
     rot180deg: '倒立字符生成器',
-    idsAST: 'IDS 抽象语法树',
     seeker: '字形检索'
   },
   otherTools: {
