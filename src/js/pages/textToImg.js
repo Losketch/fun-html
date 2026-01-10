@@ -6,33 +6,128 @@ import '@js/changeHeader.js';
 import '@js/iframeColorSchemeSync.js';
 import '@js/m3ui.js';
 
+import notoColorEmojiFP from '@assets/fonts/display/Noto-COLRv1.woff2';
+import plgo1FP from '@assets/fonts/display/Plgo1.woff2';
+import plgo2FP from '@assets/fonts/display/Plgo2.woff2';
+import notoSansSuperFP from '@assets/fonts/display/NotoSansSuper.woff2';
+import notoFP from '@assets/fonts/display/NotoUnicode.woff2';
+import wenYuanSansSCVFFP from '@assets/fonts/display/NotoSansSC.woff2';
+import seshFP from '@assets/fonts/display/UnicodiaSesh.woff2';
+import newGardinerFP from '@assets/fonts/display/NewGardiner.woff2';
+import monuFP from '@assets/fonts/display/Monu Temp.woff2';
+import lastFP from '@assets/fonts/display/Last ResortHE.woff2';
+
 const textInput = document.getElementById('text');
 const fontSizeInput = document.getElementById('fontSize');
 const lineHeightInput = document.getElementById('lineHeight');
 const paddingInput = document.getElementById('padding');
+const maxWidthInput = document.getElementById('maxWidth');
 const downloadBtn = document.getElementById('downloadBtn');
 const uploadFontBtn = document.getElementById('uploadFont');
 const fileInput = document.getElementById('fileInput');
 const container = document.getElementById('sortableListContainer');
 let itemsOrder = [];
 let currentFontFamilies = [];
+let fontLoaded = false;
+
+String.prototype.toCharArray = function () {
+  let arr = [];
+  for (let i = 0; i < this.length; ) {
+    const codePoint = this.codePointAt(i);
+    i += codePoint > 0xffff ? 2 : 1;
+    arr.push(String.fromCodePoint(codePoint));
+  }
+  return arr;
+};
+
+async function generateFontfamiliesStr(fontFamilies, fontSize) {
+  if (!fontLoaded) {
+    await loadFont('Plgo1', plgo1FP);
+    await loadFont('Noto-Color-Emoji', notoColorEmojiFP);
+    await loadFont('Plgo2', plgo2FP);
+    await loadFont('NotoSansSuper', notoSansSuperFP);
+    await loadFont('Noto', notoFP);
+    await loadFont('WenYuanSansSCVF', wenYuanSansSCVFFP);
+    await loadFont('Sesh', seshFP);
+    await loadFont('NewGardiner', newGardinerFP);
+    await loadFont('Monu', `'${monuFP}'`);
+    await loadFont('Last', `'${lastFP}'`);
+    fontLoaded = true;
+  }
+  const fallbackedFontFamilies = fontFamilies.concat([
+    'Plgo1',
+    'Noto-Color-Emoji',
+    'Plgo2',
+    'NotoSansSuper',
+    'Noto',
+    'WenYuanSansSCVF',
+    'Sesh',
+    'NewGardiner',
+    'Monu',
+    'sans-serif',
+    'Last'
+  ]);
+  return `${fontSize}px ${fallbackedFontFamilies.join(', ')}`;
+}
+
+
+function wrapText(text, maxWidth, fontFamily) {
+  if (maxWidth === 0) return text;
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  ctx.font = fontFamily;
+
+  const measureText = text => ctx.measureText(text).width;
+
+  const originalLines = text.split('\n');
+  const resultLines = [];
+
+  for (const line of originalLines) {
+    if (measureText(line) <= maxWidth) {
+      resultLines.push(line);
+      continue;
+    }
+
+    const chars = line.toCharArray();
+    let currentLine = '';
+
+    for (const char of chars) {
+      const testLine = currentLine + char;
+      const testWidth = measureText(testLine);
+
+      if (testWidth <= maxWidth) {
+        currentLine = testLine;
+      } else {
+        if (currentLine) {
+          resultLines.push(currentLine);
+        }
+        currentLine = char;
+      }
+    }
+
+    if (currentLine) {
+      resultLines.push(currentLine);
+    }
+  }
+
+  return resultLines.join('\n');
+}
 
 async function generateImage(
   text,
   fontFamilies,
   fontSize,
   lineHeight,
-  padding
+  padding,
+  maxWidth
 ) {
   const dpr = window.devicePixelRatio || 1;
 
   const tempCanvas = document.createElement('canvas');
   const tempCtx = tempCanvas.getContext('2d');
 
-  tempCtx.font = fontFamilies.length
-    ? `${fontSize}px ` + fontFamilies.join(', ')
-    : `${fontSize}px sans-serif`;
-  const lines = text.split('\n');
+  tempCtx.font = await generateFontfamiliesStr(fontFamilies, fontSize);
+  const lines = wrapText(text, maxWidth, tempCtx.font).split('\n');
 
   const canvasWidth = calculateMaxLineWidth(lines, tempCtx);
 
@@ -45,9 +140,7 @@ async function generateImage(
   tempCtx.fillStyle = 'white';
   tempCtx.fillRect(0, 0, tempCanvas.width / dpr, tempCanvas.height / dpr);
   tempCtx.fillStyle = 'black';
-  tempCtx.font = fontFamilies.length
-    ? `${fontSize}px ` + fontFamilies.join(', ')
-    : `${fontSize}px sans-serif`;
+  tempCtx.font = await generateFontfamiliesStr(fontFamilies, fontSize);
   tempCtx.textBaseline = 'top';
 
   renderText(tempCtx, lines, lineHeight, fontSize * 0.25, fontSize * 0.25);
@@ -100,13 +193,15 @@ downloadBtn.addEventListener('click', async () => {
   const fontSize = parseInt(fontSizeInput.value);
   const lineHeight = parseFloat(lineHeightInput.value);
   const padding = parseInt(paddingInput.value);
+  const maxWidth = parseInt(maxWidthInput.value);
 
   const canvas = await generateImage(
     text,
     fontFamilies,
     fontSize,
     lineHeight,
-    padding
+    padding,
+    maxWidth
   );
   if (canvas) {
     const link = document.createElement('a');
