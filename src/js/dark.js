@@ -1,5 +1,9 @@
 (function () {
   'use strict';
+  const MODE_LIGHT = 'light';
+  const MODE_DARK = 'dark';
+  const MODE_AUTO = 'auto';
+  
   let util = {
     getValue(name) {
       return localStorage.getItem(name);
@@ -8,58 +12,100 @@
       localStorage.setItem(name, value);
     }
   };
+  
   let main = {
     mainContent: document.getElementById('main-content'),
     darkModeToggle: document.getElementById('toggle-dark-button'),
-    enableDarkMode() {
-      document.documentElement.classList.add('dark');
-      this.mainContent.contentWindow.postMessage(
-        {
-          type: 'outterColorSchemeChange',
-          colorScheme: 'dark'
-        },
-        '*'
-      );
+    currentMode: MODE_LIGHT,
+    
+    isSystemDarkMode() {
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     },
-    disableDarkMode() {
-      document.documentElement.classList.remove('dark');
-      this.mainContent.contentWindow.postMessage(
-        {
-          type: 'outterColorSchemeChange',
-          colorScheme: 'light'
-        },
-        '*'
-      );
+    
+    applyDarkMode(enabled) {
+      if (enabled) {
+        document.documentElement.classList.add('dark');
+        this.mainContent.contentWindow.postMessage(
+          { type: 'outterColorSchemeChange', colorScheme: 'dark' },
+          '*'
+        );
+      } else {
+        document.documentElement.classList.remove('dark');
+        this.mainContent.contentWindow.postMessage(
+          { type: 'outterColorSchemeChange', colorScheme: 'light' },
+          '*'
+        );
+      }
     },
+    
+    updateIcon() {
+      this.darkModeToggle.setAttribute('data-mode', this.currentMode);
+    },
+    
+    handleModeChange() {
+      if (this.currentMode === MODE_AUTO) {
+        const systemIsDark = this.isSystemDarkMode();
+        this.applyDarkMode(systemIsDark);
+      } else if (this.currentMode === MODE_DARK) {
+        this.applyDarkMode(true);
+      } else {
+        this.applyDarkMode(false);
+      }
+      
+      this.updateIcon();
+      util.setValue('dark_mode', this.currentMode);
+    },
+    
     toggleDarkMode() {
-      this.darkModeToggle.addEventListener('change', () => {
-        if (this.darkModeToggle.selected) {
-          util.setValue('dark_mode', 'dark');
-          this.enableDarkMode();
+      this.darkModeToggle.addEventListener('click', () => {
+        if (this.currentMode === MODE_LIGHT) {
+          this.currentMode = MODE_DARK;
+        } else if (this.currentMode === MODE_DARK) {
+          this.currentMode = MODE_AUTO;
         } else {
-          util.setValue('dark_mode', 'light');
-          this.disableDarkMode();
+          this.currentMode = MODE_LIGHT;
         }
+        
+        this.handleModeChange();
       });
 
-      this.mainContent.addEventListener('load', function () {
-        this.contentWindow.postMessage(
-          {
-            type: 'outterColorSchemeChange',
-            colorScheme: util.getValue('dark_mode')
-          },
+      this.mainContent.addEventListener('load', () => {
+        let modeToApply = this.currentMode;
+        
+        if (modeToApply === MODE_AUTO) {
+          modeToApply = this.isSystemDarkMode() ? MODE_DARK : MODE_LIGHT;
+        }
+        
+        this.mainContent.contentWindow.postMessage(
+          { type: 'outterColorSchemeChange', colorScheme: modeToApply },
           '*'
         );
       });
 
-      if (util.getValue('dark_mode') === 'dark') {
-        this.darkModeToggle.selected = true;
-        this.enableDarkMode();
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (this.currentMode === MODE_AUTO) {
+          this.applyDarkMode(e.matches);
+        }
+      });
+      
+      const savedMode = util.getValue('dark_mode');
+      if (savedMode && [MODE_LIGHT, MODE_DARK, MODE_AUTO].includes(savedMode)) {
+        this.currentMode = savedMode;
       } else {
-        this.darkModeToggle.selected = false;
-        this.disableDarkMode();
+        this.currentMode = this.isSystemDarkMode() ? MODE_DARK : MODE_LIGHT;
+      }
+      
+      this.updateIcon();
+      
+      if (this.currentMode === MODE_AUTO) {
+        this.applyDarkMode(this.isSystemDarkMode());
+      } else if (this.currentMode === MODE_DARK) {
+        this.applyDarkMode(true);
+      } else {
+        this.applyDarkMode(false);
       }
     },
+    
     init() {
       this.toggleDarkMode();
     }

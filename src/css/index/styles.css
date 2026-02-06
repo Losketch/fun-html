@@ -131,6 +131,22 @@ hr {
   z-index: 1000;
 }
 
+.toggle-dark-button svg {
+  display: none;
+}
+
+.toggle-dark-button[data-mode="light"] svg[data-mode="light"] {
+  display: block;
+}
+
+.toggle-dark-button[data-mode="dark"] svg[data-mode="dark"] {
+  display: block;
+}
+
+.toggle-dark-button[data-mode="auto"] svg[data-mode="auto"] {
+  display: block;
+}
+
 .tabs-hidden {
   display: none;
 }
