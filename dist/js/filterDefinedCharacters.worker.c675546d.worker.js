@@ -1,0 +1,1 @@
+self.addEventListener("message",(e=>{const{characters:s,definedCharacterList:a}=e.data,r=s.filter((e=>a.has(e)||Array.isArray(e)));self.postMessage(r)}));
