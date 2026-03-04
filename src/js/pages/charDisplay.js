@@ -195,11 +195,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function addFontFeatureSetting(name, availability) {
-    if (
-      addedFontFeatureSettingsName.has(name) ||
-      !validFontFeatureSettings.has(name)
-    )
+    if (addedFontFeatureSettingsName.has(name)) {
       return false;
+    }
 
     const fontFeatureSetting = { name, availability };
 
@@ -263,27 +261,45 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function checkFontFeatureSettingsName() {
     const name = addFontFeatureSettingsName.value;
-    if (
-      !name ||
-      addedFontFeatureSettingsName.has(name) ||
-      !validFontFeatureSettings.has(name)
-    ) {
-      if (!addFontFeatureSettingsName.children.length) {
-        const errorIcon = document.createElement('md-icon');
-        errorIcon.setAttribute('slot', 'trailing-icon');
-        errorIcon.className = 'nf nf-fa-circle_exclamation';
-        addFontFeatureSettingsName.appendChild(errorIcon);
-      }
+    if (!/^[\x20-\x7E]{4}$/.test(name)) {
+      ensureIcon('nf nf-fa-circle_exclamation');
       addFontFeatureSettingsName.error = true;
-      addFontFeatureSettingsName.errorText = !name
-        ? '字体特性设置名称不能为空。'
-        : addedFontFeatureSettingsName.has(name)
-          ? '该字体特性设置已添加过了，不可再次添加。'
-          : '该字体特性设置无效，请参见 https://learn.microsoft.com/zh-cn/typography/opentype/spec/featurelist 中定义的有效字体特性设置。';
-    } else {
-      if (addFontFeatureSettingsName.children.length)
-        addFontFeatureSettingsName.children[0].remove();
+      addFontFeatureSettingsName.errorText = '字体特性设置名称必须为4个字符，且只能包含ASCII可打印字符（U+20-U+7E）。';
+      addFontFeatureSettingsName.supportingText = '';
+      return;
+    }
+    if (addedFontFeatureSettingsName.has(name)) {
+      ensureIcon('nf nf-fa-circle_exclamation');
+      addFontFeatureSettingsName.error = true;
+      addFontFeatureSettingsName.errorText = '该字体特性设置已添加过了，不可再次添加。';
+      addFontFeatureSettingsName.supportingText = '';
+      return;
+    }
+    if (!validFontFeatureSettings.has(name)) {
+      ensureIcon('nf nf-fa-exclamation_triangle');
       addFontFeatureSettingsName.error = false;
+      addFontFeatureSettingsName.errorText = '';
+      addFontFeatureSettingsName.supportingText = '该字体特性设置可能无效，请参见 https://learn.microsoft.com/zh-cn/typography/opentype/spec/featurelist 中定义的有效字体特性设置。';
+      addFontFeatureSettingsName.classList.add('warning');
+    } else {
+      if (addFontFeatureSettingsName.children.length) {
+        addFontFeatureSettingsName.children[0].remove();
+      }
+      addFontFeatureSettingsName.error = false;
+      addFontFeatureSettingsName.errorText = '';
+      addFontFeatureSettingsName.supportingText = '';
+      addFontFeatureSettingsName.classList.remove('warning');
+    }
+  }
+
+  function ensureIcon(className) {
+    if (!addFontFeatureSettingsName.children.length) {
+      const icon = document.createElement('md-icon');
+      icon.setAttribute('slot', 'trailing-icon');
+      icon.className = className;
+      addFontFeatureSettingsName.appendChild(icon);
+    } else {
+      addFontFeatureSettingsName.children[0].className = className;
     }
   }
 
@@ -318,6 +334,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   addFontFeatureSettingsSubmit.addEventListener('click', () => {
     const name = addFontFeatureSettingsName.value;
+    if (addFontFeatureSettingsName.error) {
+      return;
+    }
     const availability = addFontFeatureSettingsAvailability.selected;
     const success = addFontFeatureSetting(name, availability);
     if (success) {

@@ -37,7 +37,7 @@
 
 #added-font-feature-settings-container,
 #sortable-list-container {
-  background-color: var(--md-sys-color-surface-container-low);
+  background-color: var(--md-sys-color-surface-container);
   padding: 10px;
   border-radius: 5px;
   display: none;
@@ -94,4 +94,15 @@
 md-slider {
   margin: 0 -10px;
   min-width: 190px;
+}
+
+md-outlined-text-field.warning {
+  --md-outlined-text-field-outline-color: var(--md-sys-color-tertiary);
+  --md-outlined-text-field-focus-outline-color: var(--md-sys-color-tertiary);
+  --md-outlined-text-field-hover-outline-color: var(--md-sys-color-tertiary);
+  --md-outlined-text-field-label-text-color: var(--md-sys-color-tertiary);
+  --md-outlined-text-field-focus-label-text-color: var(--md-sys-color-tertiary);
+  --md-outlined-text-field-input-text-color: var(--md-sys-color-on-surface);
+  --md-outlined-text-field-caret-color: var(--md-sys-color-tertiary);
+  --md-outlined-text-field-supporting-text-color: var(--md-sys-color-tertiary);
 }
