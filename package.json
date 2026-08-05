@@ -22,7 +22,10 @@
     "worker-loader": "^3.0.8"
   },
   "scripts": {
-    "format": "npx eslint --fix . && npx prettier --write \"**/*.html\" && npx prettier --write \"**/*.css\""
+    "build": "webpack --config webpack.config.js",
+    "format": "npx eslint --fix . && npx prettier --write \"**/*.html\" && npx prettier --write \"**/*.css\"",
+    "deploy:github-pages": "node ./tools/deploy-github-pages.mjs",
+    "deploy:github-pages:dry": "node ./tools/deploy-github-pages.mjs --no-push"
   },
   "dependencies": {
     "@babel/core": "^7.26.10",
