@@ -79,15 +79,15 @@ module.exports = {
         }
       },
       {
-        test: /.(webmanifest|png|ico)$/,
+        test: /\.(webmanifest|png|ico)$/i,
         include: path.resolve(__dirname, 'assets/favicon'),
         type: 'asset/resource',
         generator: {
-          filename: 'assets/favicon/[name].[hash:8][ext]'
+          filename: 'assets/favicon/[name][ext]'
         }
       },
       {
-        test: /.jpg/,
+        test: /\.jpe?g$/i,
         include: path.resolve(__dirname, 'assets/images'),
         type: 'asset/resource',
         generator: {
