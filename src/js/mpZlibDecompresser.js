@@ -1,4 +1,4 @@
-import pako from 'pako';
+import { inflate } from 'pako';
 import { decode } from '@msgpack/msgpack';
 
 export default function decompress(compressedData) {
@@ -6,7 +6,7 @@ export default function decompress(compressedData) {
     compressedData instanceof Uint8Array
       ? compressedData
       : new Uint8Array(compressedData);
-  const decompressedData = pako.inflate(compressedArray);
+  const decompressedData = inflate(compressedArray);
 
   return decode(decompressedData);
 }

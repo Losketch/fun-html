@@ -11,7 +11,8 @@ if __name__ == "__main__":
 
     for path in args.input:
         output_path = Path(path).with_suffix(".mp.zlib")
-        data = json.load(open(path))
+        with open(path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
         with open(output_path, "wb") as f:
             packed = msgpack.packb(data)
             if packed:
