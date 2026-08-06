@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { __decorate } from 'tslib';
 import { customElement } from 'lit/decorators.js';
 import { ListItemEl as ListItem } from '@material/web/list/internal/listitem/list-item.js';
-import { styles } from '@material/web/list/internal/listitem/list-item-styles.js';
+import { styles } from '@material/web/list/internal/listitem/list-item-styles.cssresult.js';
 
 export let MdListItem = class MdListItem extends ListItem {
   render() {

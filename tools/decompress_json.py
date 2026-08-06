@@ -15,5 +15,5 @@ if __name__ == "__main__":
             compressed_data = f.read()
             if compressed_data:
                 data = msgpack.unpackb(zlib.decompress(compressed_data))
-                with open(output_path, "w") as out_f:
+                with open(output_path, "w", encoding='utf-8') as out_f:
                     json.dump(data, out_f, ensure_ascii=False, indent=2)
