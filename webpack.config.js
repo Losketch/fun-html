@@ -123,6 +123,7 @@ module.exports = {
     new WebpackBar(),
     new CompressionPlugin({
       test: /\.(css|js)$/,
+      filename: '[path][base].br',
       algorithm: 'brotliCompress',
       compressionOptions: {
         params: {
@@ -131,7 +132,7 @@ module.exports = {
       },
       threshold: 1024 * 50,
       minRatio: 0.8,
-      deleteOriginalAssets: true
+      deleteOriginalAssets: false
     }),
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash:8].css'

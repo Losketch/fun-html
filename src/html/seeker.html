@@ -3,152 +3,99 @@
   <head>
     <title><%= htmlWebpackPlugin.options.title %></title>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
-    <div id="main">
-      <div id="sk_header">
-        <div id="sk_logo">
-          <h1>遍黑查形</h1>
-          <h3>
-            可检索
-            <span id="datasize"></span>
-            字
-          </h3>
-          <h3 id="version"></h3>
+    <div id="seekerApp" class="seeker-shell">
+      <section class="seeker-hero" aria-labelledby="seekerTitle">
+        <div class="seeker-brand">
+          <h1 id="seekerTitle">遍黑查形</h1>
+          <p class="seeker-meta">
+            <span id="datasetStatus">正在加载字形数据…</span>
+            <span aria-hidden="true">·</span>
+            <span id="version"></span>
+          </p>
         </div>
-        <div id="sk_toolbar">
+
+        <div class="search-bar">
           <md-outlined-text-field
-            id="input"
-            class="han"></md-outlined-text-field>
-          <md-filled-tonal-button title="清除" id="buttClear" value=""
-            >清</md-filled-tonal-button
-          >
-          <md-filled-tonal-button title="解构" id="buttDecompose" value=""
-            >拆</md-filled-tonal-button
-          >
-          <md-filled-tonal-button title="查找" id="buttGo" value=""
-            >查</md-filled-tonal-button
-          >
+            id="queryInput"
+            class="han query-input"
+            label="输入部件"
+            autocomplete="off"
+            spellcheck="false"></md-outlined-text-field>
+          <md-filled-tonal-button id="clearButton" title="清除查询">清</md-filled-tonal-button>
+          <md-filled-tonal-button id="decomposeButton" title="拆分光标前的字">拆</md-filled-tonal-button>
+          <md-filled-tonal-button id="searchButton" title="搜索全部指定区块">查</md-filled-tonal-button>
         </div>
-      </div>
 
-      <div id="funcs">
-        <div>
-          <div>包含异体<md-switch id="variant"></md-switch></div>
-          <div>强行拆分<md-switch id="subdivide"></md-switch></div>
-          <div>部件键盘<md-switch id="showkeypad"></md-switch></div>
+        <p class="syntax-help">
+          输入一个或多个部件进行检索；<code>-</code> 后可排除字符；以 <code>:</code>
+          开头查看单字拆分。点击区块按钮可限定检索范围。
+        </p>
+      </section>
+
+      <section class="seeker-panel options-panel" aria-label="检索选项">
+        <label class="option-item">
+          <span>包含异体</span>
+          <md-switch id="variantSwitch"></md-switch>
+        </label>
+        <label class="option-item">
+          <span>强行拆分</span>
+          <md-switch id="subdivideSwitch"></md-switch>
+        </label>
+        <label class="option-item">
+          <span>仅 8105</span>
+          <md-switch id="standardOnlySwitch"></md-switch>
+        </label>
+        <label class="option-item">
+          <span>部件键盘</span>
+          <md-switch id="keypadSwitch"></md-switch>
+        </label>
+      </section>
+
+      <section id="shortcutPanel" class="seeker-panel shortcut-panel" hidden>
+        <div class="panel-heading-row"><h2>收藏栏</h2></div>
+        <div id="shortcutBar" class="shortcut-bar han"></div>
+      </section>
+
+      <section id="keyboardPanel" class="seeker-panel keyboard-panel" hidden>
+        <div class="panel-heading-row">
+          <h2>部件键盘</h2>
         </div>
-        <div id="table">
-          <div>8105<md-switch id="standardOnly"></md-switch></div>
-        </div>
-        <span id="scKey" class="grp"></span>
-      </div>
+        <div id="keypad" class="keypad han"></div>
+      </section>
 
-      <div id="keyboard">
-        <div id="keypad"></div>
-      </div>
-
-      <div id="result">
-        <div id="legend">
-          <span class="zone">
-            <button class="BSC">基</button>
-            基本
-          </span>
-          <span class="zone">
-            <button class="ExA">A</button>
-            A区
-          </span>
-          <span class="zone">
-            <button class="ExB">B</button>
-            B区
-          </span>
-          <span class="zone">
-            <button class="ExC">C</button>
-            C区
-          </span>
-          <span class="zone">
-            <button class="ExD">D</button>
-            D区
-          </span>
-          <span class="zone">
-            <button class="ExE">E</button>
-            E区
-          </span>
-          <span class="zone">
-            <button class="ExF">F</button>
-            F区
-          </span>
-          <span class="zone">
-            <button class="ExG">G</button>
-            G区
-          </span>
-          <span class="zone">
-            <button class="ExH">H</button>
-            H区
-          </span>
-          <span class="zone">
-            <button class="ExI">I</button>
-            I区
-          </span>
-          <span class="zone">
-            <button class="ExJ">J</button>
-            J区
-          </span>
-          <span class="zone">
-            <button class="CMP">兼</button>
-            兼容
-          </span>
-          <span class="zone">
-            <button class="TAN">夏</button>
-            西夏
-          </span>
-          <span class="zone">
-            <button class="SUP">私</button>
-            私用
-          </span>
-          <span class="zone">
-            <button class="OTH">它</button>
-            其它
-          </span>
-          <span id="counter"></span>
-        </div>
-        <div id="outputBSC" class="han"></div>
-        <div id="outputExA" class="han"></div>
-        <div id="outputExB" class="han"></div>
-        <div id="outputExC" class="han"></div>
-        <div id="outputExD" class="han"></div>
-        <div id="outputExE" class="han"></div>
-        <div id="outputExF" class="han"></div>
-        <div id="outputExG" class="han"></div>
-        <div id="outputExH" class="han"></div>
-        <div id="outputExI" class="han"></div>
-        <div id="outputExJ" class="han"></div>
-        <div id="outputCMP" class="han"></div>
-        <div id="outputTAN" class="han"></div>
-        <div id="outputSUP" class="han"></div>
-        <div id="outputOTH" class="han"></div>
-      </div>
-      <div id="popview">
-        <span id="bigchar" class="han"></span>
-        <span id="codetag"></span>
-        <span id="menu_key" class="func">输入</span>
-        <a id="menu_go" class="func" target="_blank">字统网查找</a>
-        <span id="menu_query" class="func">替换查找</span>
-        <span id="menu_copy" class="func">复制此字</span>
-        <span id="menu_skip" class="func">排除此字</span>
-        <span class="els">
-          <span id="menu_add" class="func">加入收藏栏</span>
-          <span id="menu_del" class="func">移出收藏栏</span>
-        </span>
-      </div>
-
-      <div class="set-v2-popup">
-        <div class="set-v2-popup-container">
-          <div class="set-v2-popup-block">
-            <div class="set-v2-popup-symbol"></div>
-            <div class="set-v2-popup-text">已复制！</div>
+      <section class="seeker-panel result-panel" aria-labelledby="resultHeading">
+        <div class="result-header">
+          <div>
+            <h2 id="resultHeading">检索结果</h2>
+            <output id="searchStatus" class="search-status" aria-live="polite"></output>
           </div>
+          <div id="blockLegend" class="block-legend" aria-label="Unicode 区块"></div>
         </div>
+        <div id="treeResult" class="tree-result han" hidden></div>
+        <div id="resultSections" class="result-sections"></div>
+      </section>
+
+      <aside id="charMenu" class="char-menu" hidden>
+        <div class="char-preview">
+          <span id="menuChar" class="char-preview-glyph han"></span>
+          <span id="menuCode" class="char-preview-code"></span>
+        </div>
+        <div class="char-actions">
+          <button type="button" data-action="insert">输入</button>
+          <button type="button" data-action="query">替换查找</button>
+          <button type="button" data-action="copy">复制此字</button>
+          <button type="button" data-action="exclude">排除此字</button>
+          <button type="button" data-action="favorite">加入收藏栏</button>
+          <a id="menuExternal" target="_blank" rel="noopener noreferrer">外部查字</a>
+        </div>
+      </aside>
+
+      <div id="copyToast" class="copy-toast" role="status" aria-live="polite" hidden>
+        <span id="copyToastChar" class="han"></span>
+        <span>已复制</span>
       </div>
     </div>
   </body>

@@ -6,3 +6,4 @@ eslint.config.mjs
 .prettierignore
 .prettierrc.json
 dist
+.han-data-cache

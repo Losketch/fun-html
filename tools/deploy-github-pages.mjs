@@ -78,6 +78,7 @@ function build() {
       '.prettierignore',
       '.prettierrc.json',
       'dist',
+      '.han-data-cache',
       '.env',
       '.env.*',
       '*.log',

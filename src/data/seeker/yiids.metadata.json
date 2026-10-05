@@ -1,0 +1,44 @@
+{
+  "source": "yi-bai/ids + JLHwung/TangutIDS",
+  "unicode": "18.0",
+  "tangutUnicode": "17.0",
+  "builtAt": "2026-10-05T13:44:03.667Z",
+  "characterCount": 108208,
+  "hanCharacterCount": 102033,
+  "tangutCharacterCount": 6175,
+  "standard8105Count": 8105,
+  "parser": "fun-html permissive IDS projection v4",
+  "recursiveIndex": "precomputed branch transitive postings",
+  "sources": {
+    "han": {
+      "repository": "yi-bai/ids",
+      "commit": "267e3fb5d0a32de63128e67ef2f329277cc4013c",
+      "url": "https://github.com/yi-bai/ids",
+      "license": "MIT"
+    },
+    "tangut": {
+      "repository": "JLHwung/TangutIDS",
+      "commit": "48fe86dc86f30e7862983e4f4f92a75d0a07f6b3",
+      "url": "https://github.com/JLHwung/TangutIDS",
+      "unicode": "17.0",
+      "license": null
+    }
+  },
+  "tangutUnknownOperandsIgnored": 1,
+  "lv1": {
+    "branchCount": 122933,
+    "componentReferenceCount": 273745,
+    "indexedComponentCount": 108914,
+    "directPostingCount": 371699,
+    "directBranchPostingCount": 270911,
+    "recursiveBranchPostingCount": 2540751
+  },
+  "lv2": {
+    "branchCount": 122696,
+    "componentReferenceCount": 271592,
+    "indexedComponentCount": 108914,
+    "directPostingCount": 370325,
+    "directBranchPostingCount": 268893,
+    "recursiveBranchPostingCount": 2568806
+  }
+}

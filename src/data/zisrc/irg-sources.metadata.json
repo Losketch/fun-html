@@ -1,0 +1,11 @@
+{
+  "source": "Unicode Unihan_IRGSources.txt",
+  "sourceUrl": "https://www.unicode.org/Public/18.0.0/ucd/Unihan.zip",
+  "unicode": "18.0.0",
+  "builtAt": "2026-10-05T13:44:06.839Z",
+  "characterCount": 102999,
+  "sourceColumnCount": 11,
+  "internedSourceValueCount": 269618,
+  "reverseKeyCount": 269738,
+  "reversePostingCount": 539234
+}

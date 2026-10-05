@@ -6,96 +6,160 @@ import '@js/changeHeader.js';
 import '@js/iframeColorSchemeSync.js';
 import '@js/m3ui.js';
 
-import decompress from '@js/mpZlibDecompresser.js';
-import sourceData from '@data/mp.zlib/source.mp.zlib';
-const source = decompress(sourceData);
+import ZiSrcClient from '@js/zisrc/client.js';
 
-function loadZiSrc() {
-  const { sourceDict, sourceComments } = source;
-  const reverseDict = buildReverse(sourceDict);
-
-  function buildReverse(sourceDict) {
-    const result = {};
-    for (const [key, sources] of Object.entries(sourceDict)) {
-      sources.forEach(source => {
-        if (source) {
-          if (source in result) {
-            result[source] += key;
-          } else {
-            result[source] = key;
-          }
-          let big = source.split('-');
-          if (big[0] !== source) {
-            big = big[0];
-            if (big in result) {
-              result[big] += key;
-            } else {
-              result[big] = key;
-            }
-          }
-        }
-      });
-    }
-    return result;
-  }
-
-  return {
-    sourceDict,
-    sourceComments,
-    reverseDict
-  };
-}
-
-const { sourceDict, sourceComments, reverseDict } = loadZiSrc();
-
-String.prototype.toCharArray = function () {
-  const arr = [];
-  for (let i = 0; i < this.length; ) {
-    const codePoint = this.codePointAt(i);
-    i += codePoint > 0xffff ? 2 : 1;
-    arr.push(String.fromCodePoint(codePoint));
-  }
-  return arr;
+const elements = {
+  input: document.getElementById('queryInput'),
+  charSearchButton: document.getElementById('charSearchButton'),
+  sourceSearchButton: document.getElementById('sourceSearchButton'),
+  datasetStatus: document.getElementById('datasetStatus'),
+  result: document.getElementById('result'),
+  sourceComments: document.getElementById('sourceComments')
 };
 
-const input = document.getElementById('input');
-const searchBtn = document.getElementById('searchBtn');
-const peggingBtn = document.getElementById('peggingBtn');
-const resultEle = document.getElementById('result');
-const sourceCommentsEle = document.getElementById('sourceComments');
+const client = new ZiSrcClient();
 
-for (const [source, comment] of Object.entries(sourceComments)) {
-  const li = document.createElement('li');
-  li.innerHTML = `${source}：${comment}`;
-  sourceCommentsEle.appendChild(li);
+function clearResults() {
+  elements.result.replaceChildren();
 }
 
-searchBtn.addEventListener('click', () => {
-  resultEle.innerHTML = '';
-  const queryArr = input.value.toCharArray();
+function makeEmptyResult(text = '没有匹配结果。') {
+  const li = document.createElement('li');
+  li.className = 'empty-result';
+  li.textContent = text;
+  return li;
+}
 
-  for (const char of queryArr) {
-    let sources = sourceDict[char];
-    if (Array.isArray(sources)) {
-      sources = sources.filter(Boolean);
-      const li = document.createElement('li');
-
-      li.innerHTML = `<span class="font-without-ctrlctrl">${char}</span>：${sources.join('，')}`;
-      resultEle.appendChild(li);
-    }
+function renderSourceComments(comments) {
+  const fragment = document.createDocumentFragment();
+  for (const [source, comment] of Object.entries(comments ?? {})) {
+    const li = document.createElement('li');
+    const code = document.createElement('strong');
+    code.textContent = source;
+    li.append(code, `：${comment}`);
+    fragment.appendChild(li);
   }
-});
+  elements.sourceComments.replaceChildren(fragment);
+}
 
-peggingBtn.addEventListener('click', () => {
-  const queryArr = input.value.split(',');
-  resultEle.innerHTML = '';
-  for (const query of queryArr) {
-    let chars = reverseDict[query];
-    if (typeof chars === 'string') {
-      const li = document.createElement('li');
-
-      li.innerHTML = `${query}：<span class="font-without-ctrlctrl">${chars}</span>`;
-      resultEle.appendChild(li);
-    }
+function renderCharacterResults(rows) {
+  clearResults();
+  if (!rows.length) {
+    elements.result.appendChild(makeEmptyResult());
+    return;
   }
-});
+
+  const fragment = document.createDocumentFragment();
+  for (const row of rows) {
+    const li = document.createElement('li');
+    const char = document.createElement('span');
+    char.className = 'result-char font-without-ctrlctrl';
+    char.textContent = row.char;
+    li.append(char, '：');
+
+    if (!row.sources.length) {
+      li.append('无 IRG Source');
+    } else {
+      row.sources.forEach((source, index) => {
+        if (index) li.append('，');
+        const value = document.createElement('span');
+        value.textContent = source.value;
+        value.title = source.field;
+        li.appendChild(value);
+      });
+    }
+    fragment.appendChild(li);
+  }
+  elements.result.appendChild(fragment);
+}
+
+function renderSourceResults(rows) {
+  clearResults();
+  if (!rows.length) {
+    elements.result.appendChild(makeEmptyResult());
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+  for (const row of rows) {
+    const li = document.createElement('li');
+    const label = document.createElement('strong');
+    label.textContent = `${row.query}：`;
+    li.appendChild(label);
+
+    if (!row.chars.length) {
+      li.append('无匹配字符');
+    } else {
+      const chars = document.createElement('span');
+      chars.className = 'reverse-chars font-without-ctrlctrl';
+      chars.textContent = row.chars.join('');
+      li.appendChild(chars);
+    }
+    fragment.appendChild(li);
+  }
+  elements.result.appendChild(fragment);
+}
+
+async function searchCharacters() {
+  const chars = Array.from(elements.input.value.replace(/\s/g, ''));
+  if (!chars.length) {
+    clearResults();
+    return;
+  }
+  try {
+    renderCharacterResults(await client.queryChars(chars));
+  } catch (error) {
+    clearResults();
+    elements.result.appendChild(makeEmptyResult(`查询失败：${error.message}`));
+    console.error(error);
+  }
+}
+
+async function searchSources() {
+  const sources = elements.input.value
+    .split(',')
+    .map(value => value.trim())
+    .filter(Boolean);
+  if (!sources.length) {
+    clearResults();
+    return;
+  }
+  try {
+    renderSourceResults(await client.querySources(sources));
+  } catch (error) {
+    clearResults();
+    elements.result.appendChild(makeEmptyResult(`反查失败：${error.message}`));
+    console.error(error);
+  }
+}
+
+function bindEvents() {
+  elements.charSearchButton.addEventListener('click', searchCharacters);
+  elements.sourceSearchButton.addEventListener('click', searchSources);
+  elements.input.addEventListener('keydown', event => {
+    if (event.isComposing || event.code !== 'Enter') return;
+    event.preventDefault();
+    searchCharacters();
+  });
+  window.addEventListener('beforeunload', () => client.terminate());
+}
+
+function init() {
+  bindEvents();
+  client.ready
+    .then(stats => {
+      elements.datasetStatus.dataset.state = 'ready';
+      elements.datasetStatus.textContent =
+        `Unicode ${stats.unicode} · 收录 ${stats.characterCount.toLocaleString()} 字`;
+      renderSourceComments(stats.sourceComments);
+      elements.charSearchButton.disabled = false;
+      elements.sourceSearchButton.disabled = false;
+    })
+    .catch(error => {
+      elements.datasetStatus.dataset.state = 'error';
+      elements.datasetStatus.textContent = '字源数据加载失败';
+      console.error(error);
+    });
+}
+
+init();

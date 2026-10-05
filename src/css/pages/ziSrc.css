@@ -1,10 +1,86 @@
-.btns {
+#ziSrcApp main {
+  justify-content: flex-start;
+}
+
+#ziSrcApp main > section {
+  background-color: var(--md-sys-color-surface);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow:
+    0 1px 3px var(--md-sys-color-shadow-alpha-1f),
+    0 1px 2px var(--md-sys-color-shadow-alpha-3d);
+  overflow: visible;
+}
+
+.query-card {
   display: flex;
-  justify-content: space-between;
-  margin-top: 8px;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .input {
   width: 100%;
   box-sizing: border-box;
+}
+
+.btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.dataset-status {
+  min-height: 1.2em;
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 0.75rem;
+}
+
+.dataset-status[data-state='ready'] {
+  color: var(--md-sys-color-primary);
+}
+
+.dataset-status[data-state='error'] {
+  color: var(--md-sys-color-error);
+}
+
+.result-list,
+.source-comments {
+  margin: 0;
+  padding-left: 1.4rem;
+}
+
+.result-list li,
+.source-comments li {
+  margin: 6px 0;
+  overflow-wrap: anywhere;
+}
+
+.result-char {
+  color: var(--md-sys-color-primary);
+  font-size: 1.35rem;
+}
+
+.source-field {
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 0.75rem;
+}
+
+.reverse-chars {
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.empty-result {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+@media screen and (max-width: 520px) {
+  .btns {
+    flex-direction: column;
+  }
+
+  .btns md-filled-tonal-button {
+    width: 100%;
+  }
 }
