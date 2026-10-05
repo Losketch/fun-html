@@ -1,0 +1,1 @@
+body>div{min-height:unset}body>div,body>div>div{align-items:center;display:flex;flex-direction:column;gap:5px}body>div>div{overflow:visible}body{height:unset;left:50%;position:absolute;top:50%;transform:translate(-50%,-50%)}*{margin:0;padding:0}body,html{background:#000;height:100%;overflow:hidden;width:100%}#canvas{display:block;height:100dvh;width:100dvw}
